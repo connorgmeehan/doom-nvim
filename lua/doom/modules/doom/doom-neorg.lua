@@ -1,4 +1,11 @@
-return function()
+-- [[
+-- Org-mode for neovim
+-- ]]
+
+--- @type DoomModule
+local module = {}
+
+module.config = function ()
   local doom_root = require("doom.core.system").doom_root
 
   -- Default setup for Neorg
@@ -53,3 +60,16 @@ return function()
     end
   end, 1000)
 end
+
+module.setup = function(use)
+  use({
+    "nvim-neorg/neorg",
+    commit =  --[[NO AUTO UPDATE]] "3b4d5bcd0f85b15d99183c7d29e0eb1c5f88350b",
+    branch = "unstable",
+    config = module.config,
+    after = { "nvim-treesitter" },
+  })
+end
+
+return module
+
