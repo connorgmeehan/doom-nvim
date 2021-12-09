@@ -17,6 +17,7 @@ local core_modules = {
 -- Temporary while we transition to new module api
 local implemented_modules = {
   'nest',
+  'treesitter',
 }
 --- Iterates over all enabled DoomModule in doom_modules and passes them to a callback one by one
 --- @param callback "function(doom_plugin) end"
