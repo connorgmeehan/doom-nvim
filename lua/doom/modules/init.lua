@@ -3,7 +3,8 @@
 -- NOTE: We do not provide other LSP integration like coc.nvim, please refer
 --       to our FAQ to see why.
 
-local is_plugin_disabled = require("doom.utils").is_plugin_disabled
+local utils = require('doom.utils')
+local is_plugin_disabled = utils.is_plugin_disabled
 local use_floating_win_packer = require("doom.core.config").config.doom.use_floating_win_packer
 
 -- Freeze dependencies and helper function for clean code
@@ -60,32 +61,38 @@ packer.startup(function(use)
     opt = true,
   })
 
-  -- Tree-Sitter
-  use({
-    "nvim-treesitter/nvim-treesitter",
-    commit = vim.fn.has("nvim-0.6.0") == 1 and pin_commit(
-      "afed686e6a8fc1035475d8c56c1b5ff252c346e5"
-    ) or pin_commit("47cfda2c6711077625c90902d7722238a8294982"),
-    opt = true,
-    run = ":TSUpdate",
-    branch = vim.fn.has("nvim-0.6.0") == 1 and "master" or "0.5-compat",
-    config = require("doom.modules.config.doom-treesitter"),
-  })
-  use({
-    "JoosepAlviste/nvim-ts-context-commentstring",
-    commit = pin_commit("9f5e422e1030e7073e593ad32c5354aa0bcb0176"),
-    after = "nvim-treesitter",
-  })
-  use({
-    "nvim-treesitter/nvim-tree-docs",
-    commit = pin_commit("15135bd18c8f0c4d67dd1b36d3b2cd64579aab6f"),
-    after = "nvim-treesitter",
-  })
-  use({
-    "windwp/nvim-ts-autotag",
-    commit = pin_commit("80d427af7b898768c8d8538663d52dee133da86f"),
-    after = "nvim-treesitter",
-  })
+  --- @class DoomModule
+  --- @field setup "function(use, config) end"|nil Import dependencies for plugin with packer
+  --- @field keymaps table<number, table>|nil Nest.nvim keymaps
+  --- @field depends_on table<number,string>|nil Other doom-plugins that this plugin depends on
+  --- @field incompatible_with table<number, string>|nil Other doom-plugins that this plugin is incompatible with
+
+  --- Wraps the packer.use function to add extra behaviour such as disabling pinned commits
+  --- @param use function packer.use function
+  --- @return function 
+  local wrap_packer = function(use)
+    return function(spec)
+      -- local source_package = spec[1]
+      --[[ if utils.has_value(plugin_overrides, source_package) then
+         -- ... replace spec[1] with second value from plugin_overrides
+         spec.commit = nil -- Disable pinned packer dependency
+      end ]]
+
+      -- Override spec.commit
+      spec.commit = pin_commit(spec.commit)
+
+      use(spec)
+    end
+  end
+
+  -- Entry point of all enabled modules, this lets doom_module setup packer dependencies 
+  local wrapped_use = wrap_packer(use)
+  local config = require('doom.core.config')
+  require('doom.utils.modules').for_each_doom_module(function(doom_module)
+    if doom_module.setup then
+      doom_module.setup(wrapped_use, config)
+    end
+  end)
 
   -- Aniseed, required by some treesitter modules
   use({

@@ -4,8 +4,39 @@
 --              License: GPLv2                 --
 ---[[---------------------------------------]]---
 
---- @class modules
 local modules = {}
+
+--- Can't be disabled
+local core_modules = {
+  core = {
+    'nest', -- Used to bind keymaps for all doom_modules
+    'treesitter' -- Syntax parsing
+  }
+}
+-- Safelist of implemented modules, only modules in this list will actually be passed to the callback.
+-- Temporary while we transition to new module api
+local implemented_modules = {
+}
+--- Iterates over all enabled DoomModule in doom_modules and passes them to a callback one by one
+--- @param callback "function(doom_plugin) end"
+modules.for_each_doom_module = function(callback)
+  local utils = require('doom.utils')
+  local user_modules = require("doom.core.config.modules").modules
+
+  local do_for_module = function(doom_modules, callback2)
+    for section_name, section in pairs(doom_modules) do
+      for _, module_name in ipairs(section) do
+        -- Only run modules that have been implemented
+        if utils.has_value(implemented_modules, module_name) then
+          local doom_module = require('doom.modules.' .. section_name .. '.doom-' .. module_name);
+          callback2(doom_module)
+        end
+      end
+    end
+  end
+  do_for_module(core_modules, callback)
+  do_for_module(user_modules, callback)
+end
 
 --- Check if a Lua module exists
 --- @param mod string The module name, e.g. nvim-treesitter
