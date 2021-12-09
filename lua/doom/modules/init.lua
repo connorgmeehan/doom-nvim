@@ -220,16 +220,6 @@ packer.startup(function(use)
     },
   })
 
-  -- Keybindings menu like Emacs's guide-key
-  local disabled_whichkey = is_plugin_disabled("which-key")
-  use({
-    "folke/which-key.nvim",
-    commit = pin_commit("d3032b6d3e0adb667975170f626cb693bfc66baa"),
-    opt = true,
-    config = require("doom.modules.config.doom-whichkey"),
-    disable = disabled_whichkey,
-  })
-
   -- popup that shows contents of each register
   local disabled_show_registers = is_plugin_disabled("show_registers")
   use({

@@ -47,12 +47,4 @@ vim.defer_fn(function()
     " This BufEnter call should fix some issues with concealing in neorg
     doautocmd BufEnter
   ]])
-
-  -- WARN: Fix this issue before release of module api
-  -- Causes an issue that which-key has not loaded
-  -- if not require("doom.utils").is_plugin_disabled("which-key") then
-    -- vim.cmd([[
-      -- PackerLoad which-key.nvim
-    -- ]])
-  -- end
 end, 0)
