@@ -559,15 +559,6 @@ mappings.map(
   "save_exit_nvim",
   "Save and exit Neovim"
 )
-mappings.map(
-  "n",
-  "<leader>qr",
-  "<cmd>lua require('persistence').load({ last = true })<CR>",
-  opts,
-  "Editor",
-  "restore_session",
-  "Restore previously saved session"
-)
 
 -- open
 mappings.map(

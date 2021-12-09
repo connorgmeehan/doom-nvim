@@ -61,6 +61,13 @@ packer.startup(function(use)
     opt = true,
   })
 
+  -- Aniseed, required by some treesitter modules
+  use({
+    "Olical/aniseed",
+    commit = pin_commit("9c8f2cd17d454a38b11cedd323579b579ee27f9c"),
+    module_pattern = "aniseed",
+  })
+
   --- @class DoomModule
   --- @field setup "function(use, config) end"|nil Import dependencies for plugin with packer
   --- @field keymaps table<number, table>|nil Nest.nvim keymaps
@@ -93,23 +100,6 @@ packer.startup(function(use)
       doom_module.setup(wrapped_use, config)
     end
   end)
-
-  -- Aniseed, required by some treesitter modules
-  use({
-    "Olical/aniseed",
-    commit = pin_commit("9c8f2cd17d454a38b11cedd323579b579ee27f9c"),
-    module_pattern = "aniseed",
-  })
-
-  -- Sessions
-  local disabled_sessions = is_plugin_disabled("auto-session")
-  use({
-    "folke/persistence.nvim",
-    commit = pin_commit("77cf5a6ee162013b97237ff25450080401849f85"),
-    config = require("doom.modules.config.doom-persistence"),
-    -- event = "VimEnter",
-    disable = disabled_sessions,
-  })
 
   -----[[------------]]-----
   ---     UI Related     ---

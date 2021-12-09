@@ -19,6 +19,7 @@ local implemented_modules = {
   'nest',
   'treesitter',
   'neorg',
+  'auto-session',
 }
 --- Iterates over all enabled DoomModule in doom_modules and passes them to a callback one by one
 --- @param callback "function(doom_plugin) end"
