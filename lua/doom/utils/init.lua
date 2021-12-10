@@ -152,4 +152,15 @@ utils.find_executable_in_path = function(executables)
   end, executables)[1]
 end
 
+--- Returns a list of values with all duplicates removed
+--- @param t table<any,string>|table<any,number>
+--- @return table<any,string>|table<any,number>
+utils.tbl_dedupe = function(t)
+  local temp = {}
+  for _, v in pairs(t) do
+    temp[v] = true
+  end
+  return vim.tbl_keys(temp)
+end
+
 return utils

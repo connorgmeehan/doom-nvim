@@ -22,9 +22,10 @@ local implemented_modules = {
   'neorg',
   'auto-session',
   'which-key',
+  'lsp',
 }
 --- Iterates over all enabled DoomModule in doom_modules and passes them to a callback one by one
---- @param callback "function(doom_plugin) end"
+--- @param callback "function(doom_module, section_name, module_name) end"
 modules.for_each_doom_module = function(callback)
   local utils = require('doom.utils')
   local user_modules = require("doom.core.config.modules").modules
@@ -35,7 +36,7 @@ modules.for_each_doom_module = function(callback)
         -- Only run modules that have been implemented
         if utils.has_value(implemented_modules, module_name) then
           local doom_module = require('doom.modules.' .. section_name .. '.doom-' .. module_name);
-          callback2(doom_module)
+          callback2(doom_module, section_name, module_name)
         end
       end
     end

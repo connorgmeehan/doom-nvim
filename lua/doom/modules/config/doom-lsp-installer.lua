@@ -125,6 +125,13 @@ return function()
   local function setup_servers()
     local lsp_installer = require("nvim-lsp-installer")
 
+    local module_utils = require('doom.utils.modules')
+    local nest = require('nest');
+    module_utils.for_each_doom_module(function (doom_module, section_name, language_name)
+      if doom_module.language_servers then
+        nest.applyKeymaps(doom_module.keymaps)
+      end
+    end)
     local modules = require("doom.core.config.modules").modules
     local langs = modules.langs
 
