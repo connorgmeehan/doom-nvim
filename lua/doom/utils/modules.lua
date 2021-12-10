@@ -10,7 +10,7 @@ local modules = {}
 local core_modules = {
   core = {
     'nest', -- Used to bind keymaps for all doom_modules
-    'treesitter' -- Syntax parsing
+    'treesitter', -- Syntax parsing
   }
 }
 -- Safelist of implemented modules, only modules in this list will actually be passed to the callback.
@@ -18,6 +18,7 @@ local core_modules = {
 local implemented_modules = {
   'nest',
   'treesitter',
+  'telescope',
   'neorg',
   'auto-session',
   'which-key',

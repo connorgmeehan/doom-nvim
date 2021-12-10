@@ -92,11 +92,6 @@ module.setup = function (use)
   end, 0)
 end
 
-module.keymaps = {
-  -- WARN: Couldn't get whichkey to open properly, not sure if this is suitable
-  { '<Space>', '<Nop>', 'Open WhichKey Menu', category = 'Editor', uid = 'open_whichkey' }
-}
-
 return module
 
 

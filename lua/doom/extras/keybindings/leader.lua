@@ -13,7 +13,6 @@ local opts = { silent = true }
 if is_plugin_disabled("which-key") then
   mappings.map("n", "<Space>", "<Nop>", opts, "Editor", "open_whichkey", "Open WhichKey menu")
 end
-vim.g.mapleader = " "
 
 if config.doom.new_file_split then
   if config.doom.vertical_split then
@@ -48,53 +47,6 @@ else
     "Open a new unnamed buffer"
   )
 end
-
--- Misc
-mappings.map(
-  "n",
-  "<leader>`",
-  "<cmd>lua require('telescope.builtin').find_files({cwd=vim.fn.expand('%:p:h')})<CR>",
-  opts,
-  "Editor",
-  "cwd_file_browser",
-  "Find file from CWD of current file"
-)
-mappings.map(
-  "n",
-  "<leader>.",
-  "<cmd>Telescope file_browser<CR>",
-  opts,
-  "Editor",
-  "file_browser",
-  "Browse files"
-)
-mappings.map(
-  "n",
-  "<leader>,",
-  "<cmd>Telescope buffers show_all_buffers=true<CR>",
-  opts,
-  "Movement",
-  "switch_buffers",
-  "Switch buffers"
-)
-mappings.map(
-  "n",
-  "<leader>/",
-  "<cmd>Telescope live_grep<CR>",
-  opts,
-  "Editor",
-  "live_grep",
-  "Search a word"
-)
-mappings.map(
-  "n",
-  "<leader>:",
-  "<cmd>Telescope command_history<CR>",
-  opts,
-  "Editor",
-  "command_history",
-  "Command history"
-)
 
 -- buffers
 mappings.map(
@@ -227,15 +179,6 @@ mappings.map(
 )
 mappings.map(
   "n",
-  "<leader>db",
-  "<cmd>Telescope mapper<CR>",
-  opts,
-  "Doom",
-  "show_keybindings",
-  "Show Doom keybindings"
-)
-mappings.map(
-  "n",
   "<leader>dl",
   "<cmd>DoomConfigsReload<CR>",
   opts,
@@ -321,34 +264,6 @@ mappings.map(
 )
 mappings.map(
   "n",
-  "<leader>ff",
-  "<cmd>Telescope find_files<CR>",
-  opts,
-  "Editor",
-  "find_files_alt",
-  "Find files"
-)
-
-mappings.map(
-  "n",
-  "<leader>fr",
-  "<cmd>Telescope oldfiles<CR>",
-  opts,
-  "Editor",
-  "recent_files",
-  "Recently opened files"
-)
-mappings.map(
-  "n",
-  "<leader>ft",
-  "<cmd>Telescope help_tags<CR>",
-  opts,
-  "Editor",
-  "help_tags",
-  "Help tags"
-)
-mappings.map(
-  "n",
   "<leader>fR",
   "<cmd>SudaRead<CR>",
   opts,
@@ -364,53 +279,6 @@ mappings.map(
   "Editor",
   "write_sudo",
   "Write file with sudo permissions"
-)
-
--- search
-mappings.map(
-  "n",
-  "<leader>sg",
-  "<cmd>Telescope live_grep<CR>",
-  opts,
-  "Editor",
-  "live_grep_alt",
-  "Search a word"
-)
-mappings.map(
-  "n",
-  "<leader>sb",
-  "<cmd>Telescope current_buffer_fuzzy_find<CR>",
-  opts,
-  "Editor",
-  "fzf",
-  "Search in buffer"
-)
-mappings.map(
-  "n",
-  "<leader>ss",
-  "<cmd>Telescope lsp_document_symbols<CR>",
-  opts,
-  "LSP",
-  "lsp_symbols",
-  "Goto symbol"
-)
-mappings.map(
-  "n",
-  "<leader>sh",
-  "<cmd>Telescope command_history<CR>",
-  opts,
-  "Editor",
-  "command_history_alt",
-  "Command history"
-)
-mappings.map(
-  "n",
-  "<leader>sm",
-  "<cmd>Telescope marks<CR>",
-  opts,
-  "Editor",
-  "jump_mark",
-  "Jump to mark"
 )
 
 -- tweak
@@ -656,33 +524,6 @@ mappings.map(
   "Git",
   "git_push",
   "Push git changes"
-)
-mappings.map(
-  "n",
-  "<leader>gs",
-  "<cmd>Telescope git_status<CR>",
-  opts,
-  "Git",
-  "git_status",
-  "Browse git status"
-)
-mappings.map(
-  "n",
-  "<leader>gB",
-  "<cmd>Telescope git_branches<CR>",
-  opts,
-  "Git",
-  "git_branches",
-  "Browse git branches"
-)
-mappings.map(
-  "n",
-  "<leader>gc",
-  "<cmd>Telescope git_commits<CR>",
-  opts,
-  "Git",
-  "git_commits",
-  "Browse git commits"
 )
 
 -- code

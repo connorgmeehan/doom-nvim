@@ -274,39 +274,6 @@ packer.startup(function(use)
     module = "popup",
   })
 
-  local disabled_telescope = is_plugin_disabled("telescope")
-  use({
-    "nvim-telescope/telescope.nvim",
-    commit = pin_commit("1c57cc6140644695f0d9bd71b63de45feeca6ae7"),
-    cmd = "Telescope",
-    module = "telescope",
-    requires = {
-      "popup.nvim",
-      "plenary.nvim",
-    },
-    config = require("doom.modules.config.doom-telescope"),
-    disable = disabled_telescope,
-  })
-  use({
-    "lazytanuki/nvim-mapper",
-    commit = pin_commit("e11e852bafa41a4a2c160fcd2d38779add423db9"),
-    config = function()
-      local doom_root, sep = require("doom.core.system").doom_root, require("doom.core.system").sep
-      require("nvim-mapper").setup({
-        -- do not assign the default keymap (<leader>MM)
-        no_map = true,
-        -- where should ripgrep look for your keybinds definitions.
-        -- Default config search path is ~/.config/nvim/lua
-        search_path = string.format("%s%slua", doom_root, sep),
-        -- what should be done with the selected keybind when pressing enter.
-        -- Available actions:
-        --   * "definition" - Go to keybind definition (default)
-        --   * "execute" - Execute the keybind command
-        action_on_enter = "execute",
-      })
-    end,
-    disable = disabled_telescope,
-  })
 
   -----[[-------------]]-----
   ---     GIT RELATED     ---
