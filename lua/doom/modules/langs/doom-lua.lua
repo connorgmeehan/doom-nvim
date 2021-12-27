@@ -6,8 +6,8 @@
 --- @type DoomPlugin
 local module = {}
 
+module.treesitter_parsers = { 'lua' }
 module.language_servers = function (install_lsp, configure_lsp)
-  print('Configuring lua language servers')
   install_lsp('sumneko_lua')
   configure_lsp('sumneko_lua', require('lua-dev').setup({
     lspconfig = {
