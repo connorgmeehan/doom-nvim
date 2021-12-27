@@ -177,7 +177,6 @@ module.config_lsp_signature = function()
 end
 
 module.setup = function(use)
-  print('nvim lsp setup')
   use({
     "hrsh7th/nvim-cmp",
     commit = ("2e4270d02843d15510b3549354e238788ca07ca5"),
@@ -245,6 +244,31 @@ module.setup = function(use)
     event = "InsertEnter",
   })
 end
+
+module.keybinds = {
+  { "K", vim.lsp.buf.hover, "Show hover doc", category = 'LSP', uid = 'lsp_hover_doc' },
+  { "g", {
+    { "d", vim.lsp.buf.definition, "Jump to definition", category = 'LSP', uid = 'lsp_jump_def' },
+    { "r", vim.lsp.buf.references, "Jump to references", category = 'LSP', uid = 'lsp_jump_ref' },
+    { "i", vim.lsp.buf.implementation, "Jump to implementation", category = 'LSP', uid = 'lsp_jump_impl' },
+    { "a", vim.lsp.buf.code_action, "Code actions", category = 'LSP', uid = 'lsp_code_action' },
+    { "d", vim.lsp.buf.hover, "Show hover doc", category = 'LSP', uid = 'lsp_hover_doc_alt' },
+  }},
+  { "<C-", {
+    { "p>", vim.lsp.diagnostic.goto_prev, "Jump to prev diagnostic", category = 'LSP', uid = 'lsp_prev_diagnostic' },
+    { "n>", vim.lsp.diagnostic.goto_next, "Jump to next diagnostic", category = 'LSP', uid = 'lsp_next_diagnostic' },
+  }},
+  { '<leader>c', name = '+Code', {
+    { 'l', name = '+Lsp', {
+      { 'r', vim.lsp.buf.rename, "Rename the reference under cursor", category = 'LSP', uid = 'lsp_rename_ref' },
+      { 'q', vim.lsp.diagnostic.set_loclist, 'Diagnostics into location list', category = 'LSP', uid = 'lsp_diagnostics_list'},
+      { 'l', '<cmd>lua vim.lsp.diagnostic.show_line_diagnostics({ focusable = false, border = "single" })<CR>', 'Show line diagnostics', category = 'LSP', uid = 'lsp_line_diagnostics'},
+      { 'd', vim.lsp.buf.type_definition, 'Show type definition', category = 'LSP', uid = 'lsp_type_def'},
+      { "a", vim.lsp.buf.code_action, "Code actions", category = 'LSP', uid = 'lsp_code_action_alt' },
+      { "i", '<cmd>LspInfo<cr>', "Show LSP Info", category = 'LSP', uid = 'lsp_info' },
+    }}
+  }}
+}
 
 return module
 

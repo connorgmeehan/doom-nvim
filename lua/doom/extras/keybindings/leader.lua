@@ -620,54 +620,6 @@ mappings.map(
   "Evaluate selection"
 )
 
--- lsp
-mappings.map("n", "<leader>cli", "<cmd>LspInfo<CR>", opts, "LSP", "lsp_info", "LSP Information")
-mappings.map(
-  "n",
-  "<leader>cla",
-  "<cmd>lua vim.lsp.buf.code_action()<CR>",
-  opts,
-  "LSP",
-  "code_action_alt",
-  "Code actions"
-)
-mappings.map(
-  "n",
-  "<leader>cld",
-  "<cmd>lua vim.lsp.buf.type_definition()<CR>",
-  opts,
-  "LSP",
-  "type_definition",
-  "Show type definition"
-)
-mappings.map(
-  "n",
-  "<leader>cll",
-  '<cmd>lua vim.lsp.diagnostic.show_line_diagnostics({ focusable = false, border = "single" })<CR>',
-  opts,
-  "LSP",
-  "line_diagnostic",
-  "Show line diagnostics"
-)
-mappings.map(
-  "n",
-  "<leader>clq",
-  "<cmd>lua vim.lsp.diagnostic.set_loclist()<CR>",
-  opts,
-  "LSP",
-  "diagnostic_list",
-  "Diagnostics into location list"
-)
-mappings.map(
-  "n",
-  "<leader>clr",
-  "<cmd>lua vim.lsp.buf.rename()<CR>",
-  opts,
-  "LSP",
-  "rename_reference",
-  "Rename the reference under cursor"
-)
-
 -- jumps
 mappings.map("n", "<leader>ja", "<C-^>", opts, "Jumps", "jump_alternate_file", "Alternate file")
 mappings.map("n", "<leader>jj", "<C-o>", opts, "Jumps", "jump_older", "Jump to older pos")
