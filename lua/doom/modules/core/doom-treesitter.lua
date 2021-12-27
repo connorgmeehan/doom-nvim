@@ -22,18 +22,42 @@ module.config = function()
   local modules = require("doom.core.config.modules").modules
   local is_plugin_disabled = require("doom.utils").is_plugin_disabled
 
+
+  local ignore_langs = {}
+
+  -- Get all of the treesitter_parsers from each doom_module and install them
+  local parser_configs = require("nvim-treesitter.parsers").get_parser_configs()
+  local module_utils = require('doom.utils.modules')
+  module_utils.for_each_doom_module(function (doom_module, section_name, module_name)
+    if doom_module.treesitter_parsers then
+      for parser_name, parser_name_or_config in pairs(doom_module.treesitter_parsers) do
+        local config = type(parser_name_or_config) == 'table' and parser_name_or_config or nil
+        if config then
+          parser_configs[parser_name] = config
+          table.insert(modules.langs, parser_name)
+          ignore_langs[module_name] = true
+        else
+          table.insert(modules.langs, parser_name_or_config)
+          ignore_langs[module_name] = true
+        end
+      end
+    end
+  end)
+
   local function get_ts_parsers(languages)
     local langs = {}
 
     for _, lang in ipairs(languages) do
-      -- If the lang is config then add parsers for JSON, YAML and TOML
-      if lang == "config" then
-        table.insert(langs, "json")
-        table.insert(langs, "yaml")
-        table.insert(langs, "toml")
-      else
-        lang = lang:gsub("%s+%+lsp(%(%a+%))", ""):gsub("%s+%+lsp", ""):gsub("%s+%+debug", "")
-        table.insert(langs, lang)
+      if not ignore_langs[lang] then
+        -- If the lang is config then add parsers for JSON, YAML and TOML
+        if lang == "config" then
+          table.insert(langs, "json")
+          table.insert(langs, "yaml")
+          table.insert(langs, "toml")
+        else
+          lang = lang:gsub("%s+%+lsp(%(%a+%))", ""):gsub("%s+%+lsp", ""):gsub("%s+%+debug", "")
+          table.insert(langs, lang)
+        end
       end
     end
 
@@ -43,23 +67,6 @@ module.config = function()
     end
     return langs
   end
-
-  -- Get all of the treesitter_parsers from each doom_module and install them
-  local parser_configs = require("nvim-treesitter.parsers").get_parser_configs()
-  local module_utils = require('doom.utils.modules')
-  module_utils.for_each_doom_module(function (doom_module)
-    if doom_module.treesitter_parsers then
-      for parser_name, parser_name_or_config in pairs(doom_module.treesitter_parsers) do
-        local config = type(parser_name_or_config) == 'table' and parser_name_or_config or nil
-        if config then
-          parser_configs[parser_name] = config
-          table.insert(modules.langs, parser_name)
-        else
-          table.insert(modules.langs, parser_name_or_config)
-        end
-      end
-    end
-  end)
 
   -- Set up treesitter for HTTP
   -- TODO: Move this into the doom-rest.lua config
