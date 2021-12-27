@@ -23,6 +23,7 @@ local implemented_modules = {
   'auto-session',
   'which-key',
   'lsp',
+  'lua',
 }
 --- Iterates over all enabled DoomModule in doom_modules and passes them to a callback one by one
 --- @param callback "function(doom_module, section_name, module_name) end"
