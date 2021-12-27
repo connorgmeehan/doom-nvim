@@ -64,8 +64,7 @@ end
 module.setup = function(use)
   use({
     "nvim-neorg/neorg",
-    commit =  --[[NO AUTO UPDATE]] "3b4d5bcd0f85b15d99183c7d29e0eb1c5f88350b",
-    branch = "unstable",
+    commit =  --[[NO AUTO UPDATE]] "77cdd585a4a54ef3ef918e44fc31db2dde1e2058",
     config = module.config,
     after = { "nvim-treesitter" },
   })
