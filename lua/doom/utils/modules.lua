@@ -24,6 +24,7 @@ local implemented_modules = {
   'which-key',
   'lsp',
   'lua',
+  'vue3',
 }
 --- Iterates over all enabled DoomModule in doom_modules and passes them to a callback one by one
 --- @param callback "function(doom_module, section_name, module_name) end"
