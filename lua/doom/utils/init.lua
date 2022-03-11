@@ -7,9 +7,13 @@ local fs = require("doom.utils.fs")
 utils.doom_version = "4.0.0-alpha1"
 
 -- Finds `filename` (where it is a doom config file).
-utils.find_config = function(filename)
+utils.find_config = function(filename, subpath)
   local function get_filepath(dir)
-    return table.concat({ dir, filename }, system.sep)
+    local t = { dir, filename }
+    if subpath ~= nil then
+      t = { dir, subpath, filename }
+    end
+    return table.concat(t, system.sep)
   end
   local path = get_filepath(system.doom_configs_root)
   if fs.file_exists(path) then
@@ -20,7 +24,7 @@ utils.find_config = function(filename)
     return path
   end
   local candidates = vim.api.nvim_get_runtime_file(
-    get_filepath("*" .. system.sep .. "doon-nvim"),
+    get_filepath("*" .. system.sep .. "doom-nvim"),
     false
   )
   if not vim.tbl_isempty(candidates) then
