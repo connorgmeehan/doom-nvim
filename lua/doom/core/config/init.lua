@@ -15,6 +15,7 @@ config.load = function()
   local first_load = vim.tbl_isempty(doom or {})
   if first_load then
     doom = vim.tbl_deep_extend("force", core_settings, user_settings)
+    dofile(utils.find_config("options.lua", "lua/doom/core"))
     doom.packages = {} -- Extra packages
     doom.autocmds = {} -- Extra autocommands
     doom.binds = {} -- Extra binds
@@ -49,9 +50,8 @@ config.load = function()
   end
 
   -- load vim options
-  if first_load then
-    dofile(utils.find_config("options.lua", "lua/doom/core"))
-  end
+  -- if first_load then
+  -- end
 end
 
 -- Path cases:
