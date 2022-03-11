@@ -5,6 +5,8 @@
 -- automatically).
 --
 
+local use = require("doom.utils.user").add_or_override_plugin
+
 -- Editor config
 doom.indent = 2
 doom.escape_sequences = {}
@@ -16,21 +18,13 @@ vim.diagnostic.config({
 })
 
 -- Colourscheme
-table.insert(doom.packages, {
-  'sainnhe/sonokai'
-})
+use { 'sainnhe/sonokai' }
 doom.colorscheme = 'sonokai'
 
 -- Extra packages
-table.insert(doom.packages, {
-  'rafcamlet/nvim-luapad'
-})
-table.insert(doom.packages, {
-  'nvim-treesitter/playground'
-})
-table.insert(doom.packages, {
-  'tpope/vim-surround'
-})
+use { 'rafcamlet/nvim-luapad' }
+use { 'nvim-treesitter/playground' }
+use { 'tpope/vim-surround' }
 
 
 -- vim: sw=2 sts=2 ts=2 expandtab
