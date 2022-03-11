@@ -1073,7 +1073,8 @@ local binds_visual = {
   },
 }
 
-local lsp_opts = vim.tbl_extend("force", opts, { expr = true })
+local lsp_opts = vim.tbl_extend("force", opts.sf, { expr = true })
+
 local binds_snippets = {
   { "<c-n>", 'luasnip#expand_or_jumpable() ? "<Plug>luasnip-expand-or-jump" : "<Tab>"', "luasnip_expand", options = lsp_opts }
 --     "s", "<c-n>", 'luasnip#expand_or_jumpable() ? "<Plug>luasnip-expand-or-jump" : "<Tab>"', lsp_opts, "luasnip_expand",
