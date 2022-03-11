@@ -80,7 +80,7 @@ return {
 
   -- sequences used for escaping insert mode
   -- @default = { 'jk', 'kj' }
-  escape_sequences = { "jk", "kj" },
+  escape_sequences = { "zm" },
 
   -- Use floating windows for plugins manager (packer) operations
   -- @default = false

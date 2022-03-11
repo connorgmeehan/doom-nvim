@@ -213,10 +213,6 @@ doom.logging = "warn"
 -- Editor config
 doom.indent = 2
 
--- i need to add a right hand starting sequence here as well so that I can work
--- from both hands
-doom.escape_sequences = { 'zm' }
-
 -- vim.lsp.set_log_level('trace')
 vim.diagnostic.config({
   float = {
@@ -271,41 +267,7 @@ vim.opt.winwidth = 95
 ---       HELPERS       ---
 ---------------------------
 
-
-
--- TODO:
---  1. rename func to `use {...}`
---  2. checke [1] = repo
---  3. checke [2] = local path
---  4. override all other params.
---
---  i believe that this would handle most  plugin cases especially the ones where
---    you are overriding
-
-local function plug(t, path)
-  local user, name = string.match(t[1], "(.*)/(.*)")
-  local repo = t[1]
-  if doom.packages[name] == nil then
-    doom.packages[name] = {}
-  end
-  if path ~= nil then
-    repo = path .. repo
-  end
-  doom.packages[name][1] = repo
-  for k, value in pairs(t) do
-    if k ~= 1 then
-      if k ~= "local_path" then
-        doom.packages[name][k] = t[value]
-      else
-        doom.packages[name][1] = value .. repo
-      end
-   -- if k == 2 -- local path prefix
-    end
-  end
-end
-
-
-function get_system_info_string()
+local function get_system_info_string()
 	-- Get the neovim version
 	local nvim_vinfo = vim.version()
 	local nvim_version = string.format(
@@ -342,7 +304,7 @@ function get_system_info_string()
     system.doom_configs_root)
 end
 
-function get_error_log_dump()
+local function get_error_log_dump()
   -- the reason why the pattern doesn't match is because of the zero infront of single digit days??
   local log_date_format
   local date_pre = os.date("%a %b")
@@ -377,7 +339,7 @@ end
 
 -- create_report creates a markdown report. It's meant to be used when a bug
 -- occurs, useful for debugging issues.
-function create_report()
+local function create_report()
   local date = os.date("%Y-%m-%d %H:%M:%S")
   local created_report, err = xpcall(function()
 	  local report = string.format(
@@ -1200,7 +1162,7 @@ local binds_leader = {
 
 table.insert(doom.binds, binds_normal)
 table.insert(doom.binds, binds_visual)
-table.insert(doom.binds, binds_terminal)
+-- table.insert(doom.binds, binds_terminal)
 if not is_plugin_disabled("whichkey") then table.insert(doom.binds, binds_leader) end
 
 
@@ -1281,32 +1243,33 @@ use { 'airblade/vim-rooter' }
 ---       MISC       ---
 ------------------------
 
--- { 'christoomey/vim-tmux-navigator' },
--- { 'melonmanchan/vim-tmux-resizer' },
--- { 'benmills/vimux' },
--- { 'godlygeek/tabular' },
--- { 'vim-scripts/excel.vim' },
--- { 'kjnh10/ExcelLikeVim' },
--- { 'davidgranstrom/scnvim', run = ":call scnvim#install()", config = require("molleweide.plugins.scnvim") },
--- { 'ThePrimeagen/vim-be-good' },
--- { 'rajasegar/vim-search-web' }, -- fast lookup
--- 	{ 'KabbAmine/vCoolor.vim' }, -- open color picker / requires mouse to select colors
--- { "jbyuki/venn.nvim", config = require("molleweide.plugins.venn") },
--- { "jbyuki/nabla.nvim" }, -- , config = require("molleweide.plugins.nabla")
--- { "jbyuki/quickmath.nvim" }, -- calculator
---   -- { 'saifulapm/chartoggle.nvim' },
---   -- { "AndrewRadev/switch.vim" },
---   -- { "jszakmeister/vim-togglecursor" },
---   -- { "Yohannfra/Vim-Flip.git" },
---   -- { "elentok/togglr.vim.git" },
+use { 'christoomey/vim-tmux-navigator' }
+use { 'melonmanchan/vim-tmux-resizer' }
+use { 'benmills/vimux' }
+use { 'godlygeek/tabular' }
+use { 'vim-scripts/excel.vim' }
+use { 'kjnh10/ExcelLikeVim' }
+use { 'davidgranstrom/scnvim', run = ":call scnvim#install()", config = require("molleweide.configs.scnvim") }
+use { 'ThePrimeagen/vim-be-good' }
+use { 'rajasegar/vim-search-web' } -- fast looku
+use { 'KabbAmine/vCoolor.vim' } -- open color picker / requires mouse to select color
+use { "jbyuki/venn.nvim", config = require("molleweide.configs.venn") }
+use { "jbyuki/nabla.nvim" } -- , config = require("molleweide.configs.nabla")
+use { "jbyuki/quickmath.nvim" } -- calculator
+  -- { 'saifulapm/chartoggle.nvim' },
+  -- { "AndrewRadev/switch.vim" },
+  -- { "jszakmeister/vim-togglecursor" },
+  -- { "Yohannfra/Vim-Flip.git" },
+  -- { "elentok/togglr.vim.git" },
 
 -----------------------
 ---       GIT       ---
 -----------------------
 
-plug({ 'tanvirtin/vgit.nvim', event = 'BufWinEnter', requires = { 'nvim-lua/plenary.nvim', }, config = require("molleweide.configs.vgit") })
--- { "sindrets/diffview.nvim", config = require("molleweide.plugins.diffview") },
-plug({
+use { 'TimUntersberger/neogit', gh }
+use { 'tanvirtin/vgit.nvim', event = 'BufWinEnter', requires = { 'nvim-lua/plenary.nvim', }, config = require("molleweide.configs.vgit") }
+use { "sindrets/diffview.nvim", config = require("molleweide.configs.diffview") }
+use {
 	'pwntester/octo.nvim',
 	requires = {
     'nvim-lua/plenary.nvim',
@@ -1314,7 +1277,7 @@ plug({
     'kyazdani42/nvim-web-devicons',
   },
 	config = require("molleweide.configs.octo")
-})
+}
 -- { 'f-person/git-blame.nvim' },
 -- { 'ruifm/gitlinker.nvim' },
 -- { 'rlch/github-notifications.nvim' },
@@ -1351,27 +1314,26 @@ plug({
 ---       LOCAL / OVERRIDES       ---
 -------------------------------------
 
--- LOCAL MODULE OVERRIDES
-plug { 'TimUntersberger/neogit', local_path = gh }
-use { 'cljoly/telescope-repo.nvim', gh }
-use { 'nvim-telescope/telescope-packer.nvim', gh }
-
--- add requires luasnip
-plug({ "molleweide/LuaSnip-snippets.nvim", opt = true, after = "LuaSnip" })
--- -- table.insert(doom.packages["LuaSnip"].requires, { "molleweide/LuaSnip-snippets.nvim", opt = true })
-doom.packages["LuaSnip"].config = function()
-  require("luasnip").config.set_config(doom.snippets)
-  require("luasnip").snippets = require("luasnip_snippets").load_snippets()
-  require("luasnip.loaders.from_vscode").load()
-end
+--
+-- -- add requires luasnip
+-- plug({ "molleweide/LuaSnip-snippets.nvim", opt = true, after = "LuaSnip" })
+-- -- -- table.insert(doom.packages["LuaSnip"].requires, { "molleweide/LuaSnip-snippets.nvim", opt = true })
+-- doom.packages["LuaSnip"].config = function()
+--   require("luasnip").config.set_config(doom.snippets)
+--   require("luasnip").snippets = require("luasnip_snippets").load_snippets()
+--   require("luasnip.loaders.from_vscode").load()
+-- end
 
 ----------------------------------------
 ---       TELESCOPE EXTENSIONS       ---
 ----------------------------------------
 
--- add ext to tele config
-table.insert(doom.telescope.extensions, 'repo')
-table.insert(doom.telescope.extensions, 'packer')
+use { 'cljoly/telescope-repo.nvim', gh }
+use { 'nvim-telescope/telescope-packer.nvim', gh }
+
+-- -- -- add ext to tele config
+table.insert(doom.modules.telescope.settings.extensions, 'repo')
+table.insert(doom.modules.telescope.settings.extensions, 'packer')
 
 -- table.insert(telescope.ext) ??
 
