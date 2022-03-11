@@ -49,30 +49,28 @@ vim.opt.foldtext = require("doom.core.functions").sugar_folds()
 
 -- These are the few vim options we wrap directly, because their usual
 -- interface is either error-prone or verbose.
-if first_load then
-  vim.opt.shiftwidth = doom.indent
-  vim.opt.softtabstop = doom.indent
-  vim.opt.tabstop = doom.indent
-  if doom.guicolors then
-    if vim.fn.exists("+termguicolors") == 1 then
-      vim.opt.termguicolors = true
-    elseif vim.fn.exists("+guicolors") == 1 then
-      vim.opt.guicolors = true
-    end
+vim.opt.shiftwidth = doom.indent
+vim.opt.softtabstop = doom.indent
+vim.opt.tabstop = doom.indent
+if doom.guicolors then
+  if vim.fn.exists("+termguicolors") == 1 then
+    vim.opt.termguicolors = true
+  elseif vim.fn.exists("+guicolors") == 1 then
+    vim.opt.guicolors = true
   end
+end
 
-  if doom.auto_comment then
-    vim.opt.formatoptions:append("croj")
-  end
-  if doom.movement_wrap then
-    vim.cmd("set whichwrap+=<,>,[,],h,l")
-  end
+if doom.auto_comment then
+  vim.opt.formatoptions:append("croj")
+end
+if doom.movement_wrap then
+  vim.cmd("set whichwrap+=<,>,[,],h,l")
+end
 
-  if doom.undo_dir then
-    vim.opt.undofile = true
-    vim.opt.undodir = doom.undo_dir
-  else
-    vim.opt.undofile = false
-    vim.opt.undodir = nil
-  end
+if doom.undo_dir then
+  vim.opt.undofile = true
+  vim.opt.undodir = doom.undo_dir
+else
+  vim.opt.undofile = false
+  vim.opt.undodir = nil
 end
