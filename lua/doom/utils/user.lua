@@ -21,7 +21,7 @@ user.add_or_override_plugin = function(t)
 
   for k, value in pairs(t) do
     if type(k) ~= "number" then
-        doom.packages[name][k] = t[value]
+        doom.packages[name][k] = value
     end
   end
 end
