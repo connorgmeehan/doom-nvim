@@ -1018,20 +1018,42 @@ local vg = "<c-r>z"
 -- -- xmap gs       <Plug>VSurround
 -- -- xmap gS       <Plug>VgSurround
 -- normal mode
-local binds_normal = {
-{ "<c-z>", [[<cmd>suspend<CR>]], name = "suspend vim" },
-{ "<c-z>", [[<Esc><cmd>suspend<CR>]], name = "suspend vim", mode = "v" },
-{ ';', ':', name = "colon", options = opts.sf },
-{ ':', ';', name = "semi-colon" },
---  {'n', 'dl', ':set wrap! linebreak!<CR>'},
--- { 'x', 'z', '<Plug>VSurround' },
--- { 'n', 'yzz', '<Plug>Yssurround' }, -- double ss
--- { 'n', 'yz', '<Plug>Ysurround' }, -- single s
--- { 'n', 'dz', '<Plug>Dsurround' },
--- { 'n', 'cz', '<Plug>Csurround' },
+
+-- local bind = function(t)
+--   print(t[1], t[2])
+--   -- enabled?
+--   if t[1] then
+--     for key, mappings in pairs(t) do
+--       print("type: ", type(key), key)
+--       if type(key) ~= "number" then
+--         print(key, "<<<<")
+--         table.insert(doom.binds, mappings)
+--       end
+--     end
+--   end
+-- end
+
+local bind = require("doom.utils.user").insert_binds_into_main_table
+local enable = true
+local disable = false
+
+bind { -- normal
+  enable,
+  normal = {
+  { "<c-z>", [[<cmd>suspend<CR>]], name = "suspend vim" },
+  { "<c-z>", [[<Esc><cmd>suspend<CR>]], name = "suspend vim", mode = "v" },
+  { ';', ':', name = "colon", options = opts.sf },
+  { ':', ';', name = "semi-colon" },
+    --  {'n', 'dl', ':set wrap! linebreak!<CR>'},
+    -- { 'x', 'z', '<Plug>VSurround' },
+    -- { 'n', 'yzz', '<Plug>Yssurround' }, -- double ss
+    -- { 'n', 'yz', '<Plug>Ysurround' }, -- single s
+    -- { 'n', 'dz', '<Plug>Dsurround' },
+    -- { 'n', 'cz', '<Plug>Csurround' },
+  }
 }
 
--- local binds_operator = {
+-- - local binds_operator = {
 -- { 'o', 'b', 'vb', opts.ns },
 -- { 'o', 'B', 'vB', opts.ns },
 -- { 'o', 'F', 'vF', opts.ns },
@@ -1041,22 +1063,26 @@ local binds_normal = {
 -- }
 
 -- idea > use :[range]luado to filter visual selection.
-local binds_visual = {
-{ "p", '"_dP', mode = "v", options = opts.fs },
-{ "<c-z>", [[<Esc><cmd>suspend<CR>]], name = "suspend vim", mode = "v" },
-{ "<C-l>v", vs .. ":lua doom.moll.funcs.inspect(".. vg .. ")<Left>", name = "inspect", options = opts.sf, mode = "v" },
-{
-    "<C-l>i",
-    [[:lua doom.moll.funcs.inspect(loadstring(doom.moll.funcs.get_visual_selection()))<CR>]],
-    name = "print vis sel",
-    options = opts.sf, mode = "v"
-  },
+bind { -- visual
+  enable,
+  visual = {
+  { "p", '"_dP', mode = "v", options = opts.fs },
+  { "<c-z>", [[<Esc><cmd>suspend<CR>]], name = "suspend vim", mode = "v" },
+  { "<C-l>v", vs .. ":lua doom.moll.funcs.inspect(".. vg .. ")<Left>", name = "inspect", options = opts.sf, mode = "v" },
+  {
+      "<C-l>i",
+      [[:lua doom.moll.funcs.inspect(loadstring(doom.moll.funcs.get_visual_selection()))<CR>]],
+      name = "print vis sel",
+      options = opts.sf, mode = "v",
+    },
+  }
 }
 
 local lsp_opts = vim.tbl_extend("force", opts.sf, { expr = true })
 
-local binds_snippets = {
-  { "<c-n>", 'luasnip#expand_or_jumpable() ? "<Plug>luasnip-expand-or-jump" : "<Tab>"', "luasnip_expand", options = lsp_opts }
+bind { -- lsp
+  disable,
+  lsp = { "<c-n>", 'luasnip#expand_or_jumpable() ? "<Plug>luasnip-expand-or-jump" : "<Tab>"', "luasnip_expand", options = lsp_opts }
 --     "s", "<c-n>", 'luasnip#expand_or_jumpable() ? "<Plug>luasnip-expand-or-jump" : "<Tab>"', lsp_opts, "luasnip_expand",
 --     "s", "<c-p>", 'luasnip#expand_or_jumpable() ? "<Plug>luasnip-expand-or-jump" : "<Tab>"', lsp_opts, "luasnip_expand",
 --     "s", "<c-k>", '<cmd>lua require("luasnip").jump(1)<CR>', opts, "luasnip_next_sel_s",
@@ -1071,99 +1097,103 @@ local binds_snippets = {
 -- local binds_terminal = {
 -- }
 
-local binds_leader = {
-  "<leader>", name = "+prefix", {
-  {
-      "M", name = "+moll", {
-      { "l", [[<cmd>lua require("luasnip_snippets").load_snippets()<CR>]], name = "load luasnip-snippets" },
-      { "r", [[<cmd>DoomReload<CR>]], name = "doomReload" },
-      { "R", function() doom.moll.funcs.report_an_issue() end, name = "create_issue_from_templ"},
-      { "p", [[:lua doom.moll.funcs.inspect(doom.)<Left>]], name = "inspect", options = opts.sf },
-      { "P", [[:lua doom.moll.funcs.inspect()<Left>]], name = "inspect", options = opts.sf },
-      { "w", "\"zyiw:lua doom.moll.funcs.inspect(<c-r>z)<Left>", name = "inspect iw", options = opts.sf },
-      { "W", "\"zyiW:lua doom.moll.funcs.inspect(<c-r>z)<Left>", name = "inspect iW", options = opts.sf },
-      { 't', '<cmd>TermExec cmd="zsh -il"<cr>'},
+if not is_plugin_disabled("whichkey") then
+  bind {
+    enable,
+    leader = {
+      "<leader>", name = "+prefix", {
       {
-          "g", name = "+go", {
-          { 'D', '<cmd>e '.. doom_log_path ..'<CR>' },
-          { 'N', '<cmd>e '.. notes_rndm ..'<CR>' },
-          { 'S', '<cmd>e '.. conf_skhd ..'<CR>' },
-          { 'a', '<cmd>e '.. conf_alac ..'<CR>' },
-          { 'd', '<cmd>e '.. conf_doom ..'<CR>' },
-          { 'e', '<cmd>e '.. conf_setup ..'<CR>' },
-          { 'g', '<cmd>e '.. aliases_git ..'<CR>' },
-          { 'm', '<cmd>e '.. conf_tnx_main ..'<CR>' },
-          { 'n', '<cmd>e '.. notes_todo ..'<CR>' },
-          { 's', '<cmd>e '.. conf_surf ..'<CR>' },
-          { 't', '<cmd>e '.. conf_tmux ..'<CR>' },
-          { 'x', '<cmd>e '.. conf_scim ..'<CR>' },
-          { 'y', '<cmd>e '.. conf_yabai ..'<CR>' },
-          { 'z', '<cmd>e '.. aliases_zsh ..'<CR>' },
+          "M", name = "+moll", {
+          { "l", [[<cmd>lua require("luasnip_snippets").load_snippets()<CR>]], name = "load luasnip-snippets" },
+          { "r", [[<cmd>DoomReload<CR>]], name = "doomReload" },
+          { "R", function() doom.moll.funcs.report_an_issue() end, name = "create_issue_from_templ"},
+          { "p", [[:lua doom.moll.funcs.inspect(doom.)<Left>]], name = "inspect", options = opts.sf },
+          { "P", [[:lua doom.moll.funcs.inspect()<Left>]], name = "inspect", options = opts.sf },
+          { "w", "\"zyiw:lua doom.moll.funcs.inspect(<c-r>z)<Left>", name = "inspect iw", options = opts.sf },
+          { "W", "\"zyiW:lua doom.moll.funcs.inspect(<c-r>z)<Left>", name = "inspect iW", options = opts.sf },
+          { 't', '<cmd>TermExec cmd="zsh -il"<cr>'},
+          {
+              "g", name = "+go", {
+              { 'D', '<cmd>e '.. doom_log_path ..'<CR>' },
+              { 'N', '<cmd>e '.. notes_rndm ..'<CR>' },
+              { 'S', '<cmd>e '.. conf_skhd ..'<CR>' },
+              { 'a', '<cmd>e '.. conf_alac ..'<CR>' },
+              { 'd', '<cmd>e '.. conf_doom ..'<CR>' },
+              { 'e', '<cmd>e '.. conf_setup ..'<CR>' },
+              { 'g', '<cmd>e '.. aliases_git ..'<CR>' },
+              { 'm', '<cmd>e '.. conf_tnx_main ..'<CR>' },
+              { 'n', '<cmd>e '.. notes_todo ..'<CR>' },
+              { 's', '<cmd>e '.. conf_surf ..'<CR>' },
+              { 't', '<cmd>e '.. conf_tmux ..'<CR>' },
+              { 'x', '<cmd>e '.. conf_scim ..'<CR>' },
+              { 'y', '<cmd>e '.. conf_yabai ..'<CR>' },
+              { 'z', '<cmd>e '.. aliases_zsh ..'<CR>' },
+              },
+            }, -- moll > go
           },
-        }, -- moll > go
-      },
-    }, -- moll
-  {
-      "s", name = "+search", {
-      { "g", [[<cmd>Telescope repo cached_list<CR>]], name = "repos cached" },
-      { "G", [[<cmd>Telescope repo list<CR>]], name = "repos build" },
-      { "f", [[/\v\c]], name = "text case", options = opts.sf },
+        }, -- moll
       {
-          "r", name = "+replace", {
-          { "l", ":s//g<Left><Left>", name = "line", options = opts.sf },
-          { "L", "\"zyiw:s/<c-r>z//g<Left><Left>", name = "line iw", options = opts.sf },
-          { "o", "\"zyiW:s/<c-r>z//g<Left><Left>", name = "line iW", options = opts.sf },
-          { "O", "\"zyiw:s/\\<<c-r>z\\>//g<Left><Left>", name = "line iw solo", options = opts.sf },
-          { "a", ":%s//g<Left><Left>", name = "file", options = opts.sf },
-          { "w", "\"zyiw:%s/<c-r>z//g<Left><Left>", name = "word", options = opts.sf },
-            --
-            -- {
-            --    "n",
-            --    "<leader>rfs",
-            --    "\"zyiw:%s/\\<<c-r>z\\>//g<Left><Left>",
-            --    { silent = false },
-            --    "Replace Inner (w)ord Solo",
-            --    "replace_inner_word_solo",
-            --    "Replace (w)ord Solo"
-            -- },
-            -- {
-            --    "n",
-            --    "<leader>rfW",
-            --    "\"zyiW:%s/<c-r>z//g<Left><Left>",
-            --    { silent = false },
-            --    "Replace Inner (W)ord",
-            --    "replace_inner_word_big",
-            --    "Replace (W)ord"
-            -- },
-          }
-        }, -- search > replace
-    },
-  }, -- search
-  {
-      "g", name = "+git", {
-      {
-          "z", name = "+octo", {
-          { "i", ":Octo issue ", name = "issue", options = opts.sf },
-          { "l", "<cmd>Octo issue list<cr>", name = "issue list" },
+          "s", name = "+search", {
+          { "g", [[<cmd>Telescope repo cached_list<CR>]], name = "repos cached" },
+          { "G", [[<cmd>Telescope repo list<CR>]], name = "repos build" },
+          { "f", [[/\v\c]], name = "text case", options = opts.sf },
+          {
+              "r", name = "+replace", {
+              { "l", ":s//g<Left><Left>", name = "line", options = opts.sf },
+              { "L", "\"zyiw:s/<c-r>z//g<Left><Left>", name = "line iw", options = opts.sf },
+              { "o", "\"zyiW:s/<c-r>z//g<Left><Left>", name = "line iW", options = opts.sf },
+              { "O", "\"zyiw:s/\\<<c-r>z\\>//g<Left><Left>", name = "line iw solo", options = opts.sf },
+              { "a", ":%s//g<Left><Left>", name = "file", options = opts.sf },
+              { "w", "\"zyiw:%s/<c-r>z//g<Left><Left>", name = "word", options = opts.sf },
+                --
+                -- {
+                --    "n",
+                --    "<leader>rfs",
+                --    "\"zyiw:%s/\\<<c-r>z\\>//g<Left><Left>",
+                --    { silent = false },
+                --    "Replace Inner (w)ord Solo",
+                --    "replace_inner_word_solo",
+                --    "Replace (w)ord Solo"
+                -- },
+                -- {
+                --    "n",
+                --    "<leader>rfW",
+                --    "\"zyiW:%s/<c-r>z//g<Left><Left>",
+                --    { silent = false },
+                --    "Replace Inner (W)ord",
+                --    "replace_inner_word_big",
+                --    "Replace (W)ord"
+                -- },
+              }
+            }, -- search > replace
           },
-        }, -- git -> octo
-      },
-    }, -- git
-  {
-      "w", name = "+windows", {
-      { "z", [[<esc><cmd>suspend<CR>]], name = "suspend vim" },
-      -- { "S", [[<esc><CR>]], name = "solo window / close all others" }, -- nvim get windows > compare some idx/name > close match set
-      -- { "move"}
-      -- { "new/rm"}
-      },
-    }, -- windows
-  } -- leader
-}
+        }, -- search
+      {
+          "g", name = "+git", {
+          {
+              "z", name = "+octo", {
+              { "i", ":Octo issue ", name = "issue", options = opts.sf },
+              { "l", "<cmd>Octo issue list<cr>", name = "issue list" },
+              },
+            }, -- git -> octo
+          },
+        }, -- git
+      {
+          "w", name = "+windows", {
+          { "z", [[<esc><cmd>suspend<CR>]], name = "suspend vim" },
+            -- { "S", [[<esc><CR>]], name = "solo window / close all others" }, -- nvim get windows > compare some idx/name > close match set
+            -- { "move"}
+            -- { "new/rm"}
+          },
+        }, -- windows
+      } -- leader
+    }
+  }
+end
 
-table.insert(doom.binds, binds_normal)
-table.insert(doom.binds, binds_visual)
+-- table.insert(doom.binds, binds_normal)
+-- table.insert(doom.binds, binds_visual)
 -- table.insert(doom.binds, binds_terminal)
-if not is_plugin_disabled("whichkey") then table.insert(doom.binds, binds_leader) end
 
 
 ---------------------------
@@ -1251,7 +1281,7 @@ use { 'vim-scripts/excel.vim' }
 use { 'kjnh10/ExcelLikeVim' }
 use { 'davidgranstrom/scnvim', run = ":call scnvim#install()", config = require("molleweide.configs.scnvim") }
 use { 'ThePrimeagen/vim-be-good' }
-use { 'rajasegar/vim-search-web' } -- fast looku
+-- use { 'rajasegar/vim-search-web' } -- fast looku
 use { 'KabbAmine/vCoolor.vim' } -- open color picker / requires mouse to select color
 use { "jbyuki/venn.nvim", config = require("molleweide.configs.venn") }
 use { "jbyuki/nabla.nvim" } -- , config = require("molleweide.configs.nabla")
