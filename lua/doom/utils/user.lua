@@ -30,21 +30,18 @@ user.add_or_override_plugin = function(t)
 end
 
 -- build nest map tree recursive
-local function build_next_level(user_tree)
+function build_next_level(user_tree)
   local t_nest = {}
   for key, user_node in pairs(user_tree) do
-
-    if type(key) == "table" then
-      table.insert(t_nest[3], user_node) -- << LEAF
-
+    if type(key) == "number" then
+      table.insert(t_nest, user_node) -- << LEAF
     elseif type(key) == "string" then
       local new_branch = {
-        string.format("+%s", key:sub(1,1)),
-        string.format("+%s", key:sub(3)),
+        string.format("%s", key:sub(1,1)),
+        name = string.format("+%s", key:sub(3)),
         build_next_level(user_node)
       }
-      -- attach the branch to the nest tree
-      table.insert(t_nest[3], new_branch) -- insert branch
+      table.insert(t_nest, new_branch) -- insert branch
     end
   end
   return t_nest
@@ -55,7 +52,7 @@ user.insert_binds_into_main_table = function(t)
   -- bool enable/dissable
   -- mode keyword add to all binds if it doesn't exist
   -- mappings table or key.
-  --
+
 
   if t[1] then
     for key, mappings in pairs(t) do
