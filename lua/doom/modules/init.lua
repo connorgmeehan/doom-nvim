@@ -74,6 +74,6 @@ for module_name, module in pairs(doom.modules) do
 end
 
 -- Handle extra user modules
-for _, packer_spec in ipairs(doom.packages) do
+for _, packer_spec in pairs(doom.packages) do
   use(packer_spec)
 end
