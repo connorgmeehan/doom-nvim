@@ -11,6 +11,8 @@ local system = require("doom.core.system")
 
 doom.moll = {}
 
+-- packer.nvim logs to stdpath(cache)/packer.nvim.log. Looking at this file is usually a good start if something isn't working as expected.
+
 ------------------------
 ---       TODO       ---
 ------------------------
@@ -106,13 +108,10 @@ doom.moll = {}
 ---       JIBBERISH       ---
 -----------------------------
 
--- i am learning more and more about this shit and it is something that isn2
--- mariopoll, my config file is huge at the moment. i have pretty much added every single plugin that
--- i can find that seems interesting so that I know that they are in my code and
--- then I can just disable them easilly should I need.
+-- you can just live out load, and so that is something.
+-- luckilly my colemak key map works which is quite crucial.
 --
--- allright so now i am going to do some more stretching and then make it so tha this this.
--- jag saog vad det var for machine that you guys got yourself.
+--
 
 
 
@@ -719,25 +718,6 @@ local vg = "<c-r>z"
 ---       search & replace: file       ---
 ------------------------------------------
 --
--- {
---    "n",
---    "<leader>rfs",
---    "\"zyiw:%s/\\<<c-r>z\\>//g<Left><Left>",
---    { silent = false },
---    "Replace Inner (w)ord Solo",
---    "replace_inner_word_solo",
---    "Replace (w)ord Solo"
--- },
--- {
---    "n",
---    "<leader>rfW",
---    "\"zyiW:%s/<c-r>z//g<Left><Left>",
---    { silent = false },
---    "Replace Inner (W)ord",
---    "replace_inner_word_big",
---    "Replace (W)ord"
--- },
---
 -------------------------------------------
 ---       search mult files links       ---
 -------------------------------------------
@@ -1136,6 +1116,25 @@ local binds_leader = {
           { "O", "\"zyiw:s/\\<<c-r>z\\>//g<Left><Left>", name = "line iw solo", options = opts.sf },
           { "a", ":%s//g<Left><Left>", name = "file", options = opts.sf },
           { "w", "\"zyiw:%s/<c-r>z//g<Left><Left>", name = "word", options = opts.sf },
+            --
+            -- {
+            --    "n",
+            --    "<leader>rfs",
+            --    "\"zyiw:%s/\\<<c-r>z\\>//g<Left><Left>",
+            --    { silent = false },
+            --    "Replace Inner (w)ord Solo",
+            --    "replace_inner_word_solo",
+            --    "Replace (w)ord Solo"
+            -- },
+            -- {
+            --    "n",
+            --    "<leader>rfW",
+            --    "\"zyiW:%s/<c-r>z//g<Left><Left>",
+            --    { silent = false },
+            --    "Replace Inner (W)ord",
+            --    "replace_inner_word_big",
+            --    "Replace (W)ord"
+            -- },
           }
         }, -- search > replace
     },
