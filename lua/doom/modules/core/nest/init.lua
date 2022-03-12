@@ -29,6 +29,10 @@ nest.configure_functions["nest.nvim"] = function()
       nest_package.applyKeymaps(type(module.binds) == 'function' and module.binds() or module.binds)
     end
   end
+
+  if doom.binds then
+      nest_package.applyKeymaps(type(doom.binds) == 'function' and doom.binds() or doom.binds)
+  end
 end
 
 return nest
