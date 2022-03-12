@@ -1,5 +1,5 @@
 return function()
-  local mappings = require("doom.utils.mappings")
+  -- local mappings = require("doom.utils.mappings")
 
   -- FIX: not getting this to work
   function _G.Toggle_venn()
@@ -21,5 +21,5 @@ return function()
     end
   end
 
-  mappings.map('n', '<leader>D', "<cmd>lua Toggle_venn()<CR>", { noremap = true }, "Editor", "venn_toggle", "Toggle Venn")
+  -- mappings.map('n', '<leader>D', "<cmd>lua Toggle_venn()<CR>", { noremap = true }, "Editor", "venn_toggle", "Toggle Venn")
 end
