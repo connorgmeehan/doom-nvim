@@ -50,6 +50,16 @@ local use = packer.use
 packer.reset()
 
 -- Handle the Modules
+--
+-- how to remove duplicate specs?
+-- need to merge specs if they exist
+-- i think this is the only way to rid dupl in packer
+
+local all_specs = {}
+local module_specs = {}
+local user_specs = {}
+
+-- iterate models and flatten specs into module_specs
 for module_name, module in pairs(doom.modules) do
   -- Import dependencies with packer from module.packages
   if module.packages then
@@ -61,11 +71,11 @@ for module_name, module in pairs(doom.modules) do
 
       -- Set/unset frozen packer dependencies
       packer_spec.commit = doom.freeze_dependencies and packer_spec.commit or nil
-
-      -- Initialise packer
-      use(packer_spec)
+      module_specs[dependency_name] = packer_spec
     end
   end
+
+  -- does this have to account for user as well?
   -- Setup package autogroups
   if module.autocommands then
     local autocommands = type(module.autocommands) == 'function' and module.autocommands() or module.autocommands
@@ -73,7 +83,11 @@ for module_name, module in pairs(doom.modules) do
   end
 end
 
--- Handle extra user modules
-for _, packer_spec in pairs(doom.packages) do
+-- Merge user
+all_specs = vim.tbl_deep_extend("force", module_specs, doom.packages)
+
+-- Initialize all specs
+for _, packer_spec in pairs(all_specs) do
+  -- Set/unset frozen packer dependencies
   use(packer_spec)
 end
