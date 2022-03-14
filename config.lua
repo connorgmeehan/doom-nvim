@@ -1058,17 +1058,15 @@ bind { -- visual
 
 -- insert
 bind {
-  false,
+  true,
   insert = {
-
--- { "i", "zm", "<ESC>:w<cr>", opts_s, "Editor", "exit_insert", "Exit insert mode" },
--- { "i", "zf", "<ESC>cF", opts_s, "Editor", "exit_insert_change_bkw", "Exit insert mode and change Backwards" },
+  -- { "i", "zm", "<ESC>:w<cr>", opts_s, "Editor", "exit_insert", "Exit insert mode" },
+  { "zf", "<ESC>cF", mode ="i", name = "esc search back", opts.s },
 -- { "i", "zt", "<ESC>cT", opts_s, "Editor", "exit_insert_till_bkw", "Exit insert mode and change Until Backwards" },
 -- { "i", "zD", "<ESC>dF", opts_s, "Editor", "exit_insert_delete_bkw", "Exit insert mode and delete Backwards" },
 -- { "i", "zh", "<ESC>yF", opts_s, "Editor", "exit_insert_yank_bkw", "Exit insert mode and yank Backwards" },
 -- { "i", "zp", "<ESC>la", opts_s, "Editor", "exit_insert_and_append_tiny", "Exit Insert Mode and append right" },
 -- { "i", "zP", "<ESC>A ", opts_s, "Editor", "exit_insert_and_append_big", "Exit Insert Mode and (A)ppend" },
-
   }
 }
 
@@ -1124,17 +1122,17 @@ if not is_plugin_disabled("whichkey") then
               { 'z', '<cmd>e '.. aliases_zsh ..'<CR>' },
               },
             }, -- moll > go
-          {
-              "L", name = "+line operations", {
-                -- -- line operations (testing)
-                -- -- " run current line through shell
-                -- { 'n', ',Zs', '!!$SHELL <CR>'},
-                -- -- " run current line in commandline
-                -- { 'n', ',Zl', 'yy:@" <CR>' },
-                -- ??
-                -- { 'n', ',ZZ', ':w !sudo tee %'},
-              }
-            }
+          -- {
+          --     "L", name = "+line operations", {
+          --       -- -- line operations (testing)
+          --       -- -- " run current line through shell
+          --       -- { 'n', ',Zs', '!!$SHELL <CR>'},
+          --       -- -- " run current line in commandline
+          --       -- { 'n', ',Zl', 'yy:@" <CR>' },
+          --       -- ??
+          --       -- { 'n', ',ZZ', ':w !sudo tee %'},
+          --     }
+          --   }
           },
         }, -- moll
       {
@@ -1183,38 +1181,38 @@ if not is_plugin_disabled("whichkey") then
             }, -- git -> octo
           },
         }, -- git
-      {
-          "R", "+readf", {
-            -- -- read file
-            -- -- :r file               to after cursor
-            -- -- :$r                   to end of buffer
-            -- -- :0r                   to end of buffer
-            -- -- :{x}r                 to after line x
-            -- -- :/pattern/r file      to after pattern
-            -- { 'n', ',Rf', ':r<space>' },
-            -- { 'n', ',Re', ':$r<space>' },
-            -- { 'n', ',Rb', ':0r<space>' },
-            -- { 'n', ',Rl', ':r <Left><Left>' },
-            -- { 'n', ',Rp', '://r <Left><Left><Left>' },
-          }
-        }, -- read
+      -- {
+      --     "R", "+readf", {
+      --       -- -- read file
+      --       -- -- :r file               to after cursor
+      --       -- -- :$r                   to end of buffer
+      --       -- -- :0r                   to end of buffer
+      --       -- -- :{x}r                 to after line x
+      --       -- -- :/pattern/r file      to after pattern
+      --       -- { 'n', ',Rf', ':r<space>' },
+      --       -- { 'n', ',Re', ':$r<space>' },
+      --       -- { 'n', ',Rb', ':0r<space>' },
+      --       -- { 'n', ',Rl', ':r <Left><Left>' },
+      --       -- { 'n', ',Rp', '://r <Left><Left><Left>' },
+      --     }
+      --   }, -- read
       {
           "w", name = "+windows", {
           { "z", [[<esc><cmd>suspend<CR>]], name = "suspend vim" },
             -- { "S", [[<esc><CR>]], name = "solo window / close all others" }, -- nvim get windows > compare some idx/name > close match set
             -- { "move"}
             -- { "new/rm"}
-          {
-              "t", name = "+tabs", {
-                -- { 'n', ',tn', ':tabnew<cr>' },
-                -- { 'n', 'gl', 'gt' },
-                -- { 'n', 'gL', 'gT' },
-                -- { 'n', ',g0', ':tabr<cr>' },
-                -- { 'n', ',g$', ':tabl<cr>' },
-                -- { 'n', ',gh', ':tabm -<cr>' },
-                -- { 'n', ',gl', ':tabm +<cr>' },
-              }
-            }
+          -- {
+          --     "t", name = "+tabs", {
+          --       -- { 'n', ',tn', ':tabnew<cr>' },
+          --       -- { 'n', 'gl', 'gt' },
+          --       -- { 'n', 'gL', 'gT' },
+          --       -- { 'n', ',g0', ':tabr<cr>' },
+          --       -- { 'n', ',g$', ':tabl<cr>' },
+          --       -- { 'n', ',gh', ':tabm -<cr>' },
+          --       -- { 'n', ',gl', ':tabm +<cr>' },
+          --     }
+          --   }
           },
         }, -- windows
       } -- leader
