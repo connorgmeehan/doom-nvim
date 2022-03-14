@@ -3,6 +3,9 @@ local bind = function(t) print(t) end
 
 
 -- only mult seq chars if not leader, since each branch needs a name...
+--
+-- if empty table ignore.
+--
 
 
 

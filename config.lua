@@ -133,6 +133,8 @@ doom.moll = {}
 -- they don't want to leave one war for another war. they didn't want to go here.
 --
 -- he is going to save his family.
+--
+-- now this is quite spectacular dude.
 
 
 
@@ -679,70 +681,6 @@ local vg = "<c-r>z"
 ---       SEARCH POPULATE QUICKFIX LIST       ---
 -------------------------------------------------
 
--- -- ripgrep search empty
--- {
---    "n",
---    "<leader>rg",
---    ":grep ",
---    { silent = false },
---    "Ripgrep Search Empty",
---    "ripgrep_search_empty",
---    "Ripgrep Search Empty"
--- },
--- -- ripgrep search word
--- {
---    "n",
---    "<leader>rw",
---    "\"zyiw:grep <c-r>z",
---    { silent = false },
---    "Ripgrep Search Empty",
---    "ripgrep_search_empty",
---    "Ripgrep Search Empty"
--- },
--- -- ripgrep search WORD
--- {
---    "n",
---    "<leader>rW",
---    "\"zyiW:grep <c-r>z",
---    { silent = false },
---    "Ripgrep Search Empty",
---    "ripgrep_search_empty",
---    "Ripgrep Search Empty"
--- },
-
--- -- TODO: add vimgrep variants
--- -- vimgrep search empty
--- {
---    "n",
---    "<leader>rg",
---    ":grep ",
---    { silent = false },
---    "Ripgrep Search Empty",
---    "ripgrep_search_empty",
---    "Ripgrep Search Empty"
--- },
--- -- vimgrep search word
--- {
---    "n",
---    "<leader>rw",
---    "\"zyiw:grep <c-r>z",
---    { silent = false },
---    "Ripgrep Search Empty",
---    "ripgrep_search_empty",
---    "Ripgrep Search Empty"
--- },
--- -- vimgrep search WORD
--- {
---    "n",
---    "<leader>rW",
---    "\"zyiW:grep <c-r>z",
---    { silent = false },
---    "Ripgrep Search Empty",
---    "ripgrep_search_empty",
---    "Ripgrep Search Empty"
--- },
--- -- vimgrep search word solo
--- -- vimgrep search WORD solo
 
 --------------------------------------------------
 ---       REPLACE WORDS IN QUICKFIX LIST       ---
@@ -1144,6 +1082,74 @@ if not is_plugin_disabled("whichkey") then
                 -- },
               }
             }, -- search > replace
+          {
+              "R", name = "+grep/cdo", {
+                  -- -- ripgrep search empty
+                  -- {
+                  --    "n",
+                  --    "<leader>rg",
+                  --    ":grep ",
+                  --    { silent = false },
+                  --    "Ripgrep Search Empty",
+                  --    "ripgrep_search_empty",
+                  --    "Ripgrep Search Empty"
+                  -- },
+                  -- -- ripgrep search word
+                  -- {
+                  --    "n",
+                  --    "<leader>rw",
+                  --    "\"zyiw:grep <c-r>z",
+                  --    { silent = false },
+                  --    "Ripgrep Search Empty",
+                  --    "ripgrep_search_empty",
+                  --    "Ripgrep Search Empty"
+                  -- },
+                  -- -- ripgrep search WORD
+                  -- {
+                  --    "n",
+                  --    "<leader>rW",
+                  --    "\"zyiW:grep <c-r>z",
+                  --    { silent = false },
+                  --    "Ripgrep Search Empty",
+                  --    "ripgrep_search_empty",
+                  --    "Ripgrep Search Empty"
+                  -- },
+
+                  -- -- TODO: add vimgrep variants
+                  -- -- vimgrep search empty
+                  -- {
+                  --    "n",
+                  --    "<leader>rg",
+                  --    ":grep ",
+                  --    { silent = false },
+                  --    "Ripgrep Search Empty",
+                  --    "ripgrep_search_empty",
+                  --    "Ripgrep Search Empty"
+                  -- },
+                  -- -- vimgrep search word
+                  -- {
+                  --    "n",
+                  --    "<leader>rw",
+                  --    "\"zyiw:grep <c-r>z",
+                  --    { silent = false },
+                  --    "Ripgrep Search Empty",
+                  --    "ripgrep_search_empty",
+                  --    "Ripgrep Search Empty"
+                  -- },
+                  -- -- vimgrep search WORD
+                  -- {
+                  --    "n",
+                  --    "<leader>rW",
+                  --    "\"zyiW:grep <c-r>z",
+                  --    { silent = false },
+                  --    "Ripgrep Search Empty",
+                  --    "ripgrep_search_empty",
+                  --    "Ripgrep Search Empty"
+                  -- },
+                  -- -- vimgrep search word solo
+                  -- -- vimgrep search WORD solo
+              }
+            }
           },
         }, -- search
       {
@@ -1154,6 +1160,21 @@ if not is_plugin_disabled("whichkey") then
               { "l", "<cmd>Octo issue list<cr>", name = "issue list" },
               },
             }, -- git -> octo
+          -- {
+          --     "x", name = "+vgit", {
+          --
+          --     }
+          --   }, -- git -> vgit
+          -- {
+          --     "Z", name = "+gitsigns", {
+          --
+          --     }
+          --   }, -- git -> gitsigns
+          -- {
+          --     "d", name = "+diffview", {
+          --
+          --     }
+          --   }, -- git -> gitsigns
           },
         }, -- git
       -- {
