@@ -129,7 +129,10 @@ doom.moll = {}
 -- that you might go with you know. I don't understand why this would happen.
 --
 -- this is not the first time that ukraininans come to sweden. it takes fucking ten years and then they came back.
+--
 -- they don't want to leave one war for another war. they didn't want to go here.
+--
+-- he is going to save his family.
 
 
 
@@ -638,24 +641,6 @@ local vg = "<c-r>z"
 -- {'i','<c-l>','<space>'},
 -- {'c','<c-l>','<space>'},
 
--- -- search regex
--- {'n', '/', '/\\v'}, -- need to esc backsl
--- {'v', '/', '/\\v'},
-
----------------------------------
----       esc sequenses       ---
----------------------------------
-
----------------------------------
----       help commands       ---
----------------------------------
-
--- { "n", "<leader>hm", ":Man ", { silent = false }, "Man Page", "man_page", "Man Page" },
--- { "n", "<leader>hl", ":help lua_reference_toc<CR>", { silent = false }, "Lua Reference", "lua_reference", "Lua Reference" },
--- { "n", "<leader>hw", "\"zyiw:h <c-r>z<cr>", { silent = false }, "Help Inner Word", "help_inner_word", "Inner Word" },
--- { "n", "<leader>hh", ":help ", { silent = false }, "Help", "help", "Help" },
--- { "n", "<leader>hc", "<cmd>helpc<cr>", { silent = false }, "Close Help", "close_help", "Close Help" },
-
 ------------------------------
 ---       formatting       ---
 ------------------------------
@@ -673,33 +658,12 @@ local vg = "<c-r>z"
 -- { 'n', '<leader>Te', '<cmd>TodoTelescope<cr>', {}, "Telescope", "todo_telescope", "Todo Telescope" },
 -- { 'n', '<leader>Tl', '<cmd>TodoLocList<cr>',   {}, "LocList",   "todo_loc_list", "Todo LocList" },
 
--------------------------------
----       paths & :cd       ---
--------------------------------
-
--- -- - file path to global
--- -- - file git root global nvim
--- -- - active file buffer
--- -- https://stackoverflow.com/questions/38081927/vim-cding-to-git-root
--- { "n", "<leader>fpa", "<cmd>cd %:p:h<CR><cmd>pwd<CR>", opts.s, "Editor", "cwd_to_active_file", ":cd active file" },
--- { "n", "<leader>fpg", "<cmd>cd %:h | cd `git rev-parse --show-toplevel`<CR><cmd>pwd<CR>", opts.s, "Editor", "cwd_to_current_git_root", ":cd active git root" },
-
 --------------------------------------------
----       search & replace: visual       ---
+---       SEARCH & REPLACE               ---
 --------------------------------------------
 
 -- get v sel
 --  https://stackoverflow.com/questions/1533565/how-to-get-visually-selected-text-in-vimscript
-
-
-------------------------------------------
----       search & replace: file       ---
-------------------------------------------
---
--------------------------------------------
----       search mult files links       ---
--------------------------------------------
-
 -- THESE TWO HAVE THE BEST SUGGESTIONS
 -- https://jdhao.github.io/2020/03/14/nvim_search_replace_multiple_file/
 -- https://phelipetls.github.io/posts/extending-vim-with-ripgrep/
@@ -711,30 +675,6 @@ local vg = "<c-r>z"
 -- https://www.reddit.com/r/vim/comments/n8x2xr/til_find_and_replace_multiple_files_with_and/
 -- https://github.com/brooth/far.vim
 
--------------------------------
----       paths & :cd       ---
--------------------------------
-
--- -- https://stackoverflow.com/questions/38081927/vim-cding-to-git-root
--- {
--- 	"n",
--- 	"<leader>fpa",
--- 	"<cmd>cd %:p:h<CR><cmd>pwd<CR>",
--- 	opts.s,
--- 	"Editor",
--- 	"cwd_to_active_file",
--- 	":cd active file",
--- },
--- {
--- 	"n",
--- 	"<leader>fpg",
--- 	"<cmd>cd %:h | cd `git rev-parse --show-toplevel`<CR><cmd>pwd<CR>",
--- 	opts.s,
--- 	"Editor",
--- 	"cwd_to_current_git_root",
--- 	":cd active git root",
--- },
---
 -------------------------------------------------
 ---       SEARCH POPULATE QUICKFIX LIST       ---
 -------------------------------------------------
@@ -932,39 +872,6 @@ local vg = "<c-r>z"
 -- -- mappings.map("n", "<leader>go", "<cmd>LazyGit<CR>", opts, "Git", "lazygit", "Open LazyGit")
 -- { 'n', '<leader>lzo', '<cmd>LazyGit<CR>', opts.s},
 
--------------------------
----       NEORG       ---
--------------------------
-
--- { 'n', '<leader>nd', ':Neorg workspace default_workspace<cr>', opts.n },
--- { 'n', '<leader>nn', ':Neorg workspace notes<cr>', opts.n },
--- { 'n', '<leader>nG', ':Neorg workspace gtd<cr>', opts.n },
--- { 'n', '<leader>nE', ':Neorg workspace example_gtd<cr>', opts.n },
--- { 'n', '<leader>ng', ':Neorg gtd ', opts.n },
--- { 'n', '<leader>nc', ':Neorg gtd capture<cr>', opts.n },
--- { 'n', '<leader>ne', ':Neorg gtd edit', opts.n },
--- { 'n', '<leader>nv', ':Neorg gtd views<cr>', opts.n },
-
---------------------------------
----       NABLA / VENN       ---
---------------------------------
-
--- -- https://github.com/jbyuki/nabla.nvim#usage
--- { 'n', '<F5>', '<cmd>lua require("nabla").action()<cr>', opts.n },
--- { 'n', '<leader>Tp', '<cmd>lua require("nabla").popup()<cr>', opts.n },
--- -- vim.api.nvim_set_keymap('n', '<leader>v', ":lua Toggle_venn()<CR>", { noremap = true})
--- { 'n', '<leader>N', ':lua toggle_venn()<CR>', opts.n },
-
------------------------
----       VAR       ---
------------------------
-
---       -- require("plenary.reload").reload_module(selection.value)
--- -- { 'n', '<leader>lr', ':lua require("telescope.builtin").reloader({ cwd = ' .. test_plugin_reload .. '})<cr>', opts.n },
--- { 'n', '<leader>lr', ':lua require("plenary.reload").reload_module(' .. test_plugin_reload .. ')<cr>', opts.n },
--- { 'n', '<leader>lR', ':lua report_an_issue()<cr>', opts.n },
--- { 'n', '<leader>lp', ':lua pp()<left>', opts.n },
-
 ------------------------------
 ---       lightspeed       ---
 ------------------------------
@@ -1014,6 +921,10 @@ local vg = "<c-r>z"
 local bind = require("doom.utils.user").insert_binds_into_main_table
 local enabled = true
 local disabled = false
+
+-- -- search regex
+-- {'n', '/', '/\\v'}, -- need to esc backsl
+-- {'v', '/', '/\\v'},
 
 bind { -- normal
   enabled,
@@ -1094,6 +1005,27 @@ if not is_plugin_disabled("whichkey") then
     enabled,
     leader = {
       "<leader>", name = "+prefix", {
+      -- {
+      --     "h", name = "+help", {
+      --       -- { "n", "<leader>hm", ":Man ", { silent = false }, "Man Page", "man_page", "Man Page" },
+      --       -- { "n", "<leader>hl", ":help lua_reference_toc<CR>", { silent = false }, "Lua Reference", "lua_reference", "Lua Reference" },
+      --       -- { "n", "<leader>hw", "\"zyiw:h <c-r>z<cr>", { silent = false }, "Help Inner Word", "help_inner_word", "Inner Word" },
+      --       -- { "n", "<leader>hh", ":help ", { silent = false }, "Help", "help", "Help" },
+      --       -- { "n", "<leader>hc", "<cmd>helpc<cr>", { silent = false }, "Close Help", "close_help", "Close Help" },
+      --     }
+      --   }, -- help
+      -- {
+      --     "n", name = "neorg", {
+      --       -- { 'n', '<leader>nd', ':Neorg workspace default_workspace<cr>', opts.n },
+      --       -- { 'n', '<leader>nn', ':Neorg workspace notes<cr>', opts.n },
+      --       -- { 'n', '<leader>nG', ':Neorg workspace gtd<cr>', opts.n },
+      --       -- { 'n', '<leader>nE', ':Neorg workspace example_gtd<cr>', opts.n },
+      --       -- { 'n', '<leader>ng', ':Neorg gtd ', opts.n },
+      --       -- { 'n', '<leader>nc', ':Neorg gtd capture<cr>', opts.n },
+      --       -- { 'n', '<leader>ne', ':Neorg gtd edit', opts.n },
+      --       -- { 'n', '<leader>nv', ':Neorg gtd views<cr>', opts.n },
+      --     }
+      --   }, -- neorg -> move to leader > open > neorg
       {
           "M", name = "+moll", {
           { "l", [[<cmd>lua require("luasnip_snippets").load_snippets()<CR>]], name = "load luasnip-snippets" },
@@ -1103,7 +1035,22 @@ if not is_plugin_disabled("whichkey") then
           { "P", [[:lua doom.moll.funcs.inspect()<Left>]], name = "inspect", options = opts.sf },
           { "w", "\"zyiw:lua doom.moll.funcs.inspect(<c-r>z)<Left>", name = "inspect iw", options = opts.sf },
           { "W", "\"zyiW:lua doom.moll.funcs.inspect(<c-r>z)<Left>", name = "inspect iW", options = opts.sf },
-          { 't', '<cmd>TermExec cmd="zsh -il"<cr>'},
+          { 't', '<cmd>TermExec cmd="zsh -il"<cr>', name ="terminal zsh -il" },
+          -- {
+          --     "e", name = "+TEST", {
+          --       -- -- https://github.com/jbyuki/nabla.nvim#usage
+          --       -- { 'n', '<F5>', '<cmd>lua require("nabla").action()<cr>', opts.n },
+          --       -- { 'n', '<leader>Tp', '<cmd>lua require("nabla").popup()<cr>', opts.n },
+          --       -- -- vim.api.nvim_set_keymap('n', '<leader>v', ":lua Toggle_venn()<CR>", { noremap = true})
+          --       -- { 'n', '<leader>N', ':lua toggle_venn()<CR>', opts.n },
+          --           --       -- require("plenary.reload").reload_module(selection.value)
+          --           -- -- { 'n', '<leader>lr', ':lua require("telescope.builtin").reloader({ cwd = ' .. test_plugin_reload .. '})<cr>', opts.n },
+          --           -- { 'n', '<leader>lr', ':lua require("plenary.reload").reload_module(' .. test_plugin_reload .. ')<cr>', opts.n },
+          --           -- { 'n', '<leader>lR', ':lua report_an_issue()<cr>', opts.n },
+          --           -- { 'n', '<leader>lp', ':lua pp()<left>', opts.n },
+          --
+          --     }
+          --   },
           {
               "g", name = "+go", {
               { 'D', '<cmd>e '.. doom_log_path ..'<CR>' },
@@ -1135,6 +1082,34 @@ if not is_plugin_disabled("whichkey") then
           --   }
           },
         }, -- moll
+      -- {
+      --     "P", name ="+path", { -- https://stackoverflow.com/questions/38081927/vim-cding-to-git-root
+      -- -- - file path to global
+      -- -- - file git root global nvim
+      -- -- - active file buffer
+      -- -- https://stackoverflow.com/questions/38081927/vim-cding-to-git-root
+      -- { "n", "<leader>fpa", "<cmd>cd %:p:h<CR><cmd>pwd<CR>", opts.s, "Editor", "cwd_to_active_file", ":cd active file" },
+      -- { "n", "<leader>fpg", "<cmd>cd %:h | cd `git rev-parse --show-toplevel`<CR><cmd>pwd<CR>", opts.s, "Editor", "cwd_to_current_git_root", ":cd active git root" },
+      --       -- {
+      --       -- 	"n",
+      --       -- 	"<leader>fpa",
+      --       -- 	"<cmd>cd %:p:h<CR><cmd>pwd<CR>",
+      --       -- 	opts.s,
+      --       -- 	"Editor",
+      --       -- 	"cwd_to_active_file",
+      --       -- 	":cd active file",
+      --       -- },
+      --       -- {
+      --       -- 	"n",
+      --       -- 	"<leader>fpg",
+      --       -- 	"<cmd>cd %:h | cd `git rev-parse --show-toplevel`<CR><cmd>pwd<CR>",
+      --       -- 	opts.s,
+      --       -- 	"Editor",
+      --       -- 	"cwd_to_current_git_root",
+      --       -- 	":cd active git root",
+      --       -- },
+      --     }
+      --   },
       {
           "s", name = "+search", {
           { "g", [[<cmd>Telescope repo cached_list<CR>]], name = "repos cached" },
