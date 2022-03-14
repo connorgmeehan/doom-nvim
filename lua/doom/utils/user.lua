@@ -30,7 +30,7 @@ user.add_or_override_plugin = function(t)
 end
 
 -- build nest map tree recursive
-function build_next_level(user_tree)
+function build_nest_tree(user_tree)
   local t_nest = {}
   for key, user_node in pairs(user_tree) do
     if type(key) == "number" then
@@ -39,7 +39,7 @@ function build_next_level(user_tree)
       local new_branch = {
         string.format("%s", key:sub(1,1)),
         name = string.format("+%s", key:sub(3)),
-        build_next_level(user_node)
+        build_nest_tree(user_node)
       }
       table.insert(t_nest, new_branch) -- insert branch
     end
@@ -47,17 +47,19 @@ function build_next_level(user_tree)
   return t_nest
 end
 
+-- bool enable/dissable
+-- mode keyword add to all binds if it doesn't exist
+-- mappings table or key.
 user.insert_binds_into_main_table = function(t)
+  local enabled = t[1]
+  if enabled then
+    local map_tree
+    for k, v in pairs(t) do
+      if type(k) ~= "number" then
+        map_tree = v
+        table.insert(doom.binds, map_tree)
 
-  -- bool enable/dissable
-  -- mode keyword add to all binds if it doesn't exist
-  -- mappings table or key.
-
-
-  if t[1] then
-    for key, mappings in pairs(t) do
-      if type(key) ~= "number" then
-        table.insert(doom.binds, mappings)
+        -- if t[2]
 
         -- if key = table -> normal ??
 
@@ -71,24 +73,15 @@ user.insert_binds_into_main_table = function(t)
 
         -- command
 
-        -- leader
-        -- if not is_plugin_disabled("whichkey") then
-
-
-        -- -- insert table into
-        -- {
-        --   "<leader>",
-        --   name = "+prefix",
-        -- }
-        --
-        --
-        -- ["g go"] = { .... }
-        --
-        -- if type = table then it is a leaf binding
-        -- if type = string > then it is a tree bind
-
-
-
+        -- -- leader
+        -- if k == "leader" then
+        --   if not is_plugin_disabled("whichkey") then
+        --     table.insert(doom.binds, {
+        --       "<leader>",
+        --       name = "+prefix",
+        --       build_nest_tree(map_tree)
+        --     })
+        --   end
         -- end
 
       end
