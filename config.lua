@@ -82,11 +82,27 @@ doom.moll = {}
 -- need to make macros repeatable.
 --
 
--- i need to add connors nest fork.
+-- i need to add connors nest fork, and look at how it would fit with my new idea of supertight syntax.
+--
+-- capture.nvim > nest/luasnip
 
 -- i need to override completion commands so that it becomes much easier to navigate through
 -- text fast without ever accidentally triggering a snippet or some other shit, because this
 -- is very important that this flow is not interrupted.
+
+-- command > input: filetype > enter luasnip correct file type insert after last snippet.
+
+-- open the master binds file > find correct position how? regex? for new position, non leader bind,
+-- enter bind to new index, and then write the tree back to the master file. then based on regex,
+-- look at each line, and enter the position of the bind if given via input or enter last position before
+-- leader.
+-- if empty tree then enter tree empty.
+--
+-- use smart regexes to find positions even if it is in a module file.
+--
+-- 1. find tree start
+-- 2. parse tree / or dofile into environment
+-- 3.
 
 ---------------------------
 ---       TESTING       ---
@@ -116,27 +132,24 @@ doom.moll = {}
 ---       JIBBERISH       ---
 -----------------------------
 
--- you can just live out load, and so that is something.
--- luckilly my colemak key map works which is quite crucial.
+-- the goal was 215 by november, that is at least what I am going to get to but
+-- it is so much fun. oh fuck I am moving weight dude. let's do a shot dude.
 --
--- frederic von essen. he has some very nice conference platforms that are quite fucking fast and so that is something
--- that you might want to do you know and so that is the. her boy did fourteen years old at them oment
--- and so that is not what we are saying but on the other hand this is just such a much more insane system that
--- will never bjorn af kleen. character assasination. he pretends to be your friend and then he'll backstab you so hard that
--- you cannot even understand how insane this shit is.
+-- i have to look into the refactor project and see how it is done.
+-- and so how to get c errors in quickfix list.
 --
--- there are so many other occasions where somebody asks you why did you say this 2000 years ago and so that is not the thing
--- that you might go with you know. I don't understand why this would happen.
+-- rust/go compiler errors into quickfix. learn how to do this. and get to know
+-- quickfix list more in general so that I can get nice automated ways of managing
+-- errors and warnings, and I have to see how to qf list works with lsp servers as
+-- well and see if I can get an as fast way of getting to errors as possible.
 --
--- this is not the first time that ukraininans come to sweden. it takes fucking ten years and then they came back.
+-- we don't have anything to hide so that is the reason why they did that probably and so that is something that you might want toggle
+-- anders knape. the leader of swedish communes.
 --
--- they don't want to leave one war for another war. they didn't want to go here.
+-- it seems that I should be able to use the treesitter lib and use it since it has a lot of nice helper functions that allow you
+-- to do the things that I need. and so that is something that should maybe go into treesitter.
 --
--- he is going to save his family.
---
--- now this is quite spectacular dude.
-
-
+-- so how does it feel now to do this
 
 -----------------------------
 ---       RESOURCES       ---
@@ -388,6 +401,97 @@ local function create_report()
     log.error("Error while writing report. Traceback:\n" .. err)
   end
 end
+
+
+local function get_user_input_and_print()
+
+end
+
+local function enter_string_into_file()
+
+end
+
+-- ```vim
+-- :TSBufEnable {module} " enable module on current buffer
+-- :TSBufDisable {module} " disable module on current buffer
+-- :TSEnableAll {module} [{ft}] " enable module on every buffer. If filetype is specified, enable only for this filetype.
+-- :TSDisableAll {module} [{ft}] " disable module on every buffer. If filetype is specified, disable only for this filetype.
+-- :TSModuleInfo [{module}] " list information about modules state for each filetype
+-- ```
+
+
+-- #### Incremental selection
+--
+-- Incremental selection based on the named nodes from the grammar.
+--
+-- ```vim
+-- lua <<EOF
+-- require'nvim-treesitter.configs'.setup {
+--   incremental_selection = {
+--     enable = true,
+--     keymaps = {
+--       init_selection = "gnn",
+--       node_incremental = "grn",
+--       scope_incremental = "grc",
+--       node_decremental = "grm",
+--     },
+--   },
+-- }
+-- EOF
+-- ```
+
+-- ## Adding queries
+--
+-- Queries are what `nvim-treesitter` uses to extract information from the syntax tree;
+-- they are located in the `queries/{language}/*` runtime directories (see `:h rtp`),
+-- like the `queries` folder of this plugin, e.g. `queries/{language}/{locals,highlights,textobjects}.scm`.
+-- Other modules may require additional queries such as `folding.scm`.
+--
+-- All queries found in the runtime directories will be combined.
+-- By convention, if you want to write a query, use the `queries/` directory,
+-- but if you want to extend a query use the `after/queries/` directory.
+--
+-- If you want to completely override a query, you can use `:h set_query()`.
+-- For example, to override the `injections` queries from `c` with your own:
+--
+-- ```vim
+-- lua <<EOF
+-- require("vim.treesitter.query").set_query("c", "injections", "(comment) @comment")
+-- EOF
+-- ```
+--
+-- Note: when using `set_query`, all queries in the runtime directories will be ignored.
+
+-- ### Utilities
+--
+-- You can get some utility functions with
+--
+-- ```lua
+-- local ts_utils = require 'nvim-treesitter.ts_utils'
+-- ```
+--
+-- Check [`:h nvim-treesitter-utils`](doc/nvim-treesitter.txt) for more information.
+
+local function ts_print_context()
+
+end
+
+local function create_snippet_for_filetype()
+
+end
+
+
+local function create_bind_tree()
+
+  -- 1. pass tree or empty table
+  -- 2. look if write file exists
+  -- 3. write tree to this file.
+  -- 4. get user input
+  -- 5. insert this into the tree that is read into memory.
+  -- 6. write tree to the file on enter.
+
+end
+
 
 -----------------------------
 ---       FUNCTIONS       ---

@@ -1,12 +1,19 @@
 local bind = function(t) print(t) end
 
-
-
 -- only mult seq chars if not leader, since each branch needs a name...
 --
 -- if empty table ignore.
 --
+-- if only string -> full command has to be parseable from string
+--
+-- if value = function -> then make mapping where command = value function
+--
+-- if value is = table -> this means new level
 
+-- syntax = [[ <chars> | <mode> | <name> | ]]
+
+-- if using pipes then you could have the table be formatted nicely and line up everything
+-- when you write the table.
 
 
 -- NEW DEMO | CAPITALIZE LEADER STEPS
@@ -14,6 +21,14 @@ local bind = function(t) print(t) end
 -- 1. add regular binds, and leader to the same table? how?
 bind {
   ["!LEADER"] = { -- use ! to disable
+    " asd sdfasdf",
+    " c  | n   | the name                | exec/silent/nore | <cmd>do hsomething<cr>",
+    " x  | n   | name_of_the_bind        | grzz",
+    " e  | isx | snippets_do_something   | <cmd>vim.fn.call_some_of_thegood_stuff()",
+    " a  | nt  | normal_and_terminal_esc | <esc><cmd>close.terminal.window()",
+    " zf | i   | normal_and_terminal_esc | <esc>vcF",
+    ["zf | i   | normal_and_terminal_esc "] = function () vim.cmd([[print xyz ]]) end,
+
     "a_add_a_binding_Csus",
     b_name_of_the_bind = "<cmd>!shell xyz<cr>",
     ["b/another_bind"] = "<cmd>!shell xyz<cr>",
