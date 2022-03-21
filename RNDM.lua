@@ -374,4 +374,29 @@ with modules and git histories and so I don't want to do that actually.
 so this is going to be quite nice but at them moment this is actually
 fucking insane and I don't even understand how they can do this shit.
 
+this is just so fucking frustrating but now everything with the lsp etc is working so this is quite fucking nice and now
+i am going to pull somechanges from connors branch as well so that I can actually add something and not be a fucking retard all of the time.
+
+this is quite fucking insane and so now it is going to be quite fucking interesting to see how this works.
+
+and then we measure the prices and look at differences, and so that is one of the most interesting things ever.
+
+and so stock prices they are then related to the goods that people purchase or consume, but that should not be included.
+
+in the litterature. this is one of them ost insane things that I have ever learnt.
+
+i am quite fucking excited about this because this is the most important video that I have ever seen about working out
+and pain reduction, and so this is one of the muscles that you have to think about the most.
+
+so this is actually quite magical. so one of the reasons that are going on is that they are not thinking about that shit.
+why the fuck would you do that. milk producers are one of the most interesting things.
+
+some kind of
+
+next step now is to add something that stores remotes inside of repos so that this is information that travels with the repo.
+otherwise it doesn't really make any sense to restore stuff since you still need to add that shit.
+
+
+arst
+
 --]]
