@@ -104,6 +104,25 @@ doom.moll = {}
 -- 2. parse tree / or dofile into environment
 -- 3.
 
+-- contact David engelb > whenever I feel ready get in touch with him about 3d modelling.
+--
+
+
+-- ask pwntester how I find some of the correct graphql commands.
+-- last time i noticed that I couldn't find all of the commands easilly that he is
+-- using, especially the ones pertaining to discussions.
+--
+-- 1. look at octo and see what search terms and then go to graphql api
+-- 2. what was it that I needed to find?
+-- 3. ask @pwntester
+
+-- CHECKOUT: tj devries snippets:
+--  -> https://github.com/tjdevries/config_manager/blob/master/xdg_config/nvim/lua/tj/snips/ft/go.lua
+
+-- create a UI framework for neovim that allows you to easilly hook plugins?
+
+-- dorothy bash formatting -> https://duckduckgo.com/?q=vim+bash+specify+formatting+indentation+project&ia=web
+
 ---------------------------
 ---       TESTING       ---
 ---------------------------
