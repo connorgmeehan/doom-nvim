@@ -422,6 +422,92 @@ local function create_report()
 end
 
 
+-- @param: t
+local function add_or_override_plugin(t)
+  local user, name = string.match(t[1], "(.*)/(.*)")
+  local repo = t[1]
+  local local_prefix = t[2]
+
+  -- check if plugin already exists
+  if doom.packages[name] == nil then
+    doom.packages[name] = {}
+  end
+
+  -- prefend repo with local path
+  if t[2] ~= nil then
+    repo = local_prefix .. repo
+  end
+
+  -- override the repo name / if local will the be used
+  doom.packages[name][1] = repo
+
+  for k, value in pairs(t) do
+    if type(k) ~= "number" then
+        doom.packages[name][k] = value
+    end
+  end
+end
+
+-- build nest map tree recursive
+local function build_nest_tree(user_tree)
+  local t_nest = {}
+  for key, user_node in pairs(user_tree) do
+    if type(key) == "number" then
+      table.insert(t_nest, user_node) -- << LEAF
+    elseif type(key) == "string" then
+      local new_branch = {
+        string.format("%s", key:sub(1,1)),
+        name = string.format("+%s", key:sub(3)),
+        build_nest_tree(user_node)
+      }
+      table.insert(t_nest, new_branch) -- insert branch
+    end
+  end
+  return t_nest
+end
+
+-- bool enable/dissable
+-- mode keyword add to all binds if it doesn't exist
+-- mappings table or key.
+local function insert_binds_into_main_table(t)
+  local enabled = t[1]
+  if enabled then
+    local map_tree
+    for k, v in pairs(t) do
+      if type(k) ~= "number" then
+        map_tree = v
+        table.insert(doom.binds, map_tree)
+
+        -- if t[2]
+
+        -- if key = table -> normal ??
+
+        -- visual
+
+        -- select
+
+        -- x
+
+        -- terminal
+
+        -- command
+
+        -- -- leader
+        -- if k == "leader" then
+        --   if not is_plugin_disabled("whichkey") then
+        --     table.insert(doom.binds, {
+        --       "<leader>",
+        --       name = "+prefix",
+        --       build_nest_tree(map_tree)
+        --     })
+        --   end
+        -- end
+
+      end
+    end
+  end
+end
+
 local function get_user_input_and_print()
 
 end
@@ -979,7 +1065,7 @@ local vg = "<c-r>z"
 --   end
 -- end
 
-local bind = require("doom.utils.user").insert_binds_into_main_table
+local bind = insert_binds_into_main_table -- require("doom.utils.user").insert_binds_into_main_table
 local enabled = true
 local disabled = false
 
@@ -1397,7 +1483,7 @@ end
 ---------------------------
 ---------------------------
 
-local use = require("doom.utils.user").add_or_override_plugin
+local use = add_or_override_plugin -- require("doom.utils.user").add_or_override_plugin
 
 -- Connors plugins
 use{ 'rafcamlet/nvim-luapad' }
@@ -1476,7 +1562,7 @@ use { 'davidgranstrom/scnvim', run = ":call scnvim#install()", config = require(
 use { 'ThePrimeagen/vim-be-good' }
 -- use { 'rajasegar/vim-search-web' } -- fast looku
 use { 'KabbAmine/vCoolor.vim' } -- open color picker / requires mouse to select color
-use { "jbyuki/venn.nvim", config = require("molleweide.configs.venn") }
+use { 'jbyuki/venn.nvim', config = require("molleweide.configs.venn") }
 use { "jbyuki/nabla.nvim" } -- , config = require("molleweide.configs.nabla")
 use { "jbyuki/quickmath.nvim" } -- calculator
   -- { 'saifulapm/chartoggle.nvim' },
