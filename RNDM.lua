@@ -516,6 +516,15 @@ even understand how cool this is. that is just such a good system.
 i think it is the internet in general. andrew heaton. i have seen clips of him. the other cay ian made a comment.
 
 
+next step is to move into this file and then see what the fuck happens. a kind of humour occurs in the texts and so that is
+something that really matters and I don't understand why this shit is so why the fuck.
+
+i wonder how good this will feel now that I am doing the system that is the only one.
+because if this solves itself then that is something that you can really do fast.
+
+because if I do fix this now then that will fucking fix me. because then i will be able to make music and produce withou any problems.
+
+
 
 --]]
 
