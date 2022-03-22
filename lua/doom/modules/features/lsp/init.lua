@@ -283,11 +283,11 @@ lsp.configure_functions["nvim-cmp"] = function()
       ["<C-Space>"] = cmp.mapping.complete(),
       ["<C-e>"] = cmp.mapping.close(),
       -- ["<ESC>"] = cmp.mapping.close(),
-      ["<C-m>"] = cmp.mapping.confirm({
+      ["<C-j>"] = cmp.mapping.confirm({
         behavior = cmp.ConfirmBehavior.Replace,
         select = true,
       }),
-      ["<C-k>"] = cmp.mapping(function(fallback)
+      ["<C-l>"] = cmp.mapping(function(fallback)
         if cmp.visible() then
           cmp.select_next_item()
         elseif luasnip.expand_or_jumpable() then
@@ -301,7 +301,7 @@ lsp.configure_functions["nvim-cmp"] = function()
         "i",
         "s",
       }),
-      ["<C-j>"] = cmp.mapping(function(fallback)
+      ["<C-k>"] = cmp.mapping(function(fallback)
         if cmp.visible() then
           cmp.select_prev_item()
         elseif luasnip.jumpable(-1) then
@@ -413,3 +413,5 @@ lsp.binds = {
 }
 
 return lsp
+
+
