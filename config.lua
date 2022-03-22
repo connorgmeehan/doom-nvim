@@ -1736,4 +1736,95 @@ table.insert(doom.modules.telescope.settings.extensions, 'packer')
 -- print('TCP echo-server listening on port: '..server:getsockname().port)
 
 
+-------------------------------------
+---       CMP NVIM OVERRIDE       ---
+-------------------------------------
+
+-- lsp.configure_functions["nvim-cmp"] = function()
+--   local cmp = require("cmp")
+--   local luasnip = require("luasnip")
+--   local replace_termcodes = require("doom.utils").replace_termcodes
+--
+--   local source_map = {
+--     nvim_lsp = "[LSP]",
+--     luasnip = "[Snp]",
+--     buffer = "[Buf]",
+--     nvim_lua = "[Lua]",
+--     path = "[Path]",
+--   }
+--
+--   --- Helper function to check what <Tab> behaviour to use
+--   --- @return boolean
+--   local function check_backspace()
+--     local col = vim.fn.col(".") - 1
+--     return col == 0 or vim.fn.getline("."):sub(col, col):match("%s")
+--   end
+--
+--   -- Initalize the cmp toggle if it doesn't exist.
+--   if _doom.cmp_enable == nil then
+--     _doom.cmp_enable = true
+--   end
+--
+--   cmp.setup(vim.tbl_deep_extend("force", doom.modules.lsp.settings.completion, {
+--     completeopt = nil,
+--     completion = {
+--       completeopt = doom.modules.lsp.settings.completion.completeopt,
+--     },
+--     formatting = {
+--       format = function(entry, item)
+--         item.kind = string.format("%s %s", doom.modules.lsp.settings.completion.kinds[item.kind], item.kind)
+--         item.menu = source_map[entry.source.name]
+--         item.dup = vim.tbl_contains({ "path", "buffer" }, entry.source.name)
+--         return item
+--       end,
+--     },
+--     mapping = {
+--       ["<C-p>"] = cmp.mapping.select_prev_item(),
+--       ["<C-n>"] = cmp.mapping.select_next_item(),
+--       ["<C-d>"] = cmp.mapping.scroll_docs(-4),
+--       ["<C-f>"] = cmp.mapping.scroll_docs(4),
+--       ["<C-Space>"] = cmp.mapping.complete(),
+--       ["<C-e>"] = cmp.mapping.close(),
+--       -- ["<ESC>"] = cmp.mapping.close(),
+--       ["<C-j>"] = cmp.mapping.confirm({
+--         behavior = cmp.ConfirmBehavior.Replace,
+--         select = true,
+--       }),
+--       ["<C-l>"] = cmp.mapping(function(fallback)
+--         if cmp.visible() then
+--           cmp.select_next_item()
+--         elseif luasnip.expand_or_jumpable() then
+--           vim.fn.feedkeys(replace_termcodes("<Plug>luasnip-expand-or-jump"), "")
+--         elseif check_backspace() then
+--           vim.fn.feedkeys(replace_termcodes("<Tab>"), "n")
+--         else
+--           fallback()
+--         end
+--       end, {
+--         "i",
+--         "s",
+--       }),
+--       ["<C-k>"] = cmp.mapping(function(fallback)
+--         if cmp.visible() then
+--           cmp.select_prev_item()
+--         elseif luasnip.jumpable(-1) then
+--           vim.fn.feedkeys(replace_termcodes("<Plug>luasnip-jump-prev"), "")
+--         else
+--           fallback()
+--         end
+--       end, {
+--         "i",
+--         "s",
+--       }),
+--     },
+--   }, {
+--     mapping = type(doom.modules.lsp.settings.completion.mapping) == "function" and doom.modules.lsp.settings.completion.mapping(cmp)
+--       or doom.modules.lsp.settings.completion.mapping,
+--     enabled = function()
+--       return _doom.cmp_enable and vim.api.nvim_buf_get_option(0, "buftype") ~= "prompt"
+--     end,
+--   }))
+-- end
+
+
 -- vim: sw=2 sts=2 ts=2 expandtab

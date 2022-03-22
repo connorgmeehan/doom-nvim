@@ -396,7 +396,62 @@ some kind of
 next step now is to add something that stores remotes inside of repos so that this is information that travels with the repo.
 otherwise it doesn't really make any sense to restore stuff since you still need to add that shit.
 
+and that is a way of pre embling criticism. more transparency is important. the old times are over.
+how does this feel now. i locked it when I went grocery shopping. and so that is something that is quite fucking important.
 
-arst
+and they determine the temporal framework of the contest. rules and restrictions.
+
+i should try merging in the latest worked on branch and see how that feels and get more comfortable with having multiple branches.
+also i believe that it should be possble to only break out commits that affect a dir which means that it would be more easy to do shit
+shit shit with it.
+
+it would make sense to rebase this one and make it so that it becomes easy for him to cherry pick this into his branch.
+otherwise it is a bit annoying. and so that is something that is quite fucking retarded and the thing is that something like that
+actually could be done.
+
+so tha is almost fucking stupid and so that is something that you might never want to look into and so what you need to do.
+that is almost fucking insane. and so I need to create my own timer application so that i can do stuff when I am working.
+it is a trap because you don't know how strong you can start you know. so you just have to fucking bite your tongue and do this shit.
+
+being up there on the top fifty list it is something that you might have to do. if you create a win on this one as well.
+then that is going to become so fucking huge and amazing that you cannot almost understand how good that is.
+
+i have never worked out my hip flexors like this. and i always thought this was something hat you wanted to turn off. i cannot explain
+exactly but the terms disable, turn of, and lock out comes up in my hd because focus has been so much on basic core training and
+then everybody sais don't use your hip flexors that it becomes almost like a meme where you are not suppose to use it because
+it is strong in everybody.
+
+some time at around 2017. because if this loosens up now i am going to become a monster. so this is quite interesting actually and to move
+from a
+
+i need to override the lsp config from user because i need to modify too much in the bindings so that you decouple all movements.
+
+i hade absolutely no idea of how that would affect us and it takes quite a lot of time.
+because i mean you are always saying shit like that and it is jus so stupid. do you think that there are other words that you can us.
+
+she is not the hottest one ever but but that is fucking insane
+
+he can have sex with pretty much anyone you know. and that is pretty insane you know. and it cleanes your blood so that is something
+that you need to do you know. that is quite fucking important and so that is them ost important thing you can do ever.
+
+so how important is this.
+
+hmm, i need to now rebase the doom branch. how can I turn of gpg now so that I can do
+
+why doesn't neogit open. fmaf  that is wierd and it is also fucking annoying.
+
+i trust tha this table is herer and so that is them ost important thing that you can do you know. that means that we have feedback.
+stop masturbating to us. no more porn. they let you train harder so that is quite fucking insane dude.
+
+you gotta throw all in on the energy sources hopefully one day we get there. but it is not gonna happen in our lifetimes.
+on energy that the united states produces.
+
+so they certainly should have understood what that meant.
+
+it is just so fucking painful and that is something that i just cannot fucking follow anymore.
+
+that was not a good idea, and why the fuck did they do that. you don't understand why they brought it out so one of the reasons
+that might make it into something that you think of.
 
 --]]
+
