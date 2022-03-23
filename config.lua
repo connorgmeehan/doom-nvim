@@ -311,7 +311,7 @@ vim.opt.guifont = { 'Hack Nerd Font', 'h12' }
 -- Editor config
 doom.indent = 2
 doom.autosave = false
-doom.escape_sequences = {}
+doom.escape_sequences = { 'zm' }
 -- vim.lsp.set_log_level('trace')
 vim.diagnostic.config({
   float = {

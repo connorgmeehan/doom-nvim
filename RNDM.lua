@@ -524,7 +524,7 @@ because if this solves itself then that is something that you can really do fast
 
 because if I do fix this now then that will fucking fix me. because then i will be able to make music and produce withou any problems.
 
-
+this is not entertainment that is
 
 --]]
 
