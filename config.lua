@@ -123,6 +123,8 @@ doom.moll = {}
 
 -- dorothy bash formatting -> https://duckduckgo.com/?q=vim+bash+specify+formatting+indentation+project&ia=web
 
+-- nui > neogit > use popup for ssh password
+
 ---------------------------
 ---       TESTING       ---
 ---------------------------
@@ -1082,7 +1084,7 @@ local vg = "<c-r>z"
 --   end
 -- end
 
-local bind = insert_binds_into_main_table -- require("doom.utils.user").insert_binds_into_main_table
+local bind = insert_binds_into_main_table -- doom.use_keybind
 local enabled = true
 local disabled = false
 
@@ -1090,21 +1092,21 @@ local disabled = false
 -- {'n', '/', '/\\v'}, -- need to esc backsl
 -- {'v', '/', '/\\v'},
 
--- bind { -- normal
---   enabled,
---   normal = {
---   { "<c-z>", [[<cmd>suspend<CR>]], name = "suspend vim" },
---   { "<c-z>", [[<Esc><cmd>suspend<CR>]], name = "suspend vim", mode = "v" },
---   { ';', ':', name = "colon", options = opts.sf },
---   { ':', ';', name = "semi-colon" },
---     --  {'n', 'dl', ':set wrap! linebreak!<CR>'},
---     -- { 'x', 'z', '<Plug>VSurround' },
---     -- { 'n', 'yzz', '<Plug>Yssurround' }, -- double ss
---     -- { 'n', 'yz', '<Plug>Ysurround' }, -- single s
---     -- { 'n', 'dz', '<Plug>Dsurround' },
---     -- { 'n', 'cz', '<Plug>Csurround' },
---   }
--- }
+bind {
+  enabled,
+  normal = {
+  { "<c-z>", [[<cmd>suspend<CR>]], name = "suspend vim" },
+  { "<c-z>", [[<Esc><cmd>suspend<CR>]], name = "suspend vim", mode = "v" },
+  { ';', ':', name = "colon", options = opts.sf },
+  { ':', ';', name = "semi-colon" }
+    --  {'n', 'dl', ':set wrap! linebreak!<CR>'},
+    -- { 'x', 'z', '<Plug>VSurround' },
+    -- { 'n', 'yzz', '<Plug>Yssurround' }, -- double ss
+    -- { 'n', 'yz', '<Plug>Ysurround' }, -- single s
+    -- { 'n', 'dz', '<Plug>Dsurround' },
+    -- { 'n', 'cz', '<Plug>Csurround' },
+  }
+}
 
 -- - local binds_operator = {
 -- { 'o', 'b', 'vb', opts.ns },
