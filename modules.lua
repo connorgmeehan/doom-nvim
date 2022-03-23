@@ -37,23 +37,23 @@ return {
     -- Tools (188ms, 144ms)
     "dap",                -- Debug code through neovim
     "explorer",           -- An enhanced filetree explorer
-    -- "firenvim",           -- Embed neovim in your browser
+    "firenvim",           -- Embed neovim in your browser
     "telescope",          -- Fuzzy searcher to find files, grep code and more
     "neorg",              -- Organise your life
     "whichkey",           -- An interactive sheet
     "projects",           -- Quickly switch between projects
 
-    -- "doom_themes",     -- Extra themes for doom
-    -- "lazygit",         -- Lazy git integration
-    -- "neogit",          -- A git client for neovim
-    -- "ranger",          -- File explorer in neovim (TODO: Test)
-    -- "restclient",      -- Test HTTP requests from neovim (TODO: Test)
-    -- "show_registers",  -- Show and navigate between registers
+    "doom_themes",     -- Extra themes for doom
+    "lazygit",         -- Lazy git integration
+    "neogit",          -- A git client for neovim
+    "ranger",          -- File explorer in neovim (TODO: Test)
+    "restclient",      -- Test HTTP requests from neovim (TODO: Test)
+    "show_registers",  -- Show and navigate between registers
     -- "suda",            -- Save using sudo when necessary
-    -- "superman",        -- Read unix man pages in neovim
-    -- "symbols",         -- Navigate between code symbols using telescope
-    -- "terminal",        -- Integrated terminal in neovim
-    -- "zen",             -- Distractionless coding
+    "superman",        -- Read unix man pages in neovim
+    "symbols",         -- Navigate between code symbols using telescope
+    "terminal",        -- Integrated terminal in neovim
+    "zen",             -- Distractionless coding
   },
   langs = {
     -- Scripts
@@ -81,7 +81,7 @@ return {
     "markdown",
   },
   user = {
-    -- 'char_counter',
+    'char_counter',
   }
 }
 
