@@ -43,6 +43,11 @@ nest.configs["nest.nvim"] = function()
       )
     )
   end
+
+  if doom.binds then
+      nest_package.applyKeymaps(type(doom.binds) == 'function' and doom.binds() or doom.binds)
+  end
+
 end
 
 return nest
