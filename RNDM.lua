@@ -50,6 +50,8 @@ the dimensions with like double char commands, instead of having to navigate aro
 s15 or c15.    s1   s5
 
 
+zh
+
 this could actually make it much more feasible to use boxes and shapes in neovim since you would spec them mathematically.
 and so this would also be nice since it would force you to learn some of the basic math thingys with this shitand
 that is always good since it is something that you really need.
@@ -525,6 +527,12 @@ because if this solves itself then that is something that you can really do fast
 because if I do fix this now then that will fucking fix me. because then i will be able to make music and produce withou any problems.
 
 this is not entertainment that is
+
+this is just fucking amazing. it is so good
+
+anrntesnt
+
+
 
 --]]
 
