@@ -1165,7 +1165,7 @@ bind { -- lsp
 -- local binds_terminal = {
 -- }
 
-if not is_plugin_disabled("whichkey") then
+-- if not is_plugin_disabled("whichkey") then
   bind {
     enabled,
     leader = {
@@ -1491,7 +1491,7 @@ if not is_plugin_disabled("whichkey") then
       } -- leader
     }
   }
-end
+-- end
 
 
 ---------------------------
@@ -1502,7 +1502,8 @@ end
 ---------------------------
 ---------------------------
 
-local use = doom.use_package -- require("doom.utils.user").add_or_override_plugin
+local use = doom.use_package
+-- local use = add_or_override_plugin
 
 -- Connors plugins
 -- use { 'rafcamlet/nvim-luapad' }
@@ -1517,10 +1518,8 @@ use { 'bluz71/vim-moonfly-colors' }
 use { 'bluz71/vim-nightfly-guicolors' }
 use { 'projekt0n/github-nvim-theme' }
 use { 'Pocco81/Catppuccino.nvim' }
-use { 'sainnhe/sonokai' }
+-- use { 'sainnhe/sonokai' }
 use { 'folke/tokyonight.nvim', config = require("molleweide.configs.tokyonight") }
-
--- doom.colorscheme = 'tokyonight'
 
 ------------------------------
 ---       NAVIGATION       ---
@@ -1594,7 +1593,7 @@ use { "jbyuki/quickmath.nvim" } -- calculator
 ---       GIT       ---
 -----------------------
 
-use { 'TimUntersberger/neogit', gh }
+use { gh .. 'TimUntersberger/neogit' }
 use { 'tanvirtin/vgit.nvim', event = 'BufWinEnter', requires = { 'nvim-lua/plenary.nvim', }, config = require("molleweide.configs.vgit") }
 use { "sindrets/diffview.nvim", config = require("molleweide.configs.diffview") }
 use {
@@ -1656,12 +1655,20 @@ use {
 ---       TELESCOPE EXTENSIONS       ---
 ----------------------------------------
 
-use { 'cljoly/telescope-repo.nvim', gh }
-use { 'nvim-telescope/telescope-packer.nvim', gh }
+use { gh .. 'cljoly/telescope-repo.nvim' }
+use { gh .. 'nvim-telescope/telescope-packer.nvim' }
 
 -- -- -- add ext to tele config
 table.insert(doom.modules.telescope.settings.extensions, 'repo')
 table.insert(doom.modules.telescope.settings.extensions, 'packer')
+
+
+
+
+
+
+
+
 
 -- table.insert(telescope.ext) ??
 
@@ -1979,13 +1986,14 @@ require('nightfox').setup({
   specs = specs,
   groups = groups,
 })
-doom.colorscheme = 'dawnfox'
+
+doom.colorscheme = 'tokyonight'
 
 -- Extra packages
 doom.use_package(
   'rafcamlet/nvim-luapad',
   'nvim-treesitter/playground',
-  'tpope/vim-surround',
+  -- 'tpope/vim-surround',
   'dstein64/vim-startuptime'
 )
 
