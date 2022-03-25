@@ -14,7 +14,6 @@ doom.moll = {}
 -- packer.nvim logs to stdpath(cache)/packer.nvim.log. Looking at this file is usually a good start if something isn't working as expected.
 --
 
-
 ------------------------
 ---       TODO       ---
 ------------------------
@@ -41,27 +40,18 @@ doom.moll = {}
 -- when setting up luasnip-snippets > pass the users local snippets dir. so that
 -- there is no problem with this.
 
-
 -- TODO: core module
 -- add binds to core that allow you to do very quick and easy inspection
 -- of objects.
 
 -- peek 5 > only log 5 first keys of a table to see what kind of pattern it is...
 
-
-
-
 -- would it be possible to do something similar for neovim https://github.com/rhysd/vim.wasm
-
-
 
 --telescope-repo > ctrl-w -> create new file and allow edit name > enter  open file
 
-
-
 -- debug command!!! > copy visula sel lines and run do file with an appended print(vim.inspect)
 -- statement so that anything that one is swiping over can be logged in a super simple  manner.
-
 
 --get visual selection > use lsp to parse and see what kind of contents is in the selection.
 -- then reuse this function in bindings to create snippets / binds.
@@ -76,7 +66,6 @@ doom.moll = {}
 -- command > open ranger with a specified path, eg. std('data/config/etc..')
 
 -- prevent LOVE lua sumneko
-
 
 -- create some more snippet headers level 1, 2, 3, 4, 5, 6
 
@@ -107,7 +96,6 @@ doom.moll = {}
 
 -- contact David engelb > whenever I feel ready get in touch with him about 3d modelling.
 --
-
 
 -- ask pwntester how I find some of the correct graphql commands.
 -- last time i noticed that I couldn't find all of the commands easilly that he is
@@ -144,7 +132,6 @@ doom.moll = {}
 -- I should apply tdd patterns from plenary and build good tests for doom?
 -- do it for the sake of it so that I learn how to to tdd which is good.
 --
-
 
 -- https://github.com/ThePrimeagen/refactoring.nvim/blob/master/lua/refactoring/dev.lua
 -- look at this dev lib. should I create something similar for doom? and name the module `dev`
@@ -213,22 +200,23 @@ doom.moll = {}
 local code = "~/code/repos/"
 local gh = code .. "github.com/"
 
-local xdg_cfg			    = "$XDG_CONFIG_HOME/dorothy/config.xdg/"
-local home_notes	        = "$HOME/notes/"
-local doom_log_path	        = "$HOME/.local/share/nvim/doom.log"
-local aliases_git			= '$XDG_DATA_HOME/antigen/bundles/robbyrussell/oh-my-zsh/plugins/git/git.plugin.zsh'
-local aliases_zsh			= '$XDG_CONFIG_HOME/dorothy/sources/aliases.sh'
-local conf_doom 			= '$XDG_CONFIG_HOME/dorothy/config.xdg/doom-nvim/doom_config.lua'
-local conf_scim 			= '$XDG_CONFIG_HOME/dorothy/config.xdg/sc-im/scimrc'
-local conf_setup			= '$XDG_CONFIG_HOME/dorothy/config/setup.bash'
-local conf_alac				= xdg_cfg .. 'alacritty/alacritty.yml'
-local conf_surf				= xdg_cfg .. 'surfingkeys/config.js'
-local conf_skhd				= xdg_cfg .. 'skhd/skhdrc'
-local conf_tmux				= xdg_cfg .. 'tmux/tmux.conf'
-local conf_tnx_main 	= xdg_cfg .. 'tmuxinator/main.yml'
-local conf_yabai			= xdg_cfg .. 'yabai/yabairc'
-local notes_rndm			= home_notes .. 'RNDM.norg'
-local notes_todo			= home_notes .. 'TODO.md'
+local xdg_cfg = "$XDG_CONFIG_HOME/dorothy/config.xdg/"
+local home_notes = "$HOME/notes/"
+local doom_log_path = "$HOME/.local/share/nvim/doom.log"
+local aliases_git =
+  "$XDG_DATA_HOME/antigen/bundles/robbyrussell/oh-my-zsh/plugins/git/git.plugin.zsh"
+local aliases_zsh = "$XDG_CONFIG_HOME/dorothy/sources/aliases.sh"
+local conf_doom = "$XDG_CONFIG_HOME/dorothy/config.xdg/doom-nvim/doom_config.lua"
+local conf_scim = "$XDG_CONFIG_HOME/dorothy/config.xdg/sc-im/scimrc"
+local conf_setup = "$XDG_CONFIG_HOME/dorothy/config/setup.bash"
+local conf_alac = xdg_cfg .. "alacritty/alacritty.yml"
+local conf_surf = xdg_cfg .. "surfingkeys/config.js"
+local conf_skhd = xdg_cfg .. "skhd/skhdrc"
+local conf_tmux = xdg_cfg .. "tmux/tmux.conf"
+local conf_tnx_main = xdg_cfg .. "tmuxinator/main.yml"
+local conf_yabai = xdg_cfg .. "yabai/yabairc"
+local notes_rndm = home_notes .. "RNDM.norg"
+local notes_todo = home_notes .. "TODO.md"
 
 -------------------------
 ---       DEBUG       ---
@@ -246,18 +234,15 @@ local notes_todo			= home_notes .. 'TODO.md'
 --   end,
 -- })
 
-
 -- print(vim.inspect(utils.get_capabilities()))
 -- print(vim.inspect(utils.illuminate_attach()))
 -- print(vim.inspect(doom.lua.on_attach()))
-
-
 
 ---------------------------
 ---       OPTIONS       ---
 ---------------------------
 
-vim.opt.keymap = 'INSERT_COLEMAK'
+vim.opt.keymap = "INSERT_COLEMAK"
 
 --   · trace
 --   · debug
@@ -309,22 +294,22 @@ vim.opt.winwidth = 95
 -- -- 'set nojoinspaces',
 -- -- -- 'set fillchars={ 'eob' = "~" }',
 
-vim.opt.guifont = { 'Hack Nerd Font', 'h12' }
+vim.opt.guifont = { "Hack Nerd Font", "h12" }
 
 -- Editor config
 doom.indent = 2
 doom.autosave = false
-doom.escape_sequences = { 'zm' }
+doom.escape_sequences = { "zm" }
 -- vim.lsp.set_log_level('trace')
 vim.diagnostic.config({
   float = {
-    source = 'always',
+    source = "always",
   },
 })
 
 if doom.modules.tabline then
-  doom.modules.tabline.settings.options.diagnostics_indicator = function (_, _, diagnostics_dict, _)
-  doom.modules.tabline.settings.options.numbers = nil; -- Hide buffer numbers
+  doom.modules.tabline.settings.options.diagnostics_indicator = function(_, _, diagnostics_dict, _)
+    doom.modules.tabline.settings.options.numbers = nil -- Hide buffer numbers
     local s = ""
     for e, _ in pairs(diagnostics_dict) do
       local sym = e == "error" and " " or (e == "warning" and " " or " ")
@@ -334,32 +319,33 @@ if doom.modules.tabline then
   end
 end
 
-
-
 ---------------------------
 ---       HELPERS       ---
 ---------------------------
 
 local function get_system_info_string()
-	-- Get the neovim version
-	local nvim_vinfo = vim.version()
-	local nvim_version = string.format(
-	  "%d.%d.%d", nvim_vinfo.major, nvim_vinfo.minor, nvim_vinfo.patch
+  -- Get the neovim version
+  local nvim_vinfo = vim.version()
+  local nvim_version = string.format(
+    "%d.%d.%d",
+    nvim_vinfo.major,
+    nvim_vinfo.minor,
+    nvim_vinfo.patch
   )
   if nvim_vinfo.api_prerelease then
     nvim_version = nvim_version .. " (dev)"
   end
--- Get the current OS and if the user is running Linux then get also the
--- distribution name, e.g. Manjaro
+  -- Get the current OS and if the user is running Linux then get also the
+  -- distribution name, e.g. Manjaro
   local user_os = vim.loop.os_uname().sysname
   if user_os == "Linux" then
     user_os = vim.trim(
-	    -- PRETTY_NAME="Distribution (Additional info)", e.g.
---	 PRETTY_NAME="Fedora 34 (KDE Plasma)"
+      -- PRETTY_NAME="Distribution (Additional info)", e.g.
+      --	 PRETTY_NAME="Fedora 34 (KDE Plasma)"
       vim.fn.system(
         'cat /etc/os-release | grep "^PRETTY_NAME" | sed '
-        .. "'s/^PRETTY_NAME=\"//' | sed "
-        .. "'s/\"//'"
+          .. "'s/^PRETTY_NAME=\"//' | sed "
+          .. "'s/\"//'"
       )
     )
   end
@@ -374,7 +360,8 @@ local function get_system_info_string()
     nvim_version,
     utils.doom_version,
     system.doom_root,
-    system.doom_configs_root)
+    system.doom_configs_root
+  )
 end
 
 local function get_error_log_dump()
@@ -390,9 +377,9 @@ local function get_error_log_dump()
 
   log_date_format = date_pre .. " " .. date_day_filtered .. " " .. date_time .. " " .. date_year
 
--- print(log_date_format)
+  -- print(log_date_format)
 
--- Get and save only the warning and error logs from today
+  -- Get and save only the warning and error logs from today
   local today_logs = {}
   local doom_logs = vim.split(fs.read_file(system.doom_logs), "\n")
   for _, doom_log in ipairs(doom_logs) do
@@ -400,14 +387,16 @@ local function get_error_log_dump()
       string.find(doom_log, "ERROR  " .. log_date_format)
       or string.find(doom_log, "WARN  " .. log_date_format)
     then
--- print(doom_log)
+      -- print(doom_log)
       table.insert(today_logs, doom_log)
     end
   end
   return string.format(
     [[```
 %s
-```]], table.concat(today_logs, "\n"))
+```]],
+    table.concat(today_logs, "\n")
+  )
 end
 
 -- create_report creates a markdown report. It's meant to be used when a bug
@@ -415,7 +404,7 @@ end
 local function create_report()
   local date = os.date("%Y-%m-%d %H:%M:%S")
   local created_report, err = xpcall(function()
-	  local report = string.format(
+    local report = string.format(
       [[# Doom Nvim crash report
 > Report date: %s
 ## System and Doom Nvim information
@@ -440,7 +429,6 @@ local function create_report()
   end
 end
 
-
 -- @param: t
 local function add_or_override_plugin(t)
   local user, name = string.match(t[1], "(.*)/(.*)")
@@ -462,7 +450,7 @@ local function add_or_override_plugin(t)
 
   for k, value in pairs(t) do
     if type(k) ~= "number" then
-        doom.uses[name][k] = value
+      doom.uses[name][k] = value
     end
   end
 end
@@ -475,9 +463,9 @@ local function build_nest_tree(user_tree)
       table.insert(t_nest, user_node) -- << LEAF
     elseif type(key) == "string" then
       local new_branch = {
-        string.format("%s", key:sub(1,1)),
+        string.format("%s", key:sub(1, 1)),
         name = string.format("+%s", key:sub(3)),
-        build_nest_tree(user_node)
+        build_nest_tree(user_node),
       }
       table.insert(t_nest, new_branch) -- insert branch
     end
@@ -521,19 +509,14 @@ local function insert_binds_into_main_table(t)
         --     })
         --   end
         -- end
-
       end
     end
   end
 end
 
-local function get_user_input_and_print()
+local function get_user_input_and_print() end
 
-end
-
-local function enter_string_into_file()
-
-end
+local function enter_string_into_file() end
 
 -- ```vim
 -- :TSBufEnable {module} " enable module on current buffer
@@ -542,7 +525,6 @@ end
 -- :TSDisableAll {module} [{ft}] " disable module on every buffer. If filetype is specified, disable only for this filetype.
 -- :TSModuleInfo [{module}] " list information about modules state for each filetype
 -- ```
-
 
 -- #### Incremental selection
 --
@@ -596,14 +578,9 @@ end
 --
 -- Check [`:h nvim-treesitter-utils`](doc/nvim-treesitter.txt) for more information.
 
-local function ts_print_context()
+local function ts_print_context() end
 
-end
-
-local function create_snippet_for_filetype()
-
-end
-
+local function create_snippet_for_filetype() end
 
 local function create_bind_tree()
 
@@ -613,14 +590,11 @@ local function create_bind_tree()
   -- 4. get user input
   -- 5. insert this into the tree that is read into memory.
   -- 6. write tree to the file on enter.
-
 end
-
 
 -----------------------------
 ---       FUNCTIONS       ---
 -----------------------------
-
 
 -- ---       HELPER: RELOAD PLUGINS       ---
 --
@@ -769,7 +743,7 @@ funcs.get_visual_selection = function()
   else
     lines[n_lines] = string.sub(lines[n_lines], 1, s_end[3])
   end
-  return table.concat(lines, '\n')
+  return table.concat(lines, "\n")
 end
 
 funcs.inspect_visual_sel = function()
@@ -780,19 +754,19 @@ end
 -- document
 -- NOTE: I was testing here how to insert text from lua variable
 funcs.create_feat_request = function()
-	vim.cmd([[ :vert new ]])
-	vim.cmd("read " .. system.doom_root .. "/templates/skeleton_feat_request.md")
-	local bufnr = vim.api.nvim_get_current_buf()
-	vim.api.nvim_buf_set_text(bufnr, 5,0,5,0, utils.str_2_table(get_system_info_string(), "\n"))
+  vim.cmd([[ :vert new ]])
+  vim.cmd("read " .. system.doom_root .. "/templates/skeleton_feat_request.md")
+  local bufnr = vim.api.nvim_get_current_buf()
+  vim.api.nvim_buf_set_text(bufnr, 5, 0, 5, 0, utils.str_2_table(get_system_info_string(), "\n"))
 end
 
 -- open empty buffer and read crash report so that an issue can be
 -- documented fast when it occurs
 funcs.report_an_issue = function()
-	-- functions.create_report()
+  -- functions.create_report()
   create_report()
   vim.cmd([[ :vert new ]])
--- print(system.doom_report)
+  -- print(system.doom_report)
   vim.cmd("read " .. system.doom_report)
 end
 
@@ -809,15 +783,14 @@ end
 
 doom.moll.funcs = funcs
 
-
 ----------------------------
 ---       AUTOCMDS       ---
 ----------------------------
 
-  -- doom.autocmds[augroup_name] = {
-  --   { "BufReadPre", "*.lua", "setlocal sw=2", --[[once and nested are boolean keys here]] },
-  --   { "InsertEnter", "*", function() print("Lua functions are valid!") end, once = true }
-  -- }
+-- doom.autocmds[augroup_name] = {
+--   { "BufReadPre", "*.lua", "setlocal sw=2", --[[once and nested are boolean keys here]] },
+--   { "InsertEnter", "*", function() print("Lua functions are valid!") end, once = true }
+-- }
 
 --    tmux_reload = {
 --     { 'BufWritePost', '~/.config/tmux/tmux.conf', '! tmux source-file ~/.config/tmux/tmux.conf'}
@@ -840,14 +813,14 @@ doom.moll.funcs = funcs
 -- local binds = {}
 
 local opts = {
-	sf  = { silent = false },
-	n  = {  noremap = true },
+  sf = { silent = false },
+  n = { noremap = true },
 }
 
 -- set / get visual selection
-local vs = "\"zy"
-local viw = "\"zyiw"
-local viW = "\"zyiW"
+local vs = '"zy'
+local viw = '"zyiw'
+local viW = '"zyiW'
 local vg = "<c-r>z"
 
 -----------------------------
@@ -909,7 +882,6 @@ local vg = "<c-r>z"
 -------------------------------------------------
 ---       SEARCH POPULATE QUICKFIX LIST       ---
 -------------------------------------------------
-
 
 --------------------------------------------------
 ---       REPLACE WORDS IN QUICKFIX LIST       ---
@@ -1053,8 +1025,6 @@ local vg = "<c-r>z"
 -- `<Plug>Lightspeed_t`  1-character  forward   t-like
 -- `<Plug>Lightspeed_T`  1-character  backward  T-like
 
-
-
 ----------------------------
 ---       surround       ---
 ----------------------------
@@ -1092,21 +1062,21 @@ local enabled = true
 -- {'n', '/', '/\\v'}, -- need to esc backsl
 -- {'v', '/', '/\\v'},
 
-bind {
+bind({
   enabled,
   normal = {
-  { "<c-z>", [[<cmd>suspend<CR>]], name = "suspend vim" },
-  { "<c-z>", [[<Esc><cmd>suspend<CR>]], name = "suspend vim", mode = "v" },
-  { ';', ':', name = "colon", options = opts.sf },
-  { ':', ';', name = "semi-colon" }
+    { "<c-z>", [[<cmd>suspend<CR>]], name = "suspend vim" },
+    { "<c-z>", [[<Esc><cmd>suspend<CR>]], name = "suspend vim", mode = "v" },
+    { ";", ":", name = "colon", options = opts.sf },
+    { ":", ";", name = "semi-colon" },
     --  {'n', 'dl', ':set wrap! linebreak!<CR>'},
     -- { 'x', 'z', '<Plug>VSurround' },
     -- { 'n', 'yzz', '<Plug>Yssurround' }, -- double ss
     -- { 'n', 'yz', '<Plug>Ysurround' }, -- single s
     -- { 'n', 'dz', '<Plug>Dsurround' },
     -- { 'n', 'cz', '<Plug>Csurround' },
-  }
-}
+  },
+})
 
 -- - local binds_operator = {
 -- { 'o', 'b', 'vb', opts.ns },
@@ -1118,177 +1088,234 @@ bind {
 -- }
 
 -- idea > use :[range]luado to filter visual selection.
-bind { -- visual
+bind({ -- visual
   enabled,
   visual = {
-  { "p", '"_dP', mode = "v", options = opts.fs },
-  { "<c-z>", [[<Esc><cmd>suspend<CR>]], name = "suspend vim", mode = "v" },
-  { "<C-l>v", vs .. ":lua doom.moll.funcs.inspect(".. vg .. ")<Left>", name = "inspect", options = opts.sf, mode = "v" },
-  {
+    { "p", '"_dP', mode = "v", options = opts.fs },
+    { "<c-z>", [[<Esc><cmd>suspend<CR>]], name = "suspend vim", mode = "v" },
+    {
+      "<C-l>v",
+      vs .. ":lua doom.moll.funcs.inspect(" .. vg .. ")<Left>",
+      name = "inspect",
+      options = opts.sf,
+      mode = "v",
+    },
+    {
       "<C-l>i",
       [[:lua doom.moll.funcs.inspect(loadstring(doom.moll.funcs.get_visual_selection()))<CR>]],
       name = "print vis sel",
-      options = opts.sf, mode = "v",
+      options = opts.sf,
+      mode = "v",
     },
-  }
-}
+  },
+})
 
 -- insert
-bind {
+bind({
   enabled,
   insert = {
-  -- { "i", "zm", "<ESC>:w<cr>", opts_s, "Editor", "exit_insert", "Exit insert mode" },
-  { "zf", "<ESC>cF", mode ="i", name = "esc search back", opts.s },
--- { "i", "zt", "<ESC>cT", opts_s, "Editor", "exit_insert_till_bkw", "Exit insert mode and change Until Backwards" },
--- { "i", "zD", "<ESC>dF", opts_s, "Editor", "exit_insert_delete_bkw", "Exit insert mode and delete Backwards" },
--- { "i", "zh", "<ESC>yF", opts_s, "Editor", "exit_insert_yank_bkw", "Exit insert mode and yank Backwards" },
--- { "i", "zp", "<ESC>la", opts_s, "Editor", "exit_insert_and_append_tiny", "Exit Insert Mode and append right" },
--- { "i", "zP", "<ESC>A ", opts_s, "Editor", "exit_insert_and_append_big", "Exit Insert Mode and (A)ppend" },
-  }
-}
+    -- { "i", "zm", "<ESC>:w<cr>", opts_s, "Editor", "exit_insert", "Exit insert mode" },
+    { "zf", "<ESC>cF", mode = "i", name = "esc search back", opts.s },
+    -- { "i", "zt", "<ESC>cT", opts_s, "Editor", "exit_insert_till_bkw", "Exit insert mode and change Until Backwards" },
+    -- { "i", "zD", "<ESC>dF", opts_s, "Editor", "exit_insert_delete_bkw", "Exit insert mode and delete Backwards" },
+    -- { "i", "zh", "<ESC>yF", opts_s, "Editor", "exit_insert_yank_bkw", "Exit insert mode and yank Backwards" },
+    -- { "i", "zp", "<ESC>la", opts_s, "Editor", "exit_insert_and_append_tiny", "Exit Insert Mode and append right" },
+    -- { "i", "zP", "<ESC>A ", opts_s, "Editor", "exit_insert_and_append_big", "Exit Insert Mode and (A)ppend" },
+  },
+})
 
 local lsp_opts = vim.tbl_extend("force", opts.sf, { expr = true })
 
-bind { -- lsp
+bind({ -- lsp
   not enabled,
-  lsp = { "<c-n>", 'luasnip#expand_or_jumpable() ? "<Plug>luasnip-expand-or-jump" : "<Tab>"', "luasnip_expand", options = lsp_opts }
---     "s", "<c-n>", 'luasnip#expand_or_jumpable() ? "<Plug>luasnip-expand-or-jump" : "<Tab>"', lsp_opts, "luasnip_expand",
---     "s", "<c-p>", 'luasnip#expand_or_jumpable() ? "<Plug>luasnip-expand-or-jump" : "<Tab>"', lsp_opts, "luasnip_expand",
---     "s", "<c-k>", '<cmd>lua require("luasnip").jump(1)<CR>', opts, "luasnip_next_sel_s",
---     "s", "<c-j>", '<cmd>lua require("luasnip").jump(-1)<CR>', opts, "luasnip_prev_sel_s",
---     "i", "<c-k>", '<cmd>lua require("luasnip").jump(1)<CR>', opts, "luasnip_next_sel_i_insert",
---     "i", "<c-j>", '<cmd>lua require("luasnip").jump(-1)<CR>', opts, "luasnip_prev_sel_i_insert",
---     "i", "<C-E>", 'luasnip#choice_active() ? "<Plug>luasnip-next-choice" : "<C-E>"', lsp_opts, "luasnip_next_choice",
---     "s", "<C-E>", 'luasnip#choice_active() ? "<Plug>luasnip-next-choice" : "<C-E>"', lsp_opts, "luasnip_next_choice_s",
-}
+  lsp = {
+    "<c-n>",
+    'luasnip#expand_or_jumpable() ? "<Plug>luasnip-expand-or-jump" : "<Tab>"',
+    "luasnip_expand",
+    options = lsp_opts,
+  },
+  --     "s", "<c-n>", 'luasnip#expand_or_jumpable() ? "<Plug>luasnip-expand-or-jump" : "<Tab>"', lsp_opts, "luasnip_expand",
+  --     "s", "<c-p>", 'luasnip#expand_or_jumpable() ? "<Plug>luasnip-expand-or-jump" : "<Tab>"', lsp_opts, "luasnip_expand",
+  --     "s", "<c-k>", '<cmd>lua require("luasnip").jump(1)<CR>', opts, "luasnip_next_sel_s",
+  --     "s", "<c-j>", '<cmd>lua require("luasnip").jump(-1)<CR>', opts, "luasnip_prev_sel_s",
+  --     "i", "<c-k>", '<cmd>lua require("luasnip").jump(1)<CR>', opts, "luasnip_next_sel_i_insert",
+  --     "i", "<c-j>", '<cmd>lua require("luasnip").jump(-1)<CR>', opts, "luasnip_prev_sel_i_insert",
+  --     "i", "<C-E>", 'luasnip#choice_active() ? "<Plug>luasnip-next-choice" : "<C-E>"', lsp_opts, "luasnip_next_choice",
+  --     "s", "<C-E>", 'luasnip#choice_active() ? "<Plug>luasnip-next-choice" : "<C-E>"', lsp_opts, "luasnip_next_choice_s",
+})
 
 -- { 't', '<esc>', 'command', 'option'},
 -- local binds_terminal = {
 -- }
 
 if is_module_enabled("whichkey") then
-  bind {
+  bind({
     enabled,
     leader = {
-      "<leader>", name = "+prefix", {
-      -- {
-      --     "h", name = "+help", {
-      --       -- { "n", "<leader>hm", ":Man ", { silent = false }, "Man Page", "man_page", "Man Page" },
-      --       -- { "n", "<leader>hl", ":help lua_reference_toc<CR>", { silent = false }, "Lua Reference", "lua_reference", "Lua Reference" },
-      --       -- { "n", "<leader>hw", "\"zyiw:h <c-r>z<cr>", { silent = false }, "Help Inner Word", "help_inner_word", "Inner Word" },
-      --       -- { "n", "<leader>hh", ":help ", { silent = false }, "Help", "help", "Help" },
-      --       -- { "n", "<leader>hc", "<cmd>helpc<cr>", { silent = false }, "Close Help", "close_help", "Close Help" },
-      --     }
-      --   }, -- help
-      -- {
-      --     "n", name = "neorg", {
-      --       -- { 'n', '<leader>nd', ':Neorg workspace default_workspace<cr>', opts.n },
-      --       -- { 'n', '<leader>nn', ':Neorg workspace notes<cr>', opts.n },
-      --       -- { 'n', '<leader>nG', ':Neorg workspace gtd<cr>', opts.n },
-      --       -- { 'n', '<leader>nE', ':Neorg workspace example_gtd<cr>', opts.n },
-      --       -- { 'n', '<leader>ng', ':Neorg gtd ', opts.n },
-      --       -- { 'n', '<leader>nc', ':Neorg gtd capture<cr>', opts.n },
-      --       -- { 'n', '<leader>ne', ':Neorg gtd edit', opts.n },
-      --       -- { 'n', '<leader>nv', ':Neorg gtd views<cr>', opts.n },
-      --     }
-      --   }, -- neorg -> move to leader > open > neorg
+      "<leader>",
+      name = "+prefix",
       {
-          "M", name = "+moll", {
-          { "l", [[<cmd>lua require("luasnip_snippets").load_snippets()<CR>]], name = "load luasnip-snippets" },
-          { "r", [[<cmd>DoomReload<CR>]], name = "doomReload" },
-          { "R", function() doom.moll.funcs.report_an_issue() end, name = "create_issue_from_templ"},
-          { "p", [[:lua doom.moll.funcs.inspect(doom.)<Left>]], name = "inspect", options = opts.sf },
-          { "P", [[:lua doom.moll.funcs.inspect()<Left>]], name = "inspect", options = opts.sf },
-          { "w", "\"zyiw:lua doom.moll.funcs.inspect(<c-r>z)<Left>", name = "inspect iw", options = opts.sf },
-          { "W", "\"zyiW:lua doom.moll.funcs.inspect(<c-r>z)<Left>", name = "inspect iW", options = opts.sf },
-          { 't', '<cmd>TermExec cmd="zsh -il"<cr>', name ="terminal zsh -il" },
-          -- {
-          --     "e", name = "+TEST", {
-          --       -- -- https://github.com/jbyuki/nabla.nvim#usage
-          --       -- { 'n', '<F5>', '<cmd>lua require("nabla").action()<cr>', opts.n },
-          --       -- { 'n', '<leader>Tp', '<cmd>lua require("nabla").popup()<cr>', opts.n },
-          --       -- -- vim.api.nvim_set_keymap('n', '<leader>v', ":lua Toggle_venn()<CR>", { noremap = true})
-          --       -- { 'n', '<leader>N', ':lua toggle_venn()<CR>', opts.n },
-          --           --       -- require("plenary.reload").reload_module(selection.value)
-          --           -- -- { 'n', '<leader>lr', ':lua require("telescope.builtin").reloader({ cwd = ' .. test_plugin_reload .. '})<cr>', opts.n },
-          --           -- { 'n', '<leader>lr', ':lua require("plenary.reload").reload_module(' .. test_plugin_reload .. ')<cr>', opts.n },
-          --           -- { 'n', '<leader>lR', ':lua report_an_issue()<cr>', opts.n },
-          --           -- { 'n', '<leader>lp', ':lua pp()<left>', opts.n },
-          --
-          --     }
-          --   },
+        -- {
+        --     "h", name = "+help", {
+        --       -- { "n", "<leader>hm", ":Man ", { silent = false }, "Man Page", "man_page", "Man Page" },
+        --       -- { "n", "<leader>hl", ":help lua_reference_toc<CR>", { silent = false }, "Lua Reference", "lua_reference", "Lua Reference" },
+        --       -- { "n", "<leader>hw", "\"zyiw:h <c-r>z<cr>", { silent = false }, "Help Inner Word", "help_inner_word", "Inner Word" },
+        --       -- { "n", "<leader>hh", ":help ", { silent = false }, "Help", "help", "Help" },
+        --       -- { "n", "<leader>hc", "<cmd>helpc<cr>", { silent = false }, "Close Help", "close_help", "Close Help" },
+        --     }
+        --   }, -- help
+        -- {
+        --     "n", name = "neorg", {
+        --       -- { 'n', '<leader>nd', ':Neorg workspace default_workspace<cr>', opts.n },
+        --       -- { 'n', '<leader>nn', ':Neorg workspace notes<cr>', opts.n },
+        --       -- { 'n', '<leader>nG', ':Neorg workspace gtd<cr>', opts.n },
+        --       -- { 'n', '<leader>nE', ':Neorg workspace example_gtd<cr>', opts.n },
+        --       -- { 'n', '<leader>ng', ':Neorg gtd ', opts.n },
+        --       -- { 'n', '<leader>nc', ':Neorg gtd capture<cr>', opts.n },
+        --       -- { 'n', '<leader>ne', ':Neorg gtd edit', opts.n },
+        --       -- { 'n', '<leader>nv', ':Neorg gtd views<cr>', opts.n },
+        --     }
+        --   }, -- neorg -> move to leader > open > neorg
+        {
+          "M",
+          name = "+moll",
           {
-              "g", name = "+go", {
-              { 'D', '<cmd>e '.. doom_log_path ..'<CR>' },
-              { 'N', '<cmd>e '.. notes_rndm ..'<CR>' },
-              { 'S', '<cmd>e '.. conf_skhd ..'<CR>' },
-              { 'a', '<cmd>e '.. conf_alac ..'<CR>' },
-              { 'd', '<cmd>e '.. conf_doom ..'<CR>' },
-              { 'e', '<cmd>e '.. conf_setup ..'<CR>' },
-              { 'g', '<cmd>e '.. aliases_git ..'<CR>' },
-              { 'm', '<cmd>e '.. conf_tnx_main ..'<CR>' },
-              { 'n', '<cmd>e '.. notes_todo ..'<CR>' },
-              { 's', '<cmd>e '.. conf_surf ..'<CR>' },
-              { 't', '<cmd>e '.. conf_tmux ..'<CR>' },
-              { 'x', '<cmd>e '.. conf_scim ..'<CR>' },
-              { 'y', '<cmd>e '.. conf_yabai ..'<CR>' },
-              { 'z', '<cmd>e '.. aliases_zsh ..'<CR>' },
+            {
+              "l",
+              [[<cmd>lua require("luasnip_snippets").load_snippets()<CR>]],
+              name = "load luasnip-snippets",
+            },
+            { "r", [[<cmd>DoomReload<CR>]], name = "doomReload" },
+            {
+              "R",
+              function()
+                doom.moll.funcs.report_an_issue()
+              end,
+              name = "create_issue_from_templ",
+            },
+            {
+              "p",
+              [[:lua doom.moll.funcs.inspect(doom.)<Left>]],
+              name = "inspect",
+              options = opts.sf,
+            },
+            {
+              "P",
+              [[:lua doom.moll.funcs.inspect()<Left>]],
+              name = "inspect",
+              options = opts.sf,
+            },
+            {
+              "w",
+              '"zyiw:lua doom.moll.funcs.inspect(<c-r>z)<Left>',
+              name = "inspect iw",
+              options = opts.sf,
+            },
+            {
+              "W",
+              '"zyiW:lua doom.moll.funcs.inspect(<c-r>z)<Left>',
+              name = "inspect iW",
+              options = opts.sf,
+            },
+            { "t", '<cmd>TermExec cmd="zsh -il"<cr>', name = "terminal zsh -il" },
+            -- {
+            --     "e", name = "+TEST", {
+            --       -- -- https://github.com/jbyuki/nabla.nvim#usage
+            --       -- { 'n', '<F5>', '<cmd>lua require("nabla").action()<cr>', opts.n },
+            --       -- { 'n', '<leader>Tp', '<cmd>lua require("nabla").popup()<cr>', opts.n },
+            --       -- -- vim.api.nvim_set_keymap('n', '<leader>v', ":lua Toggle_venn()<CR>", { noremap = true})
+            --       -- { 'n', '<leader>N', ':lua toggle_venn()<CR>', opts.n },
+            --           --       -- require("plenary.reload").reload_module(selection.value)
+            --           -- -- { 'n', '<leader>lr', ':lua require("telescope.builtin").reloader({ cwd = ' .. test_plugin_reload .. '})<cr>', opts.n },
+            --           -- { 'n', '<leader>lr', ':lua require("plenary.reload").reload_module(' .. test_plugin_reload .. ')<cr>', opts.n },
+            --           -- { 'n', '<leader>lR', ':lua report_an_issue()<cr>', opts.n },
+            --           -- { 'n', '<leader>lp', ':lua pp()<left>', opts.n },
+            --
+            --     }
+            --   },
+            {
+              "g",
+              name = "+go",
+              {
+                { "D", "<cmd>e " .. doom_log_path .. "<CR>" },
+                { "N", "<cmd>e " .. notes_rndm .. "<CR>" },
+                { "S", "<cmd>e " .. conf_skhd .. "<CR>" },
+                { "a", "<cmd>e " .. conf_alac .. "<CR>" },
+                { "d", "<cmd>e " .. conf_doom .. "<CR>" },
+                { "e", "<cmd>e " .. conf_setup .. "<CR>" },
+                { "g", "<cmd>e " .. aliases_git .. "<CR>" },
+                { "m", "<cmd>e " .. conf_tnx_main .. "<CR>" },
+                { "n", "<cmd>e " .. notes_todo .. "<CR>" },
+                { "s", "<cmd>e " .. conf_surf .. "<CR>" },
+                { "t", "<cmd>e " .. conf_tmux .. "<CR>" },
+                { "x", "<cmd>e " .. conf_scim .. "<CR>" },
+                { "y", "<cmd>e " .. conf_yabai .. "<CR>" },
+                { "z", "<cmd>e " .. aliases_zsh .. "<CR>" },
               },
             }, -- moll > go
-          -- {
-          --     "L", name = "+line operations", {
-          --       -- -- line operations (testing)
-          --       -- -- " run current line through shell
-          --       -- { 'n', ',Zs', '!!$SHELL <CR>'},
-          --       -- -- " run current line in commandline
-          --       -- { 'n', ',Zl', 'yy:@" <CR>' },
-          --       -- ??
-          --       -- { 'n', ',ZZ', ':w !sudo tee %'},
-          --     }
-          --   }
+            -- {
+            --     "L", name = "+line operations", {
+            --       -- -- line operations (testing)
+            --       -- -- " run current line through shell
+            --       -- { 'n', ',Zs', '!!$SHELL <CR>'},
+            --       -- -- " run current line in commandline
+            --       -- { 'n', ',Zl', 'yy:@" <CR>' },
+            --       -- ??
+            --       -- { 'n', ',ZZ', ':w !sudo tee %'},
+            --     }
+            --   }
           },
         }, -- moll
-      -- {
-      --     "P", name ="+path", { -- https://stackoverflow.com/questions/38081927/vim-cding-to-git-root
-      -- -- - file path to global
-      -- -- - file git root global nvim
-      -- -- - active file buffer
-      -- -- https://stackoverflow.com/questions/38081927/vim-cding-to-git-root
-      -- { "n", "<leader>fpa", "<cmd>cd %:p:h<CR><cmd>pwd<CR>", opts.s, "Editor", "cwd_to_active_file", ":cd active file" },
-      -- { "n", "<leader>fpg", "<cmd>cd %:h | cd `git rev-parse --show-toplevel`<CR><cmd>pwd<CR>", opts.s, "Editor", "cwd_to_current_git_root", ":cd active git root" },
-      --       -- {
-      --       -- 	"n",
-      --       -- 	"<leader>fpa",
-      --       -- 	"<cmd>cd %:p:h<CR><cmd>pwd<CR>",
-      --       -- 	opts.s,
-      --       -- 	"Editor",
-      --       -- 	"cwd_to_active_file",
-      --       -- 	":cd active file",
-      --       -- },
-      --       -- {
-      --       -- 	"n",
-      --       -- 	"<leader>fpg",
-      --       -- 	"<cmd>cd %:h | cd `git rev-parse --show-toplevel`<CR><cmd>pwd<CR>",
-      --       -- 	opts.s,
-      --       -- 	"Editor",
-      --       -- 	"cwd_to_current_git_root",
-      --       -- 	":cd active git root",
-      --       -- },
-      --     }
-      --   },
-      {
-          "s", name = "+search", {
-          { "g", [[<cmd>Telescope repo cached_list<CR>]], name = "repos cached" },
-          { "G", [[<cmd>Telescope repo list<CR>]], name = "repos build" },
-          { "f", [[/\v\c]], name = "text case", options = opts.sf },
+        -- {
+        --     "P", name ="+path", { -- https://stackoverflow.com/questions/38081927/vim-cding-to-git-root
+        -- -- - file path to global
+        -- -- - file git root global nvim
+        -- -- - active file buffer
+        -- -- https://stackoverflow.com/questions/38081927/vim-cding-to-git-root
+        -- { "n", "<leader>fpa", "<cmd>cd %:p:h<CR><cmd>pwd<CR>", opts.s, "Editor", "cwd_to_active_file", ":cd active file" },
+        -- { "n", "<leader>fpg", "<cmd>cd %:h | cd `git rev-parse --show-toplevel`<CR><cmd>pwd<CR>", opts.s, "Editor", "cwd_to_current_git_root", ":cd active git root" },
+        --       -- {
+        --       -- 	"n",
+        --       -- 	"<leader>fpa",
+        --       -- 	"<cmd>cd %:p:h<CR><cmd>pwd<CR>",
+        --       -- 	opts.s,
+        --       -- 	"Editor",
+        --       -- 	"cwd_to_active_file",
+        --       -- 	":cd active file",
+        --       -- },
+        --       -- {
+        --       -- 	"n",
+        --       -- 	"<leader>fpg",
+        --       -- 	"<cmd>cd %:h | cd `git rev-parse --show-toplevel`<CR><cmd>pwd<CR>",
+        --       -- 	opts.s,
+        --       -- 	"Editor",
+        --       -- 	"cwd_to_current_git_root",
+        --       -- 	":cd active git root",
+        --       -- },
+        --     }
+        --   },
+        {
+          "s",
+          name = "+search",
           {
-              "r", name = "+replace", {
-              { "l", ":s//g<Left><Left>", name = "line", options = opts.sf },
-              { "L", "\"zyiw:s/<c-r>z//g<Left><Left>", name = "line iw", options = opts.sf },
-              { "o", "\"zyiW:s/<c-r>z//g<Left><Left>", name = "line iW", options = opts.sf },
-              { "O", "\"zyiw:s/\\<<c-r>z\\>//g<Left><Left>", name = "line iw solo", options = opts.sf },
-              { "a", ":%s//g<Left><Left>", name = "file", options = opts.sf },
-              { "w", "\"zyiw:%s/<c-r>z//g<Left><Left>", name = "word", options = opts.sf },
+            { "g", [[<cmd>Telescope repo cached_list<CR>]], name = "repos cached" },
+            { "G", [[<cmd>Telescope repo list<CR>]], name = "repos build" },
+            { "f", [[/\v\c]], name = "text case", options = opts.sf },
+            {
+              "r",
+              name = "+replace",
+              {
+                { "l", ":s//g<Left><Left>", name = "line", options = opts.sf },
+                { "L", '"zyiw:s/<c-r>z//g<Left><Left>', name = "line iw", options = opts.sf },
+                { "o", '"zyiW:s/<c-r>z//g<Left><Left>', name = "line iW", options = opts.sf },
+                {
+                  "O",
+                  '"zyiw:s/\\<<c-r>z\\>//g<Left><Left>',
+                  name = "line iw solo",
+                  options = opts.sf,
+                },
+                { "a", ":%s//g<Left><Left>", name = "file", options = opts.sf },
+                { "w", '"zyiw:%s/<c-r>z//g<Left><Left>', name = "word", options = opts.sf },
                 --
                 -- {
                 --    "n",
@@ -1308,192 +1335,199 @@ if is_module_enabled("whichkey") then
                 --    "replace_inner_word_big",
                 --    "Replace (W)ord"
                 -- },
-              }
+              },
             }, -- search > replace
-          {
-              "R", name = "+grep/cdo", {
-                  -- -- ripgrep search empty
-                  -- {
-                  --    "n",
-                  --    "<leader>rg",
-                  --    ":grep ",
-                  --    { silent = false },
-                  --    "Ripgrep Search Empty",
-                  --    "ripgrep_search_empty",
-                  --    "Ripgrep Search Empty"
-                  -- },
-                  -- -- ripgrep search word
-                  -- {
-                  --    "n",
-                  --    "<leader>rw",
-                  --    "\"zyiw:grep <c-r>z",
-                  --    { silent = false },
-                  --    "Ripgrep Search Empty",
-                  --    "ripgrep_search_empty",
-                  --    "Ripgrep Search Empty"
-                  -- },
-                  -- -- ripgrep search WORD
-                  -- {
-                  --    "n",
-                  --    "<leader>rW",
-                  --    "\"zyiW:grep <c-r>z",
-                  --    { silent = false },
-                  --    "Ripgrep Search Empty",
-                  --    "ripgrep_search_empty",
-                  --    "Ripgrep Search Empty"
-                  -- },
+            {
+              "R",
+              name = "+grep/cdo",
+              {
+                -- -- ripgrep search empty
+                -- {
+                --    "n",
+                --    "<leader>rg",
+                --    ":grep ",
+                --    { silent = false },
+                --    "Ripgrep Search Empty",
+                --    "ripgrep_search_empty",
+                --    "Ripgrep Search Empty"
+                -- },
+                -- -- ripgrep search word
+                -- {
+                --    "n",
+                --    "<leader>rw",
+                --    "\"zyiw:grep <c-r>z",
+                --    { silent = false },
+                --    "Ripgrep Search Empty",
+                --    "ripgrep_search_empty",
+                --    "Ripgrep Search Empty"
+                -- },
+                -- -- ripgrep search WORD
+                -- {
+                --    "n",
+                --    "<leader>rW",
+                --    "\"zyiW:grep <c-r>z",
+                --    { silent = false },
+                --    "Ripgrep Search Empty",
+                --    "ripgrep_search_empty",
+                --    "Ripgrep Search Empty"
+                -- },
 
-                  -- -- TODO: add vimgrep variants
-                  -- -- vimgrep search empty
-                  -- {
-                  --    "n",
-                  --    "<leader>rg",
-                  --    ":grep ",
-                  --    { silent = false },
-                  --    "Ripgrep Search Empty",
-                  --    "ripgrep_search_empty",
-                  --    "Ripgrep Search Empty"
-                  -- },
-                  -- -- vimgrep search word
-                  -- {
-                  --    "n",
-                  --    "<leader>rw",
-                  --    "\"zyiw:grep <c-r>z",
-                  --    { silent = false },
-                  --    "Ripgrep Search Empty",
-                  --    "ripgrep_search_empty",
-                  --    "Ripgrep Search Empty"
-                  -- },
-                  -- -- vimgrep search WORD
-                  -- {
-                  --    "n",
-                  --    "<leader>rW",
-                  --    "\"zyiW:grep <c-r>z",
-                  --    { silent = false },
-                  --    "Ripgrep Search Empty",
-                  --    "ripgrep_search_empty",
-                  --    "Ripgrep Search Empty"
-                  -- },
-                  -- -- vimgrep search word solo
-                  -- -- vimgrep search WORD solo
-                  -- -- :cdo empty
-                  -- {
-                  --    "n",
-                  --    "<leader>rce",
-                  --    ":cdo s//gc<Left><Left><Left>",
-                  --    { silent = false },
-                  --    "Quickfix cdo Empty",
-                  --    "quickfix_cdo_empty",
-                  --    "Quickfix cdo Empty"
-                  -- },
-                  -- -- :cdo replace word
-                  -- {
-                  --    "n",
-                  --    "<leader>rcw",
-                  --    "\"zyiw:cdo s/<c-r>z//gc<Left><Left><Left>",
-                  --    { silent = false },
-                  --    "Quickfix cdo (w)ord",
-                  --    "quickfix_cdo_word_small",
-                  --    "Quickfix cdo (w)ord",
-                  -- },
-                  -- -- :cdo replace WORD
-                  -- {
-                  --    "n",
-                  --    "<leader>rcW",
-                  --    "\"zyiW:cdo s/<c-r>z//gc<Left><Left><Left>",
-                  --    { silent = false },
-                  --    "Quickfix cdo (W)ord",
-                  --    "quickfix_cdo_word_big",
-                  --    "Quickfix cdo (W)ord",
-                  -- },
-                  -- -- :cdo solo word
-                  -- {
-                  --    "n",
-                  --    "<leader>rcs",
-                  --    "\"zyiw:cdo s/\\<<c-r>z\\>//gc<Left><Left><Left>",
-                  --    { silent = false },
-                  --    "Quickfix cdo solo (w)ord",
-                  --    "quickfix_cdo_solo_word_small",
-                  --    "Quickfix cdo solo(w)ord",
-                  -- },
-                  -- -- :cdo solo WORD
-                  -- {
-                  --    "n",
-                  --    "<leader>rcS",
-                  --    "\"zyiW:cdo s/\\<<c-r>z\\>//gc<Left><Left><Left>",
-                  --    { silent = false },
-                  --    "Quickfix cdo solo (W)ord",
-                  --    "quickfix_cdo_solo_word_big",
-                  --    "Quickfix cdo solo (W)ord",
-                  -- },
-              }
-            }
+                -- -- TODO: add vimgrep variants
+                -- -- vimgrep search empty
+                -- {
+                --    "n",
+                --    "<leader>rg",
+                --    ":grep ",
+                --    { silent = false },
+                --    "Ripgrep Search Empty",
+                --    "ripgrep_search_empty",
+                --    "Ripgrep Search Empty"
+                -- },
+                -- -- vimgrep search word
+                -- {
+                --    "n",
+                --    "<leader>rw",
+                --    "\"zyiw:grep <c-r>z",
+                --    { silent = false },
+                --    "Ripgrep Search Empty",
+                --    "ripgrep_search_empty",
+                --    "Ripgrep Search Empty"
+                -- },
+                -- -- vimgrep search WORD
+                -- {
+                --    "n",
+                --    "<leader>rW",
+                --    "\"zyiW:grep <c-r>z",
+                --    { silent = false },
+                --    "Ripgrep Search Empty",
+                --    "ripgrep_search_empty",
+                --    "Ripgrep Search Empty"
+                -- },
+                -- -- vimgrep search word solo
+                -- -- vimgrep search WORD solo
+                -- -- :cdo empty
+                -- {
+                --    "n",
+                --    "<leader>rce",
+                --    ":cdo s//gc<Left><Left><Left>",
+                --    { silent = false },
+                --    "Quickfix cdo Empty",
+                --    "quickfix_cdo_empty",
+                --    "Quickfix cdo Empty"
+                -- },
+                -- -- :cdo replace word
+                -- {
+                --    "n",
+                --    "<leader>rcw",
+                --    "\"zyiw:cdo s/<c-r>z//gc<Left><Left><Left>",
+                --    { silent = false },
+                --    "Quickfix cdo (w)ord",
+                --    "quickfix_cdo_word_small",
+                --    "Quickfix cdo (w)ord",
+                -- },
+                -- -- :cdo replace WORD
+                -- {
+                --    "n",
+                --    "<leader>rcW",
+                --    "\"zyiW:cdo s/<c-r>z//gc<Left><Left><Left>",
+                --    { silent = false },
+                --    "Quickfix cdo (W)ord",
+                --    "quickfix_cdo_word_big",
+                --    "Quickfix cdo (W)ord",
+                -- },
+                -- -- :cdo solo word
+                -- {
+                --    "n",
+                --    "<leader>rcs",
+                --    "\"zyiw:cdo s/\\<<c-r>z\\>//gc<Left><Left><Left>",
+                --    { silent = false },
+                --    "Quickfix cdo solo (w)ord",
+                --    "quickfix_cdo_solo_word_small",
+                --    "Quickfix cdo solo(w)ord",
+                -- },
+                -- -- :cdo solo WORD
+                -- {
+                --    "n",
+                --    "<leader>rcS",
+                --    "\"zyiW:cdo s/\\<<c-r>z\\>//gc<Left><Left><Left>",
+                --    { silent = false },
+                --    "Quickfix cdo solo (W)ord",
+                --    "quickfix_cdo_solo_word_big",
+                --    "Quickfix cdo solo (W)ord",
+                -- },
+              },
+            },
           },
         }, -- search
-      {
-          "g", name = "+git", {
+        {
+          "g",
+          name = "+git",
           {
-              "z", name = "+octo", {
-              { "i", ":Octo issue ", name = "issue", options = opts.sf },
-              { "l", "<cmd>Octo issue list<cr>", name = "issue list" },
+            {
+              "z",
+              name = "+octo",
+              {
+                { "i", ":Octo issue ", name = "issue", options = opts.sf },
+                { "l", "<cmd>Octo issue list<cr>", name = "issue list" },
               },
             }, -- git -> octo
-          -- {
-          --     "x", name = "+vgit", {
-          --
-          --     }
-          --   }, -- git -> vgit
-          -- {
-          --     "Z", name = "+gitsigns", {
-          --
-          --     }
-          --   }, -- git -> gitsigns
-          -- {
-          --     "d", name = "+diffview", {
-          --
-          --     }
-          --   }, -- git -> gitsigns
+            -- {
+            --     "x", name = "+vgit", {
+            --
+            --     }
+            --   }, -- git -> vgit
+            -- {
+            --     "Z", name = "+gitsigns", {
+            --
+            --     }
+            --   }, -- git -> gitsigns
+            -- {
+            --     "d", name = "+diffview", {
+            --
+            --     }
+            --   }, -- git -> gitsigns
           },
         }, -- git
-      -- {
-      --     "R", "+readf", {
-      --       -- -- read file
-      --       -- -- :r file               to after cursor
-      --       -- -- :$r                   to end of buffer
-      --       -- -- :0r                   to end of buffer
-      --       -- -- :{x}r                 to after line x
-      --       -- -- :/pattern/r file      to after pattern
-      --       -- { 'n', ',Rf', ':r<space>' },
-      --       -- { 'n', ',Re', ':$r<space>' },
-      --       -- { 'n', ',Rb', ':0r<space>' },
-      --       -- { 'n', ',Rl', ':r <Left><Left>' },
-      --       -- { 'n', ',Rp', '://r <Left><Left><Left>' },
-      --     }
-      --   }, -- read
-      {
-          "w", name = "+windows", {
-          { "z", [[<esc><cmd>suspend<CR>]], name = "suspend vim" },
+        -- {
+        --     "R", "+readf", {
+        --       -- -- read file
+        --       -- -- :r file               to after cursor
+        --       -- -- :$r                   to end of buffer
+        --       -- -- :0r                   to end of buffer
+        --       -- -- :{x}r                 to after line x
+        --       -- -- :/pattern/r file      to after pattern
+        --       -- { 'n', ',Rf', ':r<space>' },
+        --       -- { 'n', ',Re', ':$r<space>' },
+        --       -- { 'n', ',Rb', ':0r<space>' },
+        --       -- { 'n', ',Rl', ':r <Left><Left>' },
+        --       -- { 'n', ',Rp', '://r <Left><Left><Left>' },
+        --     }
+        --   }, -- read
+        {
+          "w",
+          name = "+windows",
+          {
+            { "z", [[<esc><cmd>suspend<CR>]], name = "suspend vim" },
             -- { "S", [[<esc><CR>]], name = "solo window / close all others" }, -- nvim get windows > compare some idx/name > close match set
             -- { "move"}
             -- { "new/rm"}
-          -- {
-          --     "t", name = "+tabs", {
-          --       -- { 'n', ',tn', ':tabnew<cr>' },
-          --       -- { 'n', 'gl', 'gt' },
-          --       -- { 'n', 'gL', 'gT' },
-          --       -- { 'n', ',g0', ':tabr<cr>' },
-          --       -- { 'n', ',g$', ':tabl<cr>' },
-          --       -- { 'n', ',gh', ':tabm -<cr>' },
-          --       -- { 'n', ',gl', ':tabm +<cr>' },
-          --     }
-          --   }
+            -- {
+            --     "t", name = "+tabs", {
+            --       -- { 'n', ',tn', ':tabnew<cr>' },
+            --       -- { 'n', 'gl', 'gt' },
+            --       -- { 'n', 'gL', 'gT' },
+            --       -- { 'n', ',g0', ':tabr<cr>' },
+            --       -- { 'n', ',g$', ':tabl<cr>' },
+            --       -- { 'n', ',gh', ':tabm -<cr>' },
+            --       -- { 'n', ',gl', ':tabm +<cr>' },
+            --     }
+            --   }
           },
         }, -- windows
-      } -- leader
-    }
-  }
+      }, -- leader
+    },
+  })
 end
-
 
 ---------------------------
 ---------------------------
@@ -1514,13 +1548,13 @@ local use = doom.use_package
 ---       COLOR SCHEMES       ---
 ---------------------------------
 
-use { 'xiyaowong/nvim-transparent', config = require("molleweide.configs.transparent") }
-use { 'bluz71/vim-moonfly-colors' }
-use { 'bluz71/vim-nightfly-guicolors' }
-use { 'projekt0n/github-nvim-theme' }
-use { 'Pocco81/Catppuccino.nvim' }
+use({ "xiyaowong/nvim-transparent", config = require("molleweide.configs.transparent") })
+use({ "bluz71/vim-moonfly-colors" })
+use({ "bluz71/vim-nightfly-guicolors" })
+use({ "projekt0n/github-nvim-theme" })
+use({ "Pocco81/Catppuccino.nvim" })
 -- use { 'sainnhe/sonokai' }
-use { 'folke/tokyonight.nvim', config = require("molleweide.configs.tokyonight") }
+use({ "folke/tokyonight.nvim", config = require("molleweide.configs.tokyonight") })
 
 ------------------------------
 ---       NAVIGATION       ---
@@ -1530,26 +1564,31 @@ use { 'folke/tokyonight.nvim', config = require("molleweide.configs.tokyonight")
 ---       PLUGINS | LUA       ---
 ---------------------------------
 
-use { "milisims/nvim-luaref" } -- move this to dev module.
+use({ "milisims/nvim-luaref" }) -- move this to dev module.
 
 ---------------------------
 ---       EDITING       ---
 ---------------------------
 
-use { 'jamessan/vim-gnupg' }
-use { 'nanotee/nvim-lua-guide' }         -- additional help under :h nvim-lua-guid
-use { 'romainl/vim-cool' }               -- disable highlights automatically on cursor move
-use { 'tpope/vim-surround' }             -- cs`' to change `` to '', etc
-use { 'tpope/vim-repeat'}
-use { 'itspriddle/vim-stripper' }        -- strip whitespace on save
-use { 'drzel/vim-line-no-indicator' }   -- nice scroll indicator
-use { 'stevearc/aerial.nvim' }
-use { 'mbbill/undotree' }                -- visualize undo tree
-use { "kevinhwang91/nvim-bqf" }
-use { 'ggandor/lightspeed.nvim', config = require("molleweide.configs.lightspeed"), }
-use { 'beauwilliams/focus.nvim', config = function() require('focus').setup() end }
-use { "s1n7ax/nvim-search-and-replace" }
-use { 'airblade/vim-rooter' }
+use({ "jamessan/vim-gnupg" })
+use({ "nanotee/nvim-lua-guide" }) -- additional help under :h nvim-lua-guid
+use({ "romainl/vim-cool" }) -- disable highlights automatically on cursor move
+use({ "tpope/vim-surround" }) -- cs`' to change `` to '', etc
+use({ "tpope/vim-repeat" })
+use({ "itspriddle/vim-stripper" }) -- strip whitespace on save
+use({ "drzel/vim-line-no-indicator" }) -- nice scroll indicator
+use({ "stevearc/aerial.nvim" })
+use({ "mbbill/undotree" }) -- visualize undo tree
+use({ "kevinhwang91/nvim-bqf" })
+use({ "ggandor/lightspeed.nvim", config = require("molleweide.configs.lightspeed") })
+use({
+  "beauwilliams/focus.nvim",
+  config = function()
+    require("focus").setup()
+  end,
+})
+use({ "s1n7ax/nvim-search-and-replace" })
+use({ "airblade/vim-rooter" })
 -- { 'oberblastmeister/nvim-rooter' },
 -- { 'ldelossa/litee.nvim', config = require('molleweide.plugins.litee') },
 -- { 'ldelossa/litee-calltree.nvim' },
@@ -1566,46 +1605,54 @@ use { 'airblade/vim-rooter' }
 -- https://github.com/mg979/vim-visual-multi -- TODO: try this one.
 --		convert this one to lua
 
-
 ------------------------
 ---       MISC       ---
 ------------------------
 
-use { 'christoomey/vim-tmux-navigator' }
-use { 'melonmanchan/vim-tmux-resizer' }
-use { 'benmills/vimux' }
-use { 'godlygeek/tabular' }
-use { 'vim-scripts/excel.vim' }
-use { 'kjnh10/ExcelLikeVim' }
-use { 'davidgranstrom/scnvim', run = ":call scnvim#install()", config = require("molleweide.configs.scnvim") }
-use { 'ThePrimeagen/vim-be-good' }
+use({ "christoomey/vim-tmux-navigator" })
+use({ "melonmanchan/vim-tmux-resizer" })
+use({ "benmills/vimux" })
+use({ "godlygeek/tabular" })
+use({ "vim-scripts/excel.vim" })
+use({ "kjnh10/ExcelLikeVim" })
+use({
+  "davidgranstrom/scnvim",
+  run = ":call scnvim#install()",
+  config = require("molleweide.configs.scnvim"),
+})
+use({ "ThePrimeagen/vim-be-good" })
 -- use { 'rajasegar/vim-search-web' } -- fast looku
-use { 'KabbAmine/vCoolor.vim' } -- open color picker / requires mouse to select color
-use { 'jbyuki/venn.nvim', config = require("molleweide.configs.venn") }
-use { "jbyuki/nabla.nvim" } -- , config = require("molleweide.configs.nabla")
-use { "jbyuki/quickmath.nvim" } -- calculator
-  -- { 'saifulapm/chartoggle.nvim' },
-  -- { "AndrewRadev/switch.vim" },
-  -- { "jszakmeister/vim-togglecursor" },
-  -- { "Yohannfra/Vim-Flip.git" },
-  -- { "elentok/togglr.vim.git" },
+use({ "KabbAmine/vCoolor.vim" }) -- open color picker / requires mouse to select color
+use({ "jbyuki/venn.nvim", config = require("molleweide.configs.venn") })
+use({ "jbyuki/nabla.nvim" }) -- , config = require("molleweide.configs.nabla")
+use({ "jbyuki/quickmath.nvim" }) -- calculator
+-- { 'saifulapm/chartoggle.nvim' },
+-- { "AndrewRadev/switch.vim" },
+-- { "jszakmeister/vim-togglecursor" },
+-- { "Yohannfra/Vim-Flip.git" },
+-- { "elentok/togglr.vim.git" },
 
 -----------------------
 ---       GIT       ---
 -----------------------
 
-use { gh .. 'TimUntersberger/neogit' }
-use { 'tanvirtin/vgit.nvim', event = 'BufWinEnter', requires = { 'nvim-lua/plenary.nvim', }, config = require("molleweide.configs.vgit") }
-use { "sindrets/diffview.nvim", config = require("molleweide.configs.diffview") }
-use {
-	'pwntester/octo.nvim',
-	requires = {
-    'nvim-lua/plenary.nvim',
-    'nvim-telescope/telescope.nvim',
-    'kyazdani42/nvim-web-devicons',
+use({ gh .. "TimUntersberger/neogit" })
+use({
+  "tanvirtin/vgit.nvim",
+  event = "BufWinEnter",
+  requires = { "nvim-lua/plenary.nvim" },
+  config = require("molleweide.configs.vgit"),
+})
+use({ "sindrets/diffview.nvim", config = require("molleweide.configs.diffview") })
+use({
+  "pwntester/octo.nvim",
+  requires = {
+    "nvim-lua/plenary.nvim",
+    "nvim-telescope/telescope.nvim",
+    "kyazdani42/nvim-web-devicons",
   },
-	config = require("molleweide.configs.octo")
-}
+  config = require("molleweide.configs.octo"),
+})
 -- { 'f-person/git-blame.nvim' },
 -- { 'ruifm/gitlinker.nvim' },
 -- { 'rlch/github-notifications.nvim' },
@@ -1614,7 +1661,6 @@ use {
 -- { 'knsh14/githublink.nvim' },
 -- { 'antonk52/gitignore-grabber.nvim' },
 -- { 'petertriho/cmp-git' }, -- wip / unstable..
-
 
 ---------------------------------------------
 ---       OLD / DEPRECATED / UNUSED       ---
@@ -1667,20 +1713,12 @@ use {
 ---       TELESCOPE EXTENSIONS       ---
 ----------------------------------------
 
-use { gh .. 'cljoly/telescope-repo.nvim' }
-use { gh .. 'nvim-telescope/telescope-packer.nvim' }
+use({ gh .. "cljoly/telescope-repo.nvim" })
+use({ gh .. "nvim-telescope/telescope-packer.nvim" })
 
 -- -- -- add ext to tele config
-table.insert(doom.modules.telescope.settings.extensions, 'repo')
-table.insert(doom.modules.telescope.settings.extensions, 'packer')
-
-
-
-
-
-
-
-
+table.insert(doom.modules.telescope.settings.extensions, "repo")
+table.insert(doom.modules.telescope.settings.extensions, "packer")
 
 -- table.insert(telescope.ext) ??
 
@@ -1776,7 +1814,6 @@ table.insert(doom.modules.telescope.settings.extensions, 'packer')
 --     1. Save this code to a file.
 --     2. Execute it with ":luafile %". >
 
-
 -- -- Create a timer handle (implementation detail: uv_timer_t).
 -- local timer = vim.loop.new_timer()
 -- local i = 0
@@ -1858,7 +1895,6 @@ table.insert(doom.modules.telescope.settings.extensions, 'packer')
 --   end)
 -- end)
 -- print('TCP echo-server listening on port: '..server:getsockname().port)
-
 
 -------------------------------------
 ---       CMP NVIM OVERRIDE       ---
@@ -1950,71 +1986,73 @@ table.insert(doom.modules.telescope.settings.extensions, 'packer')
 --   }))
 -- end
 
-
 --------------------------
 ---       CONNOR       ---
 --------------------------
 
-
-
-
-
-
 -- Colourscheme
-doom.use_package('sainnhe/sonokai', 'EdenEast/nightfox.nvim')
+doom.use_package("sainnhe/sonokai", "EdenEast/nightfox.nvim")
 local options = {
   dim_inactive = true,
 }
 local pallets = {
   dawnfox = {
-    bg2 = '#F9EFEC',
-    bg3 = '#ECE3DE',
-    sel1 = '#EEF1F1',
-    sel2 = '#D8DDDD',
-  }
+    bg2 = "#F9EFEC",
+    bg3 = "#ECE3DE",
+    sel1 = "#EEF1F1",
+    sel2 = "#D8DDDD",
+  },
 }
-local specs = {
-}
+local specs = {}
 local groups = {
-  TelescopeNormal = { fg = 'fg0', bg = 'bg0' },
+  TelescopeNormal = { fg = "fg0", bg = "bg0" },
   TelescopePromptTitle = { fg = "pallet.green", bg = "bg1" },
   TelescopePromptBorder = { fg = "bg1", bg = "bg1" },
   TelescopePromptNormal = { fg = "fg1", bg = "bg1" },
   TelescopePromptPrefix = { fg = "fg1", bg = "bg1" },
 
   TelescopeResultsTitle = { fg = "pallet.green", bg = "bg2" },
-  TelescopeResultsBorder = { fg = 'bg2', bg = 'bg2' },
-  TelescopeResultsNormal = { fg = 'fg1', bg = 'bg2' },
+  TelescopeResultsBorder = { fg = "bg2", bg = "bg2" },
+  TelescopeResultsNormal = { fg = "fg1", bg = "bg2" },
 
   TelescopePreviewTitle = { fg = "pallet.green", bg = "bg1" },
-  TelescopePreviewNormal = { bg = 'bg1' },
+  TelescopePreviewNormal = { bg = "bg1" },
   TelescopePreviewBorder = { fg = "bg1", bg = "bg1" },
   TelescopeMatching = { fg = "error" },
   CursorLine = { bg = "sel1", link = "" },
 }
-require('nightfox').setup({
+require("nightfox").setup({
   options = options,
   pallets = pallets,
   specs = specs,
   groups = groups,
 })
 
-doom.colorscheme = 'tokyonight'
+doom.colorscheme = "tokyonight"
 
 -- Extra packages
 doom.use_package(
-  'rafcamlet/nvim-luapad',
-  'nvim-treesitter/playground',
+  "rafcamlet/nvim-luapad",
+  "nvim-treesitter/playground",
   -- 'tpope/vim-surround',
-  'dstein64/vim-startuptime'
+  "dstein64/vim-startuptime"
 )
 
 doom.use_cmd({
-  'Test', function() print('test') end
+  "Test",
+  function()
+    print("test")
+  end,
 })
 
 doom.use_autocmd({
-  {"FileType", "lua", function() print('lua') end }
+  {
+    "FileType",
+    "lua",
+    function()
+      print("lua")
+    end,
+  },
 })
 
 -- vim: sw=2 sts=2 ts=2 expandtab
