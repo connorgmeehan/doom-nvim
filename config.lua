@@ -1,10 +1,10 @@
 -- doom_config - Doom Nvim user configurations file
 --
--- This file contains the user-defined configurations for Doom nvim.
+--
 -- Just override stuff in the `doom` global table (it's injected into scope
 -- automatically).
 local utils = require("doom.utils")
-local is_plugin_disabled = utils.is_plugin_disabled
+local is_module_enabled = utils.is_module_enabled
 local log = require("doom.utils.logging")
 local fs = require("doom.utils.fs")
 local system = require("doom.core.system")
@@ -13,6 +13,7 @@ doom.moll = {}
 
 -- packer.nvim logs to stdpath(cache)/packer.nvim.log. Looking at this file is usually a good start if something isn't working as expected.
 --
+
 
 ------------------------
 ---       TODO       ---
@@ -1165,7 +1166,7 @@ bind { -- lsp
 -- local binds_terminal = {
 -- }
 
--- if not is_plugin_disabled("whichkey") then
+if is_module_enabled("whichkey") then
   bind {
     enabled,
     leader = {
@@ -1491,7 +1492,7 @@ bind { -- lsp
       } -- leader
     }
   }
--- end
+end
 
 
 ---------------------------
@@ -1637,16 +1638,27 @@ use {
 -- https://github.com/ThePrimeagen/refactoring.nvim -- <<<<<<<<<<<< https://martinfowler.com/books/refactoring.html
 -- https://github.com/clojure-vim/clj-refactor.nvim
 
--------------------------------------
----       LOCAL / OVERRIDES       ---
--------------------------------------
+----------------------------
+---       SNIPPETS       ---
+----------------------------
 
---
--- -- add requires luasnip
--- plug({ "molleweide/LuaSnip-snippets.nvim", opt = true, after = "LuaSnip" })
--- -- -- table.insert(doom.packages["LuaSnip"].requires, { "molleweide/LuaSnip-snippets.nvim", opt = true })
--- doom.packages["LuaSnip"].config = function()
---   require("luasnip").config.set_config(doom.snippets)
+-- use { "molleweide/LuaSnip-snippets.nvim", opt = true, after = "LuaSnip" }
+-- doom.modules.snippets.configs["LuaSnip"] = function()
+--   require("luasnip").config.set_config(doom.modules.snippets.settings)
+--   require("luasnip").snippets = require("luasnip_snippets").load_snippets()
+--   require("luasnip.loaders.from_vscode").load()
+-- end
+
+-- local snippets = doom.modules.snippets
+--  -- Add your snippets as a dependency
+-- table.insert(snippets.uses["LuaSnip"].requires, {
+--   "molleweide/LuaSnip-snippets.nvim",
+--   opt = true,
+--   after = "LuaSnip"
+--  })
+-- -- Splice your load snippets function in with the default setup function
+-- snippets.config["LuaSnip"] = function()
+--   require("luasnip").config.set_config(doom.modules.snippets.settings)
 --   require("luasnip").snippets = require("luasnip_snippets").load_snippets()
 --   require("luasnip.loaders.from_vscode").load()
 -- end
