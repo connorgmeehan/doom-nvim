@@ -17,29 +17,23 @@ Yeah go for it, if you wanted you could copy the lua/doom/modules/features/lsp
 to lua/user/modules/lsp and make any changes you want there.  I'm pretty sure
 everything will work.
 
+OR try this according to docs:
+
+```lua
+--- config.lua
+
+local lsp = doom.modules.lsp
+local old_nvim_cmp_config_function = lsp.configs['nvim-cmp']
+lsp.configs['nvim-cmp'] = function()
+  old_nvim_cmp_config_function() -- Run the default config
+  local cmp = require("cmp") -- direct access to plugin
+end
+```
+
 ---------------------------------------------------------
 
+i am so tired now that it is fucking insane. i don't understand how this
+is possible. it fucking hit me. that is how fucking milfs fuck.
 
-make a `user/modules/github`
-
-
-calves
-nordis
-hip flexors
-press. (squats/deads/legpress/etc.)
-
-what does he do at the moment. that is fucking retarded you know.
-
-what does this actually mean. well it is going to be interesting to see what this does to me in the long run so that is why i am so fucking
-excited at them moment.
-
-this is fucking annoying. the good thing about
-
-because as long as it is moved into its own modules then you can start diddying it up into smaller more logic modules but
-the start is to just shoe horn everything into its own modules.
-
-so that is quite fucking nice and you can do that and have things really become natural which is something that you like dude.
-
-arst
 
 --]]
