@@ -1,0 +1,3 @@
+local quickfix = {}
+
+return quickfix
