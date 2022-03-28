@@ -31,7 +31,7 @@ end
 
 annotations.binds = {
   { '<leader>c', name = '+code', {
-    { 'g', function() require('neogen').generate() end, name = "generate" }
+    { 'g', function() require('neogen').generate() end, name = "neogen->generate" }
   }}
 }
 
