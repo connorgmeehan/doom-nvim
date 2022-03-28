@@ -1,6 +1,3 @@
--- doom_config - Doom Nvim user configurations file
---
---
 -- Just override stuff in the `doom` global table (it's injected into scope
 -- automatically).
 local utils = require("doom.utils")
@@ -12,7 +9,6 @@ local system = require("doom.core.system")
 doom.moll = {}
 
 -- packer.nvim logs to stdpath(cache)/packer.nvim.log. Looking at this file is usually a good start if something isn't working as expected.
---
 
 ------------------------
 ---       TODO       ---
@@ -1555,14 +1551,6 @@ local m = doom.modules
 ---       COLOR SCHEMES       ---
 ---------------------------------
 
-use({ "xiyaowong/nvim-transparent", config = require("molleweide.configs.transparent") })
-use({ "bluz71/vim-moonfly-colors" })
-use({ "bluz71/vim-nightfly-guicolors" })
-use({ "projekt0n/github-nvim-theme" })
-use({ "Pocco81/Catppuccino.nvim" })
--- use { 'sainnhe/sonokai' }
-use({ "folke/tokyonight.nvim", config = require("molleweide.configs.tokyonight") })
-
 ------------------------------
 ---       NAVIGATION       ---
 ------------------------------
@@ -1570,8 +1558,6 @@ use({ "folke/tokyonight.nvim", config = require("molleweide.configs.tokyonight")
 ---------------------------------
 ---       PLUGINS | LUA       ---
 ---------------------------------
-
-use({ "milisims/nvim-luaref" }) -- move this to dev module.
 
 ---------------------------
 ---       EDITING       ---
@@ -1602,10 +1588,8 @@ use({ "airblade/vim-rooter" })
 -- { 'ldelossa/litee-symboltree.nvim' },
 -- { 'ldelossa/litee-filetree.nvim' },
 -- { 'ldelossa/litee-bookmarks.nvim' },
--- { 'nvim-pack/nvim-spectre', config = require('molleweide.plugins.nvim-spectre') },
 -- { 'luukvbaal/stabilize.nvim', config = function() require('stabilize').setup() end },
 -- https://github.com/sindrets/winshift.nvim
--- { 'romgrk/nvim-treesitter-context', config = function() require('molleweide.plugins.nvim-treesitter-context').setup({}) end }, -- BUG: nvim-treesitter-context gives error on startup
 -- { 'https://github.com/justinmk/vim-dirvish' },
 -- git@github.com:steelsojka/pears.nvim.git
 
@@ -1643,13 +1627,7 @@ use({ "jbyuki/quickmath.nvim" }) -- calculator
 ---       GIT       ---
 -----------------------
 
--- use({ gh .. "TimUntersberger/neogit" })
 m.neogit.packages["neogit"][1] = gh .. "TimUntersberger/neogit"
--- table.insert(snippets.uses["LuaSnip"].requires, {
---   "molleweide/LuaSnip-snippets.nvim",
---   opt = true,
---   after = "LuaSnip"
---  })
 
 use({
   "tanvirtin/vgit.nvim",
@@ -1657,16 +1635,16 @@ use({
   requires = { "nvim-lua/plenary.nvim" },
   config = require("molleweide.configs.vgit"),
 })
-use({ "sindrets/diffview.nvim", config = require("molleweide.configs.diffview") })
-use({
-  "pwntester/octo.nvim",
-  requires = {
-    "nvim-lua/plenary.nvim",
-    "nvim-telescope/telescope.nvim",
-    "kyazdani42/nvim-web-devicons",
-  },
-  config = require("molleweide.configs.octo"),
-})
+-- use({ "sindrets/diffview.nvim", config = require("molleweide.configs.diffview") })
+-- use({
+--   "pwntester/octo.nvim",
+--   requires = {
+--     "nvim-lua/plenary.nvim",
+--     "nvim-telescope/telescope.nvim",
+--     "kyazdani42/nvim-web-devicons",
+--   },
+--   config = require("molleweide.configs.octo"),
+-- })
 -- { 'f-person/git-blame.nvim' },
 -- { 'ruifm/gitlinker.nvim' },
 -- { 'rlch/github-notifications.nvim' },
@@ -1702,26 +1680,23 @@ use({
 ---       SNIPPETS       ---
 ----------------------------
 
--- use { "molleweide/LuaSnip-snippets.nvim", opt = true, after = "LuaSnip" }
--- doom.modules.snippets.configs["LuaSnip"] = function()
---   require("luasnip").config.set_config(doom.modules.snippets.settings)
---   require("luasnip").snippets = require("luasnip_snippets").load_snippets()
---   require("luasnip.loaders.from_vscode").load()
--- end
+--- test generate annotation with neogen
+local snippets = doom.modules.snippets
 
--- local snippets = doom.modules.snippets
---  -- Add your snippets as a dependency
--- table.insert(snippets.uses["LuaSnip"].requires, {
---   "molleweide/LuaSnip-snippets.nvim",
---   opt = true,
---   after = "LuaSnip"
---  })
--- -- Splice your load snippets function in with the default setup function
--- snippets.config["LuaSnip"] = function()
---   require("luasnip").config.set_config(doom.modules.snippets.settings)
---   require("luasnip").snippets = require("luasnip_snippets").load_snippets()
---   require("luasnip.loaders.from_vscode").load()
--- end
+--- another neogen commment
+snippets.packages["LuaSnip"][1] = gh .. "L3MON4D3/LuaSnip"
+
+table.insert(snippets.packages["LuaSnip"].requires, {
+  "molleweide/LuaSnip-snippets.nvim", -- opt = true,
+})
+
+--- here neogen works but not for the table insert above
+snippets.configs["LuaSnip"] = function()
+  local ls = require("luasnip")
+  ls.config.set_config(snippets.settings)
+  ls.snippets = require("luasnip_snippets").load_snippets()
+  require("luasnip.loaders.from_vscode").load()
+end
 
 ----------------------------------------
 ---       TELESCOPE EXTENSIONS       ---
@@ -2004,52 +1979,14 @@ table.insert(doom.modules.telescope.settings.extensions, "packer")
 ---       CONNOR       ---
 --------------------------
 
--- Colourscheme
-doom.use_package("sainnhe/sonokai", "EdenEast/nightfox.nvim")
-local options = {
-  dim_inactive = true,
-}
-local pallets = {
-  dawnfox = {
-    bg2 = "#F9EFEC",
-    bg3 = "#ECE3DE",
-    sel1 = "#EEF1F1",
-    sel2 = "#D8DDDD",
-  },
-}
-local specs = {}
-local groups = {
-  TelescopeNormal = { fg = "fg0", bg = "bg0" },
-  TelescopePromptTitle = { fg = "pallet.green", bg = "bg1" },
-  TelescopePromptBorder = { fg = "bg1", bg = "bg1" },
-  TelescopePromptNormal = { fg = "fg1", bg = "bg1" },
-  TelescopePromptPrefix = { fg = "fg1", bg = "bg1" },
-
-  TelescopeResultsTitle = { fg = "pallet.green", bg = "bg2" },
-  TelescopeResultsBorder = { fg = "bg2", bg = "bg2" },
-  TelescopeResultsNormal = { fg = "fg1", bg = "bg2" },
-
-  TelescopePreviewTitle = { fg = "pallet.green", bg = "bg1" },
-  TelescopePreviewNormal = { bg = "bg1" },
-  TelescopePreviewBorder = { fg = "bg1", bg = "bg1" },
-  TelescopeMatching = { fg = "error" },
-  CursorLine = { bg = "sel1", link = "" },
-}
-require("nightfox").setup({
-  options = options,
-  pallets = pallets,
-  specs = specs,
-  groups = groups,
-})
-
 doom.colorscheme = "tokyonight"
 
 -- Extra packages
 doom.use_package(
   "rafcamlet/nvim-luapad",
   "nvim-treesitter/playground",
-  -- 'tpope/vim-surround',
-  "dstein64/vim-startuptime"
+  "dstein64/vim-startuptime",
+  "milisims/nvim-luaref"
 )
 
 doom.use_cmd({

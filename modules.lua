@@ -83,6 +83,7 @@ return {
   user = {
     "char_counter",
     "github",
+    "themes",
   },
 }
 
