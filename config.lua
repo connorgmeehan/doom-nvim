@@ -1538,6 +1538,7 @@ end
 ---------------------------
 
 local use = doom.use_package
+local m = doom.modules
 -- local use = add_or_override_plugin
 
 -- Connors plugins
@@ -1636,7 +1637,14 @@ use({ "jbyuki/quickmath.nvim" }) -- calculator
 ---       GIT       ---
 -----------------------
 
-use({ gh .. "TimUntersberger/neogit" })
+-- use({ gh .. "TimUntersberger/neogit" })
+m.neogit.packages["neogit"][1] = gh .. "TimUntersberger/neogit"
+-- table.insert(snippets.uses["LuaSnip"].requires, {
+--   "molleweide/LuaSnip-snippets.nvim",
+--   opt = true,
+--   after = "LuaSnip"
+--  })
+
 use({
   "tanvirtin/vgit.nvim",
   event = "BufWinEnter",
