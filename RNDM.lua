@@ -10,4 +10,12 @@ what possibilities are there.
 - solve bug
 
 
+area
+are a
+a
+a
+a
+a a
+a
+
 --]]
