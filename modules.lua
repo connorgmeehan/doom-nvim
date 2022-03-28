@@ -82,6 +82,7 @@ return {
   },
   user = {
     -- "audio",
+    -- "binds_leader",
     -- "calculator",
     "char_counter",
     -- "colorpicker",
