@@ -1,6 +1,16 @@
 local neogit = {}
 
-neogit.settings = {}
+neogit.settings = {
+  -- override/add mappings
+  mappings = {
+    -- modify status buffer mappings
+    status = {
+      -- Removes the default mapping of "s"
+      ["s"] = "a",
+      ["S"] = "A",
+    },
+  },
+}
 
 neogit.packages = {
   ["neogit"] = {
