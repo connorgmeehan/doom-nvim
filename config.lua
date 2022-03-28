@@ -516,6 +516,8 @@ local function insert_binds_into_main_table(t)
   end
 end
 
+doom.moll.bind = insert_binds_into_main_table
+
 local function get_user_input_and_print() end
 
 local function enter_string_into_file() end
@@ -1539,11 +1541,6 @@ end
 
 local use = doom.use_package
 local m = doom.modules
--- local use = add_or_override_plugin
-
--- Connors plugins
--- use { 'rafcamlet/nvim-luapad' }
--- use { 'nvim-treesitter/playground' }
 
 ---------------------------
 ---       EDITING       ---
@@ -1597,11 +1594,6 @@ use({
 use({ "s1n7ax/nvim-search-and-replace" })
 use({ "airblade/vim-rooter" })
 -- { 'oberblastmeister/nvim-rooter' },
--- { 'ldelossa/litee.nvim', config = require('molleweide.plugins.litee') },
--- { 'ldelossa/litee-calltree.nvim' },
--- { 'ldelossa/litee-symboltree.nvim' },
--- { 'ldelossa/litee-filetree.nvim' },
--- { 'ldelossa/litee-bookmarks.nvim' },
 -- { 'luukvbaal/stabilize.nvim', config = function() require('stabilize').setup() end },
 -- https://github.com/sindrets/winshift.nvim
 -- { 'https://github.com/justinmk/vim-dirvish' },
@@ -1609,33 +1601,6 @@ use({ "airblade/vim-rooter" })
 
 -- https://github.com/mg979/vim-visual-multi -- TODO: try this one.
 --		convert this one to lua
-
-------------------------
----       MISC       ---
-------------------------
-
-use({ "christoomey/vim-tmux-navigator" })
-use({ "melonmanchan/vim-tmux-resizer" })
-use({ "benmills/vimux" })
-use({ "godlygeek/tabular" })
-use({ "vim-scripts/excel.vim" })
-use({ "kjnh10/ExcelLikeVim" })
--- use({
---   "davidgranstrom/scnvim",
---   run = ":call scnvim#install()",
---   config = require("molleweide.configs.scnvim"),
--- })
-use({ "ThePrimeagen/vim-be-good" })
--- use { 'rajasegar/vim-search-web' } -- fast looku
-use({ "KabbAmine/vCoolor.vim" }) -- open color picker / requires mouse to select color
--- use({ "jbyuki/venn.nvim", config = require("molleweide.configs.venn") })
-use({ "jbyuki/nabla.nvim" }) -- , config = require("molleweide.configs.nabla")
-use({ "jbyuki/quickmath.nvim" }) -- calculator
--- { 'saifulapm/chartoggle.nvim' },
--- { "AndrewRadev/switch.vim" },
--- { "jszakmeister/vim-togglecursor" },
--- { "Yohannfra/Vim-Flip.git" },
--- { "elentok/togglr.vim.git" },
 
 -----------------------
 ---       GIT       ---
@@ -1649,46 +1614,6 @@ use({
   requires = { "nvim-lua/plenary.nvim" },
   config = require("molleweide.configs.vgit"),
 })
--- use({ "sindrets/diffview.nvim", config = require("molleweide.configs.diffview") })
--- use({
---   "pwntester/octo.nvim",
---   requires = {
---     "nvim-lua/plenary.nvim",
---     "nvim-telescope/telescope.nvim",
---     "kyazdani42/nvim-web-devicons",
---   },
---   config = require("molleweide.configs.octo"),
--- })
--- { 'f-person/git-blame.nvim' },
--- { 'ruifm/gitlinker.nvim' },
--- { 'rlch/github-notifications.nvim' },
--- { 'rmagatti/igs.nvim' },
--- { 'kyoh86/gitstat.nvim' },
--- { 'knsh14/githublink.nvim' },
--- { 'antonk52/gitignore-grabber.nvim' },
--- { 'petertriho/cmp-git' }, -- wip / unstable..
-
----------------------------------------------
----       OLD / DEPRECATED / UNUSED       ---
----------------------------------------------
-
--- { 'justinmk/vim-sneak' },             --       should be even faster than easymotion
--- { 'easymotion/vim-easymotion' },  --
---
---
-
-----------------------------------------------
----       NEW PLUGINS / NOT USED YET       ---
-----------------------------------------------
-
--- https://github.com/jbyuki/instant.nvim
--- https://github.com/TimUntersberger/neofs
--- https://github.com/SmiteshP/nvim-gps
--- https://github.com/danielpieper/telescope-tmuxinator.nvim
--- https://github.com/fedeizzo/nvim-printer
--- git@github.com:DanielWeidinger/nvim-sshfs.git
--- https://github.com/ThePrimeagen/refactoring.nvim -- <<<<<<<<<<<< https://martinfowler.com/books/refactoring.html
--- https://github.com/clojure-vim/clj-refactor.nvim
 
 ----------------------------
 ---       SNIPPETS       ---
@@ -1722,92 +1647,6 @@ use({ gh .. "nvim-telescope/telescope-packer.nvim" })
 -- -- -- add ext to tele config
 table.insert(doom.modules.telescope.settings.extensions, "repo")
 table.insert(doom.modules.telescope.settings.extensions, "packer")
-
--- table.insert(telescope.ext) ??
-
--- TODO: neorg
--- git@github.com:nvim-neorg/neorg-telescope.git
-
--- requires https://github.com/cli/cli#installation
--- { "nvim-telescope/telescope-github.nvim", config = function() local telescope = require("telescope") telescope.load_extension("gh") end },
-
--- { "nvim-telescope/telescope-z.nvim", config = function() local telescope = require("telescope") telescope.load_extension("z") end }, -- navigate with z compatibles
--- { "nvim-telescope/telescope-ghq.nvim"}, -- remote repo managment for `https://github.com/x-motemen/ghq`
--- { 'cljoly/telescope-repo.nvim' } ) -- local git repos NOTE: I am using local version!!!
-
--- {
---   'nvim-telescope/telescope-project.nvim',
---   config = function()
---     local telescope = require("telescope")
---     telescope.load_extension("project")
---     vim.api.nvim_set_keymap(
---       'n',
---       '<leader>TT',
---       ":lua require'telescope'.extensions.project.project{}<CR>",
---       {noremap = true, silent = true}
---     )
---   end
--- }, -- navigate projects / similar to repo above
-
--- :Telescope cheat fd
--- :Telescope cheat recache " cheat will be auto cached with new updates on sources
--- {
---   "nvim-telescope/telescope-cheat.nvim",
---   requires = "tami5/sqlite.lua",
---   rocks = { "sqlite", "luv" },
---   config = function() local telescope = require("telescope") telescope.load_extension("cheat") end
--- }, -- search shell stuff
-
--- { "TC72/telescope-tele-tabby.nvim" }, -- manage tabs
--- { "dhruvmanila/telescope-bookmarks.nvim" }, -- web bookmarks
--- { "nvim-telescope/telescope-bibtex.nvim" }, -- tex references
--- { "nvim-telescope/telescope-node-modules.nvim" },
--- { "xiyaowong/telescope-emoji.nvim" },
--- { "crispgm/telescope-heading.nvim" },
--- { "benfowler/telescope-luasnip.nvim", config = function() local telescope = require("telescope") telescope.load_extension("luasnip") end  },
--- { "nvim-telescope/telescope-frecency.nvim" }, -- kind of like telescop internal `z`
--- { "teleivo/telescope-test.nvim" },
-
--- {
---   "rudism/telescope-dict.nvim",
---   config = function() local telescope = require("telescope") telescope.load_extension("dict")
---     vim.api.nvim_set_keymap(
---       'n',
---       '<leader>TD',
---       ":lua require('telescope').extensions.dict.synonyms()<CR>",
---       {noremap = true, silent = true}
---     )
---   end
--- }, -- how to install dicts??
-
--- { "nvim-telescope/telescope-media-files.nvim " }, -- onlylinux for now. theyre looking into hologram.nvim
--- { "jvgrootveld/telescope-zoxide" },
--- { "rmagatti/session-lens" }, -- require rmagatti auto-sessions looks very cool
--- {
---     "nvim-telescope/telescope-arecibo.nvim",
---     rocks = { "openssl", "lua-http-parser" },
--- }, -- search web
-
--- https://github.com/nvim-telescope/telescope-file-browser.nvim
--- https://github.com/LinArcX/telescope-command-palette.nvim
--- https://github.com/renerocksai/telekasten.nvim
--- https://github.com/davidgranstrom/telescope-scdoc.nvim
--- https://github.com/Josiah-tan/quick-projects-nvim
--- https://github.com/keyvchan/telescope-find-pickers.nvim
--- https://github.com/nvim-telescope/telescope-file-browser.nvim
--- https://github.com/fcying/telescope-ctags-outline.nvim
--- https://github.com/nvim-neorg/neorg-telescope
--- https://github.com/IllustratedMan-code/telescope-conda.nvim
--- https://github.com/AckslD/nvim-neoclip.lua
--- https://github.com/EthanJWright/vs-tasks.nvim
--- https://github.com/luissimas/telescope-nodescripts.nvim
--- https://github.com/psiska/telescope-hoogle.nvim -- requires local install of hoogle
--- https://github.com/tigorlazuardi/telescope-cd.nvim
--- https://github.com/tamago324/telescope-openbrowser.nvim -- https://github.com/tyru/open-browser.vim
--- https://github.com/ok97465/telescope-py-importer.nvim
--- https://github.com/camgraff/telescope-tmux.nvim
--- https://github.com/ok97465/telescope-py-outline.nvim
--- https://github.com/crispgm/telescope-heading.nvim
 
 ------------------------------
 ---       ASYNC JOBS       ---
@@ -1999,7 +1838,7 @@ doom.colorscheme = "tokyonight"
 doom.use_package(
   "rafcamlet/nvim-luapad",
   "nvim-treesitter/playground",
-  "dstein64/vim-startuptime",
+  "dstein64/vim-startuptime"
 )
 
 doom.use_cmd({

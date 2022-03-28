@@ -35,5 +35,8 @@ end
 i am so tired now that it is fucking insane. i don't understand how this
 is possible. it fucking hit me. that is how fucking milfs fuck.
 
+they can free themselves from ukrain and areas surrounding that place. which is fucking levelled to the ground. it is quite horrific.
+
+
 
 --]]
