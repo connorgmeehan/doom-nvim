@@ -10,7 +10,6 @@ github.packages = {
       "nvim-telescope/telescope.nvim",
       "kyazdani42/nvim-web-devicons",
     },
-    config = require("molleweide.configs.octo"),
   },
 }
 
