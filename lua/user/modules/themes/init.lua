@@ -114,4 +114,7 @@ themes.configs["nightfox.nvim"] = function()
   })
 end
 
+-- set my theme here
+doom.colorscheme = "tokyonight"
+
 return themes

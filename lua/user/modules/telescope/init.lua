@@ -1,5 +1,11 @@
+local utils = require("doom.utils")
+local is_module_enabled = utils.is_module_enabled
+
 local telescope = {}
 
+telescope.settings = {
+  extensions = { "repo", "packer", "neorg" },
+}
 -- use({ doom.moll.ghq_github .. "cljoly/telescope-repo.nvim" })
 -- use({ doom.moll.ghq_github .. "nvim-telescope/telescope-packer.nvim" })
 --
@@ -7,15 +13,44 @@ local telescope = {}
 -- table.insert(doom.modules.telescope.settings.extensions, "repo")
 -- table.insert(doom.modules.telescope.settings.extensions, "packer")
 
+telescope.packages = {
+  ["telescope-repo.nvim"] = { doom.moll.github .. "cljoly/telescope-repo.nvim" },
+  ["telescope-packer.nvim"] = { doom.moll.github .. "nvim-telescope/telescope-packer.nvim" },
+  ["neorg-telescope"] = { "nvim-neorg/neorg-telescope" },
+}
+
+-- add after attr to all packages so they get loaded after telescope
+for _, ext in ipairs(telescope.packages) do
+  -- ext["after"] = function() return is_module_enabled('telescope') and 'telescope' or nil end,
+  -- use table.insert instead
+end
+
+-- module.packages = {
+--   ['my-package.nvim'] = {
+--     'my-package/my-package.nvim',
+--     after = utils.is_module_enabled('telescope') and 'telescope' or nil,
+-- }
+telescope.configs = {}
+-- module.configs['my-package.nvim'] = function()
+--   if utils.is_module_enabled('telescope') then
+--     require('telescope').load_extension('my-package')
+--   end
+-- end
 
 
 
 
-
-
-
+-- telescope_package.load_extension(ext)
 
 -- table.insert(telescope.ext) ??
+
+telescope.configs = {}
+
+-- local tc = telescope.configs["telescope.nvim"] = function()
+
+
+
+
 
 -- TODO: neorg
 -- git@github.com:nvim-neorg/neorg-telescope.git
@@ -100,6 +135,5 @@ local telescope = {}
 -- https://github.com/camgraff/telescope-tmux.nvim
 -- https://github.com/ok97465/telescope-py-outline.nvim
 -- https://github.com/crispgm/telescope-heading.nvim
-
 
 return telescope
