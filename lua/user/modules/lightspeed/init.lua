@@ -1,14 +1,14 @@
-local nav = {}
+local lightspeed = {}
 
-nav.settings = {}
+lightspeed.settings = {}
 
-nav.packages = {
+lightspeed.packages = {
   ["lightspeed.nvim"] = { "ggandor/lightspeed.nvim" },
 }
 
-nav.configs = {}
+lightspeed.configs = {}
 
-nav.configs["lightspeed.nvim"] = function()
+lightspeed.configs["lightspeed.nvim"] = function()
   require("lightspeed").setup({
     ignore_case = false,
     exit_after_idle_msecs = { unlabeled = 1000, labeled = nil },
@@ -35,4 +35,4 @@ nav.configs["lightspeed.nvim"] = function()
   })
 end
 
-return nav
+return lightspeed

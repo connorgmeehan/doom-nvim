@@ -9,7 +9,6 @@ editing.packages = {
   ["vim-stripper"] = { "itspriddle/vim-stripper" }, -- strip whitespace on save
   ["vim-line-no-indicator"] = { "drzel/vim-line-no-indicator" }, -- nice scroll indicator
   ["aerial.nvim"] = { "stevearc/aerial.nvim" },
-  ["nvim-bqf"] = { "kevinhwang91/nvim-bqf" },
   ["focus.nvim"] = {
     "beauwilliams/focus.nvim",
     config = function()
