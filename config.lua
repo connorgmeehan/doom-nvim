@@ -201,6 +201,7 @@ doom.moll = {}
 
 local code = "~/code/repos/"
 local gh = code .. "github.com/"
+doom.moll.github = gh
 
 local xdg_cfg = "$XDG_CONFIG_HOME/dorothy/config.xdg/"
 local home_notes = "$HOME/notes/"
@@ -787,18 +788,6 @@ end
 
 doom.moll.funcs = funcs
 
-----------------------------
----       AUTOCMDS       ---
-----------------------------
-
--- doom.autocmds[augroup_name] = {
---   { "BufReadPre", "*.lua", "setlocal sw=2", --[[once and nested are boolean keys here]] },
---   { "InsertEnter", "*", function() print("Lua functions are valid!") end, once = true }
--- }
-
---    tmux_reload = {
---     { 'BufWritePost', '~/.config/tmux/tmux.conf', '! tmux source-file ~/.config/tmux/tmux.conf'}
--- },
 
 -------------------------
 ---       BINDS       ---
@@ -1380,23 +1369,23 @@ m.neogit.packages["neogit"][1] = gh .. "TimUntersberger/neogit"
 ---       SNIPPETS       ---
 ----------------------------
 
---- test generate annotation with neogen
-local snippets = doom.modules.snippets
-
---- another neogen commment
-snippets.packages["LuaSnip"][1] = gh .. "L3MON4D3/LuaSnip"
-
-table.insert(snippets.packages["LuaSnip"].requires, {
-  "molleweide/LuaSnip-snippets.nvim", -- opt = true,
-})
-
---- here neogen works but not for the table insert above
-snippets.configs["LuaSnip"] = function()
-  local ls = require("luasnip")
-  ls.config.set_config(snippets.settings)
-  ls.snippets = require("luasnip_snippets").load_snippets()
-  require("luasnip.loaders.from_vscode").load()
-end
+-- --- test generate annotation with neogen
+-- local snippets = doom.modules.snippets
+--
+-- --- another neogen commment
+-- snippets.packages["LuaSnip"][1] = gh .. "L3MON4D3/LuaSnip"
+--
+-- table.insert(snippets.packages["LuaSnip"].requires, {
+--   "molleweide/LuaSnip-snippets.nvim", -- opt = true,
+-- })
+--
+-- --- here neogen works but not for the table insert above
+-- snippets.configs["LuaSnip"] = function()
+--   local ls = require("luasnip")
+--   ls.config.set_config(snippets.settings)
+--   ls.snippets = require("luasnip_snippets").load_snippets()
+--   require("luasnip.loaders.from_vscode").load()
+-- end
 
 ----------------------------------------
 ---       TELESCOPE EXTENSIONS       ---
@@ -1504,7 +1493,7 @@ table.insert(doom.modules.telescope.settings.extensions, "packer")
 ---       CONNOR       ---
 --------------------------
 
-doom.colorscheme = "tokyonight"
+-- doom.colorscheme = "tokyonight"
 
 -- Extra packages
 doom.use_package(

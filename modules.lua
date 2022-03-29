@@ -102,7 +102,7 @@ return {
     -- "spectre",
     -- "tabular",
     -- "testing",
-    -- "themes",
+    "themes",
     -- "tmux",
     -- "vgit",
     -- "websearch",
