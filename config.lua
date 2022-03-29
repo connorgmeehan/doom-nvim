@@ -1300,64 +1300,64 @@ end
 local use = doom.use_package
 local m = doom.modules
 
----------------------------
----       EDITING       ---
----------------------------
-
-use({ "jamessan/vim-gnupg" })
-use({ "nanotee/nvim-lua-guide" }) -- additional help under :h nvim-lua-guid
-use({ "romainl/vim-cool" }) -- disable highlights automatically on cursor move
-use({ "tpope/vim-surround" }) -- cs`' to change `` to '', etc
-use({ "tpope/vim-repeat" })
-use({ "itspriddle/vim-stripper" }) -- strip whitespace on save
-use({ "drzel/vim-line-no-indicator" }) -- nice scroll indicator
-use({ "stevearc/aerial.nvim" })
-use({ "kevinhwang91/nvim-bqf" })
-use({
-  "ggandor/lightspeed.nvim",
-  config = function()
-    require("lightspeed").setup({
-      ignore_case = false,
-      exit_after_idle_msecs = { unlabeled = 1000, labeled = nil },
-
-      --- s/x ---
-      jump_to_unique_chars = { safety_timeout = 400 },
-      match_only_the_start_of_same_char_seqs = true,
-      force_beacons_into_match_width = false,
-      -- Display characters in a custom way in the highlighted matches.
-      substitute_chars = { ["\r"] = "¬" },
-      -- Leaving the appropriate list empty effectively disables "smart" mode,
-      -- and forces auto-jump to be on or off.
-      -- safe_labels = { . . . },
-      -- labels = { . . . },
-      -- These keys are captured directly by the plugin at runtime.
-      special_keys = {
-        next_match_group = "<space>",
-        prev_match_group = "<tab>",
-      },
-
-      --- f/t ---
-      limit_ft_matches = 4,
-      repeat_ft_with_target_char = false,
-    })
-  end,
-})
-use({
-  "beauwilliams/focus.nvim",
-  config = function()
-    require("focus").setup()
-  end,
-})
-use({ "s1n7ax/nvim-search-and-replace" })
-use({ "airblade/vim-rooter" })
--- { 'oberblastmeister/nvim-rooter' },
--- { 'luukvbaal/stabilize.nvim', config = function() require('stabilize').setup() end },
--- https://github.com/sindrets/winshift.nvim
--- { 'https://github.com/justinmk/vim-dirvish' },
--- git@github.com:steelsojka/pears.nvim.git
-
--- https://github.com/mg979/vim-visual-multi -- TODO: try this one.
---		convert this one to lua
+-- ---------------------------
+-- ---       EDITING       ---
+-- ---------------------------
+--
+-- use({ "jamessan/vim-gnupg" })
+-- use({ "nanotee/nvim-lua-guide" }) -- additional help under :h nvim-lua-guid
+-- use({ "romainl/vim-cool" }) -- disable highlights automatically on cursor move
+-- use({ "tpope/vim-surround" }) -- cs`' to change `` to '', etc
+-- use({ "tpope/vim-repeat" })
+-- use({ "itspriddle/vim-stripper" }) -- strip whitespace on save
+-- use({ "drzel/vim-line-no-indicator" }) -- nice scroll indicator
+-- use({ "stevearc/aerial.nvim" })
+-- use({ "kevinhwang91/nvim-bqf" })
+-- use({
+--   "ggandor/lightspeed.nvim",
+--   config = function()
+--     require("lightspeed").setup({
+--       ignore_case = false,
+--       exit_after_idle_msecs = { unlabeled = 1000, labeled = nil },
+--
+--       --- s/x ---
+--       jump_to_unique_chars = { safety_timeout = 400 },
+--       match_only_the_start_of_same_char_seqs = true,
+--       force_beacons_into_match_width = false,
+--       -- Display characters in a custom way in the highlighted matches.
+--       substitute_chars = { ["\r"] = "¬" },
+--       -- Leaving the appropriate list empty effectively disables "smart" mode,
+--       -- and forces auto-jump to be on or off.
+--       -- safe_labels = { . . . },
+--       -- labels = { . . . },
+--       -- These keys are captured directly by the plugin at runtime.
+--       special_keys = {
+--         next_match_group = "<space>",
+--         prev_match_group = "<tab>",
+--       },
+--
+--       --- f/t ---
+--       limit_ft_matches = 4,
+--       repeat_ft_with_target_char = false,
+--     })
+--   end,
+-- })
+-- use({
+--   "beauwilliams/focus.nvim",
+--   config = function()
+--     require("focus").setup()
+--   end,
+-- })
+-- use({ "s1n7ax/nvim-search-and-replace" })
+-- use({ "airblade/vim-rooter" })
+-- -- { 'oberblastmeister/nvim-rooter' },
+-- -- { 'luukvbaal/stabilize.nvim', config = function() require('stabilize').setup() end },
+-- -- https://github.com/sindrets/winshift.nvim
+-- -- { 'https://github.com/justinmk/vim-dirvish' },
+-- -- git@github.com:steelsojka/pears.nvim.git
+--
+-- -- https://github.com/mg979/vim-visual-multi -- TODO: try this one.
+-- --		convert this one to lua
 
 -----------------------
 ---       GIT       ---
