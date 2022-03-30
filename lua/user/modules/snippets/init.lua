@@ -9,13 +9,18 @@ snippets.packages = {
   ["LuaSnip"] = {
     "L3MON4D3/LuaSnip",
     commit = "80e68242cf8127844653060fbada32dca15579fc",
-    requires = { { "rafamadriz/friendly-snippets", opt = true } },
+    requires = {
+      { "rafamadriz/friendly-snippets", opt = true },
+      { "molleweide/LuaSnip-snippets", opt = true }, -- override with local versions in the `config.lua`
+    },
   },
 }
 
 snippets.configs = {}
 snippets.configs["LuaSnip"] = function()
-  require("luasnip").config.set_config(doom.modules.snippets.settings)
+  local ls = require("luasnip")
+  ls.config.set_config(snippets.settings)
+  ls.snippets = require("luasnip_snippets").load_snippets()
   require("luasnip.loaders.from_vscode").load()
 end
 
