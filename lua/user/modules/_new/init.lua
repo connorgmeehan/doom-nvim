@@ -10,4 +10,5 @@
 -- git@github.com:DanielWeidinger/nvim-sshfs.git
 -- https://github.com/ThePrimeagen/refactoring.nvim -- <<<<<<<<<<<< https://martinfowler.com/books/refactoring.html
 -- https://github.com/clojure-vim/clj-refactor.nvim
-
+-- https://github.com/booperlv/nvim-gomove
+-- https://github.com/filipdutescu/renamer.nvim

@@ -1,5 +1,7 @@
 local themes = {}
 
+-- https://github.com/rockerBOO/awesome-neovim#colorscheme
+
 themes.settings = {}
 
 themes.packages = {

@@ -1,5 +1,7 @@
 local colorpicker = {}
 
+-- https://github.com/rockerBOO/awesome-neovim#color
+
 colorpicker.settings = {}
 
 colorpicker.packages = {
