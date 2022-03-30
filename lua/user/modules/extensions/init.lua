@@ -1,5 +1,11 @@
 local utils = require("doom.utils")
 local is_module_enabled = utils.is_module_enabled
+local user_util = require("user.utils")
+
+after_telescope = user_util.after_telescope
+load_extension_helper = user_util.load_extension_helper
+up = user_util.paths
+
 local extensions = {}
 
 local code = "~/code/repos/"
@@ -8,7 +14,7 @@ local gh = code .. "github.com/"
 extensions.settings = {}
 
 extensions.packages = {
-  ["telescope-repo.nvim"] = { gh .. "cljoly/telescope-repo.nvim" },
+  ["telescope-repo.nvim"] = { up.ghq.github .. "cljoly/telescope-repo.nvim" },
   ["telescope-packer.nvim"] = { gh .. "nvim-telescope/telescope-packer.nvim" },
   ["neorg-telescope"] = { "nvim-neorg/neorg-telescope" },
   ["telescope-ghq.nvim"] = { "nvim-telescope/telescope-ghq.nvim" },
@@ -17,16 +23,9 @@ extensions.packages = {
   ["telescope-tele-tabby.nvim"] = { "TC72/telescope-tele-tabby.nvim" }, -- manage tabs
 }
 for _, ext in ipairs(extensions.packages) do
-  ext["after"] = is_module_enabled("telescope") and "telescope" or nil
+  ext["after"] = after_telescope
 end
 
-local function load_extension_helper(ext_key)
-  return function()
-    if utils.is_module_enabled("telescope") then
-      require("telescope").load_extension(ext_key)
-    end
-  end
-end
 extensions.configs = {}
 extensions["telescope-repo.nvim"] = load_extension_helper("repo")
 extensions["telescope-packer.nvim"] = load_extension_helper("packer")
@@ -34,16 +33,7 @@ extensions["neorg-telescope"] = load_extension_helper("neorg")
 extensions["telescope-ghq.nvim"] = load_extension_helper("ghq")
 extensions["telescope-github.nvim"] = load_extension_helper("github")
 
--- for _, ext in ipairs(extensions.settings) do
---   extensions[""]
---   if utils.is_module_enabled("telescope") then
---     require("telescope").load_extension(ext)
---   end
--- end
-
 -- TODO: neorg
-
--- { 'cljoly/telescope-repo.nvim' } ) -- local git repos NOTE: I am using local version!!!
 
 -- {
 --   'nvim-telescope/telescope-project.nvim',
