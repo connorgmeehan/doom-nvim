@@ -3,7 +3,7 @@
 - 1. need to turn off gpg
 - 2.
 
-what possibilities are there.
+wha possibilities are there.
 
 - disable fully
 - cronjo
@@ -33,6 +33,10 @@ lsp.configs['nvim-cmp'] = function()
   local cmp = require("cmp") -- direct access to plugin
 end
 ```
+
+---------------------------------------------------------
+
+telescope extension binds into extensions module.
 
 ---------------------------------------------------------
 
@@ -71,6 +75,10 @@ be soon now because this is a new level of understanding. i have never understoo
 today we are going to take a page out of george costanzas book. that is pretty nice and cool. because that is probably the most important.
 
 business dealing when biden was vice president.
+
+i don't understand why this shit happens. it is a bit annoying and I want to look into that shit.
+
+historiaclly that is quite an important thing that you can do you know.
 
 --]]
 

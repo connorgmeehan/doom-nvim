@@ -201,7 +201,6 @@ doom.moll = {}
 
 local code = "~/code/repos/"
 local gh = code .. "github.com/"
-doom.moll.github = gh
 
 local xdg_cfg = "$XDG_CONFIG_HOME/dorothy/config.xdg/"
 local home_notes = "$HOME/notes/"
@@ -1320,14 +1319,15 @@ m.neogit.packages["neogit"][1] = gh .. "TimUntersberger/neogit"
 --   require("luasnip.loaders.from_vscode").load()
 -- end
 
-use({ gh .. "cljoly/telescope-repo.nvim" })
-use({ gh .. "nvim-telescope/telescope-packer.nvim" })
+-- use({ gh .. "cljoly/telescope-repo.nvim" })
+-- use({ gh .. "nvim-telescope/telescope-packer.nvim" })
+--
+-- -- -- -- add ext to tele config
+-- table.insert(doom.modules.telescope.settings.extensions, "repo")
+-- table.insert(doom.modules.telescope.settings.extensions, "packer")
+--
 
--- -- -- add ext to tele config
-table.insert(doom.modules.telescope.settings.extensions, "repo")
-table.insert(doom.modules.telescope.settings.extensions, "packer")
-
--- doom.colorscheme = "tokyonight"
+doom.colorscheme = "tokyonight"
 
 -- Extra packages
 doom.use_package(

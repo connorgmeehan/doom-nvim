@@ -102,6 +102,7 @@ return {
     -- "replace",
     -- "spectre",
     -- "tabular",
+    "extensions",
     -- "testing",
     "themes",
     -- "tmux",
