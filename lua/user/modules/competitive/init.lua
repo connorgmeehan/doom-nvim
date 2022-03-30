@@ -1,0 +1,2 @@
+-- https://github.com/p00f/cphelper.nvim
+-- https://github.com/xeluxee/competitest.nvim
