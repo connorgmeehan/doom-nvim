@@ -44,15 +44,10 @@ add_telescope_extension
 
 ---------------------------------------------------------
 
-everything should move into modules. modules should be self-contained. so that you know you are treating everything that it
-within the subject in this specific module so that it is easy to manage them.
-this is nice and it also makes. i know you were big into it back in the days but now i haven't heard much about it in a while.
-
-rename lightspeed to motion. this is quite fucking nice because it gives you more motions.
+this is pretty cool. now things are coming together much more nicely. in a line lap and so these ones are insanely fast and it is almost
+not even fun to try to explain how fast they are because it feels just so much faster.
 
 
-this is pretty cool because this allows for such nice containment of all plugins and I love this because this is just
-the thing that I need.
 
 --]]
 
