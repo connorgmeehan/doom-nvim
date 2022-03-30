@@ -1300,74 +1300,7 @@ end
 local use = doom.use_package
 local m = doom.modules
 
--- ---------------------------
--- ---       EDITING       ---
--- ---------------------------
---
--- use({ "jamessan/vim-gnupg" })
--- use({ "nanotee/nvim-lua-guide" }) -- additional help under :h nvim-lua-guid
--- use({ "romainl/vim-cool" }) -- disable highlights automatically on cursor move
--- use({ "tpope/vim-surround" }) -- cs`' to change `` to '', etc
--- use({ "tpope/vim-repeat" })
--- use({ "itspriddle/vim-stripper" }) -- strip whitespace on save
--- use({ "drzel/vim-line-no-indicator" }) -- nice scroll indicator
--- use({ "stevearc/aerial.nvim" })
--- use({ "kevinhwang91/nvim-bqf" })
--- use({
---   "ggandor/lightspeed.nvim",
---   config = function()
---     require("lightspeed").setup({
---       ignore_case = false,
---       exit_after_idle_msecs = { unlabeled = 1000, labeled = nil },
---
---       --- s/x ---
---       jump_to_unique_chars = { safety_timeout = 400 },
---       match_only_the_start_of_same_char_seqs = true,
---       force_beacons_into_match_width = false,
---       -- Display characters in a custom way in the highlighted matches.
---       substitute_chars = { ["\r"] = "¬" },
---       -- Leaving the appropriate list empty effectively disables "smart" mode,
---       -- and forces auto-jump to be on or off.
---       -- safe_labels = { . . . },
---       -- labels = { . . . },
---       -- These keys are captured directly by the plugin at runtime.
---       special_keys = {
---         next_match_group = "<space>",
---         prev_match_group = "<tab>",
---       },
---
---       --- f/t ---
---       limit_ft_matches = 4,
---       repeat_ft_with_target_char = false,
---     })
---   end,
--- })
--- use({
---   "beauwilliams/focus.nvim",
---   config = function()
---     require("focus").setup()
---   end,
--- })
--- use({ "s1n7ax/nvim-search-and-replace" })
--- use({ "airblade/vim-rooter" })
--- -- { 'oberblastmeister/nvim-rooter' },
--- -- { 'luukvbaal/stabilize.nvim', config = function() require('stabilize').setup() end },
--- -- https://github.com/sindrets/winshift.nvim
--- -- { 'https://github.com/justinmk/vim-dirvish' },
--- -- git@github.com:steelsojka/pears.nvim.git
---
--- -- https://github.com/mg979/vim-visual-multi -- TODO: try this one.
--- --		convert this one to lua
-
------------------------
----       GIT       ---
------------------------
-
 m.neogit.packages["neogit"][1] = gh .. "TimUntersberger/neogit"
-
-----------------------------
----       SNIPPETS       ---
-----------------------------
 
 -- --- test generate annotation with neogen
 -- local snippets = doom.modules.snippets
@@ -1387,111 +1320,12 @@ m.neogit.packages["neogit"][1] = gh .. "TimUntersberger/neogit"
 --   require("luasnip.loaders.from_vscode").load()
 -- end
 
-----------------------------------------
----       TELESCOPE EXTENSIONS       ---
-----------------------------------------
-
 use({ gh .. "cljoly/telescope-repo.nvim" })
 use({ gh .. "nvim-telescope/telescope-packer.nvim" })
 
 -- -- -- add ext to tele config
 table.insert(doom.modules.telescope.settings.extensions, "repo")
 table.insert(doom.modules.telescope.settings.extensions, "packer")
-
-
--------------------------------------
----       CMP NVIM OVERRIDE       ---
--------------------------------------
-
--- lsp.configure_functions["nvim-cmp"] = function()
---   local cmp = require("cmp")
---   local luasnip = require("luasnip")
---   local replace_termcodes = require("doom.utils").replace_termcodes
---
---   local source_map = {
---     nvim_lsp = "[LSP]",
---     luasnip = "[Snp]",
---     buffer = "[Buf]",
---     nvim_lua = "[Lua]",
---     path = "[Path]",
---   }
---
---   --- Helper function to check what <Tab> behaviour to use
---   --- @return boolean
---   local function check_backspace()
---     local col = vim.fn.col(".") - 1
---     return col == 0 or vim.fn.getline("."):sub(col, col):match("%s")
---   end
---
---   -- Initalize the cmp toggle if it doesn't exist.
---   if _doom.cmp_enable == nil then
---     _doom.cmp_enable = true
---   end
---
---   cmp.setup(vim.tbl_deep_extend("force", doom.modules.lsp.settings.completion, {
---     completeopt = nil,
---     completion = {
---       completeopt = doom.modules.lsp.settings.completion.completeopt,
---     },
---     formatting = {
---       format = function(entry, item)
---         item.kind = string.format("%s %s", doom.modules.lsp.settings.completion.kinds[item.kind], item.kind)
---         item.menu = source_map[entry.source.name]
---         item.dup = vim.tbl_contains({ "path", "buffer" }, entry.source.name)
---         return item
---       end,
---     },
---     mapping = {
---       ["<C-p>"] = cmp.mapping.select_prev_item(),
---       ["<C-n>"] = cmp.mapping.select_next_item(),
---       ["<C-d>"] = cmp.mapping.scroll_docs(-4),
---       ["<C-f>"] = cmp.mapping.scroll_docs(4),
---       ["<C-Space>"] = cmp.mapping.complete(),
---       ["<C-e>"] = cmp.mapping.close(),
---       -- ["<ESC>"] = cmp.mapping.close(),
---       ["<C-j>"] = cmp.mapping.confirm({
---         behavior = cmp.ConfirmBehavior.Replace,
---         select = true,
---       }),
---       ["<C-l>"] = cmp.mapping(function(fallback)
---         if cmp.visible() then
---           cmp.select_next_item()
---         elseif luasnip.expand_or_jumpable() then
---           vim.fn.feedkeys(replace_termcodes("<Plug>luasnip-expand-or-jump"), "")
---         elseif check_backspace() then
---           vim.fn.feedkeys(replace_termcodes("<Tab>"), "n")
---         else
---           fallback()
---         end
---       end, {
---         "i",
---         "s",
---       }),
---       ["<C-k>"] = cmp.mapping(function(fallback)
---         if cmp.visible() then
---           cmp.select_prev_item()
---         elseif luasnip.jumpable(-1) then
---           vim.fn.feedkeys(replace_termcodes("<Plug>luasnip-jump-prev"), "")
---         else
---           fallback()
---         end
---       end, {
---         "i",
---         "s",
---       }),
---     },
---   }, {
---     mapping = type(doom.modules.lsp.settings.completion.mapping) == "function" and doom.modules.lsp.settings.completion.mapping(cmp)
---       or doom.modules.lsp.settings.completion.mapping,
---     enabled = function()
---       return _doom.cmp_enable and vim.api.nvim_buf_get_option(0, "buftype") ~= "prompt"
---     end,
---   }))
--- end
-
---------------------------
----       CONNOR       ---
---------------------------
 
 -- doom.colorscheme = "tokyonight"
 
@@ -1502,21 +1336,21 @@ doom.use_package(
   "dstein64/vim-startuptime"
 )
 
-doom.use_cmd({
-  "Test",
-  function()
-    print("test")
-  end,
-})
-
-doom.use_autocmd({
-  {
-    "FileType",
-    "lua",
-    function()
-      print("lua")
-    end,
-  },
-})
+-- doom.use_cmd({
+--   "Test",
+--   function()
+--     print("test")
+--   end,
+-- })
+--
+-- doom.use_autocmd({
+--   {
+--     "FileType",
+--     "lua",
+--     function()
+--       print("lua")
+--     end,
+--   },
+-- })
 
 -- vim: sw=2 sts=2 ts=2 expandtab

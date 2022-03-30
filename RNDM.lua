@@ -57,6 +57,21 @@ something that you have to do.
 
 that twitter is something that is fucking disgusting. everything by the gay rights happened and that is a bit insane actually.
 
+two sequel songs that are in the works at this moment and this is fucking insane and this is one of the coolest things that i have
+ever done because this is such an insane exercise.
+
+what are your thoughts about this thing. because this is just super wierd.
+
+that cannot be the analysis and so that cannot be the gestalt that you work on because that is quite stupid.
+
+fed has the right rationale to do this which is something that is just more important and you cannot really bargain with it.
+
+it is all blank pages. do you see how many notes are being printed. a good show is coming up. when my body is fully restorde which it will
+be soon now because this is a new level of understanding. i have never understood how strong you can get there. pull and push.
+today we are going to take a page out of george costanzas book. that is pretty nice and cool. because that is probably the most important.
+
+business dealing when biden was vice president.
+
 --]]
 
 
