@@ -1,65 +1,39 @@
 local utils = require("doom.utils")
 local is_module_enabled = utils.is_module_enabled
 
-local telescope = {}
+local t_extensions = {}
 
-telescope.settings = {
-  extensions = { "repo", "packer", "neorg" },
+t_extensions.settings = {
+  extensions = { "repo", "packer", "neorg", "ghq", "gh" },
 }
--- use({ doom.moll.ghq_github .. "cljoly/telescope-repo.nvim" })
--- use({ doom.moll.ghq_github .. "nvim-telescope/telescope-packer.nvim" })
---
--- -- -- -- add ext to tele config
--- table.insert(doom.modules.telescope.settings.extensions, "repo")
--- table.insert(doom.modules.telescope.settings.extensions, "packer")
 
-telescope.packages = {
+t_extensions.packages = {
   ["telescope-repo.nvim"] = { doom.moll.github .. "cljoly/telescope-repo.nvim" },
   ["telescope-packer.nvim"] = { doom.moll.github .. "nvim-telescope/telescope-packer.nvim" },
   ["neorg-telescope"] = { "nvim-neorg/neorg-telescope" },
+  ["telescope-ghq.nvim"] = { "nvim-telescope/telescope-ghq.nvim" },
+  ["telescope-github.nvim"] = { "nvim-telescope/telescope-github.nvim" }, -- requires https://github.com/cli/cli#installation
+  ["telescope-z.nvim"] = { "nvim-telescope/telescope-z.nvim" }, -- navigate with z compatibles
+  ["telescope-tele-tabby.nvim"] = { "TC72/telescope-tele-tabby.nvim" }, -- manage tabs
 }
 
--- add after attr to all packages so they get loaded after telescope
-for _, ext in ipairs(telescope.packages) do
-  -- ext["after"] = function() return is_module_enabled('telescope') and 'telescope' or nil end,
-  -- use table.insert instead
+-- add after attr to all extension packages
+for _, ext in ipairs(t_extensions.packages) do
+  ext["after"] = function()
+    return is_module_enabled("telescope") and "telescope" or nil
+  end -- table.insert(ext, function() return is_module_enabled('telescope') and 'telescope' or nil end)
 end
 
--- module.packages = {
---   ['my-package.nvim'] = {
---     'my-package/my-package.nvim',
---     after = utils.is_module_enabled('telescope') and 'telescope' or nil,
--- }
-telescope.configs = {}
--- module.configs['my-package.nvim'] = function()
---   if utils.is_module_enabled('telescope') then
---     require('telescope').load_extension('my-package')
---   end
--- end
+t_extensions.configs = {}
 
-
-
-
--- telescope_package.load_extension(ext)
-
--- table.insert(telescope.ext) ??
-
-telescope.configs = {}
-
--- local tc = telescope.configs["telescope.nvim"] = function()
-
-
-
-
+for _, ext in ipairs(t_extensions.settings) do
+  if utils.is_module_enabled("telescope") then
+    require("telescope").load_extension(ext)
+  end
+end
 
 -- TODO: neorg
--- git@github.com:nvim-neorg/neorg-telescope.git
 
--- requires https://github.com/cli/cli#installation
--- { "nvim-telescope/telescope-github.nvim", config = function() local telescope = require("telescope") telescope.load_extension("gh") end },
-
--- { "nvim-telescope/telescope-z.nvim", config = function() local telescope = require("telescope") telescope.load_extension("z") end }, -- navigate with z compatibles
--- { "nvim-telescope/telescope-ghq.nvim"}, -- remote repo managment for `https://github.com/x-motemen/ghq`
 -- { 'cljoly/telescope-repo.nvim' } ) -- local git repos NOTE: I am using local version!!!
 
 -- {
@@ -85,7 +59,6 @@ telescope.configs = {}
 --   config = function() local telescope = require("telescope") telescope.load_extension("cheat") end
 -- }, -- search shell stuff
 
--- { "TC72/telescope-tele-tabby.nvim" }, -- manage tabs
 -- { "dhruvmanila/telescope-bookmarks.nvim" }, -- web bookmarks
 -- { "nvim-telescope/telescope-bibtex.nvim" }, -- tex references
 -- { "nvim-telescope/telescope-node-modules.nvim" },
@@ -136,4 +109,4 @@ telescope.configs = {}
 -- https://github.com/ok97465/telescope-py-outline.nvim
 -- https://github.com/crispgm/telescope-heading.nvim
 
-return telescope
+return t_extensions
