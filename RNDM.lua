@@ -46,6 +46,7 @@ add_telescope_extension
 
 everything should move into modules. modules should be self-contained. so that you know you are treating everything that it
 within the subject in this specific module so that it is easy to manage them.
+this is nice and it also makes. i know you were big into it back in the days but now i haven't heard much about it in a while.
 
 --]]
 
