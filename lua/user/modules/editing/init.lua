@@ -20,7 +20,6 @@ editing.packages = {
   -- { 'luukvbaal/stabilize.nvim', config = function() require('stabilize').setup() end },
   -- https://github.com/sindrets/winshift.nvim
   -- { 'https://github.com/justinmk/vim-dirvish' },
-  -- git@github.com:steelsojka/pears.nvim.git
   -- https://github.com/mg979/vim-visual-multi -- TODO: try this one.
   --		convert this one to lua
 }
