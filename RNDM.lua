@@ -48,6 +48,12 @@ everything should move into modules. modules should be self-contained. so that y
 within the subject in this specific module so that it is easy to manage them.
 this is nice and it also makes. i know you were big into it back in the days but now i haven't heard much about it in a while.
 
+rename lightspeed to motion. this is quite fucking nice because it gives you more motions.
+
+
+this is pretty cool because this allows for such nice containment of all plugins and I love this because this is just
+the thing that I need.
+
 --]]
 
 

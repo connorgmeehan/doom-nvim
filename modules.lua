@@ -95,7 +95,7 @@ return {
     "gpg",
     -- "increment",
     -- "latex",
-    "lightspeed",
+    "motion", -- gives extra motion capabilities
     -- "litee",
     -- "misc",
     "quickfix",
