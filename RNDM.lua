@@ -82,8 +82,12 @@ do that i don't think so you know. because that would be quite fucking stupid yo
 merge from the core module into my user lsp module. so that I can maintain both modules separately and still keep the goodies
 that the main crew write.
 
+i have to make sure that my regular bindings work in modules so that I can contain stuff. it doesn't really matter if it is perfectly
+as long as I can put it away into a module so that I can start caring about other stuff. over time it will show whether the structure
+is good or not but the important thing is to be able to move shit into a module so that it is easy to handle.
+then I spec what I want to use in the config.lua file such as the user color scheme that I am using.
 
+this is just so fucking cool and now i am going to do some extra  hip flexor training so that ri ca start living and show my parrents
+that i am not worthless. and this is quite fucking nice
 
 --]]
-
-

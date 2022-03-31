@@ -83,6 +83,7 @@ return {
   user = {
     -- "audio",
     -- "binds_regular",
+    "binds_insert_seqs",
     -- "binds_leader",
     "calculator",
     "char_counter",
