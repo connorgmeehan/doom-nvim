@@ -24,11 +24,34 @@ user_utils.make_sure_all_module_keys_exist = function()
   -- make sure that all modules exist as a string value in the `modules.lua` file
 end
 
+user_utils.binds_options = function()
+  -- 1. what are all the default values?
+  -- 2. return table with all false
+  -- 3. pass table with a char for each one you want to toggle
+end
+
+local ghq_github_moll = "~/code/repos/github.com/molleweide/"
+local xdg_cfg = ghq_github_moll .. "xdg_configs/"
 
 user_utils.paths = {
   ghq = {
     github = "~/code/repos/github.com/",
   },
+  home_notes = "$HOME/notes/",
+  doom_log_path = "$HOME/.local/share/nvim/doom.log",
+  aliases_git = "$XDG_DATA_HOME/antigen/bundles/robbyrussell/oh-my-zsh/plugins/git/git.plugin.zsh",
+  aliases_zsh = "$XDG_CONFIG_HOME/dorothy/sources/aliases.sh",
+  conf_doom = "$XDG_CONFIG_HOME/dorothy/config.xdg/doom-nvim/doom_config.lua",
+  conf_scim = "$XDG_CONFIG_HOME/dorothy/config.xdg/sc-im/scimrc",
+  conf_setup = "$XDG_CONFIG_HOME/dorothy/config/setup.bash",
+  conf_alac = xdg_cfg .. "alacritty/alacritty.yml",
+  conf_surf = xdg_cfg .. "surfingkeys/config.js",
+  conf_skhd = xdg_cfg .. "skhd/skhdrc",
+  conf_tmux = xdg_cfg .. "tmux/tmux.conf",
+  conf_tnx_main = xdg_cfg .. "tmuxinator/main.yml",
+  conf_yabai = xdg_cfg .. "yabai/yabairc",
+  notes_rndm = home_notes .. "RNDM.norg",
+  notes_todo = home_notes .. "TODO.md",
 }
 
 -- make sure plugin is loaded after telescope
