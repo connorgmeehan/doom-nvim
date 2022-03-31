@@ -1,0 +1,2 @@
+local games = {}
+return games
