@@ -104,7 +104,7 @@ return {
     -- "tabular",
     "extensions",
     -- "testing",
-    "themes",
+    "color_schemes",
     -- "tmux",
     -- "vgit",
     -- "websearch",
