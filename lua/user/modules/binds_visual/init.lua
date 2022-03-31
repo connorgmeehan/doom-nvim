@@ -14,41 +14,13 @@ local viw = '"zyiw'
 local viW = '"zyiW'
 local vg = "<c-r>z"
 
-
 --
 -- -- -- search regex
 -- -- {'n', '/', '/\\v'}, -- need to esc backsl
 -- -- {'v', '/', '/\\v'},
---
-bind({
-  enabled,
-  normal = {
-    { "<c-z>", [[<cmd>suspend<CR>]], name = "suspend vim" },
-    { "<c-z>", [[<Esc><cmd>suspend<CR>]], name = "suspend vim", mode = "v" },
-    { ";", ":", name = "colon", options = { silent = false } },
-    { ":", ";", name = "semi-colon" },
-    --  {'n', 'dl', ':set wrap! linebreak!<CR>'},
-    -- { 'x', 'z', '<Plug>VSurround' },
-    -- { 'n', 'yzz', '<Plug>Yssurround' }, -- double ss
-    -- { 'n', 'yz', '<Plug>Ysurround' }, -- single s
-    -- { 'n', 'dz', '<Plug>Dsurround' },
-    -- { 'n', 'cz', '<Plug>Csurround' },
-  },
-})
 
--- - local binds_operator = {
--- { 'o', 'b', 'vb', opts.ns },
--- { 'o', 'B', 'vB', opts.ns },
--- { 'o', 'F', 'vF', opts.ns },
--- { 'o', 'T', 'vT', opts.ns },
--- -- { 'o', 's', '<Plug>Lightspeed_s', opts.n },
--- -- { 'o', 'S', '<Plug>Lightspeed_S', opts.ns },
--- }
-
--- idea > use :[range]luado to filter visual selection.
-bind({ -- visual
-  enabled,
-  visual = {
+return {
+  binds = {
     { "p", '"_dP', mode = "v", options = opts.fs },
     { "<c-z>", [[<Esc><cmd>suspend<CR>]], name = "suspend vim", mode = "v" },
     {
@@ -66,7 +38,16 @@ bind({ -- visual
       mode = "v",
     },
   },
-})
+}
+
+-- - local binds_operator = {
+-- { 'o', 'b', 'vb', opts.ns },
+-- { 'o', 'B', 'vB', opts.ns },
+-- { 'o', 'F', 'vF', opts.ns },
+-- { 'o', 'T', 'vT', opts.ns },
+-- -- { 'o', 's', '<Plug>Lightspeed_s', opts.n },
+-- -- { 'o', 'S', '<Plug>Lightspeed_S', opts.ns },
+-- }
 
 -- -- insert
 -- bind({
@@ -105,5 +86,3 @@ bind({ -- visual
 -- -- { 't', '<esc>', 'command', 'option'},
 -- -- local binds_terminal = {
 -- -- }
-
-return binds_regular
