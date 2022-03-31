@@ -52,42 +52,46 @@ https://github.com/echasnovski/mini.nvim
 what is this
 ------------------------------------------
 
-this is pretty cool. now things are coming together much more nicely. in a line lap and so these ones are insanely fast and it is almost
-not even fun to try to explain how fast they are because it feels just so much faster.
+see if it is possible to keep all operator changing mappings in one module and then see if it works.
+otherwise it has to be done "first" but first see if that is even necessary.
 
-times has always been a central part but we cannot know now that this is a different thing you know. that is not a relevant comarison.
+------------------------------------------
 
-much worse than the other guys and this is actually quite insane that these guys have done it.
+what are all options defaults? possibilities?
 
-their runners just will perform better and there is not anything that you can do about it.
+ask connor does nest use nvim-mapper to create the binds or is this done in nvim-mapper?
 
-a tangent of somekind of corruption that doesn't really belong to the parliament which is something that is quite fucking insanea nd this
-is quite fucking insane because I don't understand how this could never see obvious before.
+look at the mapping util.
 
-anna you have written about this before and this is quite a stupid suggestion.
+------------------------------------------
+that is something that is quite fucking similar. to russia so that is something that is a bit similar on the surface. aaah.
 
-so this will ingegrate more and more over time so that you can do this actually. the idea is to move the ground with your knee.
-and do this to the rhythm to perfectly balance the tension between glutes and hip flexors.
+it is not a chronological story. instead it is divided inte sections that deal with themes. and that is why the timeline is
+scattered so to speak. the council for stage play and culture. that stops culture news for today more ners can be found in the
+app swedish ratio play in your app store. equality council. sixtythree sais that they've had their personal codes removed from
+the state databases which means that they cannot do anything. molly sanden storre has gotten the goal to create the EM song.
+is that like somekind of europeean thing or is it a swedish song? i mean intended for a swedish market?
+anders ygeman. klippa och klistra i generna foer att goera saodanna jjer.
 
-this is quite fucking important. i dunno. i must have closed it by accident. this is only here for reference so you can cherry pick or
-do whatever you want.  i did it for like at least a year and that is so fucking stupid as a woman i am glad that i don't have that.
-even not you know. things have to be done in a thoughtful way so that you don't have to redo lost of stuff. this approach aims
-to make it higly maintaineable to do this so that you can have very large configs that maintainm ultiple plugins. yes no.
-i want you or i want that other thing. let's be honest you smell like garlic and you are not that impressive. i am trying
-to stand up for all the short kings that are watching us.
+in a couple of months they are counting on them becoming self sufficient. in about twenty states which makes them into something that
+is quite wierd and retarded that shaocat gonna have a nice life here in the US and A. the more we support their parents the better
+of they'll be in life for later. how easy and comfy we should be able to mix peoples DNA.
 
-the agreements that go down to athens because they didn't want to do that  so that is not very nice hello mister can he
-do that i don't think so you know. because that would be quite fucking stupid you know.
+in southkorea one man has said that you can disable that gene and make it impossible for you to get sharlatanes.
+charlatanes. that they make up for these kinds of things that aren't really the truth. in somekind of legal shenannigans.
+a and b league. worried that they won't keep what they have promised. so this is a bit scary actually. we want nothing else but get
+home to our own homes and cities. i have put up a lot which means that I cannot really do it you know. you know but that is a paint
+to write you know. i am however, a mother of three children.
 
-merge from the core module into my user lsp module. so that I can maintain both modules separately and still keep the goodies
-that the main crew write.
+i can make a hip flexor puller if I connect cables that are low. that is a very interesting thing that I am going to try later when
+the lights have gone out a little bit more. welcome and listen so that we can try this shit.
 
-i have to make sure that my regular bindings work in modules so that I can contain stuff. it doesn't really matter if it is perfectly
-as long as I can put it away into a module so that I can start caring about other stuff. over time it will show whether the structure
-is good or not but the important thing is to be able to move shit into a module so that it is easy to handle.
-then I spec what I want to use in the config.lua file such as the user color scheme that I am using.
+today they are much fewer so that is very interesting. how come that kind of murder have gone down or been reduced in frequency.
+so then most of the people were alcoholics but now most are narcotics people whilst alcoholics have gone down a lot.
+in order to be able to offer an as good service as possible. no it is nowhere near enough. far off but there just isn't much we can
+do toremove the majority of these situations. in most cases we have to just come and fix it.
 
-this is just so fucking cool and now i am going to do some extra  hip flexor training so that ri ca start living and show my parrents
-that i am not worthless. and this is quite fucking nice
+in the beginning they promised to pull back which is something that they haven't agrred to. where the binds are located shoudn't matter.
+so it is stupid to use too many variables and short shit because it only makes things annoying to maintain.
 
 --]]

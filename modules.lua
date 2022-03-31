@@ -103,7 +103,7 @@ return {
     -- "replace",
     -- "spectre",
     -- "tabular",
-    "extensions",
+    "telescope_extensions",
     -- "testing",
     "color_schemes",
     -- "tmux",
