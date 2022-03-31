@@ -1,33 +1,11 @@
-
 local log = require("doom.utils.logging")
 local utils = require("doom.utils")
 local is_module_enabled = utils.is_module_enabled
-
--- local bind = doom.moll.bind
--- local enabled = true
 
 local opts = {
   sf = { silent = false },
   n = { noremap = true },
 }
-
-local xdg_cfg = "$XDG_CONFIG_HOME/dorothy/config.xdg/"
-local home_notes = "$HOME/notes/"
-local doom_log_path = "$HOME/.local/share/nvim/doom.log"
-local aliases_git =
-  "$XDG_DATA_HOME/antigen/bundles/robbyrussell/oh-my-zsh/plugins/git/git.plugin.zsh"
-local aliases_zsh = "$XDG_CONFIG_HOME/dorothy/sources/aliases.sh"
-local conf_doom = "$XDG_CONFIG_HOME/dorothy/config.xdg/doom-nvim/doom_config.lua"
-local conf_scim = "$XDG_CONFIG_HOME/dorothy/config.xdg/sc-im/scimrc"
-local conf_setup = "$XDG_CONFIG_HOME/dorothy/config/setup.bash"
-local conf_alac = xdg_cfg .. "alacritty/alacritty.yml"
-local conf_surf = xdg_cfg .. "surfingkeys/config.js"
-local conf_skhd = xdg_cfg .. "skhd/skhdrc"
-local conf_tmux = xdg_cfg .. "tmux/tmux.conf"
-local conf_tnx_main = xdg_cfg .. "tmuxinator/main.yml"
-local conf_yabai = xdg_cfg .. "yabai/yabairc"
-local notes_rndm = home_notes .. "RNDM.norg"
-local notes_todo = home_notes .. "TODO.md"
 
 if is_module_enabled("whichkey") then
   return {
@@ -77,25 +55,25 @@ if is_module_enabled("whichkey") then
               "p",
               [[:lua doom.moll.funcs.inspect(doom.)<Left>]],
               name = "inspect",
-              options = opts.sf,
+              options = { silent = false },
             },
             {
               "P",
               [[:lua doom.moll.funcs.inspect()<Left>]],
               name = "inspect",
-              options = opts.sf,
+              options = { silent = false },
             },
             {
               "w",
               '"zyiw:lua doom.moll.funcs.inspect(<c-r>z)<Left>',
               name = "inspect iw",
-              options = opts.sf,
+              options = { silent = false },
             },
             {
               "W",
               '"zyiW:lua doom.moll.funcs.inspect(<c-r>z)<Left>',
               name = "inspect iW",
-              options = opts.sf,
+              options = { silent = false },
             },
             { "t", '<cmd>TermExec cmd="zsh -il"<cr>', name = "terminal zsh -il" },
             -- {
@@ -113,26 +91,6 @@ if is_module_enabled("whichkey") then
             --
             --     }
             --   },
-            {
-              "g",
-              name = "+go",
-              {
-                { "D", "<cmd>e " .. doom_log_path .. "<CR>" },
-                { "N", "<cmd>e " .. notes_rndm .. "<CR>" },
-                { "S", "<cmd>e " .. conf_skhd .. "<CR>" },
-                { "a", "<cmd>e " .. conf_alac .. "<CR>" },
-                { "d", "<cmd>e " .. conf_doom .. "<CR>" },
-                { "e", "<cmd>e " .. conf_setup .. "<CR>" },
-                { "g", "<cmd>e " .. aliases_git .. "<CR>" },
-                { "m", "<cmd>e " .. conf_tnx_main .. "<CR>" },
-                { "n", "<cmd>e " .. notes_todo .. "<CR>" },
-                { "s", "<cmd>e " .. conf_surf .. "<CR>" },
-                { "t", "<cmd>e " .. conf_tmux .. "<CR>" },
-                { "x", "<cmd>e " .. conf_scim .. "<CR>" },
-                { "y", "<cmd>e " .. conf_yabai .. "<CR>" },
-                { "z", "<cmd>e " .. aliases_zsh .. "<CR>" },
-              },
-            }, -- moll > go
             -- {
             --     "L", name = "+line operations", {
             --       -- -- line operations (testing)
@@ -180,22 +138,37 @@ if is_module_enabled("whichkey") then
           {
             { "g", [[<cmd>Telescope repo cached_list<CR>]], name = "repos cached" },
             { "G", [[<cmd>Telescope repo list<CR>]], name = "repos build" },
-            { "f", [[/\v\c]], name = "text case", options = opts.sf },
+            { "f", [[/\v\c]], name = "text case", options = { silent = false } },
             {
               "r",
               name = "+replace",
               {
-                { "l", ":s//g<Left><Left>", name = "line", options = opts.sf },
-                { "L", '"zyiw:s/<c-r>z//g<Left><Left>', name = "line iw", options = opts.sf },
-                { "o", '"zyiW:s/<c-r>z//g<Left><Left>', name = "line iW", options = opts.sf },
+                { "l", ":s//g<Left><Left>", name = "line", options = { silent = false } },
+                {
+                  "L",
+                  '"zyiw:s/<c-r>z//g<Left><Left>',
+                  name = "line iw",
+                  options = { silent = false },
+                },
+                {
+                  "o",
+                  '"zyiW:s/<c-r>z//g<Left><Left>',
+                  name = "line iW",
+                  options = { silent = false },
+                },
                 {
                   "O",
                   '"zyiw:s/\\<<c-r>z\\>//g<Left><Left>',
                   name = "line iw solo",
-                  options = opts.sf,
+                  options = { silent = false },
                 },
-                { "a", ":%s//g<Left><Left>", name = "file", options = opts.sf },
-                { "w", '"zyiw:%s/<c-r>z//g<Left><Left>', name = "word", options = opts.sf },
+                { "a", ":%s//g<Left><Left>", name = "file", options = { silent = false } },
+                {
+                  "w",
+                  '"zyiw:%s/<c-r>z//g<Left><Left>',
+                  name = "word",
+                  options = { silent = false },
+                },
                 --
                 -- {
                 --    "n",
@@ -347,7 +320,7 @@ if is_module_enabled("whichkey") then
               "z",
               name = "+octo",
               {
-                { "i", ":Octo issue ", name = "issue", options = opts.sf },
+                { "i", ":Octo issue ", name = "issue", options = { silent = false } },
                 { "l", "<cmd>Octo issue list<cr>", name = "issue list" },
               },
             }, -- git -> octo

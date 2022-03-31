@@ -50,8 +50,8 @@ user_utils.paths = {
   conf_tmux = xdg_cfg .. "tmux/tmux.conf",
   conf_tnx_main = xdg_cfg .. "tmuxinator/main.yml",
   conf_yabai = xdg_cfg .. "yabai/yabairc",
-  notes_rndm = home_notes .. "RNDM.norg",
-  notes_todo = home_notes .. "TODO.md",
+  -- notes_rndm = home_notes .. "RNDM.norg",
+  -- notes_todo = home_notes .. "TODO.md",
 }
 
 -- make sure plugin is loaded after telescope

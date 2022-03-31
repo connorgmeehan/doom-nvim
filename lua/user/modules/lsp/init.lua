@@ -284,6 +284,27 @@ lsp.configs["lsp_signature.nvim"] = function()
   }))
 end
 
+-- local lsp_opts = vim.tbl_extend("force", opts.sf, { expr = true })
+--
+-- bind({ -- lsp
+--   not enabled,
+--   lsp = {
+--     "<c-n>",
+--     'luasnip#expand_or_jumpable() ? "<Plug>luasnip-expand-or-jump" : "<Tab>"',
+--     "luasnip_expand",
+--     options = lsp_opts,
+--   },
+--   --     "s", "<c-n>", 'luasnip#expand_or_jumpable() ? "<Plug>luasnip-expand-or-jump" : "<Tab>"', lsp_opts, "luasnip_expand",
+--   --     "s", "<c-p>", 'luasnip#expand_or_jumpable() ? "<Plug>luasnip-expand-or-jump" : "<Tab>"', lsp_opts, "luasnip_expand",
+--   --     "s", "<c-k>", '<cmd>lua require("luasnip").jump(1)<CR>', opts, "luasnip_next_sel_s",
+--   --     "s", "<c-j>", '<cmd>lua require("luasnip").jump(-1)<CR>', opts, "luasnip_prev_sel_s",
+--   --     "i", "<c-k>", '<cmd>lua require("luasnip").jump(1)<CR>', opts, "luasnip_next_sel_i_insert",
+--   --     "i", "<c-j>", '<cmd>lua require("luasnip").jump(-1)<CR>', opts, "luasnip_prev_sel_i_insert",
+--   --     "i", "<C-E>", 'luasnip#choice_active() ? "<Plug>luasnip-next-choice" : "<C-E>"', lsp_opts, "luasnip_next_choice",
+--   --     "s", "<C-E>", 'luasnip#choice_active() ? "<Plug>luasnip-next-choice" : "<C-E>"', lsp_opts, "luasnip_next_choice_s",
+-- })
+--
+
 lsp.binds = {
   { "K", vim.lsp.buf.hover, name = "Show hover doc" },
   { "[d", vim.diagnostic.goto_prev, name = "Jump to prev diagnostic" },

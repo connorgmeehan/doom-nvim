@@ -35,4 +35,19 @@ motion.configs["lightspeed.nvim"] = function()
   })
 end
 
+------------------------------
+---       lightspeed       ---
+------------------------------
+-- https://github.com/ggandor/lightspeed.nvim/discussions/83
+-- `<Plug>Lightspeed_s`  2-character  forward   /-like
+-- `<Plug>Lightspeed_S`  2-character  backward  ?-like
+-- `<Plug>Lightspeed_x`  2-character  forward   X-mode
+-- `<Plug>Lightspeed_X`  2-character  backward  X-mode
+
+-- `<Plug>Lightspeed_f`  1-character  forward   f-like
+-- `<Plug>Lightspeed_F`  1-character  backward  F-like
+-- `<Plug>Lightspeed_t`  1-character  forward   t-like
+-- `<Plug>Lightspeed_T`  1-character  backward  T-like
+
+
 return motion
