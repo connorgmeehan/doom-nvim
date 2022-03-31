@@ -1,0 +1,3 @@
+local ghq = {}
+
+return ghq

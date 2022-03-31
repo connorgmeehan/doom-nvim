@@ -16,6 +16,14 @@ user_utils.create_new_module = function()
   -- open file and insert luasnip template.
 end
 
+user_utils.verify_module = function()
+  -- make sure all required components of a module exists.
+end
+
+user_utils.make_sure_all_module_keys_exist = function()
+  -- make sure that all modules exist as a string value in the `modules.lua` file
+end
+
 
 user_utils.paths = {
   ghq = {
