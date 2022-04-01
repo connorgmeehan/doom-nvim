@@ -117,6 +117,14 @@ about the ethical niveau. milieu
 
 this is quite nice actually because now everything is kept in lua with this interface which is something that is quite fucking nice.
 
+this is wierd because i don't understand. how that cannot take effect. so now the next step is to understand how you assign
 
+new binds so that I don't overwrite them which would suck.
+
+so now i am going to do a puff and then do some more hip flexor movements.
+
+now this is getting more and more clear so this is good because this will make neovim into a great developmen environment but
+it is insanely hard to get started with it because there is just so little given and the docs are a pain in the ass and i don't understand
+how that shit would fukcing work in the real world.
 
 --]]
