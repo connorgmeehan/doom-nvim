@@ -1,4 +1,10 @@
-local cwd = {}
+local paths = {}
+
+paths.packages = {
+  ["vim-rooter"] = { "airblade/vim-rooter" },
+  -- { 'oberblastmeister/nvim-rooter' },
+}
+
 
 -- {
 --     "P", name ="+path", { -- https://stackoverflow.com/questions/38081927/vim-cding-to-git-root
@@ -29,4 +35,4 @@ local cwd = {}
 --     }
 --   },
 
-return cwd
+return paths
