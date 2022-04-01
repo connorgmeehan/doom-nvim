@@ -127,4 +127,8 @@ now this is getting more and more clear so this is good because this will make n
 it is insanely hard to get started with it because there is just so little given and the docs are a pain in the ass and i don't understand
 how that shit would fukcing work in the real world.
 
+tyler the creators dick hole so that is a quite advanced system that doesn't really fucking bring it up is that how you do it.
+
+if I can do that then this is something that I would really like to be able to do you know.
+
 --]]
