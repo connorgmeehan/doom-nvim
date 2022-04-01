@@ -1,3 +1,7 @@
 local regex = {}
--- https://github.com/bennypowers/nvim-regexplainer
+
+regex.packages = {
+  ["nvim-regexplainer"] = { "bennypowers/nvim-regexplainer" },
+}
+
 return regex

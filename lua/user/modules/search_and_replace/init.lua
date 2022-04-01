@@ -1,6 +1,6 @@
-local replace = {}
+local search_and_replace = {}
 
--- use({ "s1n7ax/nvim-search-and-replace" })
+-- use({ "s1n7ax/nvim-search-and-search_and_replace" })
 
 -- move spectre into this module?
 
@@ -22,8 +22,7 @@ local replace = {}
 -- https://github.com/brooth/far.vim
 
 if require("doom.utils").is_module_enabled("whichkey") then
-  return {
-    binds = {
+  search_and_replace.binds = {
       "<leader>",
       name = "+prefix",
       {
@@ -208,8 +207,7 @@ if require("doom.utils").is_module_enabled("whichkey") then
           },
         }, -- search
       }, -- leader
-    },
-  }
+    }
 end
 
-return replace
+return search_and_replace

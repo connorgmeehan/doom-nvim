@@ -1,3 +1,6 @@
 local ssh = {}
--- git@github.com:DanielWeidinger/nvim-sshfs.git
+
+ssh.packages = {
+  ["nvim-sshfs"] = { "DanielWeidinger/nvim-sshfs" },
+}
 return ssh

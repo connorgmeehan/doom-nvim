@@ -1,3 +1,8 @@
--- https://github.com/anuvyklack/pretty-fold.nvim
+-- https://github.com/
 local folds = {}
+
+folds.packages = {
+  ["pretty-fold.nvim"] = {"anuvyklack/pretty-fold.nvim"}
+}
+
 return folds

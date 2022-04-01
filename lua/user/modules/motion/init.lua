@@ -4,6 +4,8 @@ motion.settings = {}
 
 motion.packages = {
   ["lightspeed.nvim"] = { "ggandor/lightspeed.nvim" },
+  -- { 'justinmk/vim-sneak' },             
+  -- { 'easymotion/vim-easymotion' },  
 }
 
 motion.configs = {}
@@ -48,6 +50,5 @@ end
 -- `<Plug>Lightspeed_F`  1-character  backward  F-like
 -- `<Plug>Lightspeed_t`  1-character  forward   t-like
 -- `<Plug>Lightspeed_T`  1-character  backward  T-like
-
 
 return motion
