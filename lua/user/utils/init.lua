@@ -163,4 +163,30 @@ user_utils.add_leader = function()
   -- return appropriate table.
 end
 
+user_utils.parse_string_command = function()
+  -- mode, bind, action, name, options
+
+  local test_syntax = {
+
+    -- all params
+    [[ n  command_one       s B sf ]],
+    [[ n  second_command    <c-z> :sus s ]],
+    [[ n  this_is_the_third <c-z> :sus sn ]],
+    [[ x  and_the_fourth    <c-z> :DoomReload sn ]],
+
+    -- no options
+    [[ x  and_the_fourth <c-z> :DoomReload ]],
+
+    -- function command
+    [" x the_name <c-z> sn "] = function()
+      print("hello")
+    end,
+
+    -- function command no options
+    [" x the_name <c-z> "] = function()
+      print("hello")
+    end,
+  }
+end
+
 return user_utils
