@@ -115,4 +115,8 @@ we would have doubled in population then that would never have picked up on the 
 understand why this is so that is something that they have to check out in the end but why do you do that i am asking myself nothing
 about the ethical niveau. milieu
 
+this is quite nice actually because now everything is kept in lua with this interface which is something that is quite fucking nice.
+
+
+
 --]]
