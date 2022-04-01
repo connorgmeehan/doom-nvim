@@ -95,4 +95,14 @@ and so that is something that they could do so one of those things felt quite an
 
 you have to have some kind of retardation in order to think that is normal behavior.
 
+so now this is. this is the beginning of a new era in my life where i undersand completely how to navigate insanely fast with this
+system so that you can make things insanely fast
+
+next step is just to become superstrong in my body like this and that is going to be quite fucking intreesting and this is the thing
+that is the most necessary that I could ever have dreamt of.
+
+around the twenty fourth and so this is quite fucking strange and this is insane this is actually quite franly fucking insane.
+and i believe now that this is the thing that i should have done always and so that is something that is quite fucking stupid.
+
+
 --]]
