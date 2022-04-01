@@ -158,4 +158,9 @@ user_utils.insert_binds_into_main_table = function(t)
   end
 end
 
+user_utils.add_leader = function()
+  -- require is enabled?
+  -- return appropriate table.
+end
+
 return user_utils
