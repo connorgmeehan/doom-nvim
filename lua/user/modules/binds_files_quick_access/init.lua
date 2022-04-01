@@ -1,9 +1,6 @@
-local log = require("doom.utils.logging")
 local utils = require("doom.utils")
 local is_module_enabled = utils.is_module_enabled
-
-local user_util = require("user.utils")
-paths = user_util.paths
+local paths = require("user.utils").paths
 
 if is_module_enabled("whichkey") then
   return {

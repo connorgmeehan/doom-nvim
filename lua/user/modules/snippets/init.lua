@@ -11,7 +11,7 @@ snippets.packages = {
     commit = "80e68242cf8127844653060fbada32dca15579fc",
     requires = {
       { "rafamadriz/friendly-snippets", opt = true },
-      { "molleweide/LuaSnip-snippets", opt = true }, -- override with local versions in the `config.lua`
+      { "molleweide/LuaSnip-snippets.nvim" }, -- override with local versions in the `config.lua`
     },
   },
 }

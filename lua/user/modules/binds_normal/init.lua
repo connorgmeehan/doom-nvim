@@ -1,25 +1,3 @@
-local binds_regular = {}
-
-local bind = doom.moll.bind
-local enabled = true
-
-local opts = {
-  sf = { silent = false },
-  n = { noremap = true },
-}
-
-
--- set / get visual selection
-local vs = '"zy'
-local viw = '"zyiw'
-local viW = '"zyiW'
-local vg = "<c-r>z"
-
---
--- -- -- search regex
--- -- {'n', '/', '/\\v'}, -- need to esc backsl
--- -- {'v', '/', '/\\v'},
---
 return {
   binds = {
     { "<c-z>", [[<cmd>suspend<CR>]], name = "suspend vim" },
@@ -32,5 +10,8 @@ return {
     -- { 'n', 'yz', '<Plug>Ysurround' }, -- single s
     -- { 'n', 'dz', '<Plug>Dsurround' },
     -- { 'n', 'cz', '<Plug>Csurround' },
+    -- -- -- search regex
+    -- -- {'n', '/', '/\\v'}, -- need to esc backsl
+    -- -- {'v', '/', '/\\v'},
   },
 }
