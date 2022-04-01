@@ -1,2 +1,7 @@
+local printer = {}
 
--- https://github.com/fedeizzo/nvim-printer
+printer.packages = {
+
+  ["nvim-printer"] = { "fedeizzo/nvim-printer" },
+}
+return printer

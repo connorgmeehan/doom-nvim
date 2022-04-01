@@ -163,9 +163,19 @@ user_utils.add_leader = function()
   -- return appropriate table.
 end
 
-user_utils.parse_mappings_str_syntax = function(str)
+user_utils.parse_mappings_str_syntax = function(input)
   -- mode, bind, action, name, options
   print("parse -> " .. str)
+
+  -- if input = str then
+  --    single command
+  -- if input = table then
+  --  loop through table
+  -- end
+
+  -- later test with recursive tree.
+
+  -- if wrong syntax print nice error message > ignore index
 
   local test_syntax = {
 
@@ -187,7 +197,28 @@ user_utils.parse_mappings_str_syntax = function(str)
     [" x the_name <c-z> "] = function()
       print("hello")
     end,
+
+    -- leader
+    [" G namerst"] = {
+      [[ a b c d ]],
+      [[ e f g h ]],
+    }
   }
+
+  -- if index is number then
+  --    :: string ::
+  --    4 mandatory + options
+  --    print value
+  --
+  -- else if key is string and type of value = function then
+  --    :: function ::
+  --    3 mandatory + options
+  --    print key
+  --
+  -- else if key = str and len = 2 then
+  --      :: leader ::
+  --      print hello
+  --      end
 end
 
 return user_utils
