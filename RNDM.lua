@@ -104,5 +104,15 @@ that is the most necessary that I could ever have dreamt of.
 around the twenty fourth and so this is quite fucking strange and this is insane this is actually quite franly fucking insane.
 and i believe now that this is the thing that i should have done always and so that is something that is quite fucking stupid.
 
+since that is so fucking dangerous that is one of the smartest things that I have ever done which is quite fucki insane and you have
+to be faster and much much more faster. because it is a lot of fun and that is something that is quite fucking insane and you can
+type so fast that it is just fucing insane.
+
+they have a lot of respect for these ones and that is quite stupid. they never say anything of substance.
+bring down people who are fraudsters. and completely rely on external parties which is quite fucking insane and that is good.
+
+we would have doubled in population then that would never have picked up on the last line which is quite fucking insane and i don't
+understand why this is so that is something that they have to check out in the end but why do you do that i am asking myself nothing
+about the ethical niveau. milieu
 
 --]]
