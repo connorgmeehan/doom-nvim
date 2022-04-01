@@ -14,7 +14,7 @@ return {
     "comment", -- Adds keybinds to comment in any language
     "linter", -- Linting and formatting for languages
     "lsp", -- Code completion
-    "snippets", -- Code snippets for all languages
+    -- "snippets", -- Code snippets for all languages
 
     -- Editor (34ms, 1ms)
     "auto_session", -- Remember sessions between loads
@@ -82,26 +82,33 @@ return {
   },
   user = {
     -- "audio",
-    -- "binds_regular",
+
+    -- binds
+    -- "binds_operator",
+    "binds_normal",
+    "binds_visual",
+    -- "binds_terminal",
     "binds_insert_seqs",
-    -- "binds_leader",
-    "calculator",
+    "binds_leader",
+
+    "math_calculator",
     "char_counter",
-    "colorpicker",
+    "colors",
     -- "context",
     -- "diagrams",
     -- "diffview",
     "editing",
-    "github",
+    "git_github",
     "gpg",
     -- "increment",
     -- "latex",
-    "motion", -- gives extra motion capabilities
+    "motion", -- gives extra motion capabilities / lightspeed
     -- "litee",
     -- "misc",
     "quickfix",
     -- "replace",
     -- "spectre",
+    "snippets",
     -- "tabular",
     "telescope_extensions",
     -- "testing",
@@ -109,6 +116,7 @@ return {
     -- "tmux",
     -- "vgit",
     -- "websearch",
+    "windows"
   },
 }
 
