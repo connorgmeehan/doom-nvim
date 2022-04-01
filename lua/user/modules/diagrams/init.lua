@@ -6,7 +6,8 @@ diagrams.packages = {
   ["venn.nvim"] = { "jbyuki/venn.nvim" },
 }
 
-diagrams.packages["venn.nvim"] = function()
+diagrams.config = {}
+diagrams.config["venn.nvim"] = function()
   -- local mappings = require("doom.utils.mappings")
 
   -- FIX: not getting this to work

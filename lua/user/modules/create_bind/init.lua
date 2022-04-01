@@ -1,5 +1,7 @@
 -- need nui, to get user input
 
+local user_utils = require("user.utils")
+
 local binds_create = {}
 
 -- A. command get user input and see if it passes the binds string parses
@@ -54,20 +56,20 @@ binds_create.autocmds = {
 
 binds_create.cmds = {
   -- {
-  -- "CountPrint",
-  -- function()
-  --   local Popup = require("nui.popup")
-  --   local popup = Popup(char_counter.settings.popup)
-  --   popup:mount()
-  --   popup:map("n", "<esc>", function()
-  --     popup:unmount()
-  --   end)
+  --   "CountPrint",
+  --   function()
+  --     local Popup = require("nui.popup")
+  --     local popup = Popup(char_counter.settings.popup)
+  --     popup:mount()
+  --     popup:map("n", "<esc>", function()
+  --       popup:unmount()
+  --     end)
   --
-  --   local msg = ("char_counter: You have typed %s characters since I started counting."):format(
-  --     char_counter._accumulated_difference
-  --   )
-  --   vim.api.nvim_buf_set_lines(popup.bufnr, 0, 1, false, { msg })
-  -- end,
+  --     local msg = ("char_counter: You have typed %s characters since I started counting."):format(
+  --       char_counter._accumulated_difference
+  --     )
+  --     vim.api.nvim_buf_set_lines(popup.bufnr, 0, 1, false, { msg })
+  --   end,
   -- },
   -- {
   --   "CountReset",
@@ -77,9 +79,51 @@ binds_create.cmds = {
   --   end,
   -- },
   {
-    "BindsCreateInput",
+    "BindsCreateGetInput",
     function()
-      -- prompt input
+      local Input = require("nui.input")
+      local event = require("nui.utils.autocmd").event
+
+      local popup_options = {
+        relative = "cursor",
+        position = {
+          row = 1,
+          col = 0,
+        },
+        size = 20,
+        border = {
+          style = "rounded",
+          text = {
+            top = "[Input]",
+            top_align = "left",
+          },
+        },
+        win_options = {
+          winhighlight = "Normal:Normal",
+        },
+      }
+
+      local input = Input(popup_options, {
+        prompt = "> ",
+        default_value = "42",
+        on_close = function()
+          print("Input closed!")
+        end,
+        on_submit = function(value)
+          -- print("Value submitted: ", value)
+          user_utils.parse_mappings_str_syntax(value)
+        end,
+        on_change = function(value)
+          print("Value changed: ", value)
+        end,
+      })
+      -- mount/open the component
+      input:mount()
+
+      -- unmount component when cursor leaves buffer
+      input:on(event.BufLeave, function()
+        input:unmount()
+      end)
       -- pass string through parser
       -- print result
     end,

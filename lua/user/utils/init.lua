@@ -163,8 +163,9 @@ user_utils.add_leader = function()
   -- return appropriate table.
 end
 
-user_utils.parse_string_command = function()
+user_utils.parse_mappings_str_syntax = function(str)
   -- mode, bind, action, name, options
+  print("parse -> " .. str)
 
   local test_syntax = {
 
