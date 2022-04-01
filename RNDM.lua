@@ -131,4 +131,14 @@ tyler the creators dick hole so that is a quite advanced system that doesn't rea
 
 if I can do that then this is something that I would really like to be able to do you know.
 
+use nui with neorg to in order to learn the system and add something. it would be interesting to use it in order to open windows etc.  
+
+how does writing feel now so that I can easilly navigate to a module fast.
+
+user module create binds so that is a quite interesting thing. how does it feel now when I type. i am not sure actually but there is something
+that is happening I believe
+    
+
 --]]
+
+
