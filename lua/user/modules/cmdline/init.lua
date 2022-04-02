@@ -1,8 +1,7 @@
 local cmdline = {}
 
 cmdline.packages = {
-
+  ["wilder.nvi"] = {"gelguy/wilder.nvim"} -- compleition
 }
--- https://github.com/gelguy/wilder.nvim
 
 return cmdline

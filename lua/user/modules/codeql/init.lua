@@ -1,1 +1,9 @@
--- https://github.com/filipdutescu/renamer.nvim
+-- https://github.com/
+local codeql = {}
+
+-- codeql.packages = {
+--   [""] = {""}
+-- }
+--
+
+return codeql

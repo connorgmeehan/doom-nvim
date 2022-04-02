@@ -163,62 +163,80 @@ user_utils.add_leader = function()
   -- return appropriate table.
 end
 
-user_utils.parse_mappings_str_syntax = function(input)
+user_node.mappings_split_str = function(str)
+  local cmd_split = vim.split(str, " ")
+  -- vim.strlen()
+end
+
+--- takes a string and returns the corresponding nest mappings table component
+---@param take a single string command
+---@return table of nest mapping component corresponding to the input string
+user_utils.mappings_parse_node_str = function(key, value)
+  if type(key) == "number" then
+    --    :: mapping regular ::
+    --    4 mandatory + options
+    --    print value
+    -- >>> split value
+  elseif type(key) == "string" and type(value) == "function" then
+    --    :: mapping w/function cmd ::
+    --    3 mandatory + options
+    --    print key
+
+    -- elseif type(key) == "string" and len(key) = 2 then
+    --      :: leader branch ::
+    --      print hello
+  end
+
+  return t_bind
+end
+
+--- call this function with either a table or a string that conforms to mini syntax
+--  and it will return the corresponding nest mappings table/command that can be
+--  used in modules to attach to the `module.binds = {}` table so that you can write
+--  mappings in a tighter syntax.
+---@param input string | table
+---@return the nest component
+user_utils.mappings_parse_mini_syntax = function(input)
   -- mode, bind, action, name, options
-  print("parse -> " .. str)
 
-  -- if input = str then
-  --    single command
-  -- if input = table then
-  --  loop through table
-  -- end
+  if type(string) == "string" then
+    print("parser > string input: ", string)
+    user_utils.mappings_parse_node_str(string) -- reuse in nest tree.
+  elseif type(input) == "table" then
+    print("parser > table input!")
+    -- loop > for each key > call mappings_parse_key_string in order to get what each key is
+    build_nest_tree(input)
+  end
 
-  -- later test with recursive tree.
-
-  -- if wrong syntax print nice error message > ignore index
-
-  local test_syntax = {
-
-    -- all params
-    [[ n  command_one       s B sf ]],
-    [[ n  second_command    <c-z> :sus s ]],
-    [[ n  this_is_the_third <c-z> :sus sn ]],
-    [[ x  and_the_fourth    <c-z> :DoomReload sn ]],
-
-    -- no options
-    [[ x  and_the_fourth <c-z> :DoomReload ]],
-
-    -- function command
-    [" x the_name <c-z> sn "] = function()
-      print("hello")
-    end,
-
-    -- function command no options
-    [" x the_name <c-z> "] = function()
-      print("hello")
-    end,
-
-    -- leader
-    [" G namerst"] = {
-      [[ a b c d ]],
-      [[ e f g h ]],
-    }
-  }
-
-  -- if index is number then
-  --    :: string ::
-  --    4 mandatory + options
-  --    print value
+  -- local test_syntax = {
   --
-  -- else if key is string and type of value = function then
-  --    :: function ::
-  --    3 mandatory + options
-  --    print key
+  --   -- all params
+  --   [[ n  command_one       s B sf ]],
+  --   [[ n  second_command    <c-z> :sus s ]],
+  --   [[ n  this_is_the_third <c-z> :sus sn ]],
+  --   [[ x  and_the_fourth    <c-z> :DoomReload sn ]],
   --
-  -- else if key = str and len = 2 then
-  --      :: leader ::
-  --      print hello
-  --      end
+  --   -- no options
+  --   [[ x  and_the_fourth <c-z> :DoomReload ]],
+  --
+  --   -- function command
+  --   [" x the_name <c-z> sn "] = function()
+  --     print("hello")
+  --   end,
+  --
+  --   -- function command no options
+  --   [" x the_name <c-z> "] = function()
+  --     print("hello")
+  --   end,
+  --
+  --   -- leader
+  --   [" G namerst"] = {
+  --     [[ a b c d ]],
+  --     [[ e f g h ]],
+  --   },
+  -- }
+
+  return ret_val
 end
 
 return user_utils
