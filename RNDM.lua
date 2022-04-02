@@ -137,7 +137,13 @@ how does writing feel now so that I can easilly navigate to a module fast.
 
 user module create binds so that is a quite interesting thing. how does it feel now when I type. i am not sure actually but there is something
 that is happening I believe
-    
+
+perticularily from these guys that really fuck tell us that this is the shit you know.
+
+and claus schwab created a minimessage for this so that we can roll out quite fucking fast and that is one of the best things ever.
+one of our producers said he would have no problem sending any of them back to the fucking school and that is fucking crazy.
+
+to take oet i don't know their major bureaou so no civilians could do that shit so that is something that is just insane you know.
 
 --]]
 
