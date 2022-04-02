@@ -131,7 +131,7 @@ tyler the creators dick hole so that is a quite advanced system that doesn't rea
 
 if I can do that then this is something that I would really like to be able to do you know.
 
-use nui with neorg to in order to learn the system and add something. it would be interesting to use it in order to open windows etc.  
+use nui with neorg to in order to learn the system and add something. it would be interesting to use it in order to open windows etc.
 
 how does writing feel now so that I can easilly navigate to a module fast.
 
@@ -145,6 +145,18 @@ one of our producers said he would have no problem sending any of them back to t
 
 to take oet i don't know their major bureaou so no civilians could do that shit so that is something that is just insane you know.
 
+how does it now feel when I type because this is one of the most interesting exercises ever and it really targets my feet like a
+motherfucker and since all of this does the whole body this pose is so fucking powerful.
+
+protecting kids is not your strong suit. how does my body feel now this is very interesting and it really does make my body so fucking
+strong and this is something that I just cannot fucking try. we should applaud him of the headliners wife so that is something that you
+cannot really do. he got slapped goal goooaaaalll. that is quite serioous in the comedy clubs are going to be okay.
+
+explore the block editing plugin to see how it does manage stuff so that you can act on code you are at easilly. get readdicted to
+nicotine with zipx.com is quite a nice domain. most expensive domains names.
+
+are you serious brought he white girl wouldn't she do that. in public.
+
+stoned ape hypothesis and that is the one that really makes you go crazy and out int
+
 --]]
-
-

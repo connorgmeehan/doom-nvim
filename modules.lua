@@ -156,7 +156,7 @@ return {
     "surround",
     -- "tabline",
     -- "tabs",
-    -- "tabular",
+    "tabular",
     "telescope_extensions",
     -- "terminal_integration",
     -- "testing",
