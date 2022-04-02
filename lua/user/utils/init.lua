@@ -212,28 +212,4 @@ user_utils.mappings_parse_mini_syntax = function(input)
   return ret_val
 end
 
--- TODO: move this to create_binds
--- user_utils.mappings_parse_mini_syntax({
---   -- all params
---   [[ n  command_one       s B sf ]],
---   [[ n  second_command    <c-z> :sus s ]],
---   [[ n  this_is_the_third <c-z> :sus sn ]],
---   [[ x  and_the_fourth    <c-z> :DoomReload sn ]],
---   -- no options
---   [[ x  and_the_fourth <c-z> :DoomReload ]],
---   -- function command
---   [" x the_name <c-z> sn "] = function()
---     print("hello")
---   end,
---   -- function command no options
---   [" x the_name <c-z> "] = function()
---     print("hello")
---   end,
---   -- leader
---   [" G namerst"] = {
---     [[ a b c d ]],
---     [[ e f g h ]],
---   },
--- })
-
 return user_utils

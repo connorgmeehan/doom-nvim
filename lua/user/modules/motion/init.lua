@@ -4,8 +4,8 @@ motion.settings = {}
 
 motion.packages = {
   ["lightspeed.nvim"] = { "ggandor/lightspeed.nvim" },
-  -- { 'justinmk/vim-sneak' },             
-  -- { 'easymotion/vim-easymotion' },  
+  -- { 'justinmk/vim-sneak' },
+  -- { 'easymotion/vim-easymotion' },
 }
 
 motion.configs = {}

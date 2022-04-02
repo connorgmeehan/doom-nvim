@@ -84,10 +84,10 @@ if require("doom.utils").is_module_enabled("whichkey") then
                 -- },
               },
             }, -- search > replace
-            {
-              "R",
-              name = "+grep/cdo",
-              {
+            -- {
+            --   "R",
+            --   name = "+grep/cdo",
+            --   {
                 -- -- ripgrep search empty
                 -- {
                 --    "n",
@@ -202,8 +202,8 @@ if require("doom.utils").is_module_enabled("whichkey") then
                 --    "quickfix_cdo_solo_word_big",
                 --    "Quickfix cdo solo (W)ord",
                 -- },
-              },
-            },
+              -- },
+            -- },
           },
         }, -- search
       }, -- leader

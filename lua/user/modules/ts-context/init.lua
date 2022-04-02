@@ -1,3 +1,4 @@
+local tsctx = {}
 
 -- use({
 --   "romgrk/nvim-treesitter-context",
@@ -30,3 +31,4 @@
 --     })
 --   end,
 -- }) -- BUG: nvim-treesitter-context gives error on startup
+return tsctx

@@ -4,7 +4,6 @@ local luadev = {}
 --
 -- tjdevries/nlua.nvim - Lua Development for Neovim.
 -- svermeulen/vimpeccable - Commands to help write your .vimrc in Lua or any Lua based language.
--- nanotee/nvim-lua-guide - A guide to using Lua in Neovim.
 -- rafcamlet/nvim-luapad - Interactive real time Neovim scratchpad for embedded Lua engine - Type and watch!.
 -- nvim-lua/plenary.nvim - Plenary: full; complete; entire; absolute; unqualified. All the Lua functions I don't want to write twice.
 -- nvim-lua/popup.nvim - An implementation of the Popup API from vim in Neovim.
@@ -17,7 +16,6 @@ local luadev = {}
 -- m00qek/plugin-template.nvim - A plugin template that setups test infrastructure and GitHub Actions.
 -- mini.doc - Module of echasnovski/mini.nvim for generation of help files from EmmyLua-like annotations. Allows flexible customization of output via hook functions.
 -- nanotee/luv-vimdocs - The luv docs in vimdoc format.
--- milisims/nvim-luaref - A reference for builtin lua functions.
 -- ellisonleao/nvim-plugin-template - Another neovim plugin template, using GitHub's template feature.
 
 luadev.settings = {}

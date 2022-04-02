@@ -6,7 +6,7 @@ surround.packages = {
   ["vim-surround"] = { "tpope/vim-surround" }, -- cs`' to change `` to '', etc
 }
 
-surround.binds = {}
+-- surround.binds = {}
 
 ----------------------------
 ---       surround       ---
