@@ -103,12 +103,19 @@ end
 local function build_nest_tree(user_tree)
   local t_nest = {}
 
+  -- todo: need to account for concatenated command
+  -- via tables
+  -- if table >> is concat OR leader???
+
   -- loop tree level
   for key, value in pairs(user_tree) do
     if type(key) == "number" or type(key) == "string" and type(value) == "function" then
+      print("leaf")
       local t_nest_cmd = user_utils.mappings_parse_node_str(key, value)
       table.insert(t_nest, value) -- insert leaf -- TODO: insert t_nest_cmd instead
+
     elseif type(key) == "string" and type(value) == "table" then
+      print("branch")
       -- how does the leader key work here?
       local new_branch = {
         string.format("%s", key:sub(1, 1)),
@@ -206,7 +213,8 @@ user_utils.mappings_parse_mini_syntax = function(input)
   elseif type(input) == "table" then
     print("parser > table input!")
     -- loop > for each key > call mappings_parse_key_string in order to get what each key is
-    build_nest_tree(input)
+    local nt = build_nest_tree(input)
+    print(vim.inspect(nt))
   end
 
   return ret_val
