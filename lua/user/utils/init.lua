@@ -102,15 +102,20 @@ end
 -- build nest map tree recursive
 local function build_nest_tree(user_tree)
   local t_nest = {}
-  for key, user_node in pairs(user_tree) do
-    if type(key) == "number" then
-      table.insert(t_nest, user_node) -- << LEAF
-    elseif type(key) == "string" then
+
+  -- loop tree level
+  for key, value in pairs(user_tree) do
+    if type(key) == "number" or type(key) == "string" and type(value) == "function" then
+      local t_nest_cmd = user_utils.mappings_parse_node_str(key, value)
+      table.insert(t_nest, value) -- insert leaf -- TODO: insert t_nest_cmd instead
+    elseif type(key) == "string" and type(value) == "table" then
+      -- how does the leader key work here?
       local new_branch = {
         string.format("%s", key:sub(1, 1)),
         name = string.format("+%s", key:sub(3)),
-        build_nest_tree(user_node),
+        build_nest_tree(value),
       }
+
       table.insert(t_nest, new_branch) -- insert branch
     end
   end
@@ -163,7 +168,7 @@ user_utils.add_leader = function()
   -- return appropriate table.
 end
 
-user_node.mappings_split_str = function(str)
+user_utils.mappings_split_str = function(str)
   local cmd_split = vim.split(str, " ")
   -- vim.strlen()
 end
@@ -173,18 +178,14 @@ end
 ---@return table of nest mapping component corresponding to the input string
 user_utils.mappings_parse_node_str = function(key, value)
   if type(key) == "number" then
-    --    :: mapping regular ::
-    --    4 mandatory + options
-    --    print value
+    --    :: mapping regular :: 4 mandatory + options
     -- >>> split value
   elseif type(key) == "string" and type(value) == "function" then
-    --    :: mapping w/function cmd ::
-    --    3 mandatory + options
+    --    :: mapping w/function cmd :: 3 mandatory + options
     --    print key
 
     -- elseif type(key) == "string" and len(key) = 2 then
-    --      :: leader branch ::
-    --      print hello
+    --      :: leader branch :: print hello
   end
 
   return t_bind
@@ -208,35 +209,31 @@ user_utils.mappings_parse_mini_syntax = function(input)
     build_nest_tree(input)
   end
 
-  -- local test_syntax = {
-  --
-  --   -- all params
-  --   [[ n  command_one       s B sf ]],
-  --   [[ n  second_command    <c-z> :sus s ]],
-  --   [[ n  this_is_the_third <c-z> :sus sn ]],
-  --   [[ x  and_the_fourth    <c-z> :DoomReload sn ]],
-  --
-  --   -- no options
-  --   [[ x  and_the_fourth <c-z> :DoomReload ]],
-  --
-  --   -- function command
-  --   [" x the_name <c-z> sn "] = function()
-  --     print("hello")
-  --   end,
-  --
-  --   -- function command no options
-  --   [" x the_name <c-z> "] = function()
-  --     print("hello")
-  --   end,
-  --
-  --   -- leader
-  --   [" G namerst"] = {
-  --     [[ a b c d ]],
-  --     [[ e f g h ]],
-  --   },
-  -- }
-
   return ret_val
 end
+
+-- TODO: move this to create_binds
+-- user_utils.mappings_parse_mini_syntax({
+--   -- all params
+--   [[ n  command_one       s B sf ]],
+--   [[ n  second_command    <c-z> :sus s ]],
+--   [[ n  this_is_the_third <c-z> :sus sn ]],
+--   [[ x  and_the_fourth    <c-z> :DoomReload sn ]],
+--   -- no options
+--   [[ x  and_the_fourth <c-z> :DoomReload ]],
+--   -- function command
+--   [" x the_name <c-z> sn "] = function()
+--     print("hello")
+--   end,
+--   -- function command no options
+--   [" x the_name <c-z> "] = function()
+--     print("hello")
+--   end,
+--   -- leader
+--   [" G namerst"] = {
+--     [[ a b c d ]],
+--     [[ e f g h ]],
+--   },
+-- })
 
 return user_utils
