@@ -88,6 +88,19 @@ so that it can easilly be reused again.
 
 ------------------------------------------
 
-biscops arne.
+biscops arne. i don't think that a woman would have written that you know I have thought a lot about this and it is a bit insane
+actually and that is not something that we would lKe at all.
+
+women dominate in universities. so that is a bit insane actually. some kind of positive force. so that is something that is a bit
+insane you know. they don't want that shit to happen. joakim passikivi how knows what the fuck is going on and if you shoot a
+shell on that side then it will not work and that is very nice and as a man you like hearing that than women. some women might
+enjoy it more.
+
+he analyses things that people actually have had problems. he is a bit wierd in many ways but in that way he is quite real you know
+and therefore he is good and exetricity. that is how litterature works. a lot of women already were writing back then. commercial.
+
+there is an aspect to doing things that are so convenient in vim that it is a bit insane and so that is fucking retarded.
+
+for her sake so that she will think that he is fucking cool and a nice guy.
 
 --]]
