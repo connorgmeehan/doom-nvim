@@ -3,156 +3,101 @@ local user_utils = require("user.utils")
 local binds_create = {}
 
 -- lsp.binds = {
---   {
---     "<leader>",
---     name = "+prefix",
---     {
---       {
---         "c",
---         name = "+code",
---         {
---           { "r", vim.lsp.buf.rename, name = "Rename" },
---           { "a", vim.lsp.buf.code_action, name = "Do action" },
---           { "t", vim.lsp.buf.type_definition, name = "Jump to type" },
---           { "D", vim.lsp.buf.declaration, "Jump to declaration" },
---           { "d", vim.lsp.buf.definition, name = "Jump to definition" },
---           { "R", vim.lsp.buf.references, name = "Jump to references" },
---           { "i", vim.lsp.buf.implementation, name = "Jump to implementation" },
---           {
---             "l",
---             name = "+lsp",
---             {
---               { "i", "<cmd>LspInfo<CR>", name = "Inform" },
---               { "r", "<cmd>LspRestart<CR>", name = "Restart" },
---               { "s", "<cmd>LspStart<CR>", name = "Start" },
---               { "d", "<cmd>LspStop<CR>", name = "Disconnect" },
---             },
---           },
---           {
---             "d",
---             name = "+diagnostics",
---             {
---               { "[", vim.diagnostic.goto_prev, name = "Jump to prev" },
---               { "]", vim.diagnostic.goto_next, name = "Jump to next" },
---               { "p", vim.diagnostic.goto_prev, name = "Jump to prev" },
---               { "n", vim.diagnostic.goto_next, name = "Jump to next" },
---               {
---                 "L",
---                 function()
---                   vim.diagnostic.open_float(0, {
---                     focusable = false,
---                     border = doom.border_style,
---                   })
---                 end,
---                 name = "Line",
---               },
---               { "l", vim.lsp.diagnostic.set_loclist, name = "Loclist" },
---             },
---           },
---         },
---       },
---       {
---         "t",
---         name = "+tweak",
---         {
---           { "c", function() require("doom.core.functions").toggle_completion() end, name = "Toggle completion" },
---         },
---       },
---     },
---   }
 -- }
 
+-- todo: put mapping before name >> (mode mapping name command options)
+--
+-- TODO: check out the connor/nest.nvim branch
+-- so that I understand how nest works and if I can take some inspiration
+-- from there.
+
+-- how to handle the case where you want to assign mode to just a subtable
+-- >> maybe add a cascading options key branch ["mode nv"]??
 local t_mini_syntax_test = {
-  --   { "ZZ", require("doom.core.functions").quit_doom, name = "Fast exit" },
-  --   { "<ESC>", ":noh<CR>", name = "Remove search highlight" },
-  --   { "<Tab>", ":bnext<CR>", name = "Jump to next buffer" },
-  --   { "<S-Tab>", ":bprevious<CR>", name = "Jump to prev buffer" },
-
-  --   { "K", vim.lsp.buf.hover, name = "Show hover doc" },
---   { "[d", vim.diagnostic.goto_prev, name = "Jump to prev diagnostic" },
---   { "]d", vim.diagnostic.goto_next, name = "Jump to next diagnostic" },
---   {
---     "g",
---     {
---       { "D", vim.lsp.buf.declaration, "Jump to declaration" },
---       { "d", vim.lsp.buf.definition, name = "Jump to definition" },
---       { "r", vim.lsp.buf.references, name = "Jump to references" },
---       { "i", vim.lsp.buf.implementation, name = "Jump to implementation" },
---       { "a", vim.lsp.buf.code_action, name = "Do code action" },
---     },
---   },
---   {
---     "<C-",
---     {
---       { "p>", vim.lsp.diagnostic.goto_prev, name = "Jump to prev diagnostic" },
---       { "n>", vim.lsp.diagnostic.goto_next, name = "Jump to next diagnostic" },
---       { "k>", vim.lsp.buf.signature_help, name = "Show signature help" },
---     },
---   },
-
-
-  -- NEW SPECIAL CASE WHERE SUBTABLES COMBINE INTO THE COMMAND
-  --   {
-  --     "<C-",
-  --     {
-  --       { "h>", "<C-w>h", name = "Jump window left" },
-  --       { "j>", "<C-w>j", name = "Jump window down" },
-  --       { "k>", "<C-w>k", name = "Jump window up" },
-  --       { "l>", "<C-w>l", name = "Jump window right" },
-  --       {
-  --         mode = "nv",
-  --         {
-  --           { "Left>", ":vertical resize -2<CR>", name = "Resize window left" },
-  --           { "Down>", ":resize -2<CR>", name = "Resize window down" },
-  --           { "Up>", ":resize +2<CR>", name = "Resize window up" },
-  --           { "Right>", ":vertical resize +2<CR>", name = "Resize window right" },
-  --         },
-  --       },
-  --     },
-  --   },
-
-  -- {
-  --     "<a-",
-  --     {
-  --       { "j>", ":m .+1<CR>==", name = "Move line down" },
-  --       { "k>", ":m .-2<CR>==", name = "Move line up" },
-  --     },
-  --   }
-
-  --   {
-  --     mode = "v",
-  --     {
-  --       {
-  --         "<a-",
-  --         {
-  --           { "j>", ":m '<+1<CR>gv=gv", name = "Move line down", mode = "v" },
-  --           { "k>", ":m '<-2<CR>gv=gv", name = "Move line up", mode = "v" },
-  --         },
-  --       },
-  --       { ">", ">gv", mode = "v" }, -- Stay in visual after indent.
-  --       { "<", "<gv", mode = "v" }, -- Stay in visual after indent.
-  --     },
-  --   },
-
+  [[ n  fast_exit                ZZ      require("doom.core.functions").quit_doom ]],
+  [[ n  remove_search_hl         <ESC>   :noh<CR>  ]],
+  [[ n  jump_to_next_buf         <Tab>   :bnext<CR> ]],
+  [[ n  jump_to_prev_buf         <S-Tab> :bprevious<CR> ]],
+  [[ n  show_hover_doc           K       vim.lsp.buf.hover ]],
+  [[ n  jump_to_prev_diagnostic  [d      vim.diagnostic.goto_prev ]],
+  [" n  jump_to_next_diagnostic  ]d "] = vim.diagnostic.goto_next,
   [[ n  command_one       s B sf ]],
   [[ n  second_command    <c-z> :sus s ]],
   [[ n  this_is_the_third <c-z> :sus sn ]],
   [[ x  and_the_fourth    <c-z> :DoomReload sn ]],
-  -- no options
   [[ x  and_the_fourth <c-z> :DoomReload ]],
-  -- function command
+
+  [[ v what_is_this p "_dP ]],
+  [[ v suspend_vim <c-z> <Esc><cmd>suspend<CR> ]],
+  [[ v inspect_selection <C-l>v "zy:lua doom.moll.funcs.inspect(<c-r>z)<Left> ]],
+  [[ v print_visual_sel <C-l>i :lua doom.moll.funcs.inspect(loadstring(doom.moll.funcs.get_visual_selection()))<CR> ]],
+
   [" x the_name <c-z> sn "] = function()
     print("hello")
   end,
-  -- function command no options
   [" x the_name <c-z> "] = function()
     print("hello")
   end,
-  -- leader
-  [" G namerst"] = {
-    [[ a b c d ]],
-    [[ e f g h ]],
+
+  ["<C-"] = {
+    [[ h> <C-w>h "Jump window left"   ]],
+    [[ j> <C-w>j "Jump window down"   ]],
+    [[ k> <C-w>k "Jump window up"     ]],
+    [" l>  jump_xxx  "] = function()
+      print("something")
+    end,
+    ["..nv"] = { -- this is a pretty nice syntax.
+      [[ "Left>", ":vertical resize -2<CR>", name = "Resize window left" ]],
+      [[ "Down>", ":resize -2<CR>", name = "Resize window down" ]],
+      [[ "Up>", ":resize +2<CR>", name = "Resize window up" ]],
+      [[ "Right>", ":vertical resize +2<CR>", name = "Resize window right" ]],
+    },
   },
+
+  -- leader
+  ["c +code"] = {
+    [[ r  rename                  vim.lsp.buf.rename ]],
+    [[ a  do_action               vim.lsp.buf.code_action ]],
+    [[ t  jump_to_type            vim.lsp.buf.type_definition ]],
+    [[ D  jump_to_declaration     vim.lsp.buf.declaration ]],
+    [[ d  jump_to_definition      vim.lsp.buf.definition, ]],
+    [[ R  jump_to_references      vim.lsp.buf.references, ]],
+    [[ i  jump_to_implementation  vim.lsp.buf.implementation, ]],
+    ["l +lsp"] = {
+      [[ i inform     <cmd>LspInfo<CR> ]],
+      [[ r restart    <cmd>LspRestart<CR> ]],
+      [[ s start      <cmd>LspStart<CR> ]],
+      [[ d disconnect <cmd>LspStop<CR> ]],
+    },
+    ["d +diagnostics"] = {
+      -- { "[", vim.diagnostic.goto_prev, name = "Jump to prev" },
+      -- { "]", vim.diagnostic.goto_next, name = "Jump to next" },
+      -- { "p", vim.diagnostic.goto_prev, name = "Jump to prev" },
+      -- { "n", vim.diagnostic.goto_next, name = "Jump to next" },
+      -- {
+      --   "L",
+      --   function()
+      --     vim.diagnostic.open_float(0, {
+      --       focusable = false,
+      --       border = doom.border_style,
+      --     })
+      --   end,
+      --   name = "Line",
+      -- },
+      -- { "l", vim.lsp.diagnostic.set_loclist, name = "Loclist" },
+    },
+  },
+  --       {
+  --         "c",
+  --         name = "+code",
+  --       },
+  --       {
+  --         "t",
+  --         name = "+tweak",
+  --         {
+  --           { "c", function() require("doom.core.functions").toggle_completion() end, name = "Toggle completion" },
+  --         },
+  --       },
 }
 
 binds_create.settings = {

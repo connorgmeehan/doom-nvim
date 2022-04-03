@@ -1,14 +1,14 @@
 local git = {}
 git.settings = {}
 git.packages = {
-  -- { 'f-person/git-blame.nvim' },
-  -- { 'ruifm/gitlinker.nvim' },
-  -- { 'rlch/github-notifications.nvim' },
-  -- { 'rmagatti/igs.nvim' },
-  -- { 'kyoh86/gitstat.nvim' },
-  -- { 'knsh14/githublink.nvim' },
-  -- { 'antonk52/gitignore-grabber.nvim' },
-  -- { 'petertriho/cmp-git' }, -- wip / unstable..
+  ["git-blame.nvim"] = { 'f-person/git-blame.nvim' },
+  -- ["gitlinker.nvim"] = { 'ruifm/gitlinker.nvim' },
+  -- ["github-notifications.nvim"] = { 'rlch/github-notifications.nvim' },
+  -- ["igs.nvim"] = { 'rmagatti/igs.nvim' },
+  -- ["gitstat.nvim"] = { 'kyoh86/gitstat.nvim' },
+  -- ["githublink.nvim"] = { 'knsh14/githublink.nvim' },
+  -- ["gitignore-grabber.nvim"] = { 'antonk52/gitignore-grabber.nvim' },
+  -- ["cmp-git"] = { 'petertriho/cmp-git' }, -- wip / unstable..
 }
 
 return git

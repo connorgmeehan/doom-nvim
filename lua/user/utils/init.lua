@@ -116,6 +116,13 @@ local function build_nest_tree(user_tree)
 
     elseif type(key) == "string" and type(value) == "table" then
       print("branch")
+
+      -- 1. parse key
+      -- 2. is leader or concat?
+      -- 3. local branch_state = "concat" | "leader"
+      -- if key len = 1 >> concat
+      -- if key len = 2 >> leader
+
       -- how does the leader key work here?
       local new_branch = {
         string.format("%s", key:sub(1, 1)),

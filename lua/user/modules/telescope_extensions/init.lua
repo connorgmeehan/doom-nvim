@@ -1,10 +1,10 @@
 local utils = require("doom.utils")
-local is_module_enabled = utils.is_module_enabled
+-- local is_module_enabled = utils.is_module_enabled
 local user_util = require("user.utils")
 
-after_telescope = user_util.after_telescope
-load_extension_helper = user_util.load_extension_helper
-up = user_util.paths
+local after_telescope = user_util.after_telescope
+local load_extension_helper = user_util.load_extension_helper
+local up = user_util.paths
 
 local extensions = {}
 
@@ -17,7 +17,7 @@ extensions.packages = {
   ["telescope-repo.nvim"] = { up.ghq.github .. "cljoly/telescope-repo.nvim" },
   ["telescope-packer.nvim"] = { gh .. "nvim-telescope/telescope-packer.nvim" },
   ["neorg-telescope"] = { "nvim-neorg/neorg-telescope" },
-  ["telescope-ghq.nvim"] = { "nvim-telescope/telescope-ghq.nvim" },
+  -- ["telescope-ghq.nvim"] = { "nvim-telescope/telescope-ghq.nvim" },
   ["telescope-github.nvim"] = { "nvim-telescope/telescope-github.nvim" }, -- requires https://github.com/cli/cli#installation
   ["telescope-z.nvim"] = { "nvim-telescope/telescope-z.nvim" }, -- navigate with z compatibles
   ["telescope-tele-tabby.nvim"] = { "TC72/telescope-tele-tabby.nvim" }, -- manage tabs
@@ -27,11 +27,11 @@ for _, ext in ipairs(extensions.packages) do
 end
 
 extensions.configs = {}
-extensions["telescope-repo.nvim"] = load_extension_helper("repo")
-extensions["telescope-packer.nvim"] = load_extension_helper("packer")
-extensions["neorg-telescope"] = load_extension_helper("neorg")
-extensions["telescope-ghq.nvim"] = load_extension_helper("ghq")
-extensions["telescope-github.nvim"] = load_extension_helper("github")
+extensions.configs["telescope-repo.nvim"] = load_extension_helper("repo")
+extensions.configs["telescope-packer.nvim"] = load_extension_helper("packer")
+extensions.configs["neorg-telescope"] = load_extension_helper("neorg")
+-- extensions["telescope-ghq.nvim"] = load_extension_helper("ghq")
+extensions.configs["telescope-github.nvim"] = load_extension_helper("github")
 
 -- TODO: neorg
 

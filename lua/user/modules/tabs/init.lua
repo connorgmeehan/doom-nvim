@@ -1,3 +1,8 @@
+local tabs = {}
+
+tabs.packages = {}
+
+tabs.binds = {}
 
             -- {
             --     "t", name = "+tabs", {
@@ -10,3 +15,5 @@
             --       -- { 'n', ',gl', ':tabm +<cr>' },
             --     }
             --   }
+
+return tabs

@@ -1,7 +1,5 @@
 local cmdline = {}
 
-cmdline.packages = {
-  ["wilder.nvi"] = {"gelguy/wilder.nvim"} -- compleition
-}
+cmdline.packages = {}
 
 return cmdline
