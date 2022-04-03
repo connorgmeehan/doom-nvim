@@ -11,6 +11,24 @@ wha possibilities are there.
 - ask dannymat if he uses neogit.
 
 
+--------
+
+`git-remotes`
+
+walk through the command
+
+1. test it on ghq
+2. does this work with "others" repos
+3. do I have to add forks to my own user?
+4. fork nest.nvim > add connor remote and make sure his branch is available
+5. use the local nest branch.
+
+if this would work with the regular ghq structure and I can  just add
+remotes to my own forks when they have been added to my system that would
+be ideal. maybe it would be possible to use the save command to
+store all remotes in the exporst list that would be the ideal thing in my
+case I believe.
+
 ---------------------------------------------------------
 
 >>> OVERRIDE CMP <<<
@@ -65,98 +83,79 @@ look at the mapping util.
 
 ------------------------------------------
 
-this is getting quite insane now and with this new modular strategy you can pretty much achieve anything in the core and it is easy
-to maintain because everything is.
+this is what she called terror which is something that is quite scary. a walking
+safari post and counter phase which is the decisional phase. we know that this is a
+potential phase.
 
-this is quite fucking annoying. this is just so fucking insane and this relives my body of the pain that is there all the time.
+down down down magen magen magen magen andas djupt andas djupt andas djupt ner i
+magen ner i magen and transport connected workers will probably do that on monday.
+visit the capital of ukrain which is kiev.
 
-hmmm so this is a bit wierd but I am starting to understand I believe so this will actually go my way in the end I think but I am not a hundred
-percent sure right now. this is a quite insane exercise and so that is something that we don't want to look into at all and you cannot
-really understand how strong that force is. I cannot really see now because i have had that light going into my eyes for so long
-now that i cannot see shit of what I am writing which is quite fucking insane and that is not very nice at all. you know and I would
-like to check it out if it was possible.
+in the international journal of psychiatry.
 
-okay so that is quite nice because now i can see that it is empty which means that there is something that is wrong about it.
-how does it feel now to type at the computer i don't know actually because this is such a difference in my system that it feels quite fucking
-retarded and one of the things that I really don't like about this is that I don' understand how to get the fuck out of this shit which
-is something thaty ou might never get if you are one of those people that cannot really try to do that shit.
+planboken disables them to sell and do shit like they do but many people get
+much less than what they would have thought they should get.
+it is not something that you might ever want to do.
 
-not anymore. and so that is something that I really don't want to look into. i have had it and now I don't have it anymore.
+it sais fruit on all of these products but it is not. they lie all of the time.
+and so that is something that is not very nice. and so that is what makes it
+into ultra processed stuff. a lot of exxx numbers are completely natural but
+some of these are not very good at all and. the small silver things that you
+can see on a birthday cake or something so that is something quite interesting.
 
-whether we like it or not we are going to be subject to a insurgency so that is going to come in a couple of weeks I would assume.
-or I am assuming so that is quite fucking important andd that is not very nice at all since this is fucking shitty as fuck.
+this is fucing insane and i want to get out of this shit.
 
-you were suppose to upload your grades so that is quite fucking retarded and so that is something that I donfmt understand how that
-would work so one thing that is much more performant is to use it inside of vim.
+and the weapons indursty. the water was in a light shade of brown that did not
+make me feel good at all and so later when we were to split the lobster
+shells it didn't really work at all but we tried and concluded that it is impossible.
 
-universities and highschool council which is quite a nice system but that is not the thing that I need because I need to input a four
-digit code that they did mail me so I cannot get this code for now but this is quite fucking stupid and that is something that you might do
-and so that is something that they could do so one of those things felt quite annoying and shitty.
+by mailing you with snail mail which is a bit insane. I mean validation of a string
 
-you have to have some kind of retardation in order to think that is normal behavior.
+now this is very interesting. the nazi death camps are good contenders. normal
+human processes. we know that we can pretty much get them to do anything.
+underlings.
 
-so now this is. this is the beginning of a new era in my life where i undersand completely how to navigate insanely fast with this
-system so that you can make things insanely fast
+iw ill he could have gone something funny instead of just fucking out straight which
+was super boring. you know. fuck you you bitch. that is a style choice.
+now it is not going to happen much more since it is something that is quite fucking
+strang lukeemea which is another disease rogain alopesia.
 
-next step is just to become superstrong in my body like this and that is going to be quite fucking intreesting and this is the thing
-that is the most necessary that I could ever have dreamt of.
+he is in philly and wants to burn bridges tonight
 
-around the twenty fourth and so this is quite fucking strange and this is insane this is actually quite franly fucking insane.
-and i believe now that this is the thing that i should have done always and so that is something that is quite fucking stupid.
+ghq backup script
 
-since that is so fucking dangerous that is one of the smartest things that I have ever done which is quite fucki insane and you have
-to be faster and much much more faster. because it is a lot of fun and that is something that is quite fucking insane and you can
-type so fast that it is just fucing insane.
+investigate how I can store remotes information so that it is easy to
+bring them back and get back all of the information.
 
-they have a lot of respect for these ones and that is quite stupid. they never say anything of substance.
-bring down people who are fraudsters. and completely rely on external parties which is quite fucking insane and that is good.
+this is all going to become quite easy when this is all brought out.
+and my commands thingy is stupid. but it is a fun experiment for learning
+about algorhithms and stuf and mix files so it is something that is quite useful
+from a user interaction perspective. later when the reloader module and
+everything works and you can move shit from one level to the other.
+then it is a really nice system.
 
-we would have doubled in population then that would never have picked up on the last line which is quite fucking insane and i don't
-understand why this is so that is something that they have to check out in the end but why do you do that i am asking myself nothing
-about the ethical niveau. milieu
+and then later I am going to master the nvim terminal so that I can run things
+fast as lightning from within the system and so that is one of the nicest things.
+abcdefghijklmnopqrstuvxyz.
 
-this is quite nice actually because now everything is kept in lua with this interface which is something that is quite fucking nice.
+i need to get the snippets plugin to work. and when the shit is working in it.
+so the bindings are so important. so that you can really map that shit
+from outside of the module. nicotine is a hard fucking drug that fucks you
+up dude. no it wasn't that hard. but you have to understand what I did before
+I quite that made it easy.
 
-this is wierd because i don't understand. how that cannot take effect. so now the next step is to understand how you assign
+that is a lot for somebody who doesn't say it often.
+so this is very interesting alopesia and that is quite fucking interesting and I am now
+going to see how it feels to do this with the computer in various positions so that I can
+stretch and workout in the same space.
 
-new binds so that I don't overwrite them which would suck.
+so that is a bit funny. so when this is working I am going to start working on
+how to do more complex things with this is fucking insane and so that is the most
+dumbest thing ever.
 
-so now i am going to do a puff and then do some more hip flexor movements.
+i am not going to do this now but the key syntax will only make sense if
+I understand how the nest plug works so that I don't build something stupid.
 
-now this is getting more and more clear so this is good because this will make neovim into a great developmen environment but
-it is insanely hard to get started with it because there is just so little given and the docs are a pain in the ass and i don't understand
-how that shit would fukcing work in the real world.
-
-tyler the creators dick hole so that is a quite advanced system that doesn't really fucking bring it up is that how you do it.
-
-if I can do that then this is something that I would really like to be able to do you know.
-
-use nui with neorg to in order to learn the system and add something. it would be interesting to use it in order to open windows etc.
-
-how does writing feel now so that I can easilly navigate to a module fast.
-
-user module create binds so that is a quite interesting thing. how does it feel now when I type. i am not sure actually but there is something
-that is happening I believe
-
-perticularily from these guys that really fuck tell us that this is the shit you know.
-
-and claus schwab created a minimessage for this so that we can roll out quite fucking fast and that is one of the best things ever.
-one of our producers said he would have no problem sending any of them back to the fucking school and that is fucking crazy.
-
-to take oet i don't know their major bureaou so no civilians could do that shit so that is something that is just insane you know.
-
-how does it now feel when I type because this is one of the most interesting exercises ever and it really targets my feet like a
-motherfucker and since all of this does the whole body this pose is so fucking powerful.
-
-protecting kids is not your strong suit. how does my body feel now this is very interesting and it really does make my body so fucking
-strong and this is something that I just cannot fucking try. we should applaud him of the headliners wife so that is something that you
-cannot really do. he got slapped goal goooaaaalll. that is quite serioous in the comedy clubs are going to be okay.
-
-explore the block editing plugin to see how it does manage stuff so that you can act on code you are at easilly. get readdicted to
-nicotine with zipx.com is quite a nice domain. most expensive domains names.
-
-are you serious brought he white girl wouldn't she do that. in public.
-
-stoned ape hypothesis and that is the one that really makes you go crazy and out int
 
 --]]
+
