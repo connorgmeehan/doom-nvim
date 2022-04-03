@@ -83,79 +83,17 @@ look at the mapping util.
 
 ------------------------------------------
 
-this is what she called terror which is something that is quite scary. a walking
-safari post and counter phase which is the decisional phase. we know that this is a
-potential phase.
+look at simon's recommndations for data analysis plugins and create a module for doom
+so that it can easilly be reused again.
 
-down down down magen magen magen magen andas djupt andas djupt andas djupt ner i
-magen ner i magen and transport connected workers will probably do that on monday.
-visit the capital of ukrain which is kiev.
+------------------------------------------
 
-in the international journal of psychiatry.
+you are not goi to see a lot of shit going on with people in that region since that is something that is a bit insane you know.
+but also that is something that you might never understand or know so fucking dude. you will never know.
 
-planboken disables them to sell and do shit like they do but many people get
-much less than what they would have thought they should get.
-it is not something that you might ever want to do.
+metals are a pretty important aspect of an industrial western economy and you need that shit to actually work
 
-it sais fruit on all of these products but it is not. they lie all of the time.
-and so that is something that is not very nice. and so that is what makes it
-into ultra processed stuff. a lot of exxx numbers are completely natural but
-some of these are not very good at all and. the small silver things that you
-can see on a birthday cake or something so that is something quite interesting.
-
-this is fucing insane and i want to get out of this shit.
-
-and the weapons indursty. the water was in a light shade of brown that did not
-make me feel good at all and so later when we were to split the lobster
-shells it didn't really work at all but we tried and concluded that it is impossible.
-
-by mailing you with snail mail which is a bit insane. I mean validation of a string
-
-now this is very interesting. the nazi death camps are good contenders. normal
-human processes. we know that we can pretty much get them to do anything.
-underlings.
-
-iw ill he could have gone something funny instead of just fucking out straight which
-was super boring. you know. fuck you you bitch. that is a style choice.
-now it is not going to happen much more since it is something that is quite fucking
-strang lukeemea which is another disease rogain alopesia.
-
-he is in philly and wants to burn bridges tonight
-
-ghq backup script
-
-investigate how I can store remotes information so that it is easy to
-bring them back and get back all of the information.
-
-this is all going to become quite easy when this is all brought out.
-and my commands thingy is stupid. but it is a fun experiment for learning
-about algorhithms and stuf and mix files so it is something that is quite useful
-from a user interaction perspective. later when the reloader module and
-everything works and you can move shit from one level to the other.
-then it is a really nice system.
-
-and then later I am going to master the nvim terminal so that I can run things
-fast as lightning from within the system and so that is one of the nicest things.
-abcdefghijklmnopqrstuvxyz.
-
-i need to get the snippets plugin to work. and when the shit is working in it.
-so the bindings are so important. so that you can really map that shit
-from outside of the module. nicotine is a hard fucking drug that fucks you
-up dude. no it wasn't that hard. but you have to understand what I did before
-I quite that made it easy.
-
-that is a lot for somebody who doesn't say it often.
-so this is very interesting alopesia and that is quite fucking interesting and I am now
-going to see how it feels to do this with the computer in various positions so that I can
-stretch and workout in the same space.
-
-so that is a bit funny. so when this is working I am going to start working on
-how to do more complex things with this is fucking insane and so that is the most
-dumbest thing ever.
-
-i am not going to do this now but the key syntax will only make sense if
-I understand how the nest plug works so that I don't build something stupid.
-
+this is pretty fucking cool you know and that is something that you could never have imagined a couple of months ago.
 
 --]]
 
