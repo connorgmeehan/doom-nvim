@@ -54,6 +54,15 @@ local t_mini_syntax_test = {
     },
   },
 
+  --   {
+  --     "<leader>cf",
+  --     function()
+  --       vim.lsp.buf.formatting_sync()
+  --     end,
+  --     name = "Format/Fix",
+  --   },
+  -- }
+
   -- leader
   ["c +code"] = {
     [[ r  rename                  vim.lsp.buf.rename ]],
