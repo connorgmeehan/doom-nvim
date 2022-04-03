@@ -3,8 +3,7 @@ local cursor = {}
 cursor.settings = {}
 
 cursor.packages = {
-  -- https://github.com/mg979/vim-visual-multi -- TODO: try this one.
+  ["vim-visual-multi"] = { "mg979/vim-visual-multi" },
 }
 
 return cursor
-
