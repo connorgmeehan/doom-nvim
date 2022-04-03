@@ -7,4 +7,10 @@ local create_plugin = {}
 --  ghq
 --
 --  to migrate a module into a new plugin.
+
+create_plugin.cmd = {
+  { "CreatePlugin", function() end },
+  { "CreatePluginMigrateByname", function() end },
+}
+
 return create_plugin

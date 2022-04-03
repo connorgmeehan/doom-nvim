@@ -1,3 +1,5 @@
+local up = require("user.utils").paths
+
 local snippets = {}
 
 snippets.settings = {
@@ -11,7 +13,7 @@ snippets.packages = {
     commit = "80e68242cf8127844653060fbada32dca15579fc",
     requires = {
       { "rafamadriz/friendly-snippets", opt = true },
-      { "molleweide/LuaSnip-snippets.nvim" }, -- override with local versions in the `config.lua`
+      { up.ghq.github .. "molleweide/LuaSnip-snippets.nvim" }, -- override with local versions in the `config.lua`
     },
   },
 }
