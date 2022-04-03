@@ -1,5 +1,11 @@
 local create_module = {}
 
+
+-- UI QUESTIONS
+--
+--    - is the module for a specific language or functionality?
+--    - is it a user or core module?
+
 create_module.cmd = {
   {
     "CreateModule",

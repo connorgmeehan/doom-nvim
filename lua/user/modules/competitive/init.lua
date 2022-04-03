@@ -3,7 +3,7 @@ local competitive = {}
 -- https://github.com/xeluxee/competitest.nvim
 
 competitive.packages = {
-  ["cphelper"] = { "p00f/cphelper" },
+  ["cphelper"] = { "p00f/cphelper.nvim" },
   ["competitest.nvim"] = { "xeluxee/competitest.nvim" },
 }
 
