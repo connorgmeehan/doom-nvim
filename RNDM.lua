@@ -88,12 +88,6 @@ so that it can easilly be reused again.
 
 ------------------------------------------
 
-you are not goi to see a lot of shit going on with people in that region since that is something that is a bit insane you know.
-but also that is something that you might never understand or know so fucking dude. you will never know.
-
-metals are a pretty important aspect of an industrial western economy and you need that shit to actually work
-
-this is pretty fucking cool you know and that is something that you could never have imagined a couple of months ago.
+biscops arne.
 
 --]]
-
