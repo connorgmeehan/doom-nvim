@@ -103,4 +103,35 @@ there is an aspect to doing things that are so convenient in vim that it is a bi
 
 for her sake so that she will think that he is fucking cool and a nice guy.
 
+new york is the country that does this shit so that anyone who can fix these things will never be making them and that is the reason why
+they did that shit .
+
+a couple of months ago so that it is a bit easier to fucking do this and I always forget the syntax so that is something that I
+don't like at all.
+
+now comes the hook. like that what's that about.
+
+name spaced commands so you cannot accidentally just trigger plugins.
+and fuck them so that is quite fucking fast and so that is
+
+i did this guy for years.
+
+this is the random file
+
+TEST COMMAND WITH ARGUMENTS <<<<<<<<<<
+HOW IS THIS DONE IN GTD NEORG?
+
+that is a good one so that you can
+
+this is very nice. and so the blockfi blog would be good and another resource is that one which is quite fucking strange.
+
+
+walk through vhyrro's config and make stuff into modules.
+
+
+
+remove duplicate packer spec keys.
+even he is doing that which is quite an insane system that is so fast that you cannot even understand it you know and even if this is
+something.
+
 --]]

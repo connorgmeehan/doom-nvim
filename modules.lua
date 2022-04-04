@@ -84,6 +84,7 @@ return {
 
     -- "ai",
     -- "async_jobs",
+    -- "audio",
     -- "autocmds",
     "binds",
     "char_counter",
@@ -106,7 +107,7 @@ return {
 
     "cursor",
     -- "cursorline",
-    "data_analysis",
+    "data_science",
     -- "debugging",
     -- "diagrams",
     "docs",
@@ -135,7 +136,6 @@ return {
     -- "lsp",
     -- "markdown",
     "math_calculator",
-    -- "media_audio",
     "modules_edit",
     "motion",
     "mouse",
