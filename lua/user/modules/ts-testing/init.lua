@@ -31,7 +31,8 @@ ts_testing.cmds = {
       print("ts-testing -> ")
       local parser = vim.treesitter.get_parser(0)
       local tstree = parser:parse()
-      print(tstree:root())
+      tstree:root()
+      print(vim.inspect(tstree))
     end,
   },
   {
