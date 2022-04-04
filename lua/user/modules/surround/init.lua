@@ -16,7 +16,7 @@ surround.configs = {}
 --   require("surround").setup({
 --     context_offset = 100,
 --     load_autogroups = false,
---     mappings_style = "sandwich",
+--     mappings_style = "surround", -- sandwich uses `s` | surround uses `y`
 --     map_insert_mode = true,
 --     quotes = { "'", '"' },
 --     brackets = { "(", "{", "[" },

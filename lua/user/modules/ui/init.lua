@@ -4,6 +4,8 @@ ui.packages = {
   ["nui.nvim"] = { "MunifTanjim/nui.nvim" },
 }
 
+-- TODO: use `popup.nvim`
+
 ui.cmds = {
   {
     "UIPopup",
