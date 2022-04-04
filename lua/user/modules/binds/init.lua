@@ -22,14 +22,6 @@ local paths = require("user.utils").paths
 -- {'i','<c-l>','<space>'},
 -- {'c','<c-l>','<space>'},
 
-------------------------------
----       formatting       ---
-------------------------------
-
--- { "n", "<leader>ai", "mzgg=G`z<cr>", opts.s, "Format", "indent_file", "Indent File" },
--- { "n", "<leader>au", "viwUe", opts.s, "Format", "upper_case", "Word Upper" },
--- { "n", "<leader>aU", "viwue", opts.s, "Format", "lower_case", "Word Lower" },
-
 ----------------------------------
 ---       todo quicklist       ---
 ----------------------------------

@@ -190,6 +190,12 @@ binds_create.cmds = {
       -- print result
     end,
   }, -- BindsCreateGetInput
+  {
+    "CreateBindsAddLevelToLeaf",
+    function()
+      -- use treesitter to modify lines
+    end,
+  },
 }
 
 if require("doom.utils").is_module_enabled("whichkey") then

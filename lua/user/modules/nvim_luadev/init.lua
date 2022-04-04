@@ -12,7 +12,6 @@ local luadev = {}
 -- jbyuki/one-small-step-for-vimkind - An adapter for the Neovim Lua language. It allows you to debug any Lua code running in a Neovim instance (A Lua plugin that can debug Neovim Lua plugins).
 -- tami5/sqlite.lua - SQLite/LuaJIT binding for Lua and Neovim.
 -- folke/lua-dev.nvim - Dev setup for init.Lua and plugin development with full signature help, docs and completion for the Neovim Lua API.
--- MunifTanjim/nui.nvim - UI Component Library for Neovim.
 -- m00qek/plugin-template.nvim - A plugin template that setups test infrastructure and GitHub Actions.
 -- mini.doc - Module of echasnovski/mini.nvim for generation of help files from EmmyLua-like annotations. Allows flexible customization of output via hook functions.
 -- nanotee/luv-vimdocs - The luv docs in vimdoc format.

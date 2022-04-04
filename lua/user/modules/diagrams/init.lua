@@ -4,6 +4,7 @@ diagrams.settings = {}
 
 diagrams.packages = {
   ["venn.nvim"] = { "jbyuki/venn.nvim" },
+  -- ["vim-slumlord"] = {"scrooloose/vim-slumlord "}, -- seems pretty cool.
 }
 
 diagrams.config = {}

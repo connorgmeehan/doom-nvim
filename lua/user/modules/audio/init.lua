@@ -4,13 +4,23 @@ local audio = {}
 
 audio.settings = {}
 
+-- https://github.com/davidgranstrom?tab=repositories
+-- https://github.com/madskjeldgaard?tab=repositories
+
 audio.packages = {
+  ["nvim-spotify"] = {"KadoBOT/nvim-spotify"},
+  ["music.nvim"] = {"max-0406/music.nvim "},
+  ["osc.nvim"] = { "davidgranstrom/osc.nvim.git " },
+  ["nvim-supercollider-piano"] = { "madskjeldgaard/nvim-supercollider-piano" },
+  -- https://github.com/davidgranstrom/telescope-scdoc.nvim -- <<<< EXTENSION
   ["scnvim"] = {
     "davidgranstrom/scnvim",
     run = ":call scnvim#install()",
   },
-  -- https://github.com/tidalcycles/vim-tidal
-  -- https://github.com/madskjeldgaard/reaper-nvim
+  ["vim-tidal"] = {"tidalcycles/vim-tidal"},
+  ["reaper-nvim"] = {"madskjeldgaard/reaper-nvim"},
+  -- https://github.com/karstm/chuck.vim
+  -- https://github.com/vim-scripts/ck.vim
 }
 
 audio.packages["scnvim"] = function()
