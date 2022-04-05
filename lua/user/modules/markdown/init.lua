@@ -1,5 +1,6 @@
 local md = {}
 
+-- https://github.com/oknozor/illumination
 -- https://github.com/ellisonleao/glow.nvim
 -- https://github.com/iamcco/markdown-preview.nvim
 -- https://github.com/davidgranstrom/nvim-markdown-preview
