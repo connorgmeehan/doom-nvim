@@ -47,7 +47,7 @@ return {
     "lazygit", -- Lazy git integration
     "neogit", -- A git client for neovim
     "ranger", -- File explorer in neovim (TODO: Test)
-    "restclient", -- Test HTTP requests from neovim (TODO: Test)
+    -- "restclient", -- Test HTTP requests from neovim (TODO: Test)
     "show_registers", -- Show and navigate between registers
     -- "suda",            -- Save using sudo when necessary
     "superman", -- Read unix man pages in neovim
@@ -146,7 +146,7 @@ return {
     "printer",
     "quickfix",
     -- "read_file",
-    -- "refactor",
+    "refactor",
     "regex",
     -- "remote_dev",
     -- "rename",
@@ -157,7 +157,6 @@ return {
     "search_and_replace",
     "snippets",
     "sort",
-    -- "spectre",
     "ssh",
     -- "startup",
     -- "statusline",
