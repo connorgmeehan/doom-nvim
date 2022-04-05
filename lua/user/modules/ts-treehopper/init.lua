@@ -51,6 +51,8 @@ end
 function M.nodes()
   api.nvim_buf_clear_namespace(0, ns, 0, -1)
   local ts = vim.treesitter
+
+  -- copy this into ts monitor
   local get_query = require('vim.treesitter.query').get_query
   local get_parser = require("vim.treesitter").get_parser
   local query = get_query(get_parser(0)._lang, 'locals')
@@ -58,18 +60,22 @@ function M.nodes()
     print('No locals query for language', vim.bo.filetype)
     return
   end
+
   local parser = ts.get_parser(0)
   local trees = parser:parse()
   local root = trees[1]:root()
   local lnum, col = unpack(api.nvim_win_get_cursor(0))
   lnum = lnum - 1
+
   local cursor_node = root:descendant_for_range(lnum, col, lnum, col)
   local iter = keys_iter()
   local hints = {}
+
   local win_info = vim.fn.getwininfo(api.nvim_get_current_win())[1]
   for i = win_info.topline, win_info.botline do
     api.nvim_buf_add_highlight(0, ns, 'TSNodeUnmatched', i - 1, 0, -1)
   end
+
   local function register_node(node)
     local key = iter()
     local start_row, start_col, end_row, end_col = node:range()
@@ -83,13 +89,16 @@ function M.nodes()
     })
     hints[key] = node
   end
+
   register_node(cursor_node)
   local parent = cursor_node:parent()
   while parent do
     register_node(parent)
     parent = parent:parent()
   end
+
   vim.cmd('redraw')
+
   while true do
     local ok, keynum = pcall(vim.fn.getchar)
     if not ok then
@@ -123,9 +132,14 @@ function M.nodes()
         api.nvim_buf_clear_namespace(0, ns, 0, -1)
         break
       end
-    end
-  end
+    end -- if number
+  end -- while true
+
 end
+
+-- binds
+--
+-- leader n t (nav treesitter)
 
 
 -- return M

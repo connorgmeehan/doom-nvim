@@ -1,6 +1,8 @@
 local ts_locals = require("nvim-treesitter.locals")
 local ts_utils = require("nvim-treesitter.ts_utils")
 
+-- https://github.com/nvim-treesitter/nvim-treesitter/blob/master/doc/nvim-treesitter.txt
+
 local ts_testing = {}
 
 -- ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
@@ -31,8 +33,8 @@ local ts_testing = {}
 --                     {path}    Optional path the parser is located at
 --                     {silent}  Don't throw an error if language not found
 
--- ############################################################################
--- ############################################################################
+-- ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+-- ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 
 
 
