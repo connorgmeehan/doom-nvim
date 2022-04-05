@@ -5,6 +5,10 @@ local binds_create = {}
 -- lsp.binds = {
 -- }
 
+-- CMD: rename leader branch / leaf across files.
+--    so that we can easilly update the mappings tree even though you assing binds to same branch in multiple
+--    modules.
+
 -- todo: put mapping before name >> (mode mapping name command options)
 --
 -- TODO: check out the connor/nest.nvim branch

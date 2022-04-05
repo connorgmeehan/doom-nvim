@@ -1,5 +1,11 @@
 local create_plugin = {}
 
+-- cmd:
+--
+--    clone and fork plugin/repo/url (are you sure yes/no?) under cursor in a module with ghm.
+--
+--
+
 create_plugin.cmd = {
   { "CreatePlugin", function() end },
   { "CreatePluginMigrateByname", function()
