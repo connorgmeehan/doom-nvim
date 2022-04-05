@@ -798,7 +798,7 @@ doom.moll.funcs = funcs
 local use = doom.use_package
 local m = doom.modules
 
-m.neogit.packages["neogit"][1] = gh .. "TimUntersberger/neogit"
+-- m.neogit.packages["neogit"][1] = gh .. "TimUntersberger/neogit"
 
 -- --- test generate annotation with neogen
 -- local snippets = doom.modules.snippets

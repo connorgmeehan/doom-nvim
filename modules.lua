@@ -45,7 +45,7 @@ return {
 
     "doom_themes", -- Extra themes for doom
     "lazygit", -- Lazy git integration
-    "neogit", -- A git client for neovim
+    -- "neogit", -- A git client for neovim
     "ranger", -- File explorer in neovim (TODO: Test)
     -- "restclient", -- Test HTTP requests from neovim (TODO: Test)
     "show_registers", -- Show and navigate between registers
@@ -122,7 +122,7 @@ return {
     "git",
     "git_diffview",
     "git_github",
-    -- "git_neogit",
+    "git_neogit",
     "git_vgit",
 
     "gpg",
