@@ -5,7 +5,7 @@ paths.packages = {
   -- { 'oberblastmeister/nvim-rooter' },
 }
 
-paths.binds = {}
+-- paths.binds = {}
 
 -- if require("doom.utils").is_module_enabled("whichkey") then
 --   table.insert(windows.binds, {
