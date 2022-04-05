@@ -2,6 +2,8 @@ local motion = {}
 
 motion.settings = {}
 
+-- https://github.com/mfussenegger/nvim-treehopper
+
 motion.packages = {
   ["lightspeed.nvim"] = { "ggandor/lightspeed.nvim" },
   -- { 'justinmk/vim-sneak' },
