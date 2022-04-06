@@ -1,5 +1,10 @@
 local neogit = {}
 
+-- TODO:
+--
+--    - make sure user keymap is used in neogit.
+--    - test/report mappings.
+
 neogit.settings = {
   -- -- override/add mappings
   -- mappings = {
