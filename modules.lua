@@ -88,7 +88,7 @@ return {
     -- "autocmds",
     "binds",
     "char_counter",
-    -- "cmdline",
+    "cmdline",
     -- "code_outline",
     -- "codeql",
     -- "coderunner",

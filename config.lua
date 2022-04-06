@@ -787,8 +787,6 @@ end
 
 doom.moll.funcs = funcs
 
-
-
 ---------------------------
 ---------------------------
 ---       PLUGINS       ---
@@ -828,13 +826,14 @@ local m = doom.modules
 
 doom.colorscheme = "tokyonight"
 
--- doom.use_cmd({
---   "Test",
---   function()
---     print("test")
---   end,
--- })
---
+doom.use_cmd({
+  "Test",
+  function(opts)
+    print("test", opts.args)
+  end,
+  -- { nargs = 1 },
+})
+
 -- doom.use_autocmd({
 --   {
 --     "FileType",
