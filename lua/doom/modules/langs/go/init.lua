@@ -12,7 +12,7 @@ go.autocmds = {
       local langs_utils = require('doom.modules.langs.utils')
       langs_utils.use_lsp(doom.modules.go.settings.language_server_name)
 
-      defer_fn(function()
+      vim.defer_fn(function()
         require("nvim-treesitter.install").ensure_installed("go")
       end, 0)
       --
