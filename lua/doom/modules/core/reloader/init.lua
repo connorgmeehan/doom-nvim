@@ -248,7 +248,7 @@ reloader.autocmds = function()
   local autocmds = {}
 
   if reloader.settings.reload_on_save then
-    table.insert(autocmds, { "BufWritePost", "*/doom/**/*.lua", reloader.full_reload })
+    table.insert(autocmds, { "BufWritePost", "*/doom/**/*.lua,*/user/**/*.lua", reloader.full_reload })
     table.insert(autocmds, {
       "BufWritePost",
       "*/doom-nvim/modules.lua,*/doom-nvim/config.lua",
