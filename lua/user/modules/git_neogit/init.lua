@@ -6,15 +6,15 @@ local neogit = {}
 --    - test/report mappings.
 
 neogit.settings = {
-  -- -- override/add mappings
-  -- mappings = {
-  --   -- modify status buffer mappings
-  --   status = {
-  --     -- Removes the default mapping of "s"
-  --     ["s"] = "<",
-  --     ["S"] = ">",
-  --   },
-  -- },
+  -- override/add mappings
+  mappings = {
+    -- modify status buffer mappings
+    status = {
+      -- Removes the default mapping of "s"
+      ["s"] = "a",
+      ["S"] = "A",
+    },
+  },
 }
 
 neogit.packages = {

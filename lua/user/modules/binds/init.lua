@@ -124,15 +124,15 @@ local paths = require("user.utils").paths
 
 local binds = {}
 
--- -- operator
--- table.insert(binds, {
---     -- { 'o', 'b', 'vb', options = { silent = true, noremap = true } },
---     -- { 'o', 'B', 'vB', options = { silent = true, noremap = true } },
---     -- { 'o', 'F', 'vF', options = { silent = true, noremap = true } },
---     -- { 'o', 'T', 'vT', options = { silent = true, noremap = true } },
---     -- -- { 'o', 's', '<Plug>Lightspeed_s', options = { silent = true } },
---     -- -- { 'o', 'S', '<Plug>Lightspeed_S', options = { silent = true, noremap = true } },
--- })
+-- operator
+table.insert(binds, {
+  { "b", "vb", mode = "o", options = { silent = true, noremap = true } },
+  { "B", "vB", mode = "o", options = { silent = true, noremap = true } },
+  { "F", "vF", mode = "o", options = { silent = true, noremap = true } },
+  { "T", "vT", mode = "o", options = { silent = true, noremap = true } },
+  -- { 'o', 's', '<Plug>Lightspeed_s', options = { silent = true } },
+  -- { 'o', 'S', '<Plug>Lightspeed_S', options = { silent = true, noremap = true } },
+})
 
 table.insert(binds, {
   { "<c-z>", [[<cmd>suspend<CR>]], name = "suspend vim" },

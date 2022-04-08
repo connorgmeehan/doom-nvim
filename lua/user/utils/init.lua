@@ -56,7 +56,8 @@ user_utils.paths = {
 
 -- make sure plugin is loaded after telescope
 user_utils.after_telescope = function()
-  return is_module_enabled("telescope") and "telescope" or nil
+  -- return is_module_enabled("telescope") and "telescope" or nil
+  return { "telescope.nvim" }
 end
 
 -- load telescope extension
@@ -113,7 +114,6 @@ local function build_nest_tree(user_tree)
       print("leaf")
       local t_nest_cmd = user_utils.mappings_parse_node_str(key, value)
       table.insert(t_nest, value) -- insert leaf -- TODO: insert t_nest_cmd instead
-
     elseif type(key) == "string" and type(value) == "table" then
       print("branch")
 
