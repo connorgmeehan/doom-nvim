@@ -72,6 +72,12 @@ end
 -- add_plugin
 user_utils.add_plugin = function(spec) end
 -- add_tele_ext
+
+user_utils.wrap_module_in_core_module_dependencies = function()
+  -- for x in table
+  -- check is module enabled
+end
+
 user_utils.add_tele_ext = function(spec) end
 
 -- @param: t

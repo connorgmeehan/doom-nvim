@@ -71,6 +71,7 @@ local themes = {}
 themes.settings = {}
 
 themes.packages = {
+  -- https://github.com/folke/lsp-colors.nvim
   ["nightfox.nvim"] = { "EdenEast/nightfox.nvim" },
   ["nvim-transparent"] = { "xiyaowong/nvim-transparent" },
   ["vim-moonfly-colors"] = { "bluz71/vim-moonfly-colors" },

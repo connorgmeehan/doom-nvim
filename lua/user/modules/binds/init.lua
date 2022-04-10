@@ -124,6 +124,10 @@ local paths = require("user.utils").paths
 
 local binds = {}
 
+-- search binds `/ and ?`
+
+-- commandline binds
+
 -- operator
 table.insert(binds, {
   { "b", "vb", mode = "o", options = { silent = true, noremap = true } },
