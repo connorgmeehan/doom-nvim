@@ -93,15 +93,6 @@ HOW IS THIS DONE IN GTD NEORG?
 
 ------------------------------------------
 
-they need to be put in very secure storage facilities so that you don't cause somekind of massive accident so that it is something
-that you might very well be there for.
-
-this is pretty nice
-
-it is written in fennel.
-
-where the edge of this country is going so that you can make shit into something that is quite fucking strange.
-
 fix the paths module so that you update paths efficiently.
 
 READ:
@@ -109,106 +100,51 @@ READ:
 
 TODO: fix paths and formatting module. move code format to leader>code>format>all
 
-this is quite fucking amazing and now I am starting to understand how fast this shit can actually work in the terminal and jump around
-faster than a motherfucker. but it is good because everything is extremely well organized in a way that makes it possible for you
-to really learn how to really do shit nicely.
+[packer.nvim] [ERROR 12:03:15] async.lua:20: Error in coroutine: ...ite/pack/packer/start/packer.nvim/lua/packer/compile.lua:652: attempt to index a nil value
 
-it has to be faster than a motherfucker and so that is just so fucking insane that you cannot really understand it at all.
-which would be quite insane and the reason why that is is because that is just such a motherfucker of a system.
+it is like a racist sexist thing to say so that is quite fucking strange
+it is a turtle banging on his chest because she sais things that are so absurd that it is hard to follow her ideas sometimes.
+but why are we giving them three billion dollars i am asking myself?
 
-so that he can start in a tiny school now. and so that is just fucking insane you know.
-for allegedly violating their own policy which is a bit insane since they never do anything to show it to the other side and so
-does this matter well that is the question.
+let's take one of the most amazing things every ou know that is actually much harder that you might think it is.
 
-stenography is quite interesting. always being honest and so that would be quite interesting so that you can embed it wherever you are.
+you can find a poll for anything so that is not very strange. freshly forty the puertorican rattlesnake and so good good.
+so now let's have a fun show.
 
-firenvim > nyxt embedd extension? so that you can really do everything in a vim style fashion.
-sit in the stool you motherfucker dumbass cucksucker.
+let's fall down and make this shit which is something that you might never understand and the reason why this is is because that
+is something that you might never ever understand. draw a basketball rworded rworded as fworded. he is nworded as fuck.
+how did I subsist withing are you out of your fucking mind. grind it around the screw. hexagon.
 
-so that you can have modules just as dummy note dumps so that you can just dump if you come up with something that you think about.
-stephen monacielly because he was mad  at he fact that this woman said that they were going to email my employer and tell them
-that I am an evil racist which determinnes by the next coming word. internal manouvering so that it doen't really make anything that
-is heavy consequences since i have talked about this since this morning. willing to uuh stand u and let the consequences fuck this
-shit up. that is a thing that people need to understand and so that is something that you must have all gotten sick from.
+bourbon this is getting good and so that is one of the most amazing things that you can ever imagine. matt mccuskar.
+and the dog that you hate. what are you talking about. how about you take the base out of your voice when you talk to big jay.
+after you made the bet you saw us play. naha. talk shit and come get some. even though you are making excellent points I am
+on jay and luis' side luis tried to fist fight shane in the middle of the fight. i said fucked up shit i am going to get knocked
+out by luis j gomez. i am too real ass. they really did loose twelve to zero which is just pathetic.
 
-now that I undersand this. even that among he employees could cause insane trouble since it doesn't ever do anything that is like
-that. whenever there is a layoff everyone has to hold a potato so that constantly and no one catches it then it is you.
+try callong my yabai scripts from. this could become quite amazing actually and so it makes nothing into the reason why they don't do that
+and so nothing can be said to you that mimics this behaior.
 
-it does not work at all as how I would like it to. did he have the right to shoot his guy since they are taking my son and
-there we are not giving up the kid. you kidnapped my child and I am here with a court order. incredibly frustrating and you
-have the right to be with your son if your children are being parentally kidnapped.
+winter came back. that is a bit strange and it will be interesting to hear what this will do to nature and stuff. i am really going to be
+so fucking incredibly interested in what that does.
 
-split squats is the bes thing that I have ever done since it really fucking makes me stronger and so that is really fucking cool.
+this is going to be so much fun because I had never thought this would be possible to do in neovim. terminal and that is something
+and what is the argument against that one. dude when i am done now this is going to be so much fucking fun and this system looks
+so fucking nice. i am here to take questions from you covid didn't come from a lab.
 
-now after a couple of years I am starting to understand how they work. bogdanoff twins.
+it is all of the above so that something will happen and the thing for that is that they never ever fucking did that shit and so why
+would they even look into that shit. in order to see if they have the ability to learn this type of stuff or not.
 
-press from the opposition which needs to act now so that nothing stupid happens in the case of an emergency.
+teaching farmers how to use facebook. he is trying to stay balanced but he is doing a very bad job. it makes me quite fucking sad
+and so that is the thing that really makes it so you cannot really make sure this is what goes on.
 
-start walking through code of all treesitter and lsp plugins so that I can learn how to become a super pro.
-
-i didn't have anyone who I could talk to so that is why this did never make any sense which is quite fucking retarded.
-
-and I need to have a better local dev environment. so the next step.
-
-print everything in the reload file and see how it works.
-
-i think log dot debug is what should run. so that if I set debug it will run all of the logs that I assign so that I can understand
-what is actually going on in the code. in haninge which makes it more important to communicate with them so that we can really.
-do this shit and
-
-print treesitter stuff and see what happens so that it can be nicely utils.
-
-this is pretty fucking cool. so that is what you get when you write it which is pretty damn cool and that is something that really
-works well.
-
-that is pretty fucking cool and it all combines very well into vim. so how good can this become from an ergonomC perspective
-
-this is also interesting because it creates like a completely new ui for nvim that has a super cool ui and borders and all
-kinds of cool shit. we were all essentially squating in this place which made it quite fucking funny so that the reason why they
-did that is not the same as why they ran up there so that you can build in and make things make it like that.
-
-because when everything is done at eye sight then you feel amazing when you type and code and this is what makes it possible.
-
-one of our favorite sponsors tha realy give us magic for christmas  a slap of wood in your mouth and there is something .
-live show at the stand tuesday basketball dave donfmt do this shit beats her up just shit talk. i know nothing about this story.
-send a signal saying that we are together as a family. they are working hard which is a bit hard so we need to just work on
-hard.
-
-
-CMD: toggle debug log statements so that I can be sure that nvim always starts without any stupid messages.
-
-when this is all done it is going to be so nice to type and create stuff that comes from spacemacs which is a nother cool editor
-but I have been using neovim which vim which is just an aweome but difficult tool.
-
-this is like myst level weather outside whether or not they will do that is up to them. if you can even use the word normal.
-
-
-we are happy here but we know that the shit happens in other places.
-
-we are pretty annoyed with the fact that we don't have to do that shit so something is quite fukcing retarded.
-
-neogit is very nice. so that you can view diffs inside of neovim and so that development has exploded. which is a lot of fun.
-yeah. in a more formal fashion but he never sais anything that is actual proof. it is always second or third hand info so it
-always becomes very hard to believe.
-
-my soul hurts because I don't want to do that shit which ispo. i am hoping that you are gonna be there we are live from the stand comedy
-club the skanks are all here what's up motherfuckers hello I stand with will smith comedians disrespect our wives raped by will smith
-smacked hears that story amazing guests tonight hilarious cipha sounds.
-
-convicted kind of and I loved it you know the hardest part was in when I was dosing jay and I laughed so hard oh my god this is
-shit hey you buddy okay i get fucked comings heard that song. not only
-was it written for chris but it was like jane oh connor all about black women's hair and the most ironic thing is that he
-rapped you once in that alley.
-
-so the next paragrah would be that right z
-
-so that you can bring shit out of the window which is something that is quite and that was quite thrilling you know.
-
-how do I write multi arg comands that work with the current api that we are using so that
-we can add and don't need to fucking change shitloads of stuff you know.
-
-so that we can do that shit super fast and insanely fast. that is one of the most insane
-systems that I have ever heard about and you can run it so fast that it is riddiculous.
-
+so he posed this questino. i know that i will become a monster if I can only get out of this shit. it is the most important thing
+ever and that is just such a help. regarding people who are closer and so he said the same thing for conny who is a truck
+driver and there is such an insane piple of that and so that is one of the most insane things that you can ever do.
+the country with the highest tax cap in the world sais this is something that would make sense you know and that is the reason why
+they do that shit you know.
 
 --]]
+
+
+
+

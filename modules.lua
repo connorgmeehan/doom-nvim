@@ -133,6 +133,7 @@ return {
     -- "indent",
     "latex",
     -- "litee",
+    "logging",
     -- "lsp",
     -- "markdown",
     "math_calculator",
