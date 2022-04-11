@@ -1,5 +1,7 @@
 local themes = {}
 
+
+-- https://github.com/catppuccin/nvim
 -- shaeinst/roshnivim-cs - Colorscheme for Neovim written in Lua, specially made for roshnivim with Tree-sitter support.
 -- rafamadriz/neon - Customizable colorscheme with excellent italic and bold support, dark and light variants. Made to work and look good with Tree-sitter.
 -- tomasiser/vim-code-dark - A dark color scheme heavily inspired by the look of the Dark+ scheme of Visual Studio Code.

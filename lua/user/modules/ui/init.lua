@@ -2,6 +2,7 @@ local ui = {}
 
 ui.packages = {
   ["nui.nvim"] = { "MunifTanjim/nui.nvim" },
+  -- https://github.com/sidebar-nvim/sidebar.nvim
 }
 
 -- TODO: use `popup.nvim`

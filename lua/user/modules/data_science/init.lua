@@ -14,6 +14,10 @@ local data_science = {}
 
 -- https://github.com/matplotlib/matplotlib
 -- https://github.com/pandas-dev/pandas
+--
+-- https://github.com/jalvesaq/Nvim-R
+--
+-- https://github.com/bfredl/nvim-ipy
 
 data_science.settings = {}
 

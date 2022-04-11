@@ -5,6 +5,7 @@ formatting.settings = {}
 
 formatting.packages = {
   ["vim-stripper"] = { "itspriddle/vim-stripper" }, -- strip whitespace on save
+  -- https://github.com/mhartington/formatter.nvim
 }
 
 ------------------------------

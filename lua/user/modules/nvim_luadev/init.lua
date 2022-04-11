@@ -2,6 +2,8 @@ local luadev = {}
 
 luadev.settings = {}
 
+-- https://github.com/neovim/lua-client
+
 luadev.packages = {
   -- folke/lua-dev.nvim -- already in core!!
   -- ["nlua.nvim"] = { "tjdevries/nlua.nvim" },

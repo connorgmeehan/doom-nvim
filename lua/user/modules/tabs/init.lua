@@ -1,6 +1,8 @@
 local tabs = {}
 
-tabs.packages = {}
+tabs.packages = {
+  -- https://github.com/Iron-E/nvim-tabmode
+}
 
 tabs.binds = {}
 
