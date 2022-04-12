@@ -3,6 +3,7 @@ local paths = {}
 paths.packages = {
   ["vim-rooter"] = { "airblade/vim-rooter" },
   -- { 'oberblastmeister/nvim-rooter' },
+  -- https://github.com/tzachar/cmp-fuzzy-path
 }
 
 -- paths.binds = {}

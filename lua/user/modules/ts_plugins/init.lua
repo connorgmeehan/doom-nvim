@@ -1,5 +1,5 @@
---   -- https://github.com/nvim-treesitter/nvim-treesitter-refactor -- very nice!!
---   https://github.com/nvim-treesitter/nvim-treesitter-textobjects
+-- https://github.com/nvim-treesitter/nvim-treesitter-refactor -- very nice!!
+-- https://github.com/nvim-treesitter/nvim-treesitter-textobjects
 -- https://github.com/s1n7ax/nvim-comment-frame
 -- git@github.com:akshettrj/ts-manipulator.nvim.git
 -- https://github.com/Bryley/docstr.nvim

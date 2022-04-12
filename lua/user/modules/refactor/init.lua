@@ -4,7 +4,6 @@ local refactor = {}
 -- https://github.com/clojure-vim/clj-refactor.nvim
 
 refactor.packages = {
-  -- https://github.com/nvim-treesitter/nvim-treesitter-refactor
   ["refactoring.nvim"] = {
     "ThePrimeagen/refactoring.nvim",
     requires = {

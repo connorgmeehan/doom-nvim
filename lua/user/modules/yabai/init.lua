@@ -12,7 +12,6 @@
 -- 2. create new custom `wm` mode so that I can use regular keybinds to modify windows.
 -- 3. leader > v > w -> wm_mode
 
-
 -- -- code for refactoring tele ext:
 -- -- USE THE BELOW TO SEE IF I CAN PIPE YABAI QUERIES INTO TELESCOPE?!
 -- local refactoring = require("refactoring")

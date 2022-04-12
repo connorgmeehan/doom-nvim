@@ -4,6 +4,10 @@ diagrams.settings = {}
 
 -- add ability to move blocks by specifying magnitude and direction quadrants sequences.
 
+-- create and position shapes by inputing coordinates or stuff that is sequential so that you
+-- can output shapes reasonably fast, and then have some kind of <TAB> through that allows you
+-- to jump between shapes quickly.
+
 -- create new vim mode for navigating boxes?
 
 -- would it be possible to use some kind of ascii paint lib to create more shapes and patterns and
