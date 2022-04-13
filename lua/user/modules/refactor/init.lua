@@ -2,9 +2,6 @@ local utils = require("doom.utils")
 
 local refactor = {}
 
--- https://github.com/ThePrimeagen/refactoring.nvim -- <<<<<<<<<<<< https://martinfowler.com/books/refactoring.html
--- https://github.com/clojure-vim/clj-refactor.nvim
-
 refactor.packages = {
   ["refactoring.nvim"] = {
     "ThePrimeagen/refactoring.nvim",
@@ -13,6 +10,7 @@ refactor.packages = {
       { "nvim-treesitter/nvim-treesitter" },
     },
   },
+  -- https://github.com/clojure-vim/clj-refactor.nvim
 }
 
 refactor.configs = {}
@@ -46,54 +44,61 @@ if require("doom.utils").is_module_enabled("whichkey") then
     {
       {
         "n",
-        name = "+NNN",
+        name = "+nnn",
         {
           {
             "r",
-            name = "refactor",
+            name = "+refactor",
             {
               -- NORMAL: Inline variable can also pick up the identifier currently under the cursor without visual mode
               {
                 "i",
                 [[ <Cmd>lua require('refactoring').refactor('Inline Variable')<CR>]],
+                name = "inline var",
                 { noremap = true, silent = true, expr = false },
               },
               -- VISUAL: Remaps for each of the four refactoring operations currently offered by the plugin
-              {
-                "e",
-                [[ <Esc><Cmd>lua require('refactoring').refactor('Extract Function')<CR>]],
-                { noremap = true, silent = true, expr = false },
-                mode = "v",
-              },
-              {
-                "f",
-                [[ <Esc><Cmd>lua require('refactoring').refactor('Extract Function To File')<CR>]],
-                { noremap = true, silent = true, expr = false },
-                mode = "v",
-              },
-              {
-                "v",
-                [[ <Esc><Cmd>lua require('refactoring').refactor('Extract Variable')<CR>]],
-                { noremap = true, silent = true, expr = false },
-                mode = "v",
-              },
-              {
-                "i",
-                [[ <Esc><Cmd>lua require('refactoring').refactor('Inline Variable')<CR>]],
-                { noremap = true, silent = true, expr = false },
-                mode = "v",
-              },
-              { -- prompt for a refactor to apply when the remap is triggered
-                "r",
-                [[ :lua require('refactoring').select_refactor()<CR> ]],
-                { noremap = true, silent = true, expr = false },
-              },
-              { -- remap to open the Telescope refactoring menu in visual mode
-                "r",
-                [[ <Esc><cmd>lua require('telescope').extensions.refactoring.refactors()<CR>]],
-                { noremap = true },
-                mode = "v",
-              },
+               {
+                 "e",
+                 [[ <Esc><Cmd>lua require('refactoring').refactor('Extract Function')<CR>]],
+                 { noremap = true, silent = true, expr = false },
+                name = "extract func",
+                 mode = "v",
+               },
+               {
+                 "f",
+                 [[ <Esc><Cmd>lua require('refactoring').refactor('Extract Function To File')<CR>]],
+                 { noremap = true, silent = true, expr = false },
+                name = "extract func to file",
+                 mode = "v",
+               },
+               {
+                 "v",
+                 [[ <Esc><Cmd>lua require('refactoring').refactor('Extract Variable')<CR>]],
+                 { noremap = true, silent = true, expr = false },
+                name = "extract var",
+                 mode = "v",
+               },
+               {
+                 "i",
+                 [[ <Esc><Cmd>lua require('refactoring').refactor('Inline Variable')<CR>]],
+                 { noremap = true, silent = true, expr = false },
+                name = "inline var",
+                 mode = "v",
+               },
+               { -- prompt for a refactor to apply when the remap is triggered
+                 "r",
+                 [[ :lua require('refactoring').select_refactor()<CR> ]],
+                 { noremap = true, silent = true, expr = false },
+                name = "prompt select"
+               },
+               { -- remap to open the Telescope refactoring menu in visual mode
+                 "r",
+                 [[ <Esc><cmd>lua require('telescope').extensions.refactoring.refactors()<CR>]],
+                 { noremap = true },
+                name = "open telescope",
+                 mode = "v",
+               },
             },
           },
         },
