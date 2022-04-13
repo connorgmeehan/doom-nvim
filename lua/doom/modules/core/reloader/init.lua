@@ -160,9 +160,7 @@ reloader.reload_lua_modules = function(quiet)
 end
 
 local function redo_packer_startup(old_plugins)
-  -- Redo packer startup
   dofile(vim.api.nvim_get_runtime_file("*/doom/modules/init.lua", false)[1])
-
   vim.defer_fn(function()
     vim.cmd("PackerClean")
   end, 0)
@@ -176,45 +174,44 @@ local function redo_packer_startup(old_plugins)
   end, 200)
 end
 
---- Reload the plugin definitions modules like modules.lua to automatically
---- install or uninstall plugins on changes
-reloader.reload_plugins_definitions = function()
-  local old_plugins = vim.deepcopy(packer_plugins)
-
-  if _doom and _doom.cmd_funcs then
-    _doom.cmd_funcs = {}
-  end
-
-  -- Silently reload plugins modules
+local function modules_silent_reload()
   reloader.reload_lua_module("doom.core.config", true)
   reloader.reload_lua_module("doom.core.config.modules", true)
   reloader.reload_lua_module("doom.modules", true)
   require("doom.core.config"):load()
+end
 
+--- Reload the plugin definitions modules like modules.lua to automatically
+--- install or uninstall plugins on changes
+reloader.reload_plugins_definitions = function()
+  local old_plugins = vim.deepcopy(packer_plugins)
+  if _doom and _doom.cmd_funcs then
+    _doom.cmd_funcs = {}
+  end
+  modules_silent_reload()
   redo_packer_startup(old_plugins)
+end
+
+local function config_pre_reload()
+  vim.cmd("hi clear")
+  if vim.fn.exists(":LspRestart") ~= 0 then
+    vim.cmd("silent! LspRestart")
+  end
+end
+
+local function config_post_reload()
+  vim.cmd("doautocmd VimEnter")
+  vim.cmd("doautocmd ColorScheme")
+  vim.cmd("doautocmd Syntax")
 end
 
 --- Reload all Neovim configurations
 reloader.reload_configs = function()
-  --- Clear highlighting
-  vim.cmd("hi clear")
-
-  --- Restart running language servers
-  if vim.fn.exists(":LspRestart") ~= 0 then
-    vim.cmd("silent! LspRestart")
-  end
-
+  config_pre_reload()
   reloader.reload_plugins_definitions()
-
-  --- Reload all loaded Lua modules
   reloader.reload_lua_modules(true)
-
-  --- Reload start plugins
   reload_runtime_files()
-
-  vim.cmd("doautocmd VimEnter")
-  vim.cmd("doautocmd ColorScheme")
-  vim.cmd("doautocmd Syntax")
+  config_post_reload()
 end
 
 --- Reload Neovim and simulate a new run
