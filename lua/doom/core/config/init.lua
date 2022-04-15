@@ -142,65 +142,304 @@ config.defaults = {
 
 -- }}}
 
+local function is_first_load()
+  return vim.tbl_isempty(doom or {})
+end
+
+local function apply_initial_vim_options()
+  vim.opt.hidden = true
+  vim.opt.updatetime = 200
+  vim.opt.timeoutlen = 400
+  vim.opt.background = "dark"
+  vim.opt.completeopt = {
+    "menu",
+    "menuone",
+    "preview",
+    "noinsert",
+    "noselect",
+  }
+  vim.opt.shortmess = "atsc"
+  vim.opt.inccommand = "split"
+  vim.opt.path = "**"
+  vim.opt.signcolumn = "auto:2-3"
+  vim.opt.foldcolumn = "auto:9"
+  vim.opt.colorcolumn = "80"
+  vim.opt.formatoptions:append("j")
+  vim.opt.fillchars = {
+    vert = "▕",
+    fold = " ",
+    eob = " ",
+    diff = "─",
+    msgsep = "‾",
+    foldopen = "▾",
+    foldclose = "▸",
+    foldsep = "│",
+  }
+  vim.opt.smartindent = true
+  vim.opt.copyindent = true
+  vim.opt.preserveindent = true
+  vim.opt.clipboard = "unnamedplus"
+  vim.opt.cursorline = true
+  vim.opt.splitright = false
+  vim.opt.splitbelow = true
+  vim.opt.scrolloff = 4
+  vim.opt.showmode = false
+  vim.opt.mouse = "a"
+  vim.opt.wrap = false
+  vim.opt.swapfile = false
+  vim.opt.number = true
+  vim.opt.relativenumber = true
+  vim.opt.expandtab = true
+  vim.opt.conceallevel = 0
+  vim.opt.foldenable = true
+  vim.opt.foldtext = require("doom.core.functions").sugar_folds()
+end
+
+local function apply_error_prone_or_verbose_options()
+  -- These are the few vim options we wrap directly, because their usual
+  -- interface is either error-prone or verbose.
+  vim.opt.shiftwidth = doom.indent
+  vim.opt.softtabstop = doom.indent
+  vim.opt.tabstop = doom.indent
+  if doom.guicolors then
+    if vim.fn.exists("+termguicolors") == 1 then
+      vim.opt.termguicolors = true
+    elseif vim.fn.exists("+guicolors") == 1 then
+      vim.opt.guicolors = true
+    end
+  end
+
+  if doom.auto_comment then
+    vim.opt.formatoptions:append("croj")
+  end
+  if doom.movement_wrap then
+    vim.cmd("set whichwrap+=<,>,[,],h,l")
+  end
+
+  if doom.undo_dir then
+    vim.opt.undofile = true
+    vim.opt.undodir = doom.undo_dir
+  else
+    vim.opt.undofile = false
+    vim.opt.undodir = nil
+  end
+end
+
 config.source = nil
 config.load = function()
   -- Set vim defaults on first load. To override these, the user can just
   -- override vim.opt in their own config, no bells or whistles attached.
-  local first_load = vim.tbl_isempty(doom or {})
-  if first_load then
-    vim.opt.hidden = true
-    vim.opt.updatetime = 200
-    vim.opt.timeoutlen = 400
-    vim.opt.background = "dark"
-    vim.opt.completeopt = {
-      "menu",
-      "menuone",
-      "preview",
-      "noinsert",
-      "noselect",
-    }
-    vim.opt.shortmess = "atsc"
-    vim.opt.inccommand = "split"
-    vim.opt.path = "**"
-    vim.opt.signcolumn = "auto:2-3"
-    vim.opt.foldcolumn = "auto:9"
-    vim.opt.colorcolumn = "80"
-    vim.opt.formatoptions:append("j")
-    vim.opt.fillchars = {
-      vert = "▕",
-      fold = " ",
-      eob = " ",
-      diff = "─",
-      msgsep = "‾",
-      foldopen = "▾",
-      foldclose = "▸",
-      foldsep = "│",
-    }
-    vim.opt.smartindent = true
-    vim.opt.copyindent = true
-    vim.opt.preserveindent = true
-    vim.opt.clipboard = "unnamedplus"
-    vim.opt.cursorline = true
-    vim.opt.splitright = false
-    vim.opt.splitbelow = true
-    vim.opt.scrolloff = 4
-    vim.opt.showmode = false
-    vim.opt.mouse = "a"
-    vim.opt.wrap = false
-    vim.opt.swapfile = false
-    vim.opt.number = true
-    vim.opt.relativenumber = true
-    vim.opt.expandtab = true
-    vim.opt.conceallevel = 0
-    vim.opt.foldenable = true
-    vim.opt.foldtext = require("doom.core.functions").sugar_folds()
-    doom = config.defaults
-    doom.packages = {} -- Extra packages
-    doom.cmds = {} -- Extra commands
-    doom.autocmds = {} -- Extra autocommands
-    doom.binds = {} -- Extra binds
-    doom.modules = {} -- Modules
+  if is_first_load() then
+    apply_initial_vim_options()
+    -- vim.opt.hidden = true
+    -- vim.opt.updatetime = 200
+    -- vim.opt.timeoutlen = 400
+    -- vim.opt.background = "dark"
+    -- vim.opt.completeopt = {
+    --   "menu",
+    --   "menuone",
+    --   "preview",
+    --   "noinsert",
+    --   "noselect",
+    -- }
+    -- vim.opt.shortmess = "atsc"
+    -- vim.opt.inccommand = "split"
+    -- vim.opt.path = "**"
+    -- vim.opt.signcolumn = "auto:2-3"
+    -- vim.opt.foldcolumn = "auto:9"
+    -- vim.opt.colorcolumn = "80"
+    -- vim.opt.formatoptions:append("j")
+    -- vim.opt.fillchars = {
+    --   vert = "▕",
+    --   fold = " ",
+    --   eob = " ",
+    --   diff = "─",
+    --   msgsep = "‾",
+    --   foldopen = "▾",
+    --   foldclose = "▸",
+    --   foldsep = "│",
+    -- }
+    -- vim.opt.smartindent = true
+    -- vim.opt.copyindent = true
+    -- vim.opt.preserveindent = true
+    -- vim.opt.clipboard = "unnamedplus"
+    -- vim.opt.cursorline = true
+    -- vim.opt.splitright = false
+    -- vim.opt.splitbelow = true
+    -- vim.opt.scrolloff = 4
+    -- vim.opt.showmode = false
+    -- vim.opt.mouse = "a"
+    -- vim.opt.wrap = false
+    -- vim.opt.swapfile = false
+    -- vim.opt.number = true
+    -- vim.opt.relativenumber = true
+    -- vim.opt.expandtab = true
+    -- vim.opt.conceallevel = 0
+    -- vim.opt.foldenable = true
+    -- vim.opt.foldtext = require("doom.core.functions").sugar_folds()
+    config.initiate_doom_table()
+    -- doom = config.defaults
+    -- doom.packages = {} -- Extra packages
+    -- doom.cmds = {} -- Extra commands
+    -- doom.autocmds = {} -- Extra autocommands
+    -- doom.binds = {} -- Extra binds
+    -- doom.modules = {} -- Modules
+    --
+    -- -- @type PackerSpec
+    -- -- @field 1 string Github `user/repositoryname`
+    -- -- @field opt boolean|nil Whether or not this package is optional (loaded manually or on startup)
+    -- -- @field commit string|nil Commit sha to pin this package to
+    --
+    -- -- Add doom.use helper function
+    -- -- @param  string|packer_spec PackerSpec
+    -- doom.use_package = function(...)
+    --   local arg = { ... }
+    --   -- Get table of packages via git repository name
+    --   local packages_to_add = vim.tbl_map(function(t)
+    --     return type(t) == "string" and t or t[1]
+    --   end, arg)
+    --
+    --   -- Predicate returns false if the package needs to be overriden
+    --   local package_override_predicate = function(t)
+    --     return not vim.tbl_contains(packages_to_add, t[1])
+    --   end
+    --
+    --   -- Iterate over existing packages, removing all packages that are about to be overriden
+    --   doom.packages = vim.tbl_filter(package_override_predicate, doom.packages)
+    --
+    --   for _, packer_spec in ipairs(arg) do
+    --     table.insert(
+    --       doom.packages,
+    --       type(packer_spec) == "string" and { packer_spec } or packer_spec
+    --     )
+    --   end
+    -- end
+    --
+    -- doom.use_keybind = function(...)
+    --   local arg = { ... }
+    --   for _, bind in ipairs(arg) do
+    --     table.insert(doom.binds, bind)
+    --   end
+    -- end
+    --
+    -- doom.use_cmd = function(...)
+    --   local arg = { ... }
+    --   for _, cmd in ipairs(arg) do
+    --     if type(cmd[1] == "string") then
+    --       doom.cmds[cmd[1]] = cmd
+    --     elseif cmd ~= nil then
+    --       doom.use_cmd(unpack(cmd))
+    --     end
+    --   end
+    -- end
+    --
+    -- doom.use_autocmd = function(...)
+    --   local arg = { ... }
+    --   for _, autocmd in ipairs(arg) do
+    --     if type(autocmd[1]) == "string" and type(autocmd[2]) == "string" then
+    --       local key = string.format("%s-%s", autocmd[1], autocmd[2])
+    --       doom.autocmds[key] = autocmd
+    --     elseif autocmd ~= nil then
+    --       doom.use_autocmd(unpack(autocmd))
+    --     end
+    --   end
+    -- end
+  end -- first load
+
+  -- todo: refactor this into `refresh_doom_modules_table`
+  config.compile_doom_modules()
+
+  -- -- Combine core modules with user-enabled modules
+  -- local all_modules = vim.tbl_deep_extend("keep", {
+  --   core = {
+  --     "doom",
+  --     "nest",
+  --     "treesitter",
+  --     "reloader",
+  --   },
+  -- }, enabled_modules)
+  --
+  -- for section_name, section_modules in pairs(all_modules) do
+  --   for _, module_name in pairs(section_modules) do
+  --     -- Special case for user folder, resolves to `lua/user/modules`
+  --     local root_folder = section_name == "user" and "user.modules"
+  --       or ("doom.modules.%s"):format(section_name)
+  --
+  --     local ok, result = xpcall(
+  --       require,
+  --       debug.traceback,
+  --       ("%s.%s"):format(root_folder, module_name)
+  --     )
+  --     if ok then
+  --       doom.modules[module_name] = result
+  --     else
+  --       local log = require("doom.utils.logging")
+  --       log.error(
+  --         string.format(
+  --           "There was an error loading module '%s.%s'. Traceback:\n%s",
+  --           section_name,
+  --           module_name,
+  --           result
+  --         )
+  --       )
+  --     end
+  --   end
+  -- end
+
+  config.apply_user_config()
+  -- -- Execute user config, log errors if any occur
+  -- local ok, err = xpcall(dofile, debug.traceback, config.source)
+  -- local log = require("doom.utils.logging")
+  -- if not ok and err then
+  --   log.error("Error while running `config.lua. Traceback:\n" .. err)
+  -- end
+
+  -- Check plugins updates on start if enabled.
+  if doom.check_updates then
+    require("doom.core.functions").check_updates()
   end
+
+  if is_first_load() then
+    apply_error_prone_or_verbose_options()
+  end
+  -- -- These are the few vim options we wrap directly, because their usual
+  -- -- interface is either error-prone or verbose.
+  -- if is_first_load() then
+  --   vim.opt.shiftwidth = doom.indent
+  --   vim.opt.softtabstop = doom.indent
+  --   vim.opt.tabstop = doom.indent
+  --   if doom.guicolors then
+  --     if vim.fn.exists("+termguicolors") == 1 then
+  --       vim.opt.termguicolors = true
+  --     elseif vim.fn.exists("+guicolors") == 1 then
+  --       vim.opt.guicolors = true
+  --     end
+  --   end
+  --
+  --   if doom.auto_comment then
+  --     vim.opt.formatoptions:append("croj")
+  --   end
+  --   if doom.movement_wrap then
+  --     vim.cmd("set whichwrap+=<,>,[,],h,l")
+  --   end
+  --
+  --   if doom.undo_dir then
+  --     vim.opt.undofile = true
+  --     vim.opt.undodir = doom.undo_dir
+  --   else
+  --     vim.opt.undofile = false
+  --     vim.opt.undodir = nil
+  --   end
+  -- end
+end
+
+config.initiate_doom_table = function()
+  doom = config.defaults
+  doom.packages = {} -- Extra packages
+  doom.cmds = {} -- Extra commands
+  doom.autocmds = {} -- Extra autocommands
+  doom.binds = {} -- Extra binds
+  doom.modules = {} -- Modules
 
   -- @type PackerSpec
   -- @field 1 string Github `user/repositoryname`
@@ -258,7 +497,18 @@ config.load = function()
       end
     end
   end
+end
 
+config.apply_user_config = function()
+  -- Execute user config, log errors if any occur
+  local ok, err = xpcall(dofile, debug.traceback, config.source)
+  local log = require("doom.utils.logging")
+  if not ok and err then
+    log.error("Error while running `config.lua. Traceback:\n" .. err)
+  end
+end
+
+config.compile_doom_modules = function()
   -- Combine core modules with user-enabled modules
   local all_modules = vim.tbl_deep_extend("keep", {
     core = {
@@ -293,49 +543,6 @@ config.load = function()
           )
         )
       end
-    end
-  end
-  -- end -- first load old
-
-  -- Execute user config, log errors if any occur
-  local ok, err = xpcall(dofile, debug.traceback, config.source)
-  local log = require("doom.utils.logging")
-  if not ok and err then
-    log.error("Error while running `config.lua. Traceback:\n" .. err)
-  end
-
-  -- Check plugins updates on start if enabled.
-  if doom.check_updates then
-    require("doom.core.functions").check_updates()
-  end
-
-  -- These are the few vim options we wrap directly, because their usual
-  -- interface is either error-prone or verbose.
-  if first_load then
-    vim.opt.shiftwidth = doom.indent
-    vim.opt.softtabstop = doom.indent
-    vim.opt.tabstop = doom.indent
-    if doom.guicolors then
-      if vim.fn.exists("+termguicolors") == 1 then
-        vim.opt.termguicolors = true
-      elseif vim.fn.exists("+guicolors") == 1 then
-        vim.opt.guicolors = true
-      end
-    end
-
-    if doom.auto_comment then
-      vim.opt.formatoptions:append("croj")
-    end
-    if doom.movement_wrap then
-      vim.cmd("set whichwrap+=<,>,[,],h,l")
-    end
-
-    if doom.undo_dir then
-      vim.opt.undofile = true
-      vim.opt.undodir = doom.undo_dir
-    else
-      vim.opt.undofile = false
-      vim.opt.undodir = nil
     end
   end
 end
