@@ -177,8 +177,8 @@ end
 local function modules_silent_reload()
   reloader.reload_lua_module("doom.core.config", true)
   reloader.reload_lua_module("doom.core.config.modules", true)
-  reloader.reload_lua_module("doom.modules", true)
   require("doom.core.config"):load()
+  reloader.reload_lua_module("doom.modules", false)
 end
 
 --- Reload the plugin definitions modules like modules.lua to automatically
