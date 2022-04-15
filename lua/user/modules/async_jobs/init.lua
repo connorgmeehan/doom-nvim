@@ -1,4 +1,13 @@
 local jobs = {}
+
+
+-- https://github.com/skywind3000/asynctasks.vim
+-- https://github.com/GustavoKatel/telescope-asynctasks.nvim
+
+
+
+
+
 ------------------------------
 ---       ASYNC JOBS       ---
 ------------------------------

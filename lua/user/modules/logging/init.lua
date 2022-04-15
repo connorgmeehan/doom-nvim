@@ -1,6 +1,9 @@
 local logging = {}
 
-logging.packages = {}
+logging.packages = {
+  -- does vlog nvim already exist in core?!
+  -- ["vlog.nvim"] = {"tjdevries/vlog.nvim"}, -- Single file, no dependency, easy copy & paste log file to add to your Neovim Lua plugins.
+}
 
 logging.binds = {}
 

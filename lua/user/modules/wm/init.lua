@@ -48,3 +48,35 @@
 --     },
 -- })
 
+local wm = {}
+
+wm.packages = {}
+
+wm.binds = {}
+
+if require("doom.utils").is_module_enabled("whichkey") then
+  table.insert(wm.binds, {
+    "<leader>",
+    name = "+prefix",
+    {
+      {
+        "n",
+        name = "+nnn",
+        {
+          {
+            {
+              "w",
+              name = "+wm",
+              { "h", [[ ... ]], name = "???" },
+              { "j", [[ ... ]], name = "???" },
+              { "k", [[ ... ]], name = "???" },
+              { "l", [[ ... ]], name = "???" },
+            },
+          },
+        },
+      },
+    },
+  })
+end
+
+return wm

@@ -2,6 +2,8 @@ local tabs = {}
 
 tabs.packages = {
   -- https://github.com/Iron-E/nvim-tabmode
+  -- https://github.com/seblj/nvim-tabline
+  -- https://github.com/jose-elias-alvarez/buftabline.nvim
 }
 
 tabs.binds = {}
