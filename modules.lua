@@ -178,6 +178,7 @@ return {
     -- "websearch",
     "wildmenu",
     "windows",
+    "wm",
   },
 }
 
