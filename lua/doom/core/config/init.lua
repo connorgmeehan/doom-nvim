@@ -200,98 +200,102 @@ config.load = function()
     doom.autocmds = {} -- Extra autocommands
     doom.binds = {} -- Extra binds
     doom.modules = {} -- Modules
+  end
 
-    -- @type PackerSpec
-    -- @field 1 string Github `user/repositoryname`
-    -- @field opt boolean|nil Whether or not this package is optional (loaded manually or on startup)
-    -- @field commit string|nil Commit sha to pin this package to
+  -- @type PackerSpec
+  -- @field 1 string Github `user/repositoryname`
+  -- @field opt boolean|nil Whether or not this package is optional (loaded manually or on startup)
+  -- @field commit string|nil Commit sha to pin this package to
 
-    -- Add doom.use helper function
-    -- @param  string|packer_spec PackerSpec
-    doom.use_package = function(...)
-      local arg = {...}
-      -- Get table of packages via git repository name
-      local packages_to_add = vim.tbl_map(function (t)
-        return type(t) == 'string' and t or t[1]
-      end, arg)
+  -- Add doom.use helper function
+  -- @param  string|packer_spec PackerSpec
+  doom.use_package = function(...)
+    local arg = { ... }
+    -- Get table of packages via git repository name
+    local packages_to_add = vim.tbl_map(function(t)
+      return type(t) == "string" and t or t[1]
+    end, arg)
 
-      -- Predicate returns false if the package needs to be overriden
-      local package_override_predicate = function(t)
-        return not vim.tbl_contains(packages_to_add, t[1])
-      end
-
-      -- Iterate over existing packages, removing all packages that are about to be overriden
-      doom.packages = vim.tbl_filter(package_override_predicate, doom.packages)
-
-      for _, packer_spec in ipairs(arg) do
-        table.insert(doom.packages, type(packer_spec) == "string" and { packer_spec } or packer_spec)
-      end
+    -- Predicate returns false if the package needs to be overriden
+    local package_override_predicate = function(t)
+      return not vim.tbl_contains(packages_to_add, t[1])
     end
 
-    doom.use_keybind = function(...)
-      local arg = {...}
-      for _, bind in ipairs(arg) do
-        table.insert(doom.binds, bind)
-      end
+    -- Iterate over existing packages, removing all packages that are about to be overriden
+    doom.packages = vim.tbl_filter(package_override_predicate, doom.packages)
+
+    for _, packer_spec in ipairs(arg) do
+      table.insert(doom.packages, type(packer_spec) == "string" and { packer_spec } or packer_spec)
     end
+  end
 
-    doom.use_cmd = function(...)
-      local arg = {...}
-      for _, cmd in ipairs(arg) do
-        if type(cmd[1] == "string") then
-          doom.cmds[cmd[1]] = cmd;
-        elseif cmd ~= nil then
-          doom.use_cmd(unpack(cmd))
-        end
-      end
+  doom.use_keybind = function(...)
+    local arg = { ... }
+    for _, bind in ipairs(arg) do
+      table.insert(doom.binds, bind)
     end
+  end
 
-    doom.use_autocmd = function(...)
-      local arg = {...}
-      for _, autocmd in ipairs(arg) do
-        if type(autocmd[1]) == 'string' and type(autocmd[2]) == 'string' then
-          local key = string.format('%s-%s', autocmd[1], autocmd[2])
-          doom.autocmds[key] = autocmd
-        elseif autocmd ~= nil then
-          doom.use_autocmd(unpack(autocmd))
-        end
-      end
-    end
-
-    -- Combine core modules with user-enabled modules
-    local all_modules = vim.tbl_deep_extend('keep', {
-      core = {
-        'doom',
-        'nest',
-        'treesitter',
-        'reloader',
-      }
-    }, enabled_modules)
-
-    for section_name, section_modules in pairs(all_modules) do
-      for _, module_name in pairs(section_modules) do
-        -- Special case for user folder, resolves to `lua/user/modules`
-        local root_folder = section_name == "user"
-          and "user.modules"
-          or ("doom.modules.%s"):format(section_name)
-
-        local ok, result = xpcall(require, debug.traceback, ("%s.%s"):format(root_folder, module_name))
-        if ok then
-          doom.modules[module_name] = result
-        else
-          local log = require("doom.utils.logging")
-          log.error(
-            string.format(
-              "There was an error loading module '%s.%s'. Traceback:\n%s",
-              section_name,
-              module_name,
-              result
-            )
-          )
-        end
+  doom.use_cmd = function(...)
+    local arg = { ... }
+    for _, cmd in ipairs(arg) do
+      if type(cmd[1] == "string") then
+        doom.cmds[cmd[1]] = cmd
+      elseif cmd ~= nil then
+        doom.use_cmd(unpack(cmd))
       end
     end
   end
+
+  doom.use_autocmd = function(...)
+    local arg = { ... }
+    for _, autocmd in ipairs(arg) do
+      if type(autocmd[1]) == "string" and type(autocmd[2]) == "string" then
+        local key = string.format("%s-%s", autocmd[1], autocmd[2])
+        doom.autocmds[key] = autocmd
+      elseif autocmd ~= nil then
+        doom.use_autocmd(unpack(autocmd))
+      end
+    end
+  end
+
+  -- Combine core modules with user-enabled modules
+  local all_modules = vim.tbl_deep_extend("keep", {
+    core = {
+      "doom",
+      "nest",
+      "treesitter",
+      "reloader",
+    },
+  }, enabled_modules)
+
+  for section_name, section_modules in pairs(all_modules) do
+    for _, module_name in pairs(section_modules) do
+      -- Special case for user folder, resolves to `lua/user/modules`
+      local root_folder = section_name == "user" and "user.modules"
+        or ("doom.modules.%s"):format(section_name)
+
+      local ok, result = xpcall(
+        require,
+        debug.traceback,
+        ("%s.%s"):format(root_folder, module_name)
+      )
+      if ok then
+        doom.modules[module_name] = result
+      else
+        local log = require("doom.utils.logging")
+        log.error(
+          string.format(
+            "There was an error loading module '%s.%s'. Traceback:\n%s",
+            section_name,
+            module_name,
+            result
+          )
+        )
+      end
+    end
+  end
+  -- end -- first load old
 
   -- Execute user config, log errors if any occur
   local ok, err = xpcall(dofile, debug.traceback, config.source)
