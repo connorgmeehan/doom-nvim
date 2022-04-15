@@ -10,13 +10,16 @@ local ghq = {}
 ghq.settings = {}
 
 ghq.packages = {
-  ["telescope-ghq.nvim"] = { "nvim-telescope/telescope-ghq.nvim" },
+  ["telescope-ghq.nvim"] = { "nvim-telescope/telescope-ghq.nvim", after = { "telescope.nvim" } },
 }
-for _, ext in ipairs(ghq.packages) do
-  ext["after"] = after_telescope
-end
+
+-- for _, ext in ipairs(ghq.packages) do
+--   ext["after"] = after_telescope
+-- end
 
 ghq.configs = {}
-ghq.configs["telescope-ghq.nvim"] = load_extension_helper("ghq")
+ghq.configs["telescope-github.nvim"] = function()
+  require("telescope").load_extension("repo")
+end
 
 return ghq

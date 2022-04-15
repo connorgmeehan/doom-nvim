@@ -22,7 +22,7 @@ snippets.configs = {}
 snippets.configs["LuaSnip"] = function()
   local ls = require("luasnip")
   -- ls.config.set_config(snippets.settings)
-  ls.snippets = require("luasnip_snippets").load_snippets()
+  -- ls.snippets = require("luasnip_snippets").load_snippets()
   require("luasnip.loaders.from_vscode").load()
 end
 

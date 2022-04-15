@@ -13,25 +13,48 @@ local gh = code .. "github.com/"
 
 extensions.settings = {}
 
-extensions.packages = {
-  ["telescope-repo.nvim"] = { up.ghq.github .. "cljoly/telescope-repo.nvim" },
-  ["telescope-packer.nvim"] = { gh .. "nvim-telescope/telescope-packer.nvim" },
-  ["neorg-telescope"] = { "nvim-neorg/neorg-telescope" },
-  -- ["telescope-ghq.nvim"] = { "nvim-telescope/telescope-ghq.nvim" },
-  ["telescope-github.nvim"] = { "nvim-telescope/telescope-github.nvim" }, -- requires https://github.com/cli/cli#installation
-  ["telescope-z.nvim"] = { "nvim-telescope/telescope-z.nvim" }, -- navigate with z compatibles
-  ["telescope-tele-tabby.nvim"] = { "TC72/telescope-tele-tabby.nvim" }, -- manage tabs
-}
-for _, ext in ipairs(extensions.packages) do
-  ext["after"] = after_telescope
-end
+if utils.is_module_enabled("telescope") then
+  extensions.packages = {
+    ["telescope-repo.nvim"] = {
+      up.ghq.github .. "cljoly/telescope-repo.nvim",
+      after = { "telescope.nvim" },
+    },
+    ["telescope-packer.nvim"] = {
+      up.ghq.github .. "nvim-telescope/telescope-packer.nvim",
+      after = { "telescope.nvim" },
+    },
+    ["neorg-telescope"] = { "nvim-neorg/neorg-telescope", after = { "telescope.nvim" } },
+    ["telescope-github.nvim"] = {
+      "nvim-telescope/telescope-github.nvim",
+      after = { "telescope.nvim" },
+    }, -- requires https://github.com/cli/cli#installation
+    ["telescope-z.nvim"] = { "nvim-telescope/telescope-z.nvim", after = { "telescope.nvim" } }, -- navigate with z compatibles
+    ["telescope-tele-tabby.nvim"] = {
+      "TC72/telescope-tele-tabby.nvim",
+      after = { "telescope.nvim" },
+    }, -- manage tabs
+    -- ["telescope-ghq.nvim"] = { "nvim-telescope/telescope-ghq.nvim", after = { "telescope.nvim" } },
+  }
 
-extensions.configs = {}
-extensions.configs["telescope-repo.nvim"] = load_extension_helper("repo")
-extensions.configs["telescope-packer.nvim"] = load_extension_helper("packer")
-extensions.configs["neorg-telescope"] = load_extension_helper("neorg")
--- extensions["telescope-ghq.nvim"] = load_extension_helper("ghq")
-extensions.configs["telescope-github.nvim"] = load_extension_helper("github")
+  -- for _, ext in ipairs(extensions.packages) do
+  --   ext["after"] = after_telescope
+  -- end
+
+  extensions.configs = {}
+
+  extensions.configs["telescope-repo.nvim"] = function()
+    require("telescope").load_extension("repo")
+  end
+  extensions.configs["telescope-packer.nvim"] = function()
+    require("telescope").load_extension("packer")
+  end
+  extensions.configs["neorg-telescope"] = function()
+    require("telescope").load_extension("neorg")
+  end
+  extensions.configs["telescope-github.nvim"] = function()
+    require("telescope").load_extension("gh")
+  end
+end
 
 -- TODO: neorg
 

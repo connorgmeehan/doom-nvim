@@ -9,4 +9,24 @@ editing.packages = {
   -- https://github.com/sindrets/winshift.nvim
 }
 
+editing.binds = {}
+
+if require("doom.utils").is_module_enabled("whichkey") then
+  table.insert(editing.binds, {
+    "<leader>",
+    name = "+prefix",
+    {
+      {
+        "f",
+        name = "+file",
+        {
+          { "a", [[ :w!<cr> ]], name = "Force Save" },
+          { "A", [[ :wall!<cr> ]], name = "Force Save All" },
+        },
+      },
+    },
+  })
+end
+
+
 return editing

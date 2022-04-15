@@ -9,6 +9,7 @@ refactor.packages = {
       { "nvim-lua/plenary.nvim" },
       { "nvim-treesitter/nvim-treesitter" },
     },
+    after = { "telescope.nvim" },
   },
   -- https://github.com/clojure-vim/clj-refactor.nvim
 }
