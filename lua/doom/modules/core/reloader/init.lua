@@ -123,9 +123,7 @@ local function reset_vars()
   if _doom and _doom.cmd_funcs then
     _doom.cmd_funcs = {}
   end
-
   doom.packages = {}
-
   for k, _ in pairs(package.loaded) do
     if string.match(k, "^doom%.core") or string.match(k, "^doom%.modules") then
       package.loaded[k] = nil
@@ -221,6 +219,23 @@ reloader.settings = {
 reloader.packages = {}
 reloader.configs = {}
 
+reloader.binds = {
+  {
+    "<leader>",
+    name = "+prefix",
+    {
+      "r",
+      name = "+reloader",
+      {
+        "p",
+        [[:lua require("plenary.reload").reload_module("")<left><left>]],
+        name = "reload module",
+        options = { silent = false },
+      },
+    },
+  },
+}
+
 reloader.cmds = {
   {
     "DoomReload",
@@ -229,9 +244,10 @@ reloader.cmds = {
     end,
   },
   {
-    "DoomReload",
-    function()
-      reloader.full_reload()
+    -- TODO: allow for taking arguments with `make_cmd` in utils
+    "DoomReloadSinglePlugin",
+    function(module_name)
+      require("plenary.reload").reload_module(module_name)
     end,
   },
 }
