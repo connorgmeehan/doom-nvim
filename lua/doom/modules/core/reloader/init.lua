@@ -106,14 +106,20 @@ reloader.reload_lua_modules = function(quiet)
   end
 end
 
---- Reload the plugin definitions modules like modules.lua to automatically
---- install or uninstall plugins on changes
-reloader.reload_plugins_definitions = function()
-  local old_modules = require("doom.core.config.modules").modules
-  local old_packages = vim.tbl_map(function(t)
-    return t[1]
-  end, doom.packages)
+reloader.redo_packer = function()
+  -- dofile(vim.api.nvim_get_runtime_file("*/doom/modules/init.lua", false)[1])
+  vim.defer_fn(function()
+    vim.cmd("PackerClean")
+  end, 0)
+  vim.defer_fn(function()
+    vim.cmd("PackerInstall")
+  end, 200)
+  vim.defer_fn(function()
+    vim.cmd("PackerCompile")
+  end, 200)
+end
 
+local function reset_vars()
   if _doom and _doom.cmd_funcs then
     _doom.cmd_funcs = {}
   end
@@ -125,35 +131,51 @@ reloader.reload_plugins_definitions = function()
       package.loaded[k] = nil
     end
   end
+end
 
+local function reload_core_and_reset_doom_table()
   -- Reload core entry point
   reloader.reload_lua_module("doom.core", true)
   -- Reload which modules are enabled
   reloader.reload_lua_module("doom.core.config.modules", true)
-
   -- Prepare the enabled modules, reload the user config.lua
   reloader.reload_lua_module("doom.core.config", true)
   require("doom.core.config"):load()
-
   -- Install, bind, add autocmds etc for all modules and user configs
   reloader.reload_lua_module("doom.modules", true)
   require("doom.modules"):load_modules()
   require("doom.modules"):handle_user_config()
+end
 
-  -- VimEnter to emulate loading neovim
-  vim.cmd("doautocmd VimEnter")
-
-  -- Either re-compile plugin configs or install new plugins
+-- Either re-compile plugin configs or install new plugins
+local function check_packer_delta(old_modules, old_packages)
   local modules = require("doom.core.config.modules").modules
   local packages = vim.tbl_map(function(t)
     return t[1]
   end, doom.packages)
-  local needs_install = vim.deep_equal(modules, old_modules) and vim.deep_equal(packages, old_packages)
+  local needs_install = vim.deep_equal(modules, old_modules)
+    and vim.deep_equal(packages, old_packages)
   if needs_install then
-    log.warn('reloader: If you made changes to the config of a plugin, run `:PackerCompile` to execute these changes.')
+    log.warn(
+      "reloader: If you made changes to the config of a plugin, run `:PackerCompile` to execute these changes."
+    )
   else
-    log.warn('reloader: Run `:PackerSync` to install and configure new plugins.')
+    log.warn("reloader: Run `:PackerSync` to install and configure new plugins.")
   end
+end
+
+--- Reload the plugin definitions modules like modules.lua to automatically
+--- install or uninstall plugins on changes
+reloader.reload_plugins_definitions = function()
+  local old_modules = require("doom.core.config.modules").modules
+  local old_packages = vim.tbl_map(function(t)
+    return t[1]
+  end, doom.packages)
+  reset_vars()
+  reload_core_and_reset_doom_table()
+  -- VimEnter to emulate loading neovim
+  vim.cmd("doautocmd VimEnter")
+  check_packer_delta(old_modules, old_packages)
 end
 
 local function config_pre_reload()
@@ -206,6 +228,12 @@ reloader.cmds = {
       reloader.full_reload()
     end,
   },
+  {
+    "DoomReload",
+    function()
+      reloader.full_reload()
+    end,
+  },
 }
 
 reloader.autocmds = function()
@@ -229,4 +257,5 @@ reloader.autocmds = function()
 
   return autocmds
 end
+
 return reloader
