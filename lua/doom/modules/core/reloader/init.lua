@@ -174,8 +174,6 @@ end
 reloader.reload_configs = function()
   config_pre_reload()
   reloader.reload_plugins_definitions()
-  reloader.reload_lua_modules(true)
-  -- reload_runtime_files()
   config_post_reload()
 end
 
