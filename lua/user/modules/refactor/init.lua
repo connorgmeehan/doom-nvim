@@ -32,9 +32,9 @@ refactor.configs["refactoring.nvim"] = function()
       java = true,
     },
   })
-  if utils.is_module_enabled("telescope") then
-    require("telescope").load_extension("refactoring")
-  end
+  -- if utils.is_module_enabled("telescope") then
+  --   require("telescope").load_extension("refactoring")
+  -- end
 end
 
 refactor.binds = {}
