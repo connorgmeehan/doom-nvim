@@ -7,6 +7,12 @@ local filename = "config.lua"
 
 config.source = nil
 
+-- Path cases:
+--   1. stdpath('config')/../doom-nvim/config.lua
+--   2. stdpath('config')/config.lua
+--   3. <runtimepath>/doom-nvim/config.lua
+config.source = utils.find_config(filename)
+
 -- TODO: Consider moving this to its own file.
 -- {{{ Default doom_config values
 
@@ -361,12 +367,6 @@ config.compile_doom_modules = function()
     end
   end
 end
-
--- Path cases:
---   1. stdpath('config')/../doom-nvim/config.lua
---   2. stdpath('config')/config.lua
---   3. <runtimepath>/doom-nvim/config.lua
-config.source = utils.find_config(filename)
 
 return config
 
