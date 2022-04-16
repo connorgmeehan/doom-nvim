@@ -10,6 +10,7 @@ git.packages = {
   -- ["gitignore-grabber.nvim"] = { 'antonk52/gitignore-grabber.nvim' },
   -- ["cmp-git"] = { 'petertriho/cmp-git' }, -- wip / unstable..
   -- https://github.com/ThePrimeagen/git-worktree.nvim
+    -- https://github.com/nickgerace/gfold
 }
 
 return git
