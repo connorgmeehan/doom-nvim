@@ -48,9 +48,9 @@ if utils.is_module_enabled("telescope") then
   extensions.configs["telescope-packer.nvim"] = function()
     require("telescope").load_extension("packer")
   end
-  extensions.configs["neorg-telescope"] = function()
-    require("telescope").load_extension("neorg")
-  end
+  -- extensions.configs["neorg-telescope"] = function()
+  --   require("telescope").load_extension("neorg")
+  -- end
   extensions.configs["telescope-github.nvim"] = function()
     require("telescope").load_extension("gh")
   end

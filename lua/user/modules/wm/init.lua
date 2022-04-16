@@ -52,6 +52,8 @@ local wm = {}
 
 wm.packages = {}
 
+
+
 wm.binds = {}
 
 if require("doom.utils").is_module_enabled("whichkey") then
@@ -67,7 +69,7 @@ if require("doom.utils").is_module_enabled("whichkey") then
             {
               "w",
               name = "+wm",
-              { "l", [[ :lua print("wm hello")<cr> ]], name = "wm hello" },
+              { "b", [[ :lua print("wm hello")<cr> ]], name = "wm hello" },
             },
           },
         },
