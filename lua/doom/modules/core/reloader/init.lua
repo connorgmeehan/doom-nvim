@@ -275,16 +275,20 @@ reloader.autocmds = function()
   -- AUTO RELOAD PLUGIN DURING DEVEPMENT
   table.insert(autocmds, {
     "BufEnter,BufReadPost",
-    "*.lua",
+    "*.lua", -- specify dir where you have your plugins locally?
     function()
+      -- TODO:
+      --
+      --  - check match for telescope always in case plugin has embedded telescop extension.
+
       local cwd = vim.fn.getcwd()
       local cwd_tail = nil -- the cwd dir name
       local buf_fname = vim.api.nvim_buf_get_name(0)
       local cwd_lua_path = string.format("%s%slua", cwd, system.sep)
-      local sp = cwd .. "/lua"
+      local cwd_lua_subdir = cwd .. "/lua"
       local scan_dir = require("plenary.scandir").scan_dir
       local modules_under_lua = scan_dir(
-        sp,
+        cwd_lua_subdir,
         { search_pattern = ".", depth = 1, hidden = false, add_dirs = true } -- only_dirs
       )
 
@@ -304,24 +308,70 @@ reloader.autocmds = function()
 
       -- match lua/* to cwd dir name
       local cwd_tail_lua_match
+      local telescope_match = false
+
       for _, lua_entry in ipairs(modules_under_lua) do
+        if lua_entry == "telescope" then
+          telescope_match = true
+        end
         local match = string.match(cwd_tail, string.format("%s", utils.escape_str(lua_entry)))
+
         if match ~= nil then
           cwd_tail_lua_match = match
         end
       end
 
-      -- TODO: if regular match reload module name
-      -- then we assume this is the module_name key
-      -- move on to check if module_name exists in package.loaded
-      -- print("!!!", cwd_tail_lua_match)
+      local is_telescope_ext_only = cwd_tail_lua_match == "telescope" and telescope_match
+
+      print(
+        "CWD:",
+        cwd_tail,
+        ", LUA MATCH:",
+        cwd_tail_lua_match,
+        ", t: ",
+        telescope_match,
+        ", isext: ",
+        is_telescope_ext_only
+      )
+
+      -- get dir name for extension if it exists
+      local modules_under_tele_ext
+      if cwd_tail_lua_match == "telescope" or telescope_match then
+        modules_under_tele_ext = scan_dir(
+          cwd_lua_subdir .. "/telescope/_extensions",
+          {
+            search_pattern = ".",
+            depth = 1,
+            hidden = false,
+            add_dirs = true,
+          } -- only_dirs
+        )
+      end
+
+      -- -- check package.loaded
+      -- local matcher
+      -- if true then
+      --   matcher = function(pack)
+      --     return string.find(pack, cwd_tail_lua_match, 1, true)
+      --   end
+      -- else
+      --   matcher = function(pack)
+      --     return string.find(pack, "^" .. cwd_tail_lua_match)
+      --   end
+      -- end
+      -- for pack, _ in pairs(package.loaded) do
+      --   if matcher(pack) then
+      --     print("!! match: ", pack)
+      --   end
+      -- end
 
       -- TODO: if telescope extension ??
+      -- if cwd tail match == telescope > then scan for the `telescope/_extension/<name>`
 
       -- reload module name here
       -- require("plenary.reload").reload_module(module_name)
 
-      log.warn(string.format(
+      local log_str = string.format(
         [[%s
 --------
 CWD_DIR:    %s
@@ -334,7 +384,9 @@ MATCH:    %s
         -- sp,
         -- vim.inspect(modules_under_lua),
         cwd_tail_lua_match
-      ))
+      )
+
+      -- log.warn(log_str)
     end,
   })
 
