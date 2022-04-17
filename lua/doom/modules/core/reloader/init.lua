@@ -277,9 +277,8 @@ reloader.autocmds = function()
     "BufEnter,BufReadPost",
     "*.lua",
     function()
-
-      -- scan `lua/*` for the cwd
       local cwd = vim.fn.getcwd()
+      local cwd_tail = nil -- the cwd dir name
       local buf_fname = vim.api.nvim_buf_get_name(0)
       local cwd_lua_path = string.format("%s%slua", cwd, system.sep)
       local sp = cwd .. "/lua"
@@ -289,10 +288,12 @@ reloader.autocmds = function()
         { search_pattern = ".", depth = 1, hidden = false, add_dirs = true } -- only_dirs
       )
 
-      -- cwd get tail
-      local cwd_dir_name = string.match(cwd, "([%w%-]*)$")
+      -- if cwd is system.doom_dir > return
 
-      -- lua/ get only dir names
+      -- cwd get tail | can this be done with plenary.path?
+      cwd_tail = string.match(cwd, "([%w%-%.%_]*)$")
+
+      -- get only dir/file names from lua/*
       for idx, mpath in ipairs(modules_under_lua) do
         mpath = string.match(
           mpath,
@@ -301,30 +302,38 @@ reloader.autocmds = function()
         modules_under_lua[idx] = mpath
       end
 
-      -- check match for dirs against cwd to see which module would be the actual
-      -- name to reload
-      -- do some manual testing to see whether plugins follow this pattern in general or not.
+      -- match lua/* to cwd dir name
+      local cwd_tail_lua_match
+      for _, lua_entry in ipairs(modules_under_lua) do
+        local match = string.match(cwd_tail, string.format("%s", utils.escape_str(lua_entry)))
+        if match ~= nil then
+          cwd_tail_lua_match = match
+        end
+      end
 
-      -- if regular match reload module name
+      -- TODO: if regular match reload module name
+      -- then we assume this is the module_name key
+      -- move on to check if module_name exists in package.loaded
+      -- print("!!!", cwd_tail_lua_match)
 
-      -- if telescope in name >> reload extension module
+      -- TODO: if telescope extension ??
+
+      -- reload module name here
+      -- require("plenary.reload").reload_module(module_name)
 
       log.warn(string.format(
-        [[
-%s
+        [[%s
 --------
-CWD:      %s
-cwd_dir:  %s
-FILE:     %s
-SEARCHP:  %s
-lua/*:    %s
+CWD_DIR:    %s
+MATCH:    %s
+---------------------------------------
       ]],
         "RELOADER | AUTOCMD : `reload module on save`",
-        cwd,
-        cwd_dir_name,
-        buf_fname,
-        sp,
-        vim.inspect(modules_under_lua)
+        cwd_tail,
+        -- buf_fname,
+        -- sp,
+        -- vim.inspect(modules_under_lua),
+        cwd_tail_lua_match
       ))
     end,
   })
