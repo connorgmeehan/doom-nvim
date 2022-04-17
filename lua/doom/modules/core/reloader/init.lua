@@ -125,6 +125,7 @@ local function reset_vars()
   end
   doom.packages = {}
   for k, _ in pairs(package.loaded) do
+    -- TODO: add `doom.user` here as well?
     if string.match(k, "^doom%.core") or string.match(k, "^doom%.modules") then
       package.loaded[k] = nil
     end
@@ -304,19 +305,31 @@ reloader.autocmds = function()
           )
           modules_under_lua[idx] = mpath
         end
-        -- compare filenames to repo name
-        -- TODO:
-        --  check if there is a match other than telescope
-        for _, lua_entry in ipairs(modules_under_lua) do
-          if lua_entry == "telescope" then
-            t.has_telescope_dir = true
-          end
-          local match = string.match(repo_name, string.format("%s", utils.escape_str(lua_entry)))
 
-          if match ~= nil then
-            t.repo_match = match
+        modules_under_lua = vim.fn.uniq(modules_under_lua)
+
+        if #modules_under_lua == 1 then
+            t.repo_match = modules_under_lua[1]
+        else
+          for _, lua_entry in ipairs(modules_under_lua) do
+            if lua_entry == "telescope" then
+              t.has_telescope_dir = true
+            else
+              local match = string.match(
+                repo_name,
+                string.format("%s", utils.escape_str(lua_entry))
+              )
+              if match ~= nil then
+                t.repo_match = lua_entry
+              end
+            end
           end
         end
+
+        if t.repo_match == nil and t.has_telescope_dir then
+          t.repo_match = "telescope"
+        end
+
         return t
       end
 
@@ -359,7 +372,6 @@ reloader.autocmds = function()
       print(vim.inspect(t_cwd))
 
       -- CHECK TELESCOPE EXTENSION MATCHES
-
       -- local get_tele_ext_name = function()
       --    match names under tele._ext against repo name
       --    if mult names > strip extensions and compare if the same names
@@ -382,9 +394,12 @@ reloader.autocmds = function()
         return
       end
 
-      print("tm: ", vim.inspect(modules_under_tele_ext))
-
       -- TODO: PREPARE CONDITIONAL RELOAD PATTERNS
+
+      -- 1. if repo_match == tele AND #ext > 0    ext
+      -- 2. if repo_match == tele AND #ext == 0   telescope.nvim itself
+      -- 3. if repo_match == other AND #ext > 0   plugin + ext
+      -- 4. if repo_match == other AND #ext = 0   plugin only
 
       -- if regular module then
       --  reload `<name>`
@@ -420,7 +435,10 @@ reloader.autocmds = function()
 
       -- B. reload module name here
       -- you can pass a `pattern` to plenary
-      -- require("plenary.reload").reload_module(module_name)
+      require("plenary.reload").reload_module(t_cwd.repo_match)
+      if t_cwd.has_telescope_dir then
+        require("plenary.reload").reload_module("telescope")
+      end
 
       local log_str = string.format(
         [[%s
