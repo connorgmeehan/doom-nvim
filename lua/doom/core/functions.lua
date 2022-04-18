@@ -402,6 +402,16 @@ functions.toggle_signcolumn = function()
   print(string.format("signcolumn=%s", vim.opt.signcolumn))
 end
 
+functions.toggle_config_reloader = function()
+  doom.reload_doom = not doom.reload_doom
+  print("auto reload doom on save:", doom.reload_doom)
+end
+
+functions.toggle_local_plugins_reloader = function()
+  doom.reload_local_plugins = not doom.reload_local_plugins
+  print("auto reload local plugins on save:", doom.reload_local_plugins)
+end
+
 -- Set the indent and tab related numbers.
 -- Negative numbers mean tabstop -- Really though? Tabs?
 functions.set_indent = function()

@@ -274,11 +274,13 @@ required.binds = function()
           { "S", require("doom.core.functions").toggle_spell, name = "Toggle spelling" },
           { "x", require("doom.core.functions").change_syntax, name = "Toggle syntax" },
           {
+            "R",
+            require("doom.core.functions").toggle_config_reloader,
+            name = "Toggle local plugin reloader",
+          },
+          {
             "r",
-            function()
-              doom.reload_local_plugins = not doom.reload_local_plugins
-              print("reload local plugins:", doom.reload_local_plugins)
-            end,
+            require("doom.core.functions").toggle_local_plugins_reloader,
             name = "Toggle local plugin reloader",
           },
         },

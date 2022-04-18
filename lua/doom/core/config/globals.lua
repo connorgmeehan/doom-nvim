@@ -166,6 +166,7 @@ doom = {
   },
 
   -- Automatically reload local plugins during development
+  reload_doom = true,
   reload_local_plugins = true,
 
   -- TODO: mv everything below into load_doom_helpers()
