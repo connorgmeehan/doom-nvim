@@ -165,7 +165,10 @@ doom = {
     transparent_background = false,
   },
 
-    -- TODO: mv everything below into load_doom_helpers()
+  -- Automatically reload local plugins during development
+  reload_local_plugins = true,
+
+  -- TODO: mv everything below into load_doom_helpers()
 
   packages = {},
   --- Wrapper around packer.nvim `use` function
@@ -193,10 +196,10 @@ doom = {
   --- )
   ---@vararg DoomPackage[]|string[] Packages to install
   use_package = function(...)
-    local arg = {...}
+    local arg = { ... }
     -- Get table of packages via git repository name
-    local packages_to_add = vim.tbl_map(function (t)
-      return type(t) == 'string' and t or t[1]
+    local packages_to_add = vim.tbl_map(function(t)
+      return type(t) == "string" and t or t[1]
     end, arg)
 
     -- Predicate returns false if the package needs to be overriden
@@ -227,10 +230,10 @@ doom = {
   ---
   --- @vararg DoomAutocmd|DoomAutocmd[] Autocommands to setup
   use_autocmd = function(...)
-    local arg = {...}
+    local arg = { ... }
     for _, autocmd in ipairs(arg) do
-      if type(autocmd[1]) == 'string' and type(autocmd[2]) == 'string' then
-        local key = string.format('%s-%s', autocmd[1], autocmd[2])
+      if type(autocmd[1]) == "string" and type(autocmd[2]) == "string" then
+        local key = string.format("%s-%s", autocmd[1], autocmd[2])
         doom.autocmds[key] = autocmd
       elseif autocmd ~= nil then
         doom.use_autocmd(unpack(autocmd))
@@ -254,10 +257,10 @@ doom = {
   --- })
   ---@vararg DoomCmd|DoomCmd[] Commands to bind
   use_cmd = function(...)
-    local arg = {...}
+    local arg = { ... }
     for _, cmd in ipairs(arg) do
       if type(cmd[1]) == "string" then
-        doom.cmds[cmd[1]] = cmd;
+        doom.cmds[cmd[1]] = cmd
       elseif cmd ~= nil then
         doom.use_cmd(unpack(cmd))
       end
@@ -268,7 +271,7 @@ doom = {
   ---
   ---@vararg DoomKeybind|DoomKeybind[]
   use_keybind = function(...)
-    local arg = {...}
+    local arg = { ... }
     for _, bind in ipairs(arg) do
       if type(bind[1]) == "string" then
         table.insert(doom.binds, { [1] = bind })
@@ -277,7 +280,6 @@ doom = {
       end
     end
   end,
-
 
   ---
   modules = {},
