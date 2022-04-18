@@ -53,18 +53,16 @@ function doom_modules.start()
   packer.reset()
 end
 
--- check if path begins with ~ or / which would mean that you have added a local path
-local function apply_reload_autocmds_to_local_forks(name, spec)
-  local repo_path = spec[1]
-  local repo_lua_path = string.format("%s%slua", repo_path, system.sep)
-  local autocmd_pattern = string.format("%s%s%s", repo_path, system.sep, "**/*.lua")
-  local scan_dir = require("plenary.scandir").scan_dir
-  local reload_module = require("plenary.reload").reload_module
-  local scan_dir_opts = { search_pattern = ".", depth = 1, only_dirs = true }
-  if string.match(repo_path, "^~") or string.match(repo_path, "^/") then
+local function check_for_local_forks(name, spec)
+  local function apply_reload_autocmd_to_local_fork(name, repo_path)
+    local repo_lua_path = string.format("%s%slua", repo_path, system.sep)
+    local autocmd_pattern = string.format("%s%s%s", repo_path, system.sep, "**/*.lua")
+    local scan_dir = require("plenary.scandir").scan_dir
+    local reload_module = require("plenary.reload").reload_module
+    local scan_dir_opts = { search_pattern = ".", depth = 1, only_dirs = true }
     utils.make_augroup(name .. "_autoreloader", {
       {
-        "BufEnter",
+        "BufWritePost",
         autocmd_pattern,
         function()
           if doom.reload_local_plugins then
@@ -73,14 +71,33 @@ local function apply_reload_autocmds_to_local_forks(name, spec)
               return s:match("/([_%w]-)$") -- capture only dirname
             end, t_lua_module_paths)
             for _, mname in ipairs(t_lua_module_names) do
-              print(mname)
-              -- reload_module(mname)
+              print("reload module name:", mname)
+              reload_module(mname)
             end
           end
         end,
       },
     })
-    print(string.format([[RELOADER: %s]], autocmd_pattern))
+    log.info(string.format([[Create local reloader autocmd for: %s]], repo_path:match("/([_%w%.%-]-)$")))
+  end
+
+  local repo_path = spec[1]
+  local function is_local_path(s)
+    return s:match("^~") or s:match("^/")
+  end
+  if is_local_path(repo_path) then
+    apply_reload_autocmd_to_local_fork(name, repo_path)
+  end
+  if spec.requires ~= nil then
+    for _, rspec in pairs(spec.requires) do
+      local rspec_repo_path = rspec
+      if type(rspec) == "table" then
+        rspec_repo_path = rspec[1]
+      end
+      if is_local_path(rspec_repo_path) then
+        apply_reload_autocmd_to_local_fork(rspec[1]:match("/([_%w%.%-]-)$"), rspec[1])
+      end
+    end
   end
 end
 
@@ -99,7 +116,7 @@ function doom_modules.load_modules()
         -- Set/unset frozen packer dependencies
         packer_spec.commit = doom.freeze_dependencies and packer_spec.commit or nil
 
-        apply_reload_autocmds_to_local_forks(dependency_name, packer_spec)
+        check_for_local_forks(dependency_name, packer_spec)
 
         -- Initialise packer
         use(packer_spec)
