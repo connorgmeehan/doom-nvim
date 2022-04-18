@@ -126,7 +126,11 @@ local function reset_vars()
   doom.packages = {}
   for k, _ in pairs(package.loaded) do
     -- TODO: add `doom.user` here as well?
-    if string.match(k, "^doom%.core") or string.match(k, "^doom%.modules") then
+    if
+      string.match(k, "^doom%.core")
+      or string.match(k, "^doom%.modules")
+      or string.match(k, "^user")
+    then
       package.loaded[k] = nil
     end
   end
