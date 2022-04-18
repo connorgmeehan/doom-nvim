@@ -53,6 +53,37 @@ function doom_modules.start()
   packer.reset()
 end
 
+-- check if path begins with ~ or / which would mean that you have added a local path
+local function apply_reload_autocmds_to_local_forks(name, spec)
+  local repo_path = spec[1]
+  local repo_lua_path = string.format("%s%slua", repo_path, system.sep)
+  local autocmd_pattern = string.format("%s%s%s", repo_path, system.sep, "**/*.lua")
+  local scan_dir = require("plenary.scandir").scan_dir
+  local reload_module = require("plenary.reload").reload_module
+  local scan_dir_opts = { search_pattern = ".", depth = 1, only_dirs = true }
+  if string.match(repo_path, "^~") or string.match(repo_path, "^/") then
+    utils.make_augroup(name .. "_autoreloader", {
+      {
+        "BufEnter",
+        autocmd_pattern,
+        function()
+          if doom.reload_local_plugins then
+            local t_lua_module_paths = scan_dir(vim.fn.expand(repo_lua_path), scan_dir_opts)
+            local t_lua_module_names = vim.tbl_map(function(s)
+              return s:match("/([_%w]-)$") -- capture only dirname
+            end, t_lua_module_paths)
+            for _, mname in ipairs(t_lua_module_names) do
+              print(mname)
+              -- reload_module(mname)
+            end
+          end
+        end,
+      },
+    })
+    print(string.format([[RELOADER: %s]], autocmd_pattern))
+  end
+end
+
 function doom_modules.load_modules()
   local use = require("packer").use
   -- Handle the Modules
@@ -68,6 +99,8 @@ function doom_modules.load_modules()
         -- Set/unset frozen packer dependencies
         packer_spec.commit = doom.freeze_dependencies and packer_spec.commit or nil
 
+        apply_reload_autocmds_to_local_forks(dependency_name, packer_spec)
+
         -- Initialise packer
         use(packer_spec)
       end
@@ -75,7 +108,7 @@ function doom_modules.load_modules()
 
     -- Setup package autogroups
     if module.autocmds then
-      local autocmds = type(module.autocmds) == 'function' and module.autocmds() or module.autocmds
+      local autocmds = type(module.autocmds) == "function" and module.autocmds() or module.autocmds
       utils.make_augroup(module_name, autocmds)
     end
 
@@ -105,7 +138,7 @@ function doom_modules.handle_user_config()
   for _, cmd_spec in pairs(doom.autocmds) do
     table.insert(autocmds, cmd_spec)
   end
-  utils.make_augroup('user', autocmds)
+  utils.make_augroup("user", autocmds)
 
   -- User keybinds handled in `nest` module
 end
