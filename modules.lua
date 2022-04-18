@@ -145,6 +145,7 @@ return {
     "nvim_luadev",
     -- "pandoc",
     "paths",
+		"plugins_fork",
     "printer",
     "quickfix",
     -- "read_file",

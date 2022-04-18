@@ -252,7 +252,7 @@ vim.opt.keymap = "INSERT_COLEMAK"
 --   · warn
 --   · error
 --   · fatal
-doom.logging = "error"
+doom.logging = "info"
 
 vim.opt.winwidth = 95
 
