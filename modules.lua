@@ -42,6 +42,7 @@ return {
     "neorg", -- Organise your life
     "whichkey", -- An interactive sheet
     "projects", -- Quickly switch between projects
+    "plugins_reloader", -- Auto reload local plugins
 
     "doom_themes", -- Extra themes for doom
     "lazygit", -- Lazy git integration
