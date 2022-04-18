@@ -192,10 +192,6 @@ other areas.
 
 fork connors nest branch.
 
-1. USE `GHM` TO CLONE AND FORK REPO UNDER CURSOR
-2. ADD LOCAL PATH TO DOOM NEST MODULE
-3. START READING THE CODE.
-
 --]]
 
 
