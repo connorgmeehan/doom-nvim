@@ -3,6 +3,8 @@
 - 1. need to turn off gpg
 - 2.
 
+        require("plenary.reload").reload_module(selection.value)
+
 wha possibilities are there.
 
 - disable fully
@@ -238,10 +240,43 @@ interesting you know. i would also kill my dog if it was attacking children whom
 why is it not loading properly. that is quite annoying and it really pisses me off. a million strangers or the million people.
 what do you mean. god allowed his child to die for the nation to survive.
 
+
+telescope reloader
+
+modify > add paths params where you can pass your own table with paths.
+
+so that we can use the reloader but pass
+
+it turns out that what you needed to do was to just run reloader
+
+so she is a young stupid woman like that when she is ready for the hospitals. this works and so the question is why the fuck
+does that not do the shit.
+
+someting is not working now again.
+
+how could you auto reload plugins.
+
+get module name > based on repo path? > reload module_name on save
+
+this could be done in the lua filetype auto commands.
+
+i am not going to redo this shit because that would be just fucking insane.
+somebody at that place should fuing get fired you know.
+
+she is an insane fundamentalist woman that dosen't really do anything good for anyone and so that is a bit.
+
+on this level I would say that is quite fucking insane you know so what the fuck is the mattter with y6.
+
+i just came up with a
+
+1. generate an autocommand for each plugin that is local
+2. by looping over all specs and checking if the spec has a local dev path
+3. if so then create a reload autocommand for each plugin that only listens for.
+
+so that is something that you might never actually see in the real world.
+
+
 --]]
-
-
-
 
 
 

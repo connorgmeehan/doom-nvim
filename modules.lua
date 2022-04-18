@@ -166,6 +166,7 @@ return {
     -- "tabs",
     "tabular",
     "telescope_extensions",
+    "telescope_doom_reloader",
     -- "terminal_integration",
     -- "testing",
     "ts_context",
