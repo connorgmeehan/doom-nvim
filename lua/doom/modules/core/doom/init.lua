@@ -27,11 +27,11 @@ required.packages = {
   ["nvim-mapper"] = {
     "lazytanuki/nvim-mapper",
   },
-  ['nvim-web-devicons'] = {
-    'kyazdani42/nvim-web-devicons',
+  ["nvim-web-devicons"] = {
+    "kyazdani42/nvim-web-devicons",
     commit = "8df4988ecf8599fc1f8f387bbf2eae790e4c5ffb",
     module = "nvim-web-devicons",
-  }
+  },
 }
 
 required.configs = {}
@@ -39,7 +39,7 @@ required.configs["nvim-mapper"] = function()
   require("nvim-mapper").setup(doom.modules.doom.settings.mapper)
 end
 
-required.binds = function ()
+required.binds = function()
   local utils = require("doom.utils")
   local is_module_enabled = utils.is_module_enabled
 
@@ -273,6 +273,14 @@ required.binds = function ()
           { "n", require("doom.core.functions").change_number, name = "Toggle number" },
           { "S", require("doom.core.functions").toggle_spell, name = "Toggle spelling" },
           { "x", require("doom.core.functions").change_syntax, name = "Toggle syntax" },
+          {
+            "r",
+            function()
+              doom.reload_local_plugins = not doom.reload_local_plugins
+              print("reload local plugins:", doom.reload_local_plugins)
+            end,
+            name = "Toggle local plugin reloader",
+          },
         },
       },
       {
@@ -311,7 +319,7 @@ required.binds = function ()
   return binds
 end
 
-required.autocmds = function ()
+required.autocmds = function()
   local is_module_enabled = require("doom.utils").is_module_enabled
 
   local autocmds = {}
