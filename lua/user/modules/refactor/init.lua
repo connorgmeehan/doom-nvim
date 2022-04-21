@@ -2,6 +2,9 @@ local utils = require("doom.utils")
 
 local refactor = {}
 
+-- todo: explore the plugin and create more binds from modules within refactoring.
+-- check out the dev module.
+
 refactor.packages = {
   ["refactoring.nvim"] = {
     "ThePrimeagen/refactoring.nvim",

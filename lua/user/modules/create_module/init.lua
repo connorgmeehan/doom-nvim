@@ -1,14 +1,15 @@
 local create_module = {}
 
 
--- UI QUESTIONS
---
---    - is the module for a specific language or functionality?
---    - is it a user or core module?
+-- 1. input > ask for module name
+-- 2. if name does not exist > scandir compare to input name
+-- 3. then create module.
+-- 4. tree sitter analyse that the module has all of the necessary parts.
+-- 5. -> create (settings,packages,cmds,autocmds,binds)
 
-create_module.cmd = {
+create_module.cmds = {
   {
-    "CreateModule",
+    "DoomMakeModuleCore",
     function()
 
       -- TODO:

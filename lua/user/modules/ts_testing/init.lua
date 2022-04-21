@@ -5,6 +5,10 @@ local ts_utils = require("nvim-treesitter.ts_utils")
 
 -- 1. nui popup.
 -- 2. display all kinds of siblings/children/parents/block etc.
+--
+--
+-- 1. on cursor move
+-- 2. update window in upper right corner.
 
 local ts_testing = {}
 
@@ -128,10 +132,19 @@ ts_helpers.find_references = function(node, scope, bufnr, definition)
   return references
 end
 
+-- if text is more than 5 lines return only a preview
 ts_helpers.get_node_text = function(node, bufnr, sep)
   sep = sep or " "
-
-  return table.concat(ts_utils.get_node_text(node, bufnr), sep)
+  local t_text_lines = ts_utils.get_node_text(node, bufnr)
+  if #t_text_lines > 4 then
+    local numl = #t_text_lines
+    local first = table.concat(t_text_lines, sep, 1, 2)
+    first = first .. "\n...\n...\n"
+    local last = table.concat(t_text_lines, sep, numl - 1, numl)
+    return first .. last
+  else
+    return table.concat(t_text_lines, sep)
+  end
 end
 
 -- TODO:
@@ -155,20 +168,25 @@ local function get_node_info_string(node, title)
   local tsn_range = node:range()
   local tsn_sexpr = node:sexpr()
   local tsn_child_count = node:child_count()
+
   local tsn_start_row, tsn_start_col, tsn_start_bytecount = node:start()
   local tsn_end_row, tsn_end_col, tsn_end_bytecount = node:end_()
 
-  local str_start = string.format([[%s, %s,  %s]], tsn_start_row, tsn_start_col, tsn_start_row)
-  local str_end = string.format([[%s, %s, %s]], tsn_end_row, tsn_end_col, tsn_end_row)
+  local str_start = string.format([[%s, %s]], tsn_start_row, tsn_start_col)
+  local str_end = string.format([[%s, %s]], tsn_end_row, tsn_end_col)
 
-  local node_text = ts_helpers.get_node_text(node)
+  local node_text = ts_helpers.get_node_text(node, 0, "\n")
 
   local ret_str = string.format(
-    [[
->> %s:
-%s | %s | %s | %s
-%s
-------------------
+    [[:::::::::::::::::::::
+:: %s
+:::::::::::::::::::::
+
+%s | type: %s | %s | %s
+
+```
+    %s
+```
 		]],
     title,
     tsn_symbol,
@@ -180,7 +198,7 @@ local function get_node_info_string(node, title)
   return ret_str
 end
 
-local function get_node_text_preview(node) end
+-- local function get_node_text_preview(node) end
 
 -- Can refactor take the functions below and hoist them to local functions at
 -- the beginning of the file?
@@ -189,31 +207,20 @@ ts_testing.cmds = {
     "TSTestingPrintCursorEnvironment",
     function()
       local cursor_node = ts_helpers.get_node_at_cursor(0) -- current window
-      local INFO_NODE_CURSOR = get_node_info_string(cursor_node, "cursor node")
+      local INFO_NODE_CURSOR = get_node_info_string(cursor_node, "CURSOR NODE")
 
       local parent_node = cursor_node:parent()
-      local INFO_NODE_PARENT = get_node_info_string(parent_node, "parent")
+      local INFO_NODE_PARENT = get_node_info_string(parent_node, "PARENT")
 
       local siblin_next = cursor_node:next_sibling()
       local siblin_prev = cursor_node:prev_sibling()
-      local INFO_NODE_SIB_PREV = get_node_info_string(siblin_prev, "siblin_prev")
-      local INFO_NODE_SIB_NEXT = get_node_info_string(siblin_next, "siblin_next")
-      -- local tsn_sib_next_named = cursor_node:next_named_sibling() -- Get the node's next named sibling.
-      -- local tsn_sib_prev_named = cursor_node:prev_named_sibling() -- Get the node's previous named sibling.
-
-      -- get prev/next sibling preview texts
+      local INFO_NODE_SIB_PREV = get_node_info_string(siblin_prev, "SIBLIN PREV")
+      local INFO_NODE_SIB_NEXT = get_node_info_string(siblin_next, "SIBLIN NEXT")
 
       local child_first = cursor_node:child(1)
       local child_last = cursor_node:child(cursor_node:child_count())
-      local INFO_NODE_CHILD_FIRST = get_node_info_string(child_first, "child_first")
-      local INFO_NODE_CHILD_LAST = get_node_info_string(child_last, "child_last")
-      -- cursor_node:iter_children() --   Iterates over all the direct children of {cursor_node}, regardless of whether they are named or not. Returns the child node plus the eventual field name corresponding to this child node.
-      -- cursor_node:field({name})					    --   Returns a table of the nodes corresponding to the {name} field.
-      -- tsnode:child({index})					    -- Get the node's child at the given {index}, where zero represents the first child.
-      -- tsnode:named_child_count() --   Get the node's number of named children.
-      -- tsnode:named_child({index})				-- Get the node's named child at the given {index}, where zero represents the first named child.
-
-      -- get first / last child preview text
+      local INFO_NODE_CHILD_FIRST = get_node_info_string(child_first, "CHILD FIRST")
+      local INFO_NODE_CHILD_LAST = get_node_info_string(child_last, "CHILD LAST")
 
       local s = string.format(
         [[

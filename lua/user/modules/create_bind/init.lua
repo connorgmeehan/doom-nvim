@@ -2,6 +2,10 @@ local user_utils = require("user.utils")
 
 local binds_create = {}
 
+-- NOTE: for each binds, use ts to auto generate a `cmd` for it so that we call the command instead of
+-- calling the function in the bind. since there currently is problems with binds reloading. therefore
+-- auto map it to a cmd.
+
 -- lsp.binds = {
 -- }
 
