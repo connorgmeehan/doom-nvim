@@ -124,7 +124,6 @@ lsp.packages = {
   },
 }
 
-
 lsp.configs = {}
 lsp.configs["nvim-lspconfig"] = function()
   -- Lsp Symbols
@@ -224,28 +223,34 @@ lsp.configs["nvim-cmp"] = function()
     },
     formatting = {
       format = function(entry, item)
-        item.kind = string.format("%s %s", doom.modules.lsp.settings.completion.kinds[item.kind], item.kind)
+        item.kind = string.format(
+          "%s %s",
+          doom.modules.lsp.settings.completion.kinds[item.kind],
+          item.kind
+        )
         item.menu = source_map[entry.source.name]
         item.dup = vim.tbl_contains({ "path", "buffer" }, entry.source.name)
         return item
       end,
     },
+    -- TODO: move binds into `doom.opts.cmp_binds = {}`
+    -- 		so that one can easilly change these without having to mess with core.
     mapping = {
-      ["<C-p>"] = cmp.mapping.select_prev_item(),
-      ["<C-n>"] = cmp.mapping.select_next_item(),
-      ["<C-d>"] = cmp.mapping.scroll_docs(-4),
-      ["<C-f>"] = cmp.mapping.scroll_docs(4),
-      ["<C-Space>"] = cmp.mapping.complete(),
-      ["<C-e>"] = cmp.mapping.close(),
+      doom.opts.cmp_binds.select_prev_item = cmp.mapping.select_prev_item(),
+      doom.opts.cmp_binds.select_next_item = cmp.mapping.select_next_item(),
+      doom.opts.cmp_binds.scroll_docs_bkw = cmp.mapping.scroll_docs(-4),
+      doom.opts.cmp_binds.scroll_docs_fwd = cmp.mapping.scroll_docs(4),
+      doom.opts.cmp_binds.complete = cmp.mapping.complete(),
+      doom.opts.cmp_binds.close = cmp.mapping.close(),
       -- ["<ESC>"] = cmp.mapping.close(),
-      ["<CR>"] = cmp.mapping.confirm({
+      doom.opts.cmp_binds.confirm = cmp.mapping.confirm({
         behavior = cmp.ConfirmBehavior.Replace,
         select = true,
       }),
-      ["<Tab>"] = cmp.mapping(function(fallback)
+      doom.opts.cmp_binds.tab = cmp.mapping(function(fallback)
         if cmp.visible() then
           cmp.select_next_item()
-        elseif (snippets_enabled and luasnip.expand_or_jumpable()) then
+        elseif snippets_enabled and luasnip.expand_or_jumpable() then
           vim.fn.feedkeys(replace_termcodes("<Plug>luasnip-expand-or-jump"), "")
         elseif check_backspace() then
           vim.fn.feedkeys(replace_termcodes("<Tab>"), "n")
@@ -256,7 +261,7 @@ lsp.configs["nvim-cmp"] = function()
         "i",
         "s",
       }),
-      ["<S-Tab>"] = cmp.mapping(function(fallback)
+      doom.opts.cmp_binds.stab = cmp.mapping(function(fallback)
         if cmp.visible() then
           cmp.select_prev_item()
         elseif snippets_enabled and luasnip.jumpable(-1) then
@@ -270,7 +275,8 @@ lsp.configs["nvim-cmp"] = function()
       }),
     },
   }, {
-    mapping = type(doom.modules.lsp.settings.completion.mapping) == "function" and doom.modules.lsp.settings.completion.mapping(cmp)
+    mapping = type(doom.modules.lsp.settings.completion.mapping) == "function"
+        and doom.modules.lsp.settings.completion.mapping(cmp)
       or doom.modules.lsp.settings.completion.mapping,
     enabled = function()
       return _doom.cmp_enable and vim.api.nvim_buf_get_option(0, "buftype") ~= "prompt"
@@ -381,11 +387,17 @@ lsp.binds = {
         "t",
         name = "+tweak",
         {
-          { "c", function() require("doom.core.functions").toggle_completion() end, name = "Toggle completion" },
+          {
+            "c",
+            function()
+              require("doom.core.functions").toggle_completion()
+            end,
+            name = "Toggle completion",
+          },
         },
       },
     },
-  }
+  },
 }
 
 return lsp

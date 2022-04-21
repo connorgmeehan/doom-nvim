@@ -34,6 +34,8 @@
 --- @field config string|function Command or function to run after the plugin is loaded.
 --- @field setup string|function Command or function to run before the plugin is loaded.
 
+-- TODO: mv all options into `doom.opts.`
+
 doom = {
   -- Pins plugins to a commit sha to prevent breaking changes
   -- @default = true
@@ -165,11 +167,23 @@ doom = {
     transparent_background = false,
   },
 
+  opts = {
+    cmp_binds = {
+      select_prev_item = "<C-p>",
+      select_next_item = "<C-n>",
+      scroll_docs_fwd = "<C-d>",
+      scroll_docs_bkw = "<C-f>",
+      complete = "<C-Space>",
+      close = "<C-e>",
+      confirm = "<CR>",
+      tab = "<Tab>",
+      stab = "<S-Tab>",
+    },
+  },
+
   -- Automatically reload local plugins during development
   reload_doom = true,
   reload_local_plugins = true,
-
-  -- TODO: mv everything below into load_doom_helpers()
 
   packages = {},
   --- Wrapper around packer.nvim `use` function
