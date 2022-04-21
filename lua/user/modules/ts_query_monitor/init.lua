@@ -14,6 +14,16 @@ local ts_query_monitor = {}
 
 local AUTOCMD_PREFIX = "UserTSQueryMonitor_"
 
+local query_lang = "java"
+
+local query_str = [[
+(method_declaration
+    (modifiers
+        (marker_annotation
+            name: (identifier) @annotation (#eq? @annotation "Test")))
+    name: (identifier) @method (#offset! @method))
+]]
+
 local references = {}
 
 ts_query_monitor.settings = {
@@ -42,53 +52,36 @@ local function i(value)
   print(vim.inspect(value))
 end
 
--- TODO: create lua query
-
-local monitor_query = vim.treesitter.parse_query(
-  "java",
-  [[
-(method_declaration
-    (modifiers
-        (marker_annotation
-            name: (identifier) @annotation (#eq? @annotation "Test")))
-    name: (identifier) @method (#offset! @method))
-]]
-)
-
--- utils.make_augroup = function(group_name, cmds, existing_group)
--- utils.make_autocmd = function(event, pattern, action, group, nested, once)
-
-local function get_query_match(bufnr, the_query)
+local function get_query(the_lang, query_name)
   local language_tree = vim.treesitter.get_parser(0)
   local syntax_tree = language_tree:parse()
   local root = syntax_tree[1]:root()
+  local sep = "\n"
 
   local matches = {}
 
-  for _, captures, metadata in the_query:iter_matches(root, bufnr) do
-    i(q.get_node_text(captures[2], bufnr))
-    i(metadata)
-    table.insert(matches, q.get_node_text(captures[2], bufnr))
+  local ok, result = pcall(vim.treesitter.parse_query, the_lang, query_name)
+
+  if ok then
+    for _, captures, metadata in result:iter_matches(root, references.target_bufnr) do
+      i(q.get_node_text(captures[2], references.target_bufnr))
+      i(metadata)
+      table.insert(matches, q.get_node_text(captures[2], references.target_bufnr))
+    end
+    return table.concat(matches, sep)
+  else
+    return result
   end
 
-  local sep = "\n"
-  return table.concat(matches, sep)
 end
 
-local function popup_set_content(popup, str)
-  -- local query_match_str = get_query_match(references.target_bufnr, monitor_query)
-  local query_match_str = "ABCDEFGH"
-  vim.api.nvim_buf_set_lines(
-    references.popup.bufnr,
-    0,
-    1,
-    false,
-    vim.fn.split(query_match_str, "\n")
-  )
+local function popup_set_content()
+  local str_display = get_query(query_lang, query_str)
+  vim.api.nvim_buf_set_lines(references.popup.bufnr, 0, 1, false, vim.fn.split(str_display, "\n"))
 end
 
-local function target_on_insert()
-  popup_set_content(references.popup, get_query_match(target_bufnr, monitor_query))
+local function refresh_content()
+  popup_set_content()
 end
 
 local function detach_autocmds()
@@ -112,7 +105,7 @@ local function attach_autocmds()
     {
       "InsertChange,InsertLeave",
       string.format("<buffer=%d>", references.target_bufnr),
-      target_on_insert,
+      refresh_content,
     },
     -- kill monitor on target leave
     {
@@ -124,16 +117,16 @@ local function attach_autocmds()
 end
 
 local function spawn_monitor()
-    references.target_bufnr = vim.api.nvim_win_get_buf(0)
+  references.target_bufnr = vim.api.nvim_win_get_buf(0)
 
-    local Popup = require("nui.popup")
-    local event = require("nui.utils.autocmd").event
-    local popup = Popup(ts_query_monitor.settings.popup)
-    popup:mount()
-    references.popup = popup
+  local Popup = require("nui.popup")
+  local event = require("nui.utils.autocmd").event
+  local popup = Popup(ts_query_monitor.settings.popup)
+  popup:mount()
+  references.popup = popup
 
-    popup_set_content()
-    attach_autocmds(target_bufnr)
+  popup_set_content()
+  attach_autocmds(target_bufnr)
 end
 
 local function toggle_query_monitor()
