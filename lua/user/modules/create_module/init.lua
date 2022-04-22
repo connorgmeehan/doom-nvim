@@ -133,16 +133,26 @@ local function compare_input_to_current_modules(input_str)
   end
 end
 
+-- install fzf with exact matching into telescope -> https://github.com/nvim-telescope/telescope-fzf-native.nvim
 local function spawn_telescope_picker_on_table(target_table, callback)
   print("!!!")
   local function pass_telescope_entry_to_callback(prompt_bufnr)
-    local content = require("telescope.actions.state").get_selected_entry(prompt_bufnr)
+    local state = require("telescope.actions.state")
+    local input_str = state.get_current_line(prompt_bufnr)
+    local fuzzy_selection = state.get_selected_entry(prompt_bufnr)
     require("telescope.actions").close(prompt_bufnr)
 
-    i(content)
-    print("tele result: ", content.value)
+    print(input_str, fuzzy_selection.value)
 
-    callback(content.value)
+    if input_str == fuzzy_selection.value then
+      --open file
+      print("open file: ", input_str)
+    else
+     -- create new module
+      print("create module: ", input_str)
+    end
+
+    callback(fuzzy_selection.value)
   end
 
   -- local function telescope_refactoring(opts)
