@@ -2,14 +2,11 @@
 
 
 
--- https://github.com/nvim-treesitter/nvim-treesitter-refactor -- very nice!!
--- https://github.com/nvim-treesitter/nvim-treesitter-textobjects
 -- https://github.com/s1n7ax/nvim-comment-frame
 -- git@github.com:akshettrj/ts-manipulator.nvim.git
 -- https://github.com/Bryley/docstr.nvim
 -- https://github.com/rishabh3/symsearch.nvim
 -- https://github.com/RRethy/nvim-treesitter-endwise
--- https://github.com/nvim-treesitter/nvim-tree-docs
 -- https://github.com/nvim-treesitter/module-template
 -- https://github.com/m-demare/hlargs.nvim
 -- https://github.com/eddiebergman/nvim-treesitter-pyfold
