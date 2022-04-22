@@ -4,6 +4,7 @@ local fs = require("doom.utils.fs")
 local create_module = {}
 
 create_module.settings = {
+  use_telescope = true,
   popup = {
     relative = "cursor",
     position = {
@@ -97,17 +98,14 @@ local function create_new_module_dir(mname)
   print("no match for: ", input_str, "creating new module...")
   print("......")
   print("...")
-  -- >>>>>>> shell mkdir mparent .. mname
   print(string.format("mkdir -p %s/lua/user/modules/%s", system.doom_root, mname))
-  -- >>>>>>>> shell touch mparent .. mname .. init.lua
   print(string.format("touch %s/lua/user/modules/%s/init.lua", system.doom_root, mname))
-  -- :e path to init.lua file
   print(string.format(":e %s/lua/user/modules/%s/init.lua", system.doom_root, mname))
   -- local buf = nvim_create_buf()
   -- nvim_win_set_buf(0, buf)
 end
 
-local function compare_input_to_current_modules(input_str)
+local function get_current_user_modules()
   local current_modules_path = string.format(
     "%s%slua%suser%smodules",
     system.doom_root,
@@ -119,6 +117,12 @@ local function compare_input_to_current_modules(input_str)
   local t_current_module_paths = get_dir_files_or_both_in_path_location(current_modules_path)
   -- mv into utils.get_doom_modules_list(table -> core|user)
   local t_current_module_names = path_get_tail(t_current_module_paths)
+  return t_current_module_names
+end
+
+local function compare_input_to_current_modules(input_str)
+  local t_current_module_names = get_current_user_modules()
+
   local has_match = vim.tbl_contains(t_current_module_names, input_str)
   if has_match then
     open_existing_module(input_str)
@@ -129,7 +133,38 @@ local function compare_input_to_current_modules(input_str)
   end
 end
 
-local function prompt_user_for_input()
+local function spawn_telescope_picker_on_table(target_table, callback)
+  print("!!!")
+  local function pass_telescope_entry_to_callback(prompt_bufnr)
+    local content = require("telescope.actions.state").get_selected_entry(prompt_bufnr)
+    require("telescope.actions").close(prompt_bufnr)
+
+    i(content)
+    print("tele result: ", content.value)
+
+    callback(content.value)
+  end
+
+  -- local function telescope_refactoring(opts)
+  opts = opts or require("telescope.themes").get_cursor()
+
+  -- TODO: pass absolute match instead of fuzzy
+  require("telescope.pickers").new(opts, {
+    prompt_title = "create user module",
+    finder = require("telescope.finders").new_table({
+      results = target_table,
+    }),
+    sorter = require("telescope.config").values.generic_sorter(opts),
+    attach_mappings = function(_, map)
+      map("i", "<CR>", pass_telescope_entry_to_callback)
+      map("n", "<CR>", pass_telescope_entry_to_callback)
+      return true
+    end,
+  }):find()
+  -- end
+end
+
+local function spawn_nui_input(callback)
   local Input = require("nui.input")
   local event = require("nui.utils.autocmd").event
   local input = Input(create_module.settings.popup, {
@@ -139,7 +174,7 @@ local function prompt_user_for_input()
       print("Input closed!")
     end,
     on_submit = function(value)
-      compare_input_to_current_modules(value)
+      callback(value)
     end,
     on_change = function(value)
       print("Value changed: ", value)
@@ -151,6 +186,16 @@ local function prompt_user_for_input()
   end)
 end
 
+local function prompt_user_for_input()
+  -- local get_current_modules =
+  if create_module.settings.use_telescope then
+    local t_current_module_names = get_current_user_modules()
+    spawn_telescope_picker_on_table(t_current_module_names, compare_input_to_current_modules)
+  else
+    spawn_nui_input(compare_input_to_current_modules)
+  end
+end
+
 create_module.cmds = {
   {
     "DoomCreateModuleUser",
@@ -158,15 +203,13 @@ create_module.cmds = {
       prompt_user_for_input()
     end,
   },
-  {
-    "CreateModuleMoveChunkToModule",
-    function()
-      -- move selected chunk to another module
-      -- helper to make it more easy to organize modules and plugins.
-      -- use tree-sitter to analyse which components of a file that should be moved.
-      -- use REFACTOR.NVIM?
-    end,
-  },
+  -- {
+  --   "DoomCreateModuleCore",
+  --   function()
+  --     -- do something that makes it easier to configureate the module creation
+  --     prompt_user_for_input({ module_type = "core", kind = "feature" })
+  --   end,
+  -- },
 }
 
 return create_module
