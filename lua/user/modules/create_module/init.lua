@@ -137,25 +137,32 @@ end
 
 -- install fzf with exact matching into telescope -> https://github.com/nvim-telescope/telescope-fzf-native.nvim
 local function spawn_telescope_picker_on_table(target_table, callback)
-  print("!!!")
-  local function pass_telescope_entry_to_callback(prompt_bufnr)
+  local function pass_telescope_entry_to_callback(ui_type, prompt_bufnr)
     local state = require("telescope.actions.state")
-    local input_str = state.get_current_line(prompt_bufnr)
+    local str_curr_line = state.get_current_line(prompt_bufnr)
     local fuzzy_selection = state.get_selected_entry(prompt_bufnr)
     require("telescope.actions").close(prompt_bufnr)
 
-    print(input_str, fuzzy_selection.value)
+    print(str_curr_line, fuzzy_selection.value)
 
-    if input_str == fuzzy_selection.value then
-      print("open file: ", input_str)
-    else
-      print("create module: ", input_str)
+    if ui_type == "fuzzy" then
+      -- open file
+      print("open file: ", fuzzy_selection.value)
+    elseif ui_type == "line" then
+      -- try create new module
+      print("create module: ", str_curr_line)
+      -- compare input to modules
+      callback(str_curr_line)
     end
-
-    callback(fuzzy_selection.value)
   end
 
-  -- local function telescope_refactoring(opts)
+  local function use_fuzzy(prompt_buf)
+    pass_telescope_entry_to_callback("fuzzy", prompt_buf)
+  end
+  local function use_line(prompt_buf)
+    pass_telescope_entry_to_callback("line", prompt_buf)
+  end
+
   opts = opts or require("telescope.themes").get_cursor()
 
   -- TODO: pass absolute match instead of fuzzy
@@ -166,12 +173,13 @@ local function spawn_telescope_picker_on_table(target_table, callback)
     }),
     sorter = require("telescope.config").values.generic_sorter(opts),
     attach_mappings = function(_, map)
-      map("i", "<CR>", pass_telescope_entry_to_callback)
-      map("n", "<CR>", pass_telescope_entry_to_callback)
+      map("i", "<CR>", use_fuzzy)
+      map("n", "<CR>", use_fuzzy)
+      map("i", "<C-e>", use_line)
+      map("n", "<C-e>", use_line)
       return true
     end,
   }):find()
-  -- end
 end
 
 local function spawn_nui_input(callback)
@@ -222,8 +230,31 @@ create_module.cmds = {
   -- },
 }
 
+create_module.binds = {}
 -- leader > doom > modules > a/A -> new user module (feature/language)
 -- leader > doom > modules > C -> mv module to core
 -- leader > doom > modules > P -> migrate module to new plugin
+if require("doom.utils").is_module_enabled("whichkey") then
+  table.insert(create_module.binds, {
+    "<leader>",
+    name = "+prefix",
+    {
+      {
+        "D",
+        name = "+doom",
+        {
+          {
+            {
+              "M",
+              name = "+modules",
+              { "e", [[ :DoomCreateModuleUser<cr> ]], name = "edit/create user modules" },
+            },
+          },
+        },
+      },
+    },
+  })
+end
+
 
 return create_module
