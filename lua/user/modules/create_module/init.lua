@@ -1,5 +1,7 @@
 local system = require("doom.core.system")
 local fs = require("doom.utils.fs")
+local user_utils_ui = require("user.utils.ui")
+local user_utils_path = require("user.utils.path")
 
 local create_module = {}
 
@@ -145,10 +147,8 @@ local function spawn_telescope_picker_on_table(target_table, callback)
     print(input_str, fuzzy_selection.value)
 
     if input_str == fuzzy_selection.value then
-      --open file
       print("open file: ", input_str)
     else
-     -- create new module
       print("create module: ", input_str)
     end
 
@@ -221,5 +221,9 @@ create_module.cmds = {
   --   end,
   -- },
 }
+
+-- leader > doom > modules > a/A -> new user module (feature/language)
+-- leader > doom > modules > C -> mv module to core
+-- leader > doom > modules > P -> migrate module to new plugin
 
 return create_module
