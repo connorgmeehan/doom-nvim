@@ -2,6 +2,7 @@ local system = require("doom.core.system")
 local fs = require("doom.utils.fs")
 local user_utils_ui = require("user.utils.ui")
 local user_utils_path = require("user.utils.path")
+local user_utils_modules = require("user.utils.modules")
 
 local create_module = {}
 
@@ -26,57 +27,6 @@ create_module.settings = {
     },
   },
 }
-
-local function get_module_template_from_name(mname)
-  return string.format(
-    [[
-local %s = {}
-
--- TODO:
---
---    -
-
--- %s.settings = {}
-
--- %s.packages = {
--- [""] = {},
--- -- [""] = {},
--- -- [""] = {},
--- -- [""] = {},
--- }
-
--- %s.cmds = {}
--- %s.autocmds = {}
--- %s.binds = {}
-
--- if require("doom.utils").is_module_enabled("whichkey") then
---   table.insert(%s.binds, {
---     "<leader>",
---     name = "+prefix",
---     {
---       {
---         "YYY",
---         name = "+ZZZ",
---         {
---         -- first level
---         },
---       },
---     },
---   })
--- end
-
-return %s
-  ]],
-    mname,
-    mname,
-    mname,
-    mname,
-    mname,
-    mname,
-    mname,
-    mname
-  )
-end
 
 local function i(value)
   print(vim.inspect(value))
@@ -107,11 +57,6 @@ local function open_existing_module(mname)
   vim.cmd(string.format(":e %s/lua/user/modules/%s/init.lua", system.doom_root, mname))
 end
 
--- local function get_module_template_from_name(mname)
---   local s = ""
---   return s
--- end
-
 local function create_new_module_dir(new_mname)
   print("CREATE MODULE: ", new_mname)
   local path_user_modules = string.format("%s/lua/user/modules", system.doom_root)
@@ -121,7 +66,7 @@ local function create_new_module_dir(new_mname)
   vim.cmd(string.format("!mkdir -p %s", new_module_path))
   vim.cmd(string.format("!touch %s", new_module_init_file))
 
-  fs.write_file(new_module_init_file, get_module_template_from_name(new_mname), "w+")
+  fs.write_file(new_module_init_file, user_utils_modules.get_module_template_from_name(new_mname), "w+")
 
   vim.cmd(string.format(":e %s", new_module_init_file))
 
