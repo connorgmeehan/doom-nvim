@@ -27,28 +27,30 @@ create_module.settings = {
   },
 }
 
-local module_template_string = [[
-local XXX = {}
+local function get_module_template_from_name(mname)
+  return string.format(
+    [[
+local %s = {}
 
 -- TODO:
 --
 --    -
 
--- XXX.settings = {}
+-- %s.settings = {}
 
--- XXX.packages = {
+-- %s.packages = {
 -- [""] = {},
 -- -- [""] = {},
 -- -- [""] = {},
 -- -- [""] = {},
 -- }
 
--- XXX.cmds = {}
--- XXX.autocmds = {}
--- XXX.binds = {}
+-- %s.cmds = {}
+-- %s.autocmds = {}
+-- %s.binds = {}
 
 -- if require("doom.utils").is_module_enabled("whichkey") then
---   table.insert(XXX.binds, {
+--   table.insert(%s.binds, {
 --     "<leader>",
 --     name = "+prefix",
 --     {
@@ -63,8 +65,18 @@ local XXX = {}
 --   })
 -- end
 
-return XXX
-  ]]
+return %s
+  ]],
+    mname,
+    mname,
+    mname,
+    mname,
+    mname,
+    mname,
+    mname,
+    mname
+  )
+end
 
 local function i(value)
   print(vim.inspect(value))
@@ -92,19 +104,32 @@ local function append_new_module_to_modules_file(mname)
 end
 
 local function open_existing_module(mname)
-  print("success!! match with: ", mname)
-  print(string.format(":e %s/lua/user/modules/%s/init.lua", system.doom_root, mname))
+  vim.cmd(string.format(":e %s/lua/user/modules/%s/init.lua", system.doom_root, mname))
 end
 
-local function create_new_module_dir(mname)
-  print("no match for: ", input_str, "creating new module...")
-  print("......")
-  print("...")
-  print(string.format("mkdir -p %s/lua/user/modules/%s", system.doom_root, mname))
-  print(string.format("touch %s/lua/user/modules/%s/init.lua", system.doom_root, mname))
-  print(string.format(":e %s/lua/user/modules/%s/init.lua", system.doom_root, mname))
-  -- local buf = nvim_create_buf()
-  -- nvim_win_set_buf(0, buf)
+-- local function get_module_template_from_name(mname)
+--   local s = ""
+--   return s
+-- end
+
+local function create_new_module_dir(new_mname)
+  print("CREATE MODULE: ", new_mname)
+  local path_user_modules = string.format("%s/lua/user/modules", system.doom_root)
+  local new_module_path = string.format("%s%s%s", path_user_modules, system.sep, new_mname)
+  local new_module_init_file = string.format("%s%sinit.lua", new_module_path, system.sep)
+
+  vim.cmd(string.format("!mkdir -p %s", new_module_path))
+  vim.cmd(string.format("!touch %s", new_module_init_file))
+
+  fs.write_file(new_module_init_file, get_module_template_from_name(new_mname), "w+")
+
+  vim.cmd(string.format(":e %s", new_module_init_file))
+
+  -- local newbuf = vim.api.nvim_create_buf(1, 0)
+  -- vim.api.nvim_buf_set_lines(newbuf, 0, 1, false, vim.fn.split(module_template_string, "\n"))
+
+  -- set file to cur bef
+  -- vim.cmd(string.format(":%sb", newbuf))
 end
 
 local function get_current_user_modules()
@@ -122,37 +147,35 @@ local function get_current_user_modules()
   return t_current_module_names
 end
 
-local function compare_input_to_current_modules(input_str)
-  local t_current_module_names = get_current_user_modules()
+-- local function check_match_in_target_table(t, s)
+--   return vim.tbl_contains(t, s)
+-- end
 
-  local has_match = vim.tbl_contains(t_current_module_names, input_str)
+local function compare_selection_to_target_table(target_table, input_str)
+  local input_trimmed = vim.trim(input_str)
+  local has_match = vim.tbl_contains(target_table, input_trimmed)
   if has_match then
-    open_existing_module(input_str)
+    open_existing_module(input_trimmed)
   else
-    local bufhandle = create_new_module_dir(input_str)
-    -- TODO: bufhandle.insert module templae
-    -- ...
+    create_new_module_dir(input_trimmed)
   end
 end
 
 -- install fzf with exact matching into telescope -> https://github.com/nvim-telescope/telescope-fzf-native.nvim
 local function spawn_telescope_picker_on_table(target_table, callback)
+  -- TODO: rename `use_fuzzy_or_line`
   local function pass_telescope_entry_to_callback(ui_type, prompt_bufnr)
     local state = require("telescope.actions.state")
     local str_curr_line = state.get_current_line(prompt_bufnr)
     local fuzzy_selection = state.get_selected_entry(prompt_bufnr)
     require("telescope.actions").close(prompt_bufnr)
 
-    print(str_curr_line, fuzzy_selection.value)
-
     if ui_type == "fuzzy" then
-      -- open file
-      print("open file: ", fuzzy_selection.value)
+      -- open
+      callback(target_table, fuzzy_selection.value)
     elseif ui_type == "line" then
-      -- try create new module
-      print("create module: ", str_curr_line)
-      -- compare input to modules
-      callback(str_curr_line)
+      -- create
+      callback(target_table, str_curr_line)
     end
   end
 
@@ -177,12 +200,15 @@ local function spawn_telescope_picker_on_table(target_table, callback)
       map("n", "<CR>", use_fuzzy)
       map("i", "<C-e>", use_line)
       map("n", "<C-e>", use_line)
+      -- <C-x> rm module
+      -- <C-v> open split
+      -- <C-r> create new in split
       return true
     end,
   }):find()
 end
 
-local function spawn_nui_input(callback)
+local function spawn_nui_input(target_table, callback)
   local Input = require("nui.input")
   local event = require("nui.utils.autocmd").event
   local input = Input(create_module.settings.popup, {
@@ -192,7 +218,7 @@ local function spawn_nui_input(callback)
       print("Input closed!")
     end,
     on_submit = function(value)
-      callback(value)
+      callback(target_table, value)
     end,
     on_change = function(value)
       print("Value changed: ", value)
@@ -205,12 +231,16 @@ local function spawn_nui_input(callback)
 end
 
 local function prompt_user_for_input()
-  -- local get_current_modules =
+  -- edit_create_from_table(
+  --   create_module.settings.use_telescope,  -> ui type
+  --   t_current_module_names,                -> table
+  --   compare_selection_to_target_table    -> decider function
+  -- )
+  local t_current_module_names = get_current_user_modules()
   if create_module.settings.use_telescope then
-    local t_current_module_names = get_current_user_modules()
-    spawn_telescope_picker_on_table(t_current_module_names, compare_input_to_current_modules)
+    spawn_telescope_picker_on_table(t_current_module_names, compare_selection_to_target_table)
   else
-    spawn_nui_input(compare_input_to_current_modules)
+    spawn_nui_input(t_current_module_names, compare_selection_to_target_table)
   end
 end
 
@@ -255,6 +285,5 @@ if require("doom.utils").is_module_enabled("whichkey") then
     },
   })
 end
-
 
 return create_module
