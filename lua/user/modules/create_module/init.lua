@@ -66,7 +66,11 @@ local function create_new_module_dir(new_mname)
   vim.cmd(string.format("!mkdir -p %s", new_module_path))
   vim.cmd(string.format("!touch %s", new_module_init_file))
 
-  fs.write_file(new_module_init_file, user_utils_modules.get_module_template_from_name(new_mname), "w+")
+  fs.write_file(
+    new_module_init_file,
+    user_utils_modules.get_module_template_from_name(new_mname),
+    "w+"
+  )
 
   vim.cmd(string.format(":e %s", new_module_init_file))
 
@@ -225,6 +229,13 @@ if require("doom.utils").is_module_enabled("whichkey") then
               { "e", [[ :DoomCreateModuleUser<cr> ]], name = "edit/create user modules" },
             },
           },
+        },
+      },
+      {
+        "n",
+        name = "+nnn",
+        {
+          { "c", [[ :DoomCreateModuleUser<cr> ]], name = "edit/create user modules" },
         },
       },
     },

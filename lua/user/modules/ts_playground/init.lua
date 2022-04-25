@@ -14,11 +14,18 @@ if require("doom.utils").is_module_enabled("whichkey") then
       "<leader>v",
       name = "+testing",
       {
-        { "p", "<cmd>TSPlaygroundToggle<CR>", name = "ts test print" },
+        {
+          "t",
+          name = "+treesitter",
+          {
+            { "p", "<cmd>TSPlaygroundToggle<CR>", name = "togl playgr" },
+            { "h", "<cmd>TSHighlightCapturesUnderCursor<CR>", name = "highl capt curs" },
+            { "u", "<cmd>TSNodeUnderCursor<CR>", name = "node under curs" },
+          },
+        },
       },
     },
   }
 end
 
 return ts_playground
-

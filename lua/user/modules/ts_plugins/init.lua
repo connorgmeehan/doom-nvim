@@ -2,6 +2,16 @@
 
 
 
+
+-- https://github.com/David-Kunz/treesitter-unit/
+-- https://github.com/mizlan/iswap.nvim
+-- https://github.com/vigoux/complementree.nvim
+-- https://github.com/yioneko/nvim-yati
+-- https://github.com/theHamsta/crazy-node-movement
+-- https://github.com/zacharydscott/hatchet.nvim
+-- https://github.com/keyvchan/virt_context.nvim
+
+
 -- https://github.com/s1n7ax/nvim-comment-frame
 -- git@github.com:akshettrj/ts-manipulator.nvim.git
 -- https://github.com/Bryley/docstr.nvim

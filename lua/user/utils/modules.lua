@@ -20,10 +20,55 @@ utils_modules.create_new_module = function()
   --
 end
 
-utils_modules.get_modules_template = function(mname)
-  local str_tempate = ""
+utils_modules.get_module_template_from_name = function(mname)
+  return string.format(
+    [[
+local %s = {}
 
-  return str_tempate
+-- TODO:
+--
+--    -
+
+-- %s.settings = {}
+
+-- %s.packages = {
+-- [""] = {},
+-- -- [""] = {},
+-- -- [""] = {},
+-- -- [""] = {},
+-- }
+
+-- %s.cmds = {}
+-- %s.autocmds = {}
+-- %s.binds = {}
+
+-- if require("doom.utils").is_module_enabled("whichkey") then
+--   table.insert(%s.binds, {
+--     "<leader>",
+--     name = "+prefix",
+--     {
+--       {
+--         "YYY",
+--         name = "+ZZZ",
+--         {
+--         -- first level
+--         },
+--       },
+--     },
+--   })
+-- end
+
+return %s
+  ]],
+    mname,
+    mname,
+    mname,
+    mname,
+    mname,
+    mname,
+    mname,
+    mname
+  )
 end
 
 return utils_modules

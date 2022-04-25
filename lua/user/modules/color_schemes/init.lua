@@ -3,6 +3,7 @@ local themes = {}
 
 -- https://github.com/kvrohit/rasmus.nvim
 -- https://github.com/0xsamrath/kyoto.nvim
+-- https://github.com/hamzamemon/sunflower
 -- https://github.com/catppuccin/nvim
 -- shaeinst/roshnivim-cs - Colorscheme for Neovim written in Lua, specially made for roshnivim with Tree-sitter support.
 -- rafamadriz/neon - Customizable colorscheme with excellent italic and bold support, dark and light variants. Made to work and look good with Tree-sitter.
@@ -157,7 +158,7 @@ themes.configs["nightfox.nvim"] = function()
   local options = {
     dim_inactive = true,
   }
-  local pallets = {
+  local palette = {
     dawnfox = {
       bg2 = "#F9EFEC",
       bg3 = "#ECE3DE",
@@ -185,7 +186,7 @@ themes.configs["nightfox.nvim"] = function()
   }
   require("nightfox").setup({
     options = options,
-    pallets = pallets,
+    palette = palette,
     specs = specs,
     groups = groups,
   })
