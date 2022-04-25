@@ -1,3 +1,4 @@
+local tsq = require("vim.treesitter.query")
 local ts_utils = require("nvim-treesitter.ts_utils")
 local locals = require("nvim-treesitter.locals")
 local api = vim.api
@@ -8,105 +9,176 @@ local pf = {}
 -- WATCH/USE -->> https://www.youtube.com/watch?v=86sgKa0jeO4
 --
 -- `:h lua-treesitter-query`
---
---
--- TODO: migrate to plugin `forkify.nvim`
+-- `forkify.nvim`
 
 -- TODO: doom.local_plugins_path = "~/code/repos/github.com/"
-
--- :: REFACTORING :::::::::::::::::::::::::::::::::::::::::::::::::::
-
--- TODO: create user.util > doom_picker(str_title,table_tele_results,bool_match_exact, cb)
-
--- refactoring helper
-local function doom_picke_do(prompt_bufnr)
-  local content = require("telescope.actions.state").get_selected_entry(prompt_bufnr)
-
-  print("doom picker:", content)
-
-  require("telescope.actions").close(prompt_bufnr)
-end
-
-local function doom_picker_find(opts, title, picker_data)
-  local opts = opts or require("telescope.themes").get_cursor()
-
-  require("telescope.pickers").new(opts, {
-    prompt_title = title,
-    finder = require("telescope.finders").new_table({
-      results = picker_data,
-    }),
-    sorter = require("telescope.config").values.generic_sorter(opts),
-    attach_mappings = function(_, map)
-      map("i", "<CR>", doom_picke_do)
-      map("n", "<CR>", doom_picke_do)
-      return true
-    end,
-  }):find()
-end
-
--- NOTE:
 --
---  see how you can just pass a table to the picker in order to generate a picker.
+local lua_query_scopes = [[
+[
+  (chunk)
+  (do_statement)
+  (while_statement)
+  (repeat_statement)
+  (if_statement)
+  (for_statement)
+  (function_declaration)
+  (function_definition)
+] @scope
+]]
 
--- local refactoring = require("refactoring")
+local lua_query_assignment_identifier = [[
+assignment_statement
+ (variable_list
+   (identifier) @definition.var))
+]]
 
--- -- refactoring helper
--- local function refactor(prompt_bufnr)
---   local content = require("telescope.actions.state").get_selected_entry(prompt_bufnr)
---   require("telescope.actions").close(prompt_bufnr)
---   refactoring.refactor(content.value)
--- end
+local lua_query_assignment_dot = [[
+(assignment_statement
+  (variable_list
+    (dot_index_expression . (_) @definition.associated (identifier) @definition.var)))
+]]
 
--- local function telescope_refactoring(opts) end
+local lua_query_function_identifier = [[
+(function_declaration
+  name: (identifier) @definition.function)
+  (#set! definition.function.scope "parent")
+]]
 
--- return require("telescope").register_extension({
---     exports = {
---         refactors = telescope_refactoring,
---     },
--- })
+local lua_query_function_dot = [[
+(function_declaration
+  name: (dot_index_expression
+    . (_) @definition.associated (identifier) @definition.function))
+  (#set! definition.method.scope "parent")
+]]
 
--- :::::::::::::::::::::::::::::::::::::::::::::::::::
+local lua_query_function_method_index = [[
+(function_declaration
+  name: (method_index_expression
+    . (_) @definition.associated (identifier) @definition.method))
+  (#set! definition.method.scope "parent")
+]]
 
--- local q = require("vim.treesitter.query")
---
--- local function i(value)
---   print(vim.inspect(value))
--- end
---
--- local bufnr = 4
---
--- local language_tree = vim.treesitter.get_parser(0)
--- local syntax_tree = language_tree:parse()
--- local root = syntax_tree[1]:root()
---
--- local query = vim.treesitter.parse_query(
---   "java",
---   [[
--- (method_declaration
---     (modifiers
---         (marker_annotation
---             name: (identifier) @annotation (#eq? @annotation "Test")))
---     name: (identifier) @method (#offset! @method))
+local lua_query_for_clause = [[
+ (for_generic_clause
+   (variable_list
+     (identifier) @definition.var))
+]]
+local lua_query_for_numeric = [[
+ (for_numeric_clause
+   name: (identifier) @definition.var)
+
+]]
+
+local lua_query_parameters = [[
+ (parameters (identifier) @definition.parameter)
+]]
+
+local lua_query_reference = [[
+ [
+   (identifier)
+ ] @reference
+]]
+
+-- local lua_query_package_name_strings = [[
+-- (assignment_statement
+--   (variable_list
+--     (dot_index_expression . (_) @definition.associated (identifier) @definition.var)))
 -- ]]
--- )
---
--- for _, captures, metadata in query:iter_matches(root, bufnr) do
---   i(q.get_node_text(captures[2], bufnr))
---   i(metadata)
--- end
 
--- :::::::::::::::::::::::::::::::::::::::::::::::::::
-
-local q = {}
-
-q.packages = {
+-- assignment_statement [88, 0] - [92, 1]
+--   variable_list [88, 0] - [88, 10]
+--     name: dot_index_expression [88, 0] - [88, 10]
+--       table: identifier [88, 0] - [88, 1]
+--       field: identifier [88, 2] - [88, 10]
+--   expression_list [88, 13] - [92, 1]
+--     value: table_constructor [88, 13] - [92, 1]
+--       field [89, 2] - [89, 24]
+--         value: string [89, 2] - [89, 24]
+--       field [90, 2] - [90, 41]
+--         name: string [90, 3] - [90, 16]
+--         value: table_constructor [90, 20] - [90, 41]
+--           field [90, 22] - [90, 39]
+--             value: string [90, 22] - [90, 39]
+--       field [91, 2] - [91, 26]
+--         name: string [91, 3] - [91, 9]
+--         value: table_constructor [91, 13] - [91, 26]
+--           field [91, 15] - [91, 24]
+--             value: string [91, 15] - [91, 24]
+local test_table = {}
+test_table.packages = {
   "aaaa/tttt_ss-st.nvim",
   ["t_e-rrr.aaa"] = { "ccc/t_e-rrr.aaa" },
   ["xxxx"] = { "yyy/xxx" },
 }
 
+-- get string fields in the first table level
+-- or field[1] in second table levels
+local lua_query_package_name_strings = [[
+(assignment_statement
+  (variable_list
+    (dot_index_expression . (_) @definition.associated (identifier) @definition.var)))
+]]
+
+local function print_query()
+  local bufnr = api.nvim_get_current_buf()
+  local language_tree = vim.treesitter.get_parser(bufnr)
+  local syntax_tree = language_tree:parse()
+  local root = syntax_tree[1]:root()
+  local query = vim.treesitter.parse_query("lua", lua_query_package_name_strings)
+
+  for id, captures, metadata in query:iter_matches(root, bufnr, root:start(), root:end_()) do
+    for id, node in pairs(captures) do
+      local name = query.captures[id]
+      local nt = tsq.get_node_text(node, bufnr)
+      local node_data = metadata[id] -- Node level metadata
+      local ns = node:start()
+      if name == "definition.var" and nt == "packages" then
+        -- this captures the `packages` identifier if it is a dot assignment expr.
+        -- it does not account for module name atm.
+        print("capture id: ", name, " | node text:", nt)
+        local parent = node:parent()
+        local pp = parent:parent()
+        local ppp = pp:parent()
+        local sib = parent:prev_sibling()
+        print("parent:", tsq.get_node_text(parent,bufnr))
+        -- print("nxt sib:", tsq.get_node_text(sib,bufnr))
+        print(sib)
+        print("parent type", parent:type())
+        print("pp type", pp:type())
+        print("ppp type", ppp:type())
+
+        local pp_sib = pp:next_sibling()
+        local pp_sib2 = pp_sib:next_sibling()
+        print("pp.sib:", pp_sib:type())
+        print("pp.sib2:", pp_sib2:type()) -- expression list
+
+        print(ppp:child_count())
+
+        for child, name in pp_sib2:iter_children() do
+          print(tsq.get_node_text(child,bufnr))
+            print("PPP child name", name)
+          for c, n in child:iter_children() do
+            local t = tsq.get_node_text(c,bufnr)
+            print(":::", n, " // ", t)
+          end
+        end
+
+        -- TODO:
+        -- use node funcs her to filter string field nodes
+      end
+    end
+
+    -- if match[2] ~= nil then
+    --   print(tsq.get_node_text(match[2], bufnr))
+    -- end
+  end
+end
+
+-- :::::::::::::::::::::::::::::::::::::::::::::::::::
+
 local function fork_plugin_under_cursor()
   -- ADD NUI POPUP
+  print_query()
 
   -- 1. query for package strings
   -- 2. pass table set to doom_picker.
