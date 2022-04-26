@@ -20,16 +20,33 @@ utils_modules.create_new_module = function()
   --
 end
 
+-- TODO: sketch structures etc with comments
+
 utils_modules.get_module_template_from_name = function(mname)
-  return string.format(
-    [[
-local %s = {}
+  local header = string.format(
+    [[local %s = {}
 
 -- TODO:
 --
 --    -
+	]],
+    mname
+  )
+
+  local settings = string.format(
+    [[----------------------------
+-- SETTINGS
+----------------------------
 
 -- %s.settings = {}
+	]],
+    mname
+  )
+
+  local packages = string.format(
+    [[----------------------------
+-- PACKAGES
+----------------------------
 
 -- %s.packages = {
 -- [""] = {},
@@ -37,10 +54,52 @@ local %s = {}
 -- -- [""] = {},
 -- -- [""] = {},
 -- }
+  ]],
+    mname
+  )
+
+  local configs = string.format(
+    [[----------------------------
+-- CONFIGS
+----------------------------
+  ]],
+    mname
+  )
+
+  local cmds = string.format(
+    [[----------------------------
+-- CMDS
+----------------------------
 
 -- %s.cmds = {}
+  ]],
+    mname
+  )
+
+  local autocmds = string.format(
+    [[--------------------------
+-- AUTOCMDS
+--------------------------
+
 -- %s.autocmds = {}
+	]],
+    mname
+  )
+
+  local binds = string.format(
+    [[----------------------------
+-- BINDS
+----------------------------
+
 -- %s.binds = {}
+  ]],
+    mname
+  )
+
+  local binds_leader = string.format(
+    [[----------------------------
+-- LEADER BINDS
+----------------------------
 
 -- if require("doom.utils").is_module_enabled("whichkey") then
 --   table.insert(%s.binds, {
@@ -57,17 +116,40 @@ local %s = {}
 --     },
 --   })
 -- end
+  ]],
+    mname
+  )
+
+  local footer = string.format(
+    [[----------------------------
+-- RETURN
+----------------------------
 
 return %s
   ]],
-    mname,
-    mname,
-    mname,
-    mname,
-    mname,
-    mname,
-    mname,
     mname
+  )
+
+  return string.format(
+    [[%s
+%s
+%s
+%s
+%s
+%s
+%s
+%s
+%s
+  ]],
+    header,
+    settings,
+    packages,
+    configs,
+    cmds,
+    autocmds,
+    binds,
+    binds_leader,
+    footer
   )
 end
 

@@ -1,6 +1,6 @@
 local user_utils = require("user.utils")
 
-local binds_create = {}
+local binds_mini_syntax = {}
 
 -- NOTE: for each binds, use ts to auto generate a `cmd` for it so that we call the command instead of
 -- calling the function in the bind. since there currently is problems with binds reloading. therefore
@@ -117,7 +117,7 @@ local t_mini_syntax_test = {
   --       },
 }
 
-binds_create.settings = {
+binds_mini_syntax.settings = {
   input = {
     position = "50%",
     size = {
@@ -141,7 +141,7 @@ binds_create.settings = {
   },
 }
 
-binds_create.cmds = {
+binds_mini_syntax.cmds = {
   {
     "MiniSyntaxTest",
     function()
@@ -207,7 +207,7 @@ binds_create.cmds = {
 }
 
 if require("doom.utils").is_module_enabled("whichkey") then
-  binds_create.binds = {
+  binds_mini_syntax.binds = {
     {
       "<leader>M",
       name = "+moll",
@@ -219,4 +219,4 @@ if require("doom.utils").is_module_enabled("whichkey") then
   }
 end
 
-return binds_create
+return binds_mini_syntax

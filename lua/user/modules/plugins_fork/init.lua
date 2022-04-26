@@ -3,186 +3,145 @@ local ts_utils = require("nvim-treesitter.ts_utils")
 local locals = require("nvim-treesitter.locals")
 local api = vim.api
 local cmd = api.nvim_command
+local doom_queries = require("user.utils.doom_queries")
+
+-- rename this module to `module_package_get_local`
 
 local pf = {}
 
--- WATCH/USE -->> https://www.youtube.com/watch?v=86sgKa0jeO4
---
 -- `:h lua-treesitter-query`
 -- `forkify.nvim`
-
--- TODO: doom.local_plugins_path = "~/code/repos/github.com/"
+-- doom.local_plugins_path = "~/code/repos/github.com/"
 --
-local lua_query_scopes = [[
-[
-  (chunk)
-  (do_statement)
-  (while_statement)
-  (repeat_statement)
-  (if_statement)
-  (for_statement)
-  (function_declaration)
-  (function_definition)
-] @scope
-]]
+local local_prefix = ""
 
-local lua_query_assignment_identifier = [[
-assignment_statement
- (variable_list
-   (identifier) @definition.var))
-]]
-
-local lua_query_assignment_dot = [[
-(assignment_statement
-  (variable_list
-    (dot_index_expression . (_) @definition.associated (identifier) @definition.var)))
-]]
-
-local lua_query_function_identifier = [[
-(function_declaration
-  name: (identifier) @definition.function)
-  (#set! definition.function.scope "parent")
-]]
-
-local lua_query_function_dot = [[
-(function_declaration
-  name: (dot_index_expression
-    . (_) @definition.associated (identifier) @definition.function))
-  (#set! definition.method.scope "parent")
-]]
-
-local lua_query_function_method_index = [[
-(function_declaration
-  name: (method_index_expression
-    . (_) @definition.associated (identifier) @definition.method))
-  (#set! definition.method.scope "parent")
-]]
-
-local lua_query_for_clause = [[
- (for_generic_clause
-   (variable_list
-     (identifier) @definition.var))
-]]
-local lua_query_for_numeric = [[
- (for_numeric_clause
-   name: (identifier) @definition.var)
-
-]]
-
-local lua_query_parameters = [[
- (parameters (identifier) @definition.parameter)
-]]
-
-local lua_query_reference = [[
- [
-   (identifier)
- ] @reference
-]]
-
--- local lua_query_package_name_strings = [[
--- (assignment_statement
---   (variable_list
---     (dot_index_expression . (_) @definition.associated (identifier) @definition.var)))
--- ]]
-
--- assignment_statement [88, 0] - [92, 1]
---   variable_list [88, 0] - [88, 10]
---     name: dot_index_expression [88, 0] - [88, 10]
---       table: identifier [88, 0] - [88, 1]
---       field: identifier [88, 2] - [88, 10]
---   expression_list [88, 13] - [92, 1]
---     value: table_constructor [88, 13] - [92, 1]
---       field [89, 2] - [89, 24]
---         value: string [89, 2] - [89, 24]
---       field [90, 2] - [90, 41]
---         name: string [90, 3] - [90, 16]
---         value: table_constructor [90, 20] - [90, 41]
---           field [90, 22] - [90, 39]
---             value: string [90, 22] - [90, 39]
---       field [91, 2] - [91, 26]
---         name: string [91, 3] - [91, 9]
---         value: table_constructor [91, 13] - [91, 26]
---           field [91, 15] - [91, 24]
---             value: string [91, 15] - [91, 24]
 local test_table = {}
 test_table.packages = {
-  "aaaa/tttt_ss-st.nvim",
-  ["t_e-rrr.aaa"] = { "ccc/t_e-rrr.aaa" },
-  ["xxxx"] = { "yyy/xxx" },
+  "first/tttt_ss-st.nvim",
+  ["first.aaa"] = { "second/t_e-rrr.aaa" },
+  ["first"] = { "second/xxx", opt = true },
+  ["firstX"] = { "second/rst.nnnnn", opt = true, arst = "arst" },
 }
 
--- get string fields in the first table level
--- or field[1] in second table levels
-local lua_query_package_name_strings = [[
-(assignment_statement
-  (variable_list
-    (dot_index_expression . (_) @definition.associated (identifier) @definition.var)))
-]]
+--     for id, node, metadata in query:iter_captures(tree:root(), bufnr, first, last) do
+--       local name = query.captures[id] -- name of the capture in the query
+--       -- typically useful info about the node:
+--       local type = node:type() -- type of the captured node
+--       local row1, col1, row2, col2 = node:range() -- range of the capture
+--       ... use the info here ...
+--     end
+-- <
 
-local function print_query()
+-- return table of nodes in capture name
+local function log_captures(root, bufnr, q, capture_name)
+  local capture_name_matches = {}
+  if q ~= nil then
+    for id, node, metadata in q:iter_captures(root, bufnr, root:start(), root:end_()) do
+      local name = q.captures[id] -- name of the capture in the query
+
+      -- refactor into function get_capture from query
+      if name == capture_name then
+        table.insert(capture_name_matches, node)
+      end
+    end
+  end
+  return capture_name_matches
+end
+
+-- todo: if bufnr or current buf
+local function get_query(query_str, bufnr)
   local bufnr = api.nvim_get_current_buf()
   local language_tree = vim.treesitter.get_parser(bufnr)
   local syntax_tree = language_tree:parse()
   local root = syntax_tree[1]:root()
-  local query = vim.treesitter.parse_query("lua", lua_query_package_name_strings)
 
-  for id, captures, metadata in query:iter_matches(root, bufnr, root:start(), root:end_()) do
+  local q = vim.treesitter.parse_query("lua", query_str)
+  return bufnr, root, q
+end
+
+local function filter_query_for_packages_field_string_nodes(bufnr, root, query_parsed)
+  local package_string_nodes = {}
+  for _, captures in query_parsed:iter_matches(root, bufnr, root:start(), root:end_()) do
     for id, node in pairs(captures) do
-      local name = query.captures[id]
+      local name = query_parsed.captures[id]
       local nt = tsq.get_node_text(node, bufnr)
-      local node_data = metadata[id] -- Node level metadata
-      local ns = node:start()
       if name == "definition.var" and nt == "packages" then
-        -- this captures the `packages` identifier if it is a dot assignment expr.
-        -- it does not account for module name atm.
-        print("capture id: ", name, " | node text:", nt)
         local parent = node:parent()
         local pp = parent:parent()
-        local ppp = pp:parent()
-        local sib = parent:prev_sibling()
-        print("parent:", tsq.get_node_text(parent,bufnr))
-        -- print("nxt sib:", tsq.get_node_text(sib,bufnr))
-        print(sib)
-        print("parent type", parent:type())
-        print("pp type", pp:type())
-        print("ppp type", ppp:type())
-
         local pp_sib = pp:next_sibling()
         local pp_sib2 = pp_sib:next_sibling()
-        print("pp.sib:", pp_sib:type())
-        print("pp.sib2:", pp_sib2:type()) -- expression list
-
-        print(ppp:child_count())
-
-        for child, name in pp_sib2:iter_children() do
-          print(tsq.get_node_text(child,bufnr))
-            print("PPP child name", name)
-          for c, n in child:iter_children() do
-            local t = tsq.get_node_text(c,bufnr)
-            print(":::", n, " // ", t)
+        for child, _ in pp_sib2:iter_children() do
+          for c, _ in child:iter_children() do
+            local t = tsq.get_node_text(c, bufnr)
+            local ccnt = c:child_count()
+            if ccnt == 1 then
+              table.insert(package_string_nodes, c)
+            elseif ccnt == 5 then
+              local node_t_value = c:child(4)
+              local child_str_node = node_t_value:child(1)
+              table.insert(package_string_nodes, child_str_node)
+            end
           end
         end
-
-        -- TODO:
-        -- use node funcs her to filter string field nodes
       end
     end
+  end
+  return package_string_nodes
+end
 
-    -- if match[2] ~= nil then
-    --   print(tsq.get_node_text(match[2], bufnr))
-    -- end
+local function app_end_text_to_top_locals()
+  -- query the end of the `requires` block on top of the file
+end
+
+local function ts_nodes_prepend_text(nodes, bufnr)
+  for i, v in ipairs(nodes) do
+    local type = v:type() -- type of the captured node
+    local nt = tsq.get_node_text(v, bufnr)
+    local sr, sc, er, ec = v:range()
+    -- print( string.format("type: %s, text: %s, [%s %s, %s %s]", type, nt, sr + 1, sc, er + 1, ec))
   end
 end
 
--- :::::::::::::::::::::::::::::::::::::::::::::::::::
+local function ts_node_append_text(node) end
+
+local function ts_node_surround_text(node) end
+
+local function prepare_forking_plugin(bufnr, repo_str)
+  -- 1. append string to table field
+  --    buf insert text
+  -- 2. require the doom.paths on top.
+  --    get top locals require block scope range end
+  --    insert require user.utils.paths.", repo_str
+  --- 3. pass string to doom.opts.fork_cmd = "ghm fork %s"
+  --      vim.cmd(string.format(":! <cr>", repo_str)
+end
+
+local function print_query()
+  local bufnr, root, q_parsed = get_query(doom_queries.lua_assignment_dot)
+
+  local psns = filter_query_for_packages_field_string_nodes(bufnr, root, q_parsed)
+
+  for _, node in pairs(psns) do
+    local node_text = tsq.get_node_text(node, bufnr)
+    -- print("node_text: ", node:type(), node_text)
+    local sr, sc, er, ec = node:range()
+
+    -- TODO:
+    --
+    -- 1. create picker that searches the package text fields
+    -- 2. copy picker from `create_module`
+    -- 3. callback -> prepare_forking_plugin(repo_str)
+  end
+
+  local bufnr, root, q_parsed_2 = get_query(doom_queries.doom_get_package_repo_fields)
+
+  local package_string_nodes = log_captures(root, bufnr, q_parsed_2, "package_string")
+
+  ts_nodes_prepend_text(package_string_nodes, bufnr)
+end
 
 local function fork_plugin_under_cursor()
-  -- ADD NUI POPUP
   print_query()
-
-  -- 1. query for package strings
-  -- 2. pass table set to doom_picker.
-  -- 3. create callback that replaces the string.
 end
 
 local function fork_all_packages(include_deps)
