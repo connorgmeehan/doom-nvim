@@ -3,8 +3,6 @@ local is_module_enabled = utils.is_module_enabled
 
 local utils_ui = {}
 
-
-
 -- @param input method
 -- 		nui | telescope | regular vim input
 -- @param selection_table
@@ -15,15 +13,19 @@ local utils_ui = {}
 -- 		typed_input_str
 -- @return str
 -- 		fuzzy_match_str_if_telescope
-utils_ui.spawn_input = function(kind, selection_table, callback)
-
-end
-
-
-
+utils_ui.spawn_input = function(kind, selection_table, callback) end
 
 -- install fzf with exact matching into telescope -> https://github.com/nvim-telescope/telescope-fzf-native.nvim
 local function spawn_telescope_picker_on_table(target_table, callback)
+  -- map each entry back to the target_table
+  local selection_to_target_table_map = {}
+
+  for _, v in ipairs[target_table] do
+    selection_to_target_table_map[ui_repr_map(v,bufnr)] = v
+  end
+
+  print(vim.inspect(selection_to_target_table_map))
+
   local function pass_telescope_entry_to_callback(prompt_bufnr)
     local state = require("telescope.actions.state")
     local input_str = state.get_current_line(prompt_bufnr)

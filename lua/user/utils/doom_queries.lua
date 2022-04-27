@@ -2,7 +2,7 @@ local utils = require("doom.utils")
 local system = require("doom.core.system")
 
 local function doom_get_query_by_name(lang, query_name)
-  print(string.format("queries/%s/%s.scm", lang, query_name), true)
+  return string.format("%s/queries/%s/%s.scm", system.doom_root, lang, query_name)
 end
 
 local test_table = {}
