@@ -32,21 +32,6 @@ local function i(value)
   print(vim.inspect(value))
 end
 
--- TODO: redo this with plenary.path
-local function path_get_tail(p)
-  local tail = vim.tbl_map(function(s)
-    return s:match("/([_%w]-)$") -- capture only dirname
-  end, p)
-  return tail
-end
-
-local function get_dir_files_or_both_in_path_location(path)
-  local scan_dir = require("plenary.scandir").scan_dir
-  local scan_dir_opts = { search_pattern = ".", depth = 1, only_dirs = true }
-  local t_current_module_paths = scan_dir(path, scan_dir_opts)
-  return t_current_module_paths
-end
-
 local function append_new_module_to_modules_file(mname)
   -- get file.
   -- nvim insert hardcoded position for now!!!!
@@ -81,21 +66,6 @@ local function create_new_module_dir(new_mname)
   -- vim.cmd(string.format(":%sb", newbuf))
 end
 
-local function get_current_user_modules()
-  local current_modules_path = string.format(
-    "%s%slua%suser%smodules",
-    system.doom_root,
-    system.sep,
-    system.sep,
-    system.sep
-  )
-
-  local t_current_module_paths = get_dir_files_or_both_in_path_location(current_modules_path)
-  -- mv into utils.get_doom_modules_list(table -> core|user)
-  local t_current_module_names = path_get_tail(t_current_module_paths)
-  return t_current_module_names
-end
-
 -- local function check_match_in_target_table(t, s)
 --   return vim.tbl_contains(t, s)
 -- end
@@ -111,7 +81,7 @@ local function compare_selection_to_target_table(target_table, input_str)
 end
 
 -- install fzf with exact matching into telescope -> https://github.com/nvim-telescope/telescope-fzf-native.nvim
-local function spawn_telescope_picker_on_table(target_table, callback)
+local function spawn_telescope_picker_on_table(target_table, callback, buf_ref)
   -- TODO: rename `use_fuzzy_or_line`
   local function pass_telescope_entry_to_callback(ui_type, prompt_bufnr)
     local state = require("telescope.actions.state")
@@ -185,7 +155,7 @@ local function prompt_user_for_input()
   --   t_current_module_names,                -> table
   --   compare_selection_to_target_table    -> decider function
   -- )
-  local t_current_module_names = get_current_user_modules()
+  local t_current_module_names = user_utils_path.get_user_mod_names()
   if create_module.settings.use_telescope then
     spawn_telescope_picker_on_table(t_current_module_names, compare_selection_to_target_table)
   else
@@ -207,6 +177,7 @@ create_module.cmds = {
   --     prompt_user_for_input({ module_type = "core", kind = "feature" })
   --   end,
   -- },
+  -- { "DoomInsertModuleTemplateAtCursor" },
 }
 
 create_module.binds = {}
