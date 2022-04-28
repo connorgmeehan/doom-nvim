@@ -1,4 +1,4 @@
--- 1. put global options under `doom.opts`
+-- 1. put global options under `doom.settings`
 -- 2. pass to picker
 -- 3. update value.
 -- 4. reload??

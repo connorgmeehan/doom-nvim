@@ -233,21 +233,21 @@ lsp.configs["nvim-cmp"] = function()
         return item
       end,
     },
-    -- TODO: move binds into `doom.opts.cmp_binds = {}`
+    -- TODO: move binds into `doom.settings.cmp_binds = {}`
     -- 		so that one can easilly change these without having to mess with core.
     mapping = {
-      doom.opts.cmp_binds.select_prev_item = cmp.mapping.select_prev_item(),
-      doom.opts.cmp_binds.select_next_item = cmp.mapping.select_next_item(),
-      doom.opts.cmp_binds.scroll_docs_bkw = cmp.mapping.scroll_docs(-4),
-      doom.opts.cmp_binds.scroll_docs_fwd = cmp.mapping.scroll_docs(4),
-      doom.opts.cmp_binds.complete = cmp.mapping.complete(),
-      doom.opts.cmp_binds.close = cmp.mapping.close(),
+      doom.settings.cmp_binds.select_prev_item = cmp.mapping.select_prev_item(),
+      doom.settings.cmp_binds.select_next_item = cmp.mapping.select_next_item(),
+      doom.settings.cmp_binds.scroll_docs_bkw = cmp.mapping.scroll_docs(-4),
+      doom.settings.cmp_binds.scroll_docs_fwd = cmp.mapping.scroll_docs(4),
+      doom.settings.cmp_binds.complete = cmp.mapping.complete(),
+      doom.settings.cmp_binds.close = cmp.mapping.close(),
       -- ["<ESC>"] = cmp.mapping.close(),
-      doom.opts.cmp_binds.confirm = cmp.mapping.confirm({
+      doom.settings.cmp_binds.confirm = cmp.mapping.confirm({
         behavior = cmp.ConfirmBehavior.Replace,
         select = true,
       }),
-      doom.opts.cmp_binds.tab = cmp.mapping(function(fallback)
+      doom.settings.cmp_binds.tab = cmp.mapping(function(fallback)
         if cmp.visible() then
           cmp.select_next_item()
         elseif snippets_enabled and luasnip.expand_or_jumpable() then
@@ -261,7 +261,7 @@ lsp.configs["nvim-cmp"] = function()
         "i",
         "s",
       }),
-      doom.opts.cmp_binds.stab = cmp.mapping(function(fallback)
+      doom.settings.cmp_binds.stab = cmp.mapping(function(fallback)
         if cmp.visible() then
           cmp.select_prev_item()
         elseif snippets_enabled and luasnip.jumpable(-1) then

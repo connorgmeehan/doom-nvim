@@ -26,7 +26,7 @@ local user_ts_utils = require("user.utils.ts")
 local pf = {}
 
 pf.settings = {
-  local_prefix = "doom.opts.local_plugins_path .. ",
+  local_prefix = "doom.settings.local_plugins_path .. ",
 }
 
 local test_table = {}
@@ -46,7 +46,7 @@ local function fork_package(repo_string_node, bufnr)
   user_ts_utils.ts_single_node_prepend_text(repo_string_node, bufnr, pf.settings.local_prefix)
   local fork_cmd = string.format(
     ":!%s git@github.com:%s.git",
-    doom.opts.fork_package_cmd,
+    doom.settings.fork_package_cmd,
     nt_stripped
   )
   print(fork_cmd)

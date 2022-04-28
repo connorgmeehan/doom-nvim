@@ -34,7 +34,7 @@
 --- @field config string|function Command or function to run after the plugin is loaded.
 --- @field setup string|function Command or function to run before the plugin is loaded.
 
--- TODO: mv all options into `doom.opts.`
+-- TODO: mv all options into `doom.settings = { ... }`
 
 doom = {
   -- Pins plugins to a commit sha to prevent breaking changes
@@ -167,7 +167,7 @@ doom = {
     transparent_background = false,
   },
 
-  opts = {
+  settings = {
     -- defaults to false of course..
     -- so that we can add binds tha easilly modify and refactor core
     -- with eg. Treesitter..
