@@ -11,10 +11,24 @@ local doom_queries = {}
 --
 --    reuse the same picker from `create_module`
 --
--- 	picker -> fuzzy select name
 
--- 	if rm -> kill()
--- 	if new -> picker -> select lang
+----------------------------
+-- LOGIC
+----------------------------
+
+local function run_doom_queries_ui()
+  print("doom queries ui!!!")
+
+  -- get all queries together with they file paths
+  -- fuzzy or line
+  -- run callback
+  --
+
+  -- 	picker -> fuzzy/line select name
+  -- 	if open -> open()
+  -- 	if rm -> kill()
+  -- 	if new -> picker -> select lang -> make new under correct lang dir.
+end
 
 ----------------------------
 -- SETTINGS
@@ -45,7 +59,7 @@ doom_queries.cmds = {
   {
     "DoomQueriesUI",
     function()
-      print("doom queries ui")
+      run_doom_queries_ui()
     end,
   },
 }
@@ -75,7 +89,7 @@ if require("doom.utils").is_module_enabled("whichkey") then
         "D",
 
         {
-              { "q", [[ :DoomQueriesUI<cr> ]], name = "make/open/rm doom ts queries" },
+          { "q", [[ :DoomQueriesUI<cr> ]], name = "make/open/rm doom ts queries" },
         },
       },
     },

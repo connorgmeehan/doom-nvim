@@ -2,14 +2,15 @@ local binds_debug = {}
 
 -- TODO:
 --
---    -
-	
+--    - visualize binds and conflicts UI
+--    - navigate to bind definition in module picker/buffer line picker
+
 ----------------------------
 -- SETTINGS
 ----------------------------
 
 -- binds_debug.settings = {}
-	
+
 ----------------------------
 -- PACKAGES
 ----------------------------
@@ -20,29 +21,29 @@ local binds_debug = {}
 -- -- [""] = {},
 -- -- [""] = {},
 -- }
-  
+
 ----------------------------
 -- CONFIGS
 ----------------------------
-  
+
 ----------------------------
 -- CMDS
 ----------------------------
 
 -- binds_debug.cmds = {}
-  
+
 --------------------------
 -- AUTOCMDS
 --------------------------
 
 -- binds_debug.autocmds = {}
-	
+
 ----------------------------
 -- BINDS
 ----------------------------
 
 -- binds_debug.binds = {}
-  
+
 ----------------------------
 -- LEADER BINDS
 ----------------------------
@@ -62,11 +63,11 @@ local binds_debug = {}
 --     },
 --   })
 -- end
-  
+
 ----------------------------
 -- RETURN
 ----------------------------
 
 return binds_debug
-  
-  
+
+

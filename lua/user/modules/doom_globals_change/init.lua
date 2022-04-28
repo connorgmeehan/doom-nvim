@@ -2,3 +2,9 @@
 -- 2. pass to picker
 -- 3. update value.
 -- 4. reload??
+--
+--  change value UI
+--  navigate to option in globals file
+--  add option/table to doom
+--
+--  add override to `config.lua` file

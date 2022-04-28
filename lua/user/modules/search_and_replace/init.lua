@@ -4,7 +4,6 @@ search_and_replace.packages = {
   -- ["nvim-search-and-replace"] = { "s1n7ax/nvim-search-and-replace" },
   -- ["nvim-spectre"] = {"nvim-pack/nvim-spectre" },
   -- ["sad.nvim"] = {"ray-x/sad.nvim"},
-  -- ["architext"] = { "vigoux/architext.nvim" }, -- NOTE: substitute s// w/ TS QUERIES
 }
 
 search_and_replace.configs = {}
