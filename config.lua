@@ -10,17 +10,21 @@ doom.moll = {}
 
 -- packer.nvim logs to stdpath(cache)/packer.nvim.log. Looking at this file is usually a good start if something isn't working as expected.
 
-doom.opts.cmp_binds = {
-  select_prev_item = "<C-p>",
-  select_next_item = "<C-n>",
-  scroll_docs_fwd = "<C-d>",
-  scroll_docs_bkw = "<C-f>",
-  complete = "<C-Space>",
-  close = "<C-e>",
-  confirm = "<CR>",
-  tab = "<Tab>",
-  stab = "<S-Tab>",
-}
+-- doom.opts.cmp_binds = {
+--   select_prev_item = "<C-p>",
+--   select_next_item = "<C-n>",
+--   scroll_docs_fwd = "<C-d>",
+--   scroll_docs_bkw = "<C-f>",
+--   complete = "<C-Space>",
+--   close = "<C-h>",
+--   confirm = "<C-a>",
+--   tab = "<C-l>",
+--   stab = "<C-h>",
+-- }
+
+
+
+
 
 ------------------------
 ---       TODO       ---
