@@ -14,18 +14,35 @@ local ts_architext_ui = {}
 -- SETTINGS
 ----------------------------
 
--- ts_architext_ui.settings = {}
+ts_architext_ui.settings = {}
 
 ----------------------------
 -- PACKAGES
 ----------------------------
 
--- ts_architext_ui.packages = {
+--[[
+--  type: string, text: "vigoux/architext.nvim", [24 20, 24 43]
+-- :!ghm clone git@github.com:vigoux/architext.nvim.git
+-- :!ghm clone git@github.com:vigoux/architext.nvim.git
+-- [No write since last change]
+-- ^[[0;32m     clone^[[0m ssh://git@github.com/vigoux/architext.nvim.git -> /Users/hjalmarjakobsson/code/repos/github.com/vigoux/architext.nvim
+-- ^[[0;37m       git^[[0m clone --recursive ssh://git@github.com/vigoux/architext.nvim.git /Users/hjalmarjakobsson/code/repos/github.com/vigoux/architext
+-- .nvim
+-- Cloning into '/Users/hjalmarjakobsson/code/repos/github.com/vigoux/architext.nvim'...
+-- git@github.com: Permission denied (publickey).
+-- fatal: Could not read from remote repository.
+--
+-- Please make sure you have the correct access rights
+-- and the repository exists.
+-- ^[[0;31m     error^[[0m failed to get "git@github.com:vigoux/architext.nvim.git": /usr/local/bin/git: exit status 128
+-- --]]
+
+ts_architext_ui.packages = {
+  ["architext"] = { "vigoux/architext.nvim" }, -- NOTE: substitute s// w/ TS QUERIES
 -- [""] = {},
--- -- [""] = {},
--- -- [""] = {},
--- -- [""] = {},
--- }
+-- [""] = {},
+-- [""] = {},
+}
 
 ----------------------------
 -- CONFIGS
