@@ -27,12 +27,12 @@ return {
     "todo_comments", -- Highlight TODO: comments
 
     -- UI (44ms, 10ms)
-    "lsp_progress",       -- Check status of LSP loading
-    "tabline",            -- Tab bar buffer switcher
-    "dashboard",          -- A pretty dashboard upon opening
-    "trouble",            -- A pretty diagnostic viewer
-    "statusline2",        -- A pretty status line at the bottom of the buffer
-    "minimap",            -- Shows current position in document
+    "lsp_progress", -- Check status of LSP loading
+    "tabline", -- Tab bar buffer switcher
+    "dashboard", -- A pretty dashboard upon opening
+    "trouble", -- A pretty diagnostic viewer
+    "statusline2", -- A pretty status line at the bottom of the buffer
+    "minimap", -- Shows current position in document
 
     -- Tools (188ms, 144ms)
     "dap", -- Debug code through neovim
@@ -90,7 +90,7 @@ return {
     -- "autocmds",
     "binds",
     "char_counter",
-    "cmdline",
+    -- "cmdline",
     -- "code_outline",
     -- "codeql",
     -- "coderunner",
@@ -102,7 +102,7 @@ return {
     -- "config_old",
     -- "corerunner",
 
-    "create_bind",
+    "create_binds",
     "create_module",
     "create_plugin",
     "create_snippet",
@@ -113,6 +113,7 @@ return {
     -- "debugging",
     -- "diagrams",
     "docs",
+    "doom_queries",
     "editing",
     "fennel",
     "file_explorers",
@@ -146,7 +147,7 @@ return {
     "nvim_luadev",
     -- "pandoc",
     "paths",
-		"plugins_fork",
+    "plugins_fork",
     "printer",
     "quickfix",
     -- "read_file",
@@ -174,13 +175,14 @@ return {
     -- "testing",
     "ts_context",
     "ts_playground",
+    "ts_query_monitor",
     "ts_testing",
     "tmux",
     "ui",
     "undo",
     "utilities",
     -- "websearch",
-    "wildmenu",
+    -- "wildmenu",
     "windows",
     "wm",
   },
