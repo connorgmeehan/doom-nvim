@@ -1,5 +1,5 @@
 local utils = require("doom.utils")
-local use_floating_win_packer = doom.use_floating_win_packer
+local use_floating_win_packer = doom.settings.use_floating_win_packer
 local log = require("doom.utils.logging")
 local system = require("doom.core.system")
 
@@ -46,7 +46,7 @@ function doom_modules.start()
       enable = true,
     },
     log = {
-      level = doom.logging,
+      level = doom.settings.logging,
     },
   })
 
@@ -66,7 +66,7 @@ function doom_modules.load_modules()
         end
 
         -- Set/unset frozen packer dependencies
-        packer_spec.commit = doom.freeze_dependencies and packer_spec.commit or nil
+        packer_spec.commit = doom.settings.freeze_dependencies and packer_spec.commit or nil
 
         -- Initialise packer
         use(packer_spec)

@@ -1,5 +1,5 @@
 local utils = require("doom.utils")
-local use_floating_win_packer = doom.use_floating_win_packer
+local use_floating_win_packer = doom.settings.use_floating_win_packer
 local log = require("doom.utils.logging")
 local system = require("doom.core.system")
 

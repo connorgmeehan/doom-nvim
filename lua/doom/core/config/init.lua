@@ -18,7 +18,7 @@ local function first_load_only()
   if vim.tbl_isempty(doom or {}) then
     require("doom.core.config.vim_options")()
 
-    if doom.check_updates then
+    if doom.settings.check_updates then
       require("doom.core.functions").check_updates()
     end
   end
