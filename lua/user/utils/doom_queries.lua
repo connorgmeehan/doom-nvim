@@ -1,8 +1,10 @@
 local utils = require("doom.utils")
+local fs = require("doom.utils.fs")
 local system = require("doom.core.system")
 
 local function doom_get_query_by_name(lang, query_name)
-  return string.format("%s/queries/%s/%s.scm", system.doom_root, lang, query_name)
+  local query_path = string.format("%s/queries/%s/%s.scm", system.doom_root, lang, query_name)
+  return fs.read_file(query_path)
 end
 
 local test_table = {}

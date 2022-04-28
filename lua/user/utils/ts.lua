@@ -1,9 +1,12 @@
 local utils = require("doom.utils")
+local fs = require("doom.utils.fs")
+local system = require("doom.core.system")
+local user_paths = require("user.utils.path")
 local tsq = require("vim.treesitter.query")
 local api = vim.api
 local cmd = api.nvim_command
 
-local user_ts_utils = {}
+local M = {}
 
 -- create helper functions that can be nice and useful.
 -- ALSO ANNOTATE IF THE FUNCTION ALREADY EXISTS IN A PLUGIN
@@ -19,8 +22,13 @@ local user_ts_utils = {}
 -- ts.insert_text_before_node(node,"-- ", offset)
 -- ts.insert_text_after_node(node,"-- ", offset)
 -- ts.surround_node_with_text(node,"-- ", offset)
+--
 
-user_ts_utils.get_query = function(query_str, bufnr)
+M.get_query_file = function(lang, query_name)
+  return fs.read_file(string.format("%s/queries/%s/%s.scm", system.doom_root, lang, query_name))
+end
+
+M.get_query = function(query_str, bufnr)
   if bufnr == nil then
     bufnr = api.nvim_get_current_buf()
   end
@@ -31,7 +39,7 @@ user_ts_utils.get_query = function(query_str, bufnr)
   return bufnr, root, q
 end
 
-user_ts_utils.get_captures = function(root, bufnr, q, capture_name)
+M.get_captures = function(root, bufnr, q, capture_name)
   local capture_name_matches = {}
   if q ~= nil then
     for id, node, metadata in q:iter_captures(root, bufnr, root:start(), root:end_()) do
@@ -46,7 +54,20 @@ user_ts_utils.get_captures = function(root, bufnr, q, capture_name)
   return capture_name_matches
 end
 
-user_ts_utils.ts_single_node_prepend_text = function(node, bufnr, prepend_text)
+M.get_captures_from_multiple_files_with_STRING_PARSER = function()
+  local mult_file_captures = {
+    filepath = "",
+    node = nil,
+  }
+  local umps = user_paths.get_user_mod_paths()
+  -- for each path
+  -- ts parse for package_string captures
+  -- store in table
+
+  return mult_file_captures
+end
+
+M.ts_single_node_prepend_text = function(node, bufnr, prepend_text)
   local type = node:type() -- type of the captured node
   local nt = tsq.get_node_text(node, bufnr)
   local sr, sc, er, ec = node:range()
@@ -54,7 +75,7 @@ user_ts_utils.ts_single_node_prepend_text = function(node, bufnr, prepend_text)
   api.nvim_buf_set_text(bufnr, sr, sc, sr, sc, { prepend_text })
 end
 
-user_ts_utils.ts_single_node_append_text = function(node, bufnr, prepend_text)
+M.ts_single_node_append_text = function(node, bufnr, prepend_text)
   local type = node:type() -- type of the captured node
   local nt = tsq.get_node_text(node, bufnr)
   local sr, sc, er, ec = node:range()
@@ -62,21 +83,20 @@ user_ts_utils.ts_single_node_append_text = function(node, bufnr, prepend_text)
   api.nvim_buf_set_text(bufnr, er, ec, er, ec, { prepend_text })
 end
 
-
 -- @param table
 -- loop and apply
-user_ts_utils.ts_nodes_prepend_text = function(nodes, bufnr, prepend_text)
+M.ts_nodes_prepend_text = function(nodes, bufnr, prepend_text)
   for i, v in ipairs(nodes) do
-    user_ts_utils.ts_single_node_prepend_text(v, bufnr, prepend_text)
+    M.ts_single_node_prepend_text(v, bufnr, prepend_text)
   end
 end
 
-user_ts_utils.ts_nodes_append_text = function(nodes, bufnr, prepend_text)
+M.ts_nodes_append_text = function(nodes, bufnr, prepend_text)
   for i, v in ipairs(nodes) do
-    user_ts_utils.ts_single_node_append_text(v, bufnr, prepend_text)
+    M.ts_single_node_append_text(v, bufnr, prepend_text)
   end
 end
--- user_ts_utils.ts_node_append_text = function(node) end
--- user_ts_utils.ts_node_surround_text = function(node) end
+-- M.ts_node_append_text = function(node) end
+-- M.ts_node_surround_text = function(node) end
 
-return user_ts_utils
+return M

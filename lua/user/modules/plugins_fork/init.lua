@@ -6,28 +6,20 @@ local cmd = api.nvim_command
 local doom_queries = require("user.utils.doom_queries")
 local user_ts_utils = require("user.utils.ts")
 
+
 -- rename this module to `module_package_get_local`
 --
 -- XXX prepen text works
 --
--- - refactor telescope table picker
--- - pass nodes into picker
--- - select node
--- - transform_prepend_text(node, text, offset)
--- - call `ghm clone ` with node text
--- - insert `require path somehow` on top of file.
+-- 	clone/fork?
+-- 	toggle use local version?
 --
+-- 	picker select only NON-local package string (current situation)
 --
--- 1. make a UI chain
--- 	mv telescope UI function to util.
--- 	a. select plugin
--- 	b. clone/fork?
--- 	c. use local version?
+-- 	picker for local -> set to regular.
 --
--- 	this could be a telescope chain.
---
--- 2. list/filter upstream/local packages. (toggle/modify)
--- doom.local_plugins_path = "~/code/repos/github.com/"
+-- 	compile all user-module-package-string-nodes into a telescope picker so that we can
+-- 	select/toggle from a list of all packages that exists in doom.
 --
 --
 -- redo the whole thing with `ARCHITEXT` plugin and see if it has streamlined my processes??
@@ -62,7 +54,23 @@ local function fork_package(repo_string_node, bufnr)
   --      vim.cmd(string.format(":! <cr>", repo_str)
 end
 
-local function fork_plugins_picker(config)
+local function make_picker_for_all_packages_in_all_user_modules()
+
+  -- iterate modules > collect packages into all_packages = { { file = "..", node = <user_data> } ... {file,node} }
+  --
+	-- scandir modules
+	-- parse file at path?
+	-- get package string nodes
+	-- put into table
+	-- ...
+	--
+	-- since I don't to open the files into a buffer, BUT
+	-- only parse the file and transform it. Therefore I need
+	-- to first read all of the files and then
+	-- use vim.treesitter.get_string_parser()
+end
+
+local function fork_plugins_picker_cur_buf(config)
   local function pass_entry_to_callback(prompt_buf)
     local state = require("telescope.actions.state")
     local fuzzy_selection = state.get_selected_entry(prompt_bufnr)
@@ -86,25 +94,22 @@ local function fork_plugins_picker(config)
   }):find()
 end
 
--- TODO: move params into settings config table so that we only pass an options table to the func.
+-- TODO: get query from file `queries` dir.
 local function print_query()
-  local bufnr, root, q_parsed_2 = user_ts_utils.get_query(doom_queries.doom_get_package_repo_fields)
+  local bufnr, root, q_parsed_2 = user_ts_utils.get_query(user_ts_utils.get_query_file("lua", "doom_module_packages"))
   local package_string_nodes = user_ts_utils.get_captures(root, bufnr, q_parsed_2, "package_string")
-
   local picker_config = {
     bufnr = bufnr,
     entries = {},
     entries_mapped = {},
     callback = fork_package,
   }
-
   for k, v in pairs(package_string_nodes) do
     local nt = tsq.get_node_text(v, bufnr)
     table.insert(picker_config.entries, nt)
     picker_config.entries_mapped[nt] = v
   end
-
-  fork_plugins_picker(picker_config)
+  fork_plugins_picker_cur_buf(picker_config)
 end
 
 local function fork_plugin_under_cursor()
