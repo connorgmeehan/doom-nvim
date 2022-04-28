@@ -183,7 +183,8 @@ doom = {
       tab = "<Tab>",
       stab = "<S-Tab>",
     },
-    local_plugins_path = ""
+    local_plugins_path = "",
+    fork_package_cmd = "",
   },
 
   -- Automatically reload local plugins during development
