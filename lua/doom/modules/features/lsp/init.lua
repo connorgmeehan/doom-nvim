@@ -229,21 +229,21 @@ lsp.configs["nvim-cmp"] = function()
       end,
     },
     mapping = {
-      ["<C-p>"] = cmp.mapping.select_prev_item(),
-      ["<C-n>"] = cmp.mapping.select_next_item(),
-      ["<C-d>"] = cmp.mapping.scroll_docs(-4),
-      ["<C-f>"] = cmp.mapping.scroll_docs(4),
-      ["<C-Space>"] = cmp.mapping.complete(),
-      ["<C-e>"] = cmp.mapping.close(),
+      [doom.opts.cmp_binds.select_prev_item] = cmp.mapping.select_prev_item(),
+      [doom.opts.cmp_binds.select_next_item] = cmp.mapping.select_next_item(),
+      [doom.opts.cmp_binds.scroll_docs_bkw] = cmp.mapping.scroll_docs(-4),
+      [doom.opts.cmp_binds.scroll_docs_fwd] = cmp.mapping.scroll_docs(4),
+      [doom.opts.cmp_binds.complete] = cmp.mapping.complete(),
+      [doom.opts.cmp_binds.close] = cmp.mapping.close(),
       -- ["<ESC>"] = cmp.mapping.close(),
-      ["<CR>"] = cmp.mapping.confirm({
+      [doom.opts.cmp_binds.confirm] = cmp.mapping.confirm({
         behavior = cmp.ConfirmBehavior.Replace,
         select = true,
       }),
-      ["<Tab>"] = cmp.mapping(function(fallback)
+      [doom.opts.cmp_binds.tab] = cmp.mapping(function(fallback)
         if cmp.visible() then
           cmp.select_next_item()
-        elseif (snippets_enabled and luasnip.expand_or_jumpable()) then
+        elseif snippets_enabled and luasnip.expand_or_jumpable() then
           vim.fn.feedkeys(replace_termcodes("<Plug>luasnip-expand-or-jump"), "")
         elseif check_backspace() then
           vim.fn.feedkeys(replace_termcodes("<Tab>"), "n")
@@ -254,7 +254,7 @@ lsp.configs["nvim-cmp"] = function()
         "i",
         "s",
       }),
-      ["<S-Tab>"] = cmp.mapping(function(fallback)
+      [doom.opts.cmp_binds.stab] = cmp.mapping(function(fallback)
         if cmp.visible() then
           cmp.select_prev_item()
         elseif snippets_enabled and luasnip.jumpable(-1) then
