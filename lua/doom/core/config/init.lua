@@ -33,7 +33,7 @@ end
 
 config.override_doom_with_user_settings = function()
   local user_settings = require("doom.core.config.user_settings").settings
-  doom.opts = vim.tbl_deep_extend("force", doom, user_settings)
+  doom = vim.tbl_deep_extend("force", doom, user_settings)
 end
 
 config.compile_doom_modules = function()
@@ -61,6 +61,9 @@ config.compile_doom_modules = function()
       )
       if ok then
         doom.modules[module_name] = result
+        -- if module_name == "plugins_fork" then
+        --   print("y")
+        -- end
       else
         local log = require("doom.utils.logging")
         log.error(
