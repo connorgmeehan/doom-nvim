@@ -168,6 +168,10 @@ doom = {
   },
 
   opts = {
+    -- defaults to false of course..
+    -- so that we can add binds tha easilly modify and refactor core
+    -- with eg. Treesitter..
+    core_dev_binds_enabled = false,
     cmp_binds = {
       select_prev_item = "<C-p>",
       select_next_item = "<C-n>",
@@ -179,6 +183,7 @@ doom = {
       tab = "<Tab>",
       stab = "<S-Tab>",
     },
+    local_plugins_path = ""
   },
 
   -- Automatically reload local plugins during development

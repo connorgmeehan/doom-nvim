@@ -26,8 +26,14 @@ end
 
 config.load = function()
   first_load_only()
+  config.override_doom_with_user_settings()
   config.compile_doom_modules()
   config.apply_user_config()
+end
+
+config.override_doom_with_user_settings = function()
+  local user_settings = require("doom.core.config.user_settings").settings
+  doom.opts = vim.tbl_deep_extend("force", doom, user_settings)
 end
 
 config.compile_doom_modules = function()
