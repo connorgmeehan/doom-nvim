@@ -25,8 +25,8 @@ local function first_load_only()
 end
 
 config.load = function()
-  first_load_only()
   config.override_doom_with_user_settings()
+  first_load_only()
   config.compile_doom_modules()
   config.apply_user_config()
 end
