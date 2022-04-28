@@ -6,7 +6,6 @@ local cmd = api.nvim_command
 local doom_queries = require("user.utils.doom_queries")
 local user_ts_utils = require("user.utils.ts")
 
-
 -- rename this module to `module_package_get_local`
 --
 -- XXX prepen text works
@@ -27,7 +26,7 @@ local user_ts_utils = require("user.utils.ts")
 local pf = {}
 
 pf.settings = {
-  local_prefix = "user_paths.ghq.gh .. ",
+  local_prefix = "doom.opts.local_plugins_path .. ",
 }
 
 local test_table = {}
@@ -38,36 +37,36 @@ test_table.packages = {
   ["firstX"] = { "second/rst.nnnnn", opt = true, arst = "arst" },
 }
 
-local function append_text_to_top_locals()
-  -- query the end of the `requires` block on top of the file
-end
+-- local function run_fork_cmd_for_packag(package_string)
+-- end
 
 local function fork_package(repo_string_node, bufnr)
-  print("fork_package: ", tsq.get_node_text(repo_string_node, bufnr))
+  local nt = tsq.get_node_text(repo_string_node, bufnr)
+  local nt_stripped = string.sub(nt, 2, -2)
   user_ts_utils.ts_single_node_prepend_text(repo_string_node, bufnr, pf.settings.local_prefix)
-  -- 1. append string to table field
-  --    buf insert text
-  -- 2. require the doom.paths on top.
-  --    get top locals require block scope range end
-  --    insert require user.utils.paths.", repo_str
-  --- 3. pass string to doom.opts.fork_cmd = "ghm fork %s"
-  --      vim.cmd(string.format(":! <cr>", repo_str)
+  local fork_cmd = string.format(
+    ":!%s git@github.com:%s.git",
+    doom.opts.fork_package_cmd,
+    nt_stripped
+  )
+  print(fork_cmd)
+  vim.cmd(fork_cmd)
 end
 
 local function make_picker_for_all_packages_in_all_user_modules()
 
   -- iterate modules > collect packages into all_packages = { { file = "..", node = <user_data> } ... {file,node} }
   --
-	-- scandir modules
-	-- parse file at path?
-	-- get package string nodes
-	-- put into table
-	-- ...
-	--
-	-- since I don't to open the files into a buffer, BUT
-	-- only parse the file and transform it. Therefore I need
-	-- to first read all of the files and then
-	-- use vim.treesitter.get_string_parser()
+  -- scandir modules
+  -- parse file at path?
+  -- get package string nodes
+  -- put into table
+  -- ...
+  --
+  -- since I don't to open the files into a buffer, BUT
+  -- only parse the file and transform it. Therefore I need
+  -- to first read all of the files and then
+  -- use vim.treesitter.get_string_parser()
 end
 
 local function fork_plugins_picker_cur_buf(config)
@@ -96,7 +95,9 @@ end
 
 -- TODO: get query from file `queries` dir.
 local function print_query()
-  local bufnr, root, q_parsed_2 = user_ts_utils.get_query(user_ts_utils.get_query_file("lua", "doom_module_packages"))
+  local bufnr, root, q_parsed_2 = user_ts_utils.get_query(
+    user_ts_utils.get_query_file("lua", "doom_module_packages")
+  )
   local package_string_nodes = user_ts_utils.get_captures(root, bufnr, q_parsed_2, "package_string")
   local picker_config = {
     bufnr = bufnr,

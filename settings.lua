@@ -149,6 +149,7 @@ return {
       stab = "<S-Tab>",
     },
     local_plugins_path = "~/code/repos/github.com/",
+    fork_package_cmd = "ghm clone",
   },
 
   -- Automatically reload local plugins during development
