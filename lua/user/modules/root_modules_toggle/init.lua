@@ -1,24 +1,23 @@
-local module_syntax_enforce = {}
+local root_modules_toggle = {}
 
 -- TODO:
 --
---    - make sure that a module conforms to our spec
---    - use doom queries together to run through code and make sure that stuff adheres.
+--    - use the doom root modules query to manage enabled/disabled
+--    modules.
 --
---    I don't know if this makes any sense at all but at least it is a good laboratory
---    that maybe could serve useful purposes in the future.
+--     >> rename to `modules_manager`
 
 ----------------------------
 -- SETTINGS
 ----------------------------
 
--- module_syntax_enforce.settings = {}
+-- root_modules_toggle.settings = {}
 
 ----------------------------
 -- PACKAGES
 ----------------------------
 
--- module_syntax_enforce.packages = {
+-- root_modules_toggle.packages = {
 -- [""] = {},
 -- -- [""] = {},
 -- -- [""] = {},
@@ -33,26 +32,33 @@ local module_syntax_enforce = {}
 -- CMDS
 ----------------------------
 
--- module_syntax_enforce.cmds = {}
+root_modules_toggle.cmds = {
+  {
+    "DoomModulesDisableAllUser",
+    function()
+      print("hello")
+    end,
+  },
+}
 
-----------------------------
+--------------------------
 -- AUTOCMDS
-----------------------------
+--------------------------
 
--- module_syntax_enforce.autocmds = {}
+-- root_modules_toggle.autocmds = {}
 
 ----------------------------
 -- BINDS
 ----------------------------
 
--- module_syntax_enforce.binds = {}
+-- root_modules_toggle.binds = {}
 
 ----------------------------
 -- LEADER BINDS
 ----------------------------
 
 -- if require("doom.utils").is_module_enabled("whichkey") then
---   table.insert(module_syntax_enforce.binds, {
+--   table.insert(root_modules_toggle.binds, {
 --     "<leader>",
 --     name = "+prefix",
 --     {
@@ -67,5 +73,8 @@ local module_syntax_enforce = {}
 --   })
 -- end
 
-return module_syntax_enforce
+----------------------------
+-- RETURN
+----------------------------
 
+return root_modules_toggle

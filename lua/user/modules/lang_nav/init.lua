@@ -1,24 +1,21 @@
-local module_syntax_enforce = {}
+local lang_nav = {}
 
 -- TODO:
 --
---    - make sure that a module conforms to our spec
---    - use doom queries together to run through code and make sure that stuff adheres.
---
---    I don't know if this makes any sense at all but at least it is a good laboratory
---    that maybe could serve useful purposes in the future.
+--    - have a special leader that updates based on lang context.
+--    - create powerful language commands.
 
 ----------------------------
 -- SETTINGS
 ----------------------------
 
--- module_syntax_enforce.settings = {}
+-- lang_nav.settings = {}
 
 ----------------------------
 -- PACKAGES
 ----------------------------
 
--- module_syntax_enforce.packages = {
+-- lang_nav.packages = {
 -- [""] = {},
 -- -- [""] = {},
 -- -- [""] = {},
@@ -33,26 +30,26 @@ local module_syntax_enforce = {}
 -- CMDS
 ----------------------------
 
--- module_syntax_enforce.cmds = {}
+-- lang_nav.cmds = {}
 
-----------------------------
+--------------------------
 -- AUTOCMDS
-----------------------------
+--------------------------
 
--- module_syntax_enforce.autocmds = {}
+-- lang_nav.autocmds = {}
 
 ----------------------------
 -- BINDS
 ----------------------------
 
--- module_syntax_enforce.binds = {}
+-- lang_nav.binds = {}
 
 ----------------------------
 -- LEADER BINDS
 ----------------------------
 
 -- if require("doom.utils").is_module_enabled("whichkey") then
---   table.insert(module_syntax_enforce.binds, {
+--   table.insert(lang_nav.binds, {
 --     "<leader>",
 --     name = "+prefix",
 --     {
@@ -67,5 +64,10 @@ local module_syntax_enforce = {}
 --   })
 -- end
 
-return module_syntax_enforce
+----------------------------
+-- RETURN
+----------------------------
+
+return lang_nav
+
 

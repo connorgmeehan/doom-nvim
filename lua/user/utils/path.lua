@@ -2,17 +2,33 @@ local system = require("doom.core.system")
 local utils = require("doom.utils")
 local is_module_enabled = utils.is_module_enabled
 
-local utils_path = {}
+local M = {}
 
 -- TODO: redo this with plenary.path
-utils_path.path_get_tail = function(p)
+M.path_get_tail = function(p)
   local tail = vim.tbl_map(function(s)
     return s:match("/([_%w]-)$") -- capture only dirname
   end, p)
   return tail
 end
 
-utils_path.user_modules_dir = function()
+-- REFACTOR:
+--
+-- add param `doom_dir_string` so that one can more easilly select from which diry ou want modules.
+-- user/features/langs/core
+-- if _include_core ??
+--
+-- make it more easy to pipe specific paths or whatever into telescope.
+--
+M.get_doom_path = function(...)end
+
+M.get_doom_features_modules_dir = function()
+ M.get_doom_path("doom", "modules", "features")
+end
+M.get_doom_langs_modules_dir = function() end
+M.get_user_modules_dir = function() end
+
+M.user_modules_dir = function()
   return string.format(
     "%s%slua%suser%smodules",
     system.doom_root,
@@ -22,19 +38,19 @@ utils_path.user_modules_dir = function()
   )
 end
 
-utils_path.get_dir_files_or_both_in_path_location = function(path)
+M.get_dir_files_or_both_in_path_location = function(path)
   local scan_dir = require("plenary.scandir").scan_dir
   local scan_dir_opts = { search_pattern = ".", depth = 1, only_dirs = true }
   local t_current_module_paths = scan_dir(path, scan_dir_opts)
   return t_current_module_paths
 end
 
-utils_path.get_user_mod_paths = function()
-  return utils_path.get_dir_files_or_both_in_path_location(utils_path.user_modules_dir())
+M.get_user_mod_paths = function()
+  return M.get_dir_files_or_both_in_path_location(M.user_modules_dir())
 end
 
-utils_path.get_user_mod_names = function()
-  return utils_path.path_get_tail(utils_path.get_user_mod_paths())
+M.get_user_mod_names = function()
+  return M.path_get_tail(M.get_user_mod_paths())
 end
 
-return utils_path
+return M

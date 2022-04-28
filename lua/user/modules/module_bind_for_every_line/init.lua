@@ -1,24 +1,22 @@
-local module_syntax_enforce = {}
+local module_bind_for_every_line = {}
 
 -- TODO:
 --
---    - make sure that a module conforms to our spec
---    - use doom queries together to run through code and make sure that stuff adheres.
---
---    I don't know if this makes any sense at all but at least it is a good laboratory
---    that maybe could serve useful purposes in the future.
+--    - create a row based full view UI where we list all binds AND allow user to sort binds based
+--    on properties/ filter binds/ etc.
+--    - mapping -> go to module position where the bind is created.
 
 ----------------------------
 -- SETTINGS
 ----------------------------
 
--- module_syntax_enforce.settings = {}
+-- module_bind_for_every_line.settings = {}
 
 ----------------------------
 -- PACKAGES
 ----------------------------
 
--- module_syntax_enforce.packages = {
+-- module_bind_for_every_line.packages = {
 -- [""] = {},
 -- -- [""] = {},
 -- -- [""] = {},
@@ -33,26 +31,26 @@ local module_syntax_enforce = {}
 -- CMDS
 ----------------------------
 
--- module_syntax_enforce.cmds = {}
+-- module_bind_for_every_line.cmds = {}
 
-----------------------------
+--------------------------
 -- AUTOCMDS
-----------------------------
+--------------------------
 
--- module_syntax_enforce.autocmds = {}
+-- module_bind_for_every_line.autocmds = {}
 
 ----------------------------
 -- BINDS
 ----------------------------
 
--- module_syntax_enforce.binds = {}
+-- module_bind_for_every_line.binds = {}
 
 ----------------------------
 -- LEADER BINDS
 ----------------------------
 
 -- if require("doom.utils").is_module_enabled("whichkey") then
---   table.insert(module_syntax_enforce.binds, {
+--   table.insert(module_bind_for_every_line.binds, {
 --     "<leader>",
 --     name = "+prefix",
 --     {
@@ -67,5 +65,10 @@ local module_syntax_enforce = {}
 --   })
 -- end
 
-return module_syntax_enforce
+----------------------------
+-- RETURN
+----------------------------
+
+return module_bind_for_every_line
+
 

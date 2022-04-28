@@ -3,6 +3,10 @@ local module_rename = {}
 -- TODO:
 --
 --    - rename module ability so that we can have full controll over the structure of
+--
+--    - this one is important because the more functionality we have the more ease we want
+--    when moving functionality around fast so that things make sense but we also don't get lost
+--    or lose something by messing up.
 
 -- module_rename.settings = {}
 

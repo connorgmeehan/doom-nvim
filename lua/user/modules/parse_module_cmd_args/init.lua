@@ -1,24 +1,20 @@
-local module_syntax_enforce = {}
+local parse_module_cmd_args = {}
 
 -- TODO:
 --
---    - make sure that a module conforms to our spec
---    - use doom queries together to run through code and make sure that stuff adheres.
---
---    I don't know if this makes any sense at all but at least it is a good laboratory
---    that maybe could serve useful purposes in the future.
+--    - how can we parse cmd arguments?
 
 ----------------------------
 -- SETTINGS
 ----------------------------
 
--- module_syntax_enforce.settings = {}
+-- parse_module_cmd_args.settings = {}
 
 ----------------------------
 -- PACKAGES
 ----------------------------
 
--- module_syntax_enforce.packages = {
+-- parse_module_cmd_args.packages = {
 -- [""] = {},
 -- -- [""] = {},
 -- -- [""] = {},
@@ -33,26 +29,26 @@ local module_syntax_enforce = {}
 -- CMDS
 ----------------------------
 
--- module_syntax_enforce.cmds = {}
+-- parse_module_cmd_args.cmds = {}
 
-----------------------------
+--------------------------
 -- AUTOCMDS
-----------------------------
+--------------------------
 
--- module_syntax_enforce.autocmds = {}
+-- parse_module_cmd_args.autocmds = {}
 
 ----------------------------
 -- BINDS
 ----------------------------
 
--- module_syntax_enforce.binds = {}
+-- parse_module_cmd_args.binds = {}
 
 ----------------------------
 -- LEADER BINDS
 ----------------------------
 
 -- if require("doom.utils").is_module_enabled("whichkey") then
---   table.insert(module_syntax_enforce.binds, {
+--   table.insert(parse_module_cmd_args.binds, {
 --     "<leader>",
 --     name = "+prefix",
 --     {
@@ -67,5 +63,10 @@ local module_syntax_enforce = {}
 --   })
 -- end
 
-return module_syntax_enforce
+----------------------------
+-- RETURN
+----------------------------
+
+return parse_module_cmd_args
+
 

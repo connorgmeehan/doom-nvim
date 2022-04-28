@@ -4,7 +4,7 @@ local modules_move_component = {}
 --
 --    - Eg. move a package field prom one module to the other.
 --
---    with tree sitter.
+--    - mv command/packages/leader_bind
 
 -- modules_move_component.settings = {}
 

@@ -1,24 +1,21 @@
-local module_syntax_enforce = {}
+local modules_manager = {}
 
 -- TODO:
 --
---    - make sure that a module conforms to our spec
---    - use doom queries together to run through code and make sure that stuff adheres.
---
---    I don't know if this makes any sense at all but at least it is a good laboratory
---    that maybe could serve useful purposes in the future.
+--    - in the end >> refactor all module management stuff into this module and then
+--    move it into the doom core.
 
 ----------------------------
 -- SETTINGS
 ----------------------------
 
--- module_syntax_enforce.settings = {}
+-- modules_manager.settings = {}
 
 ----------------------------
 -- PACKAGES
 ----------------------------
 
--- module_syntax_enforce.packages = {
+-- modules_manager.packages = {
 -- [""] = {},
 -- -- [""] = {},
 -- -- [""] = {},
@@ -33,26 +30,26 @@ local module_syntax_enforce = {}
 -- CMDS
 ----------------------------
 
--- module_syntax_enforce.cmds = {}
+-- modules_manager.cmds = {}
 
-----------------------------
+--------------------------
 -- AUTOCMDS
-----------------------------
+--------------------------
 
--- module_syntax_enforce.autocmds = {}
+-- modules_manager.autocmds = {}
 
 ----------------------------
 -- BINDS
 ----------------------------
 
--- module_syntax_enforce.binds = {}
+-- modules_manager.binds = {}
 
 ----------------------------
 -- LEADER BINDS
 ----------------------------
 
 -- if require("doom.utils").is_module_enabled("whichkey") then
---   table.insert(module_syntax_enforce.binds, {
+--   table.insert(modules_manager.binds, {
 --     "<leader>",
 --     name = "+prefix",
 --     {
@@ -67,5 +64,10 @@ local module_syntax_enforce = {}
 --   })
 -- end
 
-return module_syntax_enforce
+----------------------------
+-- RETURN
+----------------------------
+
+return modules_manager
+
 
