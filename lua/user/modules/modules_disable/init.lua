@@ -2,12 +2,24 @@ local modules_disable = {}
 
 -- TODO:
 --
---    - helper for debugging config by disabling
---    all modules in the `modules.lua` file
 --
+-- 	1. Three cmds:
+-- 		`DoomModulesDisableAll`
+-- 		`DoomModulesDisableToggleFuzzySelect`
 --
---    read through the source of a TS comment plugin and see if there
---    are any nice utils etc. that can be used in doom.
+-- 		in the ui, show disabled entries with the `-- ` prefix so that user can
+-- 		see which is enabled/disabled -> toggle fuzzy match on <CR>
+--
+-- 	2. first do disable all..
+-- 		a. get root modules captures.
+-- 		b. get captures `module-enabled`
+-- 		c. for each -> prepend with `-- `
+--
+
+local function disable_all_modules()
+	print("!!!")
+end
+local function disable_all_select() end
 
 ----------------------------
 -- SETTINGS
@@ -35,7 +47,20 @@ modules_disable.settings = {}
 ----------------------------
 
 -- disable_all_modules("features/langs/user")
-modules_disable.cmds = {}
+modules_disable.cmds = {
+  {
+    "DoomModulesDisableAll",
+    function()
+      disable_all_modules()
+    end,
+  },
+{
+    "DoomModulesDisableSelect",
+    function()
+      disable_all_select()
+    end,
+  }
+}
 
 --------------------------
 -- AUTOCMDS
@@ -47,7 +72,29 @@ modules_disable.cmds = {}
 -- BINDS
 ----------------------------
 
--- modules_disable.binds = {}
+modules_disable.binds = {
+  {
+    "<leader>",
+    name = "+prefix",
+    {
+      {
+        "D",
+        name = "+doom",
+        {
+          {
+            "M",
+            name = "+modules",
+            {
+              { "P", ":DoomModulesDisableAll<cr>", name = "disable all modules" },
+              { "p", ":DoomModulesDisableSelect<cr>", name = "disable select" },
+            },
+          },
+        },
+      },
+    },
+    -- lvl 1 branch
+  },
+}
 
 ----------------------------
 -- LEADER BINDS
@@ -74,5 +121,3 @@ modules_disable.cmds = {}
 ----------------------------
 
 return modules_disable
-
-
