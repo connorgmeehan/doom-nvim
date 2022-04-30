@@ -1,13 +1,23 @@
 (return_statement
   (expression_list
     (table_constructor
-      (field name: (identifier) @module-categories
-             value:
-	 (table_constructor
-		       (comment) @module-disabled ; @module-disabled: match comment to `-- "string",`
-			(field) @module-enabled
-         )
-      )
-    )
+      (field name: (identifier) @modules.category
+        value: (table_constructor [
+		(comment) @modules.disabled ; (#lua-match? @modules.disabled "%-%-%s\"[%w%-_]+\",")
+		(field) @modules.enabled
+]
+ 	))
   )
 )
+)
+
+; (return_statement
+;   (expression_list
+;     (table_constructor
+;       (field name: (identifier)
+;         value: (table_constructor
+;
+;  	))
+;   )
+; )
+; )
