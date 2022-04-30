@@ -186,13 +186,14 @@ doom = {
       tab = "<Tab>",
       stab = "<S-Tab>",
     },
+
+    -- Automatically reload local plugins during development
+    reload_doom = true,
+    reload_local_plugins = true,
+
     local_plugins_path = "",
     fork_package_cmd = "",
   },
-
-  -- Automatically reload local plugins during development
-  reload_doom = true,
-  reload_local_plugins = true,
 
   packages = {},
   --- Wrapper around packer.nvim `use` function

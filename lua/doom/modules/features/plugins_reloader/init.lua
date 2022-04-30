@@ -21,7 +21,7 @@ pr.cmds = {
               "BufWritePost",
               autocmd_pattern,
               function()
-                if doom.reload_local_plugins then
+                if doom.settings.reload_local_plugins then
                   local t_lua_module_paths = scan_dir(vim.fn.expand(repo_lua_path), scan_dir_opts)
                   local t_lua_module_names = vim.tbl_map(function(s)
                     return s:match("/([_%w]-)$") -- capture only dirname
