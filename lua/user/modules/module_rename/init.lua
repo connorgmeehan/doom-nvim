@@ -17,65 +17,140 @@ local module_rename = {}
 -- 		b. check name aleady exists? > open nui window again?
 --
 --    	c. update module dirname
+local function promt_for_new_name() end
 
-local function update_module_name(old_name)
+--
+-- ACTION FUNCTIONS -> params: (buf, config, module, telescope_input)
+--
+
+local function m_rename(b, c, m, i)
+  print("M RENAME: ", i)
   -- 1. transform `modules.lua` with architext
   -- 2. change module dir name.
 end
+local function m_create(b, c, m, i)
+  print("M CREATE: ", i)
+  -- local path_user_modules = string.format("%s/lua/user/modules", system.doom_root)
+  -- local new_module_path = string.format("%s%s%s", path_user_modules, system.sep, new_mname)
+  -- local new_module_init_file = string.format("%s%sinit.lua", new_module_path, system.sep)
+  -- vim.cmd(string.format("!mkdir -p %s", new_module_path))
+  -- vim.cmd(string.format("!touch %s", new_module_init_file))
+  -- fs.write_file(
+  --   new_module_init_file,
+  --   user_utils_modules.get_module_template_from_name(new_mname),
+  --   "w+"
+  -- )
+  -- vim.cmd(string.format(":e %s", new_module_init_file))
+  -- -- local newbuf = vim.api.nvim_create_buf(1, 0)
+  -- -- vim.api.nvim_buf_set_lines(newbuf, 0, 1, false, vim.fn.split(module_template_string, "\n"))
+  -- -- set file to cur bef
+  -- -- vim.cmd(string.format(":%sb", newbuf))
+end
+local function m_edit(buf, config, m, i)
+  print("M EDIT: ", i)
+  -- vim.cmd(string.format(":e %s/lua/user/modules/%s/init.lua", system.doom_root, mname))
+end
+local function m_delete(buf, config)
+  print("M DELETE: ", i)
+  -- 1. nui menu -> are you sure
+  -- 2. if yes ->
+  -- 	a. transform `modules.lua`
+  -- 	b. remove dir.
+end
+local function m_toggle(buf, config)
+  print("M TOGGLE: ", i)
+  -- if opts.enabled then
+  --   user_ts_utils.ts_nodes_prepend_text(nodes_by_section, buf, "-- ")
+  -- else
+  --   -- remove comment
+  --   user_ts_utils.ts_nodes_prepend_text(nodes_by_section, buf, "XXX ")
+  --   -- print("root modules rm comment > todo..")
+  -- end
+end
+local function m_move(buf, config)
+  -- move module into into (features/langs)
+end
+local function m_merge(buf, config) end
+-- action_id = "BIND"
+-- action_id = "LEADER"
+-- action_id = "CMD"
+-- action_id = "AUTOCMD"
+-- action_id = "PACKAGE"
 
-local function promt_for_new_name() end
+--
+-- ACTION ROUTER
+--
+
+local function picker_get_state(prompt_bufnr)
+  local state = require("telescope.actions.state")
+  local line = state.get_current_line(prompt_bufnr)
+  local fuzzy = state.get_selected_entry(prompt_bufnr)
+  return fuzzy, line
+end
+
+local function picker_action_router(buf, config, action, use_line)
+  local fuzzy, line = picker_get_state(buf)
+  local m_sel = config.entries_mapped[fuzzy.value]
+  if action == "CREATE" then
+    m_create(buf, config, m_sel, line)
+  elseif action == "RENAME" then
+    m_rename(buf, config, m_sel, fuzzy.value)
+  elseif action == "EDIT" then
+    m_edit(buf, config, m_sel, fuzzy.value)
+  elseif action == "DELETE" then
+  elseif action == "TOGGLE" then
+    -- elseif action == "MOVE" then
+    -- elseif action == "MERGE" then
+    -- elseif action == "BINDS" then
+  end
+  require("telescope.actions").close(buf)
+end
+
+--
+-- DOOM MODULES PICKER
+--
 
 local function picker_rename(config)
-  local function pass_entry_to_callback(prompt_buf)
-    local state = require("telescope.actions.state")
-    local fuzzy_selection = state.get_selected_entry(prompt_bufnr)
-    require("telescope.actions").close(prompt_buf)
-    config.callback(config.entries_mapped[fuzzy_selection.value], config.bufnr)
-  end
-
-  opts = opts or require("telescope.themes").get_cursor()
-
+  local opts = opts or require("telescope.themes").get_cursor()
   require("telescope.pickers").new(opts, {
-    prompt_title = "create user module",
+    prompt_title = "Doom Modules Manager",
     finder = require("telescope.finders").new_table({
       results = config.entries,
     }),
     sorter = require("telescope.config").values.generic_sorter(opts),
     attach_mappings = function(_, map)
-      map("i", "<CR>", pass_entry_to_callback)
-      map("n", "<CR>", pass_entry_to_callback)
+      map("i", "<CR>", function(bufnr)
+        picker_action_router(bufnr, config, "EDIT", false)
+      end)
+      map("i", "<C-r>", function(bufnr)
+        picker_action_router(bufnr, config, "RENAME", false)
+      end)
+      map("i", "<C-e>", function(bufnr)
+        picker_action_router(bufnr, config, "CREATE", true) -- use line...
+      end)
+      map("i", "<C-u>", function(bufnr)
+        picker_action_router(bufnr, config, "DELETE", false)
+      end)
+      map("i", "<C-t>", function(bufnr)
+        picker_action_router(bufnr, config, "TOGGLE", false)
+      end)
       return true
     end,
   }):find()
 end
 
-local function rename_modules_select()
-  --    1. select module
-  --    get all modules > TODO: copy from create_module.
-
-  -- TODO: get_module_data() -- return { path, name, section }
-  local t_current_module_names = user_utils_path.get_user_mod_names()
-  print("rename")
-
+local function prepare_data_for_picker()
   local modules_data = user_utils_path.get_module_meta_data()
-  print(vim.inspect(modules_data))
-
-  --    map entries for UI
-
-  -- local picker_config = {
-  --   bufnr = bufnr, -- we use the module dir path here instead.
-  --   entries = {},
-  --   entries_mapped = {},
-  --   callback = fork_package,
-  -- }
-  -- for k, v in pairs(package_string_nodes) do
-  --   local nt = tsq.get_node_text(v, bufnr)
-  --   table.insert(picker_config.entries, nt)
-  --   picker_config.entries_mapped[nt] = v
-  -- end
-
- --    call picker with `promt_for_new_name` callback
-  -- fork_plugins_picker_cur_buf(picker_config)
+  local picker_config = {
+    entries = {}, -- what you see
+    entries_mapped = {}, -- the mapped table data
+  }
+  for _, m in pairs(modules_data) do
+    local ui_str = m.section .. " > " .. m.name
+    table.insert(picker_config.entries, ui_str)
+    picker_config.entries_mapped[ui_str] = m
+  end
+  picker_rename(picker_config)
 end
 
 -- module_rename.settings = {}
@@ -91,7 +166,7 @@ module_rename.cmds = {
   {
     "DoomModulesRenameSelect",
     function()
-      rename_modules_select()
+      prepare_data_for_picker()
     end,
   },
 }
