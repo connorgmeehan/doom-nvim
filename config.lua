@@ -215,26 +215,26 @@ doom.moll = {}
 -- to open the picker and not create a new bind for each path which just
 -- clutters up the mappings tree.
 
-local code = "~/code/repos/"
-local gh = code .. "github.com/"
-
-local xdg_cfg = "$XDG_CONFIG_HOME/dorothy/config.xdg/"
-local home_notes = "$HOME/notes/"
-local doom_log_path = "$HOME/.local/share/nvim/doom.log"
-local aliases_git =
-  "$XDG_DATA_HOME/antigen/bundles/robbyrussell/oh-my-zsh/plugins/git/git.plugin.zsh"
-local aliases_zsh = "$XDG_CONFIG_HOME/dorothy/sources/aliases.sh"
-local conf_doom = "$XDG_CONFIG_HOME/dorothy/config.xdg/doom-nvim/doom_config.lua"
-local conf_scim = "$XDG_CONFIG_HOME/dorothy/config.xdg/sc-im/scimrc"
-local conf_setup = "$XDG_CONFIG_HOME/dorothy/config/setup.bash"
-local conf_alac = xdg_cfg .. "alacritty/alacritty.yml"
-local conf_surf = xdg_cfg .. "surfingkeys/config.js"
-local conf_skhd = xdg_cfg .. "skhd/skhdrc"
-local conf_tmux = xdg_cfg .. "tmux/tmux.conf"
-local conf_tnx_main = xdg_cfg .. "tmuxinator/main.yml"
-local conf_yabai = xdg_cfg .. "yabai/yabairc"
-local notes_rndm = home_notes .. "RNDM.norg"
-local notes_todo = home_notes .. "TODO.md"
+-- local code = "~/code/repos/"
+-- local gh = code .. "github.com/"
+--
+-- local xdg_cfg = "$XDG_CONFIG_HOME/dorothy/config.xdg/"
+-- local home_notes = "$HOME/notes/"
+-- local doom_log_path = "$HOME/.local/share/nvim/doom.log"
+-- local aliases_git =
+--   "$XDG_DATA_HOME/antigen/bundles/robbyrussell/oh-my-zsh/plugins/git/git.plugin.zsh"
+-- local aliases_zsh = "$XDG_CONFIG_HOME/dorothy/sources/aliases.sh"
+-- local conf_doom = "$XDG_CONFIG_HOME/dorothy/config.xdg/doom-nvim/doom_config.lua"
+-- local conf_scim = "$XDG_CONFIG_HOME/dorothy/config.xdg/sc-im/scimrc"
+-- local conf_setup = "$XDG_CONFIG_HOME/dorothy/config/setup.bash"
+-- local conf_alac = xdg_cfg .. "alacritty/alacritty.yml"
+-- local conf_surf = xdg_cfg .. "surfingkeys/config.js"
+-- local conf_skhd = xdg_cfg .. "skhd/skhdrc"
+-- local conf_tmux = xdg_cfg .. "tmux/tmux.conf"
+-- local conf_tnx_main = xdg_cfg .. "tmuxinator/main.yml"
+-- local conf_yabai = xdg_cfg .. "yabai/yabairc"
+-- local notes_rndm = home_notes .. "RNDM.norg"
+-- local notes_todo = home_notes .. "TODO.md"
 
 -------------------------
 ---       DEBUG       ---
@@ -312,6 +312,15 @@ vim.opt.winwidth = 95
 -- -- 'set nojoinspaces',
 -- -- -- 'set fillchars={ 'eob' = "~" }',
 
+
+
+
+
+
+
+
+
+
 vim.opt.guifont = { "Hack Nerd Font", "h12" }
 
 -- Editor config
@@ -341,196 +350,196 @@ end
 ---       HELPERS       ---
 ---------------------------
 
-local function get_system_info_string()
-  -- Get the neovim version
-  local nvim_vinfo = vim.version()
-  local nvim_version = string.format(
-    "%d.%d.%d",
-    nvim_vinfo.major,
-    nvim_vinfo.minor,
-    nvim_vinfo.patch
-  )
-  if nvim_vinfo.api_prerelease then
-    nvim_version = nvim_version .. " (dev)"
-  end
-  -- Get the current OS and if the user is running Linux then get also the
-  -- distribution name, e.g. Manjaro
-  local user_os = vim.loop.os_uname().sysname
-  if user_os == "Linux" then
-    user_os = vim.trim(
-      -- PRETTY_NAME="Distribution (Additional info)", e.g.
-      --	 PRETTY_NAME="Fedora 34 (KDE Plasma)"
-      vim.fn.system(
-        'cat /etc/os-release | grep "^PRETTY_NAME" | sed '
-          .. "'s/^PRETTY_NAME=\"//' | sed "
-          .. "'s/\"//'"
-      )
-    )
-  end
-  return string.format(
-    [[- **OS**: %s
-- **Neovim version**: %s
-- **Doom Nvim information**:
-- **version**: %s
-- **`doom_root` variable**: `%s`
-- **`doom_configs_root` variable**: `%s`]],
-    user_os,
-    nvim_version,
-    utils.doom_version,
-    system.doom_root,
-    system.doom_configs_root
-  )
-end
-
-local function get_error_log_dump()
-  -- the reason why the pattern doesn't match is because of the zero infront of single digit days??
-  local log_date_format
-  local date_pre = os.date("%a %b")
-  local date_day = os.date("%d")
-  local date_time = "%d%d:%d%d:%d%d"
-  local date_year = os.date("%Y")
-  local date_day_filtered
-
-  date_day_filtered = date_day:gsub("0", " ")
-
-  log_date_format = date_pre .. " " .. date_day_filtered .. " " .. date_time .. " " .. date_year
-
-  -- print(log_date_format)
-
-  -- Get and save only the warning and error logs from today
-  local today_logs = {}
-  local doom_logs = vim.split(fs.read_file(system.doom_logs), "\n")
-  for _, doom_log in ipairs(doom_logs) do
-    if
-      string.find(doom_log, "ERROR  " .. log_date_format)
-      or string.find(doom_log, "WARN  " .. log_date_format)
-    then
-      -- print(doom_log)
-      table.insert(today_logs, doom_log)
-    end
-  end
-  return string.format(
-    [[```
-%s
-```]],
-    table.concat(today_logs, "\n")
-  )
-end
-
--- create_report creates a markdown report. It's meant to be used when a bug
--- occurs, useful for debugging issues.
-local function create_report()
-  local date = os.date("%Y-%m-%d %H:%M:%S")
-  local created_report, err = xpcall(function()
-    local report = string.format(
-      [[# Doom Nvim crash report
-> Report date: %s
-## System and Doom Nvim information
-%s
-
-### Begin error log dump
-
-<details>
-%s
-</details>
-
-### End log dump]],
-      date,
-      get_system_info_string(),
-      get_error_log_dump()
-    )
-    fs.write_file(system.doom_report, report, "w+")
-    log.info("Report created at " .. system.doom_report)
-  end, debug.traceback)
-  if not created_report then
-    log.error("Error while writing report. Traceback:\n" .. err)
-  end
-end
-
--- @param: t
-local function add_or_override_plugin(t)
-  local user, name = string.match(t[1], "(.*)/(.*)")
-  local repo = t[1]
-  local local_prefix = t[2]
-
-  -- check if plugin already exists
-  if doom.uses[name] == nil then
-    doom.uses[name] = {}
-  end
-
-  -- prefend repo with local path
-  if t[2] ~= nil then
-    repo = local_prefix .. repo
-  end
-
-  -- override the repo name / if local will the be used
-  doom.uses[name][1] = repo
-
-  for k, value in pairs(t) do
-    if type(k) ~= "number" then
-      doom.uses[name][k] = value
-    end
-  end
-end
-
--- build nest map tree recursive
-local function build_nest_tree(user_tree)
-  local t_nest = {}
-  for key, user_node in pairs(user_tree) do
-    if type(key) == "number" then
-      table.insert(t_nest, user_node) -- << LEAF
-    elseif type(key) == "string" then
-      local new_branch = {
-        string.format("%s", key:sub(1, 1)),
-        name = string.format("+%s", key:sub(3)),
-        build_nest_tree(user_node),
-      }
-      table.insert(t_nest, new_branch) -- insert branch
-    end
-  end
-  return t_nest
-end
-
--- bool enable/dissable
--- mode keyword add to all binds if it doesn't exist
--- mappings table or key.
-local function insert_binds_into_main_table(t)
-  local enabled = t[1]
-  if enabled then
-    local map_tree
-    for k, v in pairs(t) do
-      if type(k) ~= "number" then
-        map_tree = v
-        table.insert(doom.binds, map_tree)
-
-        -- if t[2]
-
-        -- if key = table -> normal ??
-
-        -- visual
-
-        -- select
-
-        -- x
-
-        -- terminal
-
-        -- command
-
-        -- -- leader
-        -- if k == "leader" then
-        --   if not is_plugin_disabled("whichkey") then
-        --     table.insert(doom.binds, {
-        --       "<leader>",
-        --       name = "+prefix",
-        --       build_nest_tree(map_tree)
-        --     })
-        --   end
-        -- end
-      end
-    end
-  end
-end
+-- local function get_system_info_string()
+--   -- Get the neovim version
+--   local nvim_vinfo = vim.version()
+--   local nvim_version = string.format(
+--     "%d.%d.%d",
+--     nvim_vinfo.major,
+--     nvim_vinfo.minor,
+--     nvim_vinfo.patch
+--   )
+--   if nvim_vinfo.api_prerelease then
+--     nvim_version = nvim_version .. " (dev)"
+--   end
+--   -- Get the current OS and if the user is running Linux then get also the
+--   -- distribution name, e.g. Manjaro
+--   local user_os = vim.loop.os_uname().sysname
+--   if user_os == "Linux" then
+--     user_os = vim.trim(
+--       -- PRETTY_NAME="Distribution (Additional info)", e.g.
+--       --	 PRETTY_NAME="Fedora 34 (KDE Plasma)"
+--       vim.fn.system(
+--         'cat /etc/os-release | grep "^PRETTY_NAME" | sed '
+--           .. "'s/^PRETTY_NAME=\"//' | sed "
+--           .. "'s/\"//'"
+--       )
+--     )
+--   end
+--   return string.format(
+--     [[- **OS**: %s
+-- - **Neovim version**: %s
+-- - **Doom Nvim information**:
+-- - **version**: %s
+-- - **`doom_root` variable**: `%s`
+-- - **`doom_configs_root` variable**: `%s`]],
+--     user_os,
+--     nvim_version,
+--     utils.doom_version,
+--     system.doom_root,
+--     system.doom_configs_root
+--   )
+-- end
+--
+-- local function get_error_log_dump()
+--   -- the reason why the pattern doesn't match is because of the zero infront of single digit days??
+--   local log_date_format
+--   local date_pre = os.date("%a %b")
+--   local date_day = os.date("%d")
+--   local date_time = "%d%d:%d%d:%d%d"
+--   local date_year = os.date("%Y")
+--   local date_day_filtered
+--
+--   date_day_filtered = date_day:gsub("0", " ")
+--
+--   log_date_format = date_pre .. " " .. date_day_filtered .. " " .. date_time .. " " .. date_year
+--
+--   -- print(log_date_format)
+--
+--   -- Get and save only the warning and error logs from today
+--   local today_logs = {}
+--   local doom_logs = vim.split(fs.read_file(system.doom_logs), "\n")
+--   for _, doom_log in ipairs(doom_logs) do
+--     if
+--       string.find(doom_log, "ERROR  " .. log_date_format)
+--       or string.find(doom_log, "WARN  " .. log_date_format)
+--     then
+--       -- print(doom_log)
+--       table.insert(today_logs, doom_log)
+--     end
+--   end
+--   return string.format(
+--     [[```
+-- %s
+-- ```]],
+--     table.concat(today_logs, "\n")
+--   )
+-- end
+--
+-- -- create_report creates a markdown report. It's meant to be used when a bug
+-- -- occurs, useful for debugging issues.
+-- local function create_report()
+--   local date = os.date("%Y-%m-%d %H:%M:%S")
+--   local created_report, err = xpcall(function()
+--     local report = string.format(
+--       [[# Doom Nvim crash report
+-- > Report date: %s
+-- ## System and Doom Nvim information
+-- %s
+--
+-- ### Begin error log dump
+--
+-- <details>
+-- %s
+-- </details>
+--
+-- ### End log dump]],
+--       date,
+--       get_system_info_string(),
+--       get_error_log_dump()
+--     )
+--     fs.write_file(system.doom_report, report, "w+")
+--     log.info("Report created at " .. system.doom_report)
+--   end, debug.traceback)
+--   if not created_report then
+--     log.error("Error while writing report. Traceback:\n" .. err)
+--   end
+-- end
+--
+-- -- @param: t
+-- local function add_or_override_plugin(t)
+--   local user, name = string.match(t[1], "(.*)/(.*)")
+--   local repo = t[1]
+--   local local_prefix = t[2]
+--
+--   -- check if plugin already exists
+--   if doom.uses[name] == nil then
+--     doom.uses[name] = {}
+--   end
+--
+--   -- prefend repo with local path
+--   if t[2] ~= nil then
+--     repo = local_prefix .. repo
+--   end
+--
+--   -- override the repo name / if local will the be used
+--   doom.uses[name][1] = repo
+--
+--   for k, value in pairs(t) do
+--     if type(k) ~= "number" then
+--       doom.uses[name][k] = value
+--     end
+--   end
+-- end
+--
+-- -- build nest map tree recursive
+-- local function build_nest_tree(user_tree)
+--   local t_nest = {}
+--   for key, user_node in pairs(user_tree) do
+--     if type(key) == "number" then
+--       table.insert(t_nest, user_node) -- << LEAF
+--     elseif type(key) == "string" then
+--       local new_branch = {
+--         string.format("%s", key:sub(1, 1)),
+--         name = string.format("+%s", key:sub(3)),
+--         build_nest_tree(user_node),
+--       }
+--       table.insert(t_nest, new_branch) -- insert branch
+--     end
+--   end
+--   return t_nest
+-- end
+--
+-- -- bool enable/dissable
+-- -- mode keyword add to all binds if it doesn't exist
+-- -- mappings table or key.
+-- local function insert_binds_into_main_table(t)
+--   local enabled = t[1]
+--   if enabled then
+--     local map_tree
+--     for k, v in pairs(t) do
+--       if type(k) ~= "number" then
+--         map_tree = v
+--         table.insert(doom.binds, map_tree)
+--
+--         -- if t[2]
+--
+--         -- if key = table -> normal ??
+--
+--         -- visual
+--
+--         -- select
+--
+--         -- x
+--
+--         -- terminal
+--
+--         -- command
+--
+--         -- -- leader
+--         -- if k == "leader" then
+--         --   if not is_plugin_disabled("whichkey") then
+--         --     table.insert(doom.binds, {
+--         --       "<leader>",
+--         --       name = "+prefix",
+--         --       build_nest_tree(map_tree)
+--         --     })
+--         --   end
+--         -- end
+--       end
+--     end
+--   end
+-- end
 
 doom.moll.bind = insert_binds_into_main_table
 

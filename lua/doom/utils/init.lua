@@ -4,7 +4,12 @@ local system = require("doom.core.system")
 local fs = require("doom.utils.fs")
 
 --- Doom Nvim version
-utils.doom_version = "4.0.0-alpha1"
+utils.version = {
+  major = 4,
+  minor = 0,
+  patch = 0,
+}
+utils.doom_version = string.format("%d.%d.%d", utils.version.major, utils.version.minor, utils.version.patch)
 
 -- Finds `filename` (where it is a doom config file).
 utils.find_config = function(filename)
@@ -42,6 +47,14 @@ utils.bool2num = function(bool_or_num)
   end
   return bool_or_num
 end
+
+--- Useful in vim `:set <option>` style commands
+---@param bool boolean Bool to convert to string
+---@return string "on" or "off"
+utils.bool2str = function(bool)
+  return bool and "on" or "off"
+end
+
 
 --- Load the specified Lua modules
 --- @param module_path string The path to Lua modules, e.g. 'doom' → 'lua/doom'
@@ -234,7 +247,7 @@ end
 --- @param plugin string The plugin identifier, e.g. statusline
 --- @return boolean
 utils.is_module_enabled = function(plugin)
-  local modules = require("doom.core.config.modules").modules
+  local modules = require("doom.core.modules").enabled_modules
 
   -- Iterate over all modules sections (e.g. ui) and their plugins
   for _, section in pairs(modules) do

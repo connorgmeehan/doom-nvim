@@ -226,18 +226,24 @@ TODO: DEKLARERA -> TRANSFER MONEY?
 
 READ: about how you test queries. https://tree-sitter.github.io/tree-sitter/code-navigation-systems#command-line-invocation
 
+use `refactoring` to refactor parts in the `module_manager` which could be quite fucking cool you know.
 
-this is just so cool be cause that plugin allows you to transform any buffer and when you can do that, then you have the
-ability to just fucking go nuts on a code base and do shit that looks pretty fucki fancy.
+so that is not a good idea but you cannot really understadn how good and importnat this is for doing shit in neovim so that
+someone can really jump around fast in the code base which would then in turn fix it so that it would be come something that we could work
+on together you know.
 
-when you show up for this then you have no fucking idea how that is going to fucking make it into and that might nobe it actually
-and we don't understand why they would haev done that .
+git show 728c5fe:lua/doom/core/config/init.lua > lua/doom/core/config_old.lua
+git show 728c5fe:lua/doom/modules/core/reloder/init.lua > lua/doom/modules/core/reloader/init.lua
 
-
-
+. wrap doom globals in function.
+. move user setting into globals
+. call doom_reset()
+. override the globals table with user settings from inside the globals file so that everything is self contained to one single file.
 
 
 
 --]]
 --
+
+
 
