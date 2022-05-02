@@ -28,6 +28,7 @@ M.get_query_file = function(lang, query_name)
   return fs.read_file(string.format("%s/queries/%s/%s.scm", system.doom_root, lang, query_name))
 end
 
+-- get_query_on_buf
 M.get_query = function(query_str, bufnr)
   if bufnr == nil then
     bufnr = api.nvim_get_current_buf()
@@ -38,6 +39,59 @@ M.get_query = function(query_str, bufnr)
   local q = vim.treesitter.parse_query("lua", query_str)
   return bufnr, root, q
 end
+
+M.get_query_on_file = function(lang, query_name, path_target)
+  local query_str = M.get_query_file(lang, query_name)
+  local source_str = fs.read_file(path_target)
+
+  local language_tree_parser_str = vim.treesitter.get_string_parser(source_str, lang)
+  local syntax_tree = language_tree_parser_str:parse()
+  local root = syntax_tree[1]:root()
+  local q = vim.treesitter.parse_query(lang, query_str)
+  return source_str, root, q
+end
+
+M.run_query_on_buf = function(lang, query_name, buf)
+  print("buf: ", buf)
+  local query_str = M.get_query_file(lang, query_name)
+
+  local language_tree = vim.treesitter.get_parser(buf, lang)
+  local syntax_tree = language_tree:parse()
+  local root = syntax_tree[1]:root()
+  local q = vim.treesitter.parse_query(lang, query_str)
+  return buf, root, q
+end
+
+-- M.get
+
+M.log_captures = function(root, bufnr, q)
+  if q ~= nil then
+    local id_done = {}
+    local iterated_captures = {}
+    for id, node, metadata in q:iter_captures(root, bufnr, root:start(), root:end_()) do
+      local name = q.captures[id]
+      local nt = tsq.get_node_text(node, bufnr)
+      -- if not vim.tbl_contains(id_done, id) then
+      --   table.insert(id_done, id)
+      -- table.insert(iterated_captures, { id = id, node = node, metadata = metadata })
+      -- end
+      print(string.format([[ %s: (%s) -> `%s` ]], id, name, nt))
+    end
+
+    print("::: log captures :::::::::::::::::::::::::::::::::::::::::::::::")
+
+    -- for _, c in ipairs(iterated_captures) do
+    --   local name = q.captures[c.id]
+    --   local nt = tsq.get_node_text(c.node, bufnr)
+    --   local sr, sc, er, ec = c.node:range()
+    --   print(
+    --     string.format([[ %s: (%s) -> `%s`  [%s %s, %s %s] ]], c.id, name, nt, sr + 1, sc, er + 1, ec)
+    --   )
+    -- end
+  end
+end
+
+M.get_unique_captures = function() end
 
 M.get_captures = function(root, bufnr, q, capture_name)
   local capture_name_matches = {}
@@ -73,6 +127,7 @@ M.ts_single_node_prepend_text = function(node, bufnr, prepend_text)
   local sr, sc, er, ec = node:range()
   print(string.format("type: %s, text: %s, [%s %s, %s %s]", type, nt, sr + 1, sc, er + 1, ec))
   api.nvim_buf_set_text(bufnr, sr, sc, sr, sc, { prepend_text })
+  return bufnr
 end
 
 M.ts_single_node_append_text = function(node, bufnr, prepend_text)
@@ -81,6 +136,14 @@ M.ts_single_node_append_text = function(node, bufnr, prepend_text)
   local sr, sc, er, ec = node:range()
   print(string.format("type: %s, text: %s, [%s %s, %s %s]", type, nt, sr + 1, sc, er + 1, ec))
   api.nvim_buf_set_text(bufnr, er, ec, er, ec, { prepend_text })
+end
+
+M.single_node_inner_text_transform = function(node, source, mode)
+
+  -- 1 replace from beginning "L"
+  -- 2 replace from end "R"
+  -- 3 replace from both both "B"
+  -- 4 full swap inner text with repl "F"
 end
 
 -- @param table
