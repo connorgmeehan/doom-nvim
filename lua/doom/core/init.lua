@@ -1,4 +1,4 @@
---[[
+
 --  doom.core
 --
 --  Entrypoint for the doom-nvim framework.
@@ -15,7 +15,7 @@ local utils = require("doom.utils")
 _G._doom = {}
 
 -- Sets the `doom` global object
-require("doom.core.doom_global").load()
+require("doom.core.doom_global")
 
 -- Boostraps the doom-nvim framework, runs the user's `config.lua` file.
 local config = utils.safe_require("doom.core.config")
