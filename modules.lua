@@ -85,6 +85,7 @@ return {
   user = {
 
     -- "ai",
+    "architext",
     -- "async_jobs",
     -- "audio",
     -- "autocmds",
@@ -103,7 +104,6 @@ return {
     -- "corerunner",
 
     "create_binds",
-    "create_module",
     "create_plugin",
     "create_snippet",
 
@@ -113,7 +113,7 @@ return {
     -- "debugging",
     -- "diagrams",
     "docs",
-    "doom_queries",
+    "doom_queries_manager",
     "editing",
     "fennel",
     "file_explorers",
@@ -140,7 +140,11 @@ return {
     -- "lsp",
     -- "markdown",
     "math_calculator",
-    "modules_edit",
+    "module_create_edit",
+    -- "module_edit",
+    "module_disable",
+    "module_manager",
+    "module_merge",
     "motion",
     "mouse",
     -- "neorg",
@@ -148,7 +152,7 @@ return {
     -- "pandoc",
     "paths",
     "plugins_fork",
-    "printer",
+    -- "printer",
     "quickfix",
     -- "read_file",
     "refactor",

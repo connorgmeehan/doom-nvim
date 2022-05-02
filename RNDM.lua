@@ -192,7 +192,52 @@ other areas.
 
 fork connors nest branch.
 
+i had very interesting mentions that I didn't understand a t all and so that is a fucking stupid thing you know and so that is why they didn'
+
+so this is going to be so fucking fast that you cannot even understand how good this shit is and the best thing about this is
+that there is something that you mightn ever understand you know. so that would make it into something that you mightever understand
+ so that would make it into something that you mightever understand
+
+ i don't think i was at least didn't live here. i don't see anything on a superficial search. i tried to get him on my
+ podcast. he talks to bussiness people and so that is quite fucking interesting.
+
+ okay so the next thing to focus on is to learn tree-sitter as well as possible now. and so that is something that I really
+ need to learn now. it is very nice to have a plan for how to act you know. but especially in those that are important for
+ the special enforcement. very interesting.
+
+ then you'd know you know and so that is actually quite fucking importnat that they see that shit and donfmt mess things up like a fucki retard.
+
+and so I just want to copy over functions from the nvim treesitter refactor and see if I can understand something.
+
+which one would be appropriate to copy over into the fork. all of the gun stuff that is just so fucking interesting and you don't really
+get scarred in the moment and there is like this moment where you are more surprised it is real or what is happening. so after that shit
+storm we wanted to see what could be done about running into that shit like a fucking cucksucker.
+
+this is quite fancy shit you know and so if this is done properly then it will make vim into such a fuckign fast system that you cannot
+even understand how fast it is. even if you have pain in you throat then you should not do shit because that is not the most dangerous
+thing in the world you know.
+
+i should really try to get this commandline to work you know so that is the thing you know.
+
+https://github.com/VonHeikemen/dotfiles/blob/master/my-configs/neovim/lua/conf/keymaps.lua
+
+
+TODO: DEKLARERA -> TRANSFER MONEY?
+
+READ: about how you test queries. https://tree-sitter.github.io/tree-sitter/code-navigation-systems#command-line-invocation
+
+
+this is just so cool be cause that plugin allows you to transform any buffer and when you can do that, then you have the
+ability to just fucking go nuts on a code base and do shit that looks pretty fucki fancy.
+
+when you show up for this then you have no fucking idea how that is going to fucking make it into and that might nobe it actually
+and we don't understand why they would haev done that .
+
+
+
+
+
+
 --]]
-
-
+--
 

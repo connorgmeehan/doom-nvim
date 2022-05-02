@@ -10,7 +10,7 @@ doom.moll = {}
 
 -- packer.nvim logs to stdpath(cache)/packer.nvim.log. Looking at this file is usually a good start if something isn't working as expected.
 
--- doom.opts.cmp_binds = {
+-- doom.settings.cmp_binds = {
 --   select_prev_item = "<C-p>",
 --   select_next_item = "<C-n>",
 --   scroll_docs_fwd = "<C-d>",
@@ -268,7 +268,7 @@ vim.opt.keymap = "INSERT_COLEMAK"
 --   · warn
 --   · error
 --   · fatal
-doom.logging = "info"
+doom.settings.logging = "info"
 
 vim.opt.winwidth = 95
 
@@ -315,9 +315,9 @@ vim.opt.winwidth = 95
 vim.opt.guifont = { "Hack Nerd Font", "h12" }
 
 -- Editor config
-doom.indent = 2
-doom.autosave = false
-doom.escape_sequences = { "zm" }
+doom.settings.indent = 2
+doom.settings.autosave = false
+doom.settings.escape_sequences = { "zm" }
 -- vim.lsp.set_log_level('info')
 vim.diagnostic.config({
   float = {
@@ -840,7 +840,7 @@ local m = doom.modules
 -- table.insert(doom.modules.telescope.settings.extensions, "packer")
 --
 
-doom.colorscheme = "tokyonight"
+doom.settings.colorscheme = "tokyonight"
 
 doom.use_cmd({
   "Test",
