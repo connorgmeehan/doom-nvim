@@ -46,7 +46,14 @@ local utils = require("doom.utils")
 local M = {}
 local filename = "settings.lua"
 
-M.user_source = nil
+M.source = nil
+
+-- Path cases:
+--   1. stdpath('config')/../doom-nvim/config.lua
+--   2. stdpath('config')/config.lua
+--   3. <runtimepath>/doom-nvim/config.lua
+M.source = utils.find_config(filename)
+M.user_settings = dofile(M.source)
 
 M.load = function()
   doom = {
@@ -344,20 +351,7 @@ M.load = function()
     langs = {},
   }
 
-  -- Execute user's `config.lua` so they can modify the doom global object.
-  local ok, res = xpcall(dofile, debug.traceback, M.user_source)
-  local log = require("doom.utils.logging")
-  if not ok and res then
-    log.error("Error while running `settings.lua. Traceback:\n" .. res)
-  else
-    doom = vim.tbl_deep_extend("force", doom, res)
-  end
+    doom = vim.tbl_deep_extend("force", doom, M.user_settings)
 end
-
--- Path cases:
---   1. stdpath('config')/../doom-nvim/config.lua
---   2. stdpath('config')/config.lua
---   3. <runtimepath>/doom-nvim/config.lua
-M.user_source = utils.find_config(filename)
 
 return M
