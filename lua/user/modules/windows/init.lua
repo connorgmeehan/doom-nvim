@@ -1,5 +1,7 @@
 local windows = {}
 
+-- https://github.com/declancm/windex.nvim
+
 windows.packages = {
   ["focus.nvim"] = {
     "beauwilliams/focus.nvim",

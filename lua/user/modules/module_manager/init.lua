@@ -145,6 +145,21 @@ local function load_with_file(path)
   return buf_tmp
 end
 
+local function run_query_on_path(path)
+  local root_modules_path = path -- returns full path..
+  local buf = load_with_file(root_modules_path)
+  local buf, root, qp = user_ts_utils.run_query_on_buf("lua", "doom_root_modules", buf)
+end
+
+local function parse_root_modules()
+  local buf, root, qp = run_query_on_path(
+    "lua",
+    "doom_root_modules",
+    utils.find_config("modules.lua")
+  )
+  return buf, root, qp
+end
+
 --
 -- ACTION FUNCTIONS -> params: (buf, config, module, telescope_input)
 --
@@ -153,20 +168,19 @@ local function m_rename(b, c, m, i)
   nui_input("NEW NAME", function(value)
     if not check_if_module_name_exists(c, m, value) then
       print("old name: ", m.name, ", new name:", value)
-      -- 1. transform `modules.lua` with architext:
-      -- >>> prepare file and buffers >
-      local buf = load_with_file(settings_path)
 
-      local buf, root, qp = user_ts_utils.run_query_on_buf("lua", "doom_root_modules", buf)
-      local captured_nodes = user_ts_utils.get_captures(root, buf, qp, "modules." .. toggle_state)
-      local nodes_by_section = filter_modules_by_cat(buf, captured_nodes, opts.section_name)
+      local buf, root, qp = parse_root_modules()
 
-      -- RENAME_UPDATE_ENTRY:
-      user_ts_utils.ts_nodes_prepend_text(nodes_by_section, buf, "-- ")
+      local all_module_nodes = user_ts_utils.get_captures(root, buf, qp, "modules." .. toggle_state)
+
+      -- local old_name_node = filter_modules_by_cat(buf, captured_nodes, opts.section_name)
+
+      -- user_ts_utils.ts_replace_inner_text(old_name_node, buf, new_name)
 
       -- NOTE: E. write buffer and delete. write `buf` back to `path`
-      -- vim.api.nvim_buf_delete(buf, { force = true, unload = true })
       -- vim.api.nvim_win_set_buf(0, buf) -> put in split instead so that it is easy to develop..
+      -- vim.api.nvim_buf_delete(buf, { force = true, unload = true })
+      -- >> write root moduls
 
       -- 2. change module dir name.
       -- get the module path -> m.path
@@ -192,43 +206,38 @@ local function m_create(b, c, m, i)
 
         -- TODO: need to account for section here as well
         if not check_if_module_name_exists(c, m, value) then
+          local buf, root, qp = parse_root_modules()
+          -- local captured_nodes = user_ts_utils.get_captures(root, buf, qp, "modules." .. toggle_state)
+          -- local nodes_by_section = filter_modules_by_cat(buf, captured_nodes, opts.section_name)
+
+          -- CREATE_INSERT_NEW_ENTRY: insert new entry
+          -- user_ts_utils.ts_nodes_prepend_text(nodes_by_section, buf, "-- ")
+          -- >> write root moduls
+          -- vim.api.nvim_buf_delete(buf, { force = true, unload = true })
+
+          -- 2. create new module
+
+          -- local path_user_modules = string.format("%s/lua/user/modules", system.doom_root)
+          -- local new_module_path = string.format("%s%s%s", path_user_modules, system.sep, new_mname)
+          -- local new_module_init_file = string.format("%s%sinit.lua", new_module_path, system.sep)
+          -- vim.cmd(string.format("!mkdir -p %s", new_module_path))
+          -- vim.cmd(string.format("!touch %s", new_module_init_file))
+          -- fs.write_file(
+          --   new_module_init_file,
+          --   user_utils_modules.get_module_template_from_name(new_mname),
+          --   "w+"
+          -- )
+          -- vim.cmd(string.format(":e %s", new_module_init_file))
+          -- -- local newbuf = vim.api.nvim_create_buf(1, 0)
+          -- -- vim.api.nvim_buf_set_lines(newbuf, 0, 1, false, vim.fn.split(module_template_string, "\n"))
+          -- -- set file to cur bef
+          -- -- vim.cmd(string.format(":%sb", newbuf))
         end
-
-        -- 1. transform `modules.lua` with ARCHITEXT:
-
-        local buf = load_with_file(settings_path)
-
-        local buf, root, qp = user_ts_utils.run_query_on_buf("lua", "doom_root_modules", buf)
-        local captured_nodes = user_ts_utils.get_captures(root, buf, qp, "modules." .. toggle_state)
-        local nodes_by_section = filter_modules_by_cat(buf, captured_nodes, opts.section_name)
-
-        -- CREATE_INSERT_NEW_ENTRY: insert new entry
-        user_ts_utils.ts_nodes_prepend_text(nodes_by_section, buf, "-- ")
-
-        -- 2. change module dir name.
-
-        -- local path_user_modules = string.format("%s/lua/user/modules", system.doom_root)
-        -- local new_module_path = string.format("%s%s%s", path_user_modules, system.sep, new_mname)
-        -- local new_module_init_file = string.format("%s%sinit.lua", new_module_path, system.sep)
-        -- vim.cmd(string.format("!mkdir -p %s", new_module_path))
-        -- vim.cmd(string.format("!touch %s", new_module_init_file))
-        -- fs.write_file(
-        --   new_module_init_file,
-        --   user_utils_modules.get_module_template_from_name(new_mname),
-        --   "w+"
-        -- )
-        -- vim.cmd(string.format(":e %s", new_module_init_file))
-        -- -- local newbuf = vim.api.nvim_create_buf(1, 0)
-        -- -- vim.api.nvim_buf_set_lines(newbuf, 0, 1, false, vim.fn.split(module_template_string, "\n"))
-        -- -- set file to cur bef
-        -- -- vim.cmd(string.format(":%sb", newbuf))
-        -- 3. transform `modules.lua` with ARCHITEXT:
       end)
     end
   end)
 end
 
--- done!!
 local function m_edit(buf, config, m, i)
   vim.cmd(string.format(":e %s%s%s", m.path, system.sep, "init.lua"))
 end
@@ -237,17 +246,12 @@ local function m_delete(buf, c, m, i)
   nui_menu("CONFIRM DELETE", M.settings.confirm_alternatives, function(value)
     if value.text == "yes" then
       print("delete:", m.section .. " > " .. m.name)
-      --  a. transform `modules.lua` with ARCHITEXT:
-      -- REMOVE_ENTRY:
-      local buf = load_with_file(settings_path)
-
-      local buf, root, qp = user_ts_utils.run_query_on_buf("lua", "doom_root_modules", buf)
-      local captured_nodes = user_ts_utils.get_captures(root, buf, qp, "modules." .. toggle_state)
-      local nodes_by_section = filter_modules_by_cat(buf, captured_nodes, opts.section_name)
-
-      -- CREATE_INSERT_NEW_ENTRY: insert new entry
-      user_ts_utils.ts_nodes_prepend_text(nodes_by_section, buf, "-- ")
-
+      local buf, root, qp = parse_root_modules()
+      -- local captured_nodes = user_ts_utils.get_captures(root, buf, qp, "modules." .. toggle_state)
+      -- local nodes_by_section = filter_modules_by_cat(buf, captured_nodes, opts.section_name)
+      -- user_ts_utils.ts_nodes_prepend_text(nodes_by_section, buf, "-- ")
+      -- >> write root moduls
+      -- vim.api.nvim_buf_delete(buf, { force = true, unload = true })
       -- 	b. delete dir.
       -- shell: rm m.path
     end
@@ -256,17 +260,10 @@ end
 
 local function m_toggle(buf, c, m, i)
   print("toggle: ", m.name)
-  -- 1. select module
-  -- 2. transform `modules.lua`
-  local buf = load_with_file(settings_path)
-
-  local buf, root, qp = user_ts_utils.run_query_on_buf("lua", "doom_root_modules", buf)
+  local buf, root, qp = parse_root_modules()
   local captured_nodes = user_ts_utils.get_captures(root, buf, qp, "modules." .. toggle_state)
   local nodes_by_section = filter_modules_by_cat(buf, captured_nodes, opts.section_name)
-
-  -- TOGGLE: ADD/REMOVE `-- ` IF COMMENT/FIELD.STRING
-  user_ts_utils.ts_nodes_prepend_text(nodes_by_section, buf, "-- ")
-
+  -- user_ts_utils.ts_nodes_prepend_text(nodes_by_section, buf, "-- ")
   -- if opts.enabled then
   --   user_ts_utils.ts_nodes_prepend_text(nodes_by_section, buf, "-- ")
   -- else
@@ -274,6 +271,8 @@ local function m_toggle(buf, c, m, i)
   --   user_ts_utils.ts_nodes_prepend_text(nodes_by_section, buf, "XXX ")
   --   -- print("root modules rm comment > todo..")
   -- end
+  -- >> write root moduls
+  -- vim.api.nvim_buf_delete(buf, { force = true, unload = true })
 end
 
 local function m_move(buf, config)

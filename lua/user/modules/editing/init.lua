@@ -7,6 +7,7 @@ editing.packages = {
   -- https://github.com/booperlv/nvim-gomove
   -- { 'luukvbaal/stabilize.nvim', config = function() require('stabilize').setup() end }, --???????????????
   -- https://github.com/sindrets/winshift.nvim
+  -- https://github.com/nkakouros-original/numbers.nvim
 }
 
 editing.binds = {}
@@ -27,6 +28,5 @@ if require("doom.utils").is_module_enabled("whichkey") then
     },
   })
 end
-
 
 return editing

@@ -1,5 +1,13 @@
 local logging = {}
 
+-- TODO:
+--
+--  	- `AddPrintForScope`
+--
+--  		insert smart print statement that formats all relevant locals
+--  		in the cursor scope into a string that is printed
+
+
 logging.packages = {
   -- does vlog nvim already exist in core?!
   -- ["vlog.nvim"] = {"tjdevries/vlog.nvim"}, -- Single file, no dependency, easy copy & paste log file to add to your Neovim Lua plugins.

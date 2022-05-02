@@ -10,9 +10,6 @@ local create_binds = {}
 
 -- TODO:
 --
---    - cmd: DoomBindsLeaderAddLevel
---    - cmd: DoomBindsLeaderAddBindToLevelUnderCursor
---    - cmd: DoomBindsAddRegularBind
 --    		telescope picker -> select module -> enter module.binds table and insert a regular bind
 --
 --    this is going to be very interesting to do a telescope picker for.
@@ -34,6 +31,8 @@ local create_binds = {}
 --    jump next child.
 --
 --    insert leader branch
+--
+--    later many of the `insertion` binds will be implemented as a snippet.
 
 create_binds.settings = {}
 
@@ -43,10 +42,33 @@ create_binds.settings = {}
 -- -- [""] = {},
 -- -- [""] = {},
 -- }
+--
+
+-- merge into only next/prev bind
+local function nav_next_bind() end
+local function nav_prev_bind() end
+local function nav_next_leader_bind() end
+local function nav_prev_leader_bind() end
+local function bind_insert_above() end
+local function bind_insert_below() end
+
+local function nav_next_branch() end
+local function nav_prev_branch() end
+local function branch_insert_above() end
+local function branch_insert_below() end
+
+local function bind_insert_regular()
+  -- find position of last regular bind
+  -- insert new bind table template after
+  -- enter insert mode at char position.
+end
+local function bind_insert_leader()
+  -- find position of first leader lvl1 table
+  -- insert regular bind temblate after.
+  -- insert char position
+end
 
 local function create_bind_for_select_module()
-  print("create binds...")
-
   -- TODO: need to read query into string first
   local bufnr, root, parsed_query = user_ts_utils.get_query(
     user_ts_utils.get_query_file("lua", "doom_module_binds")
@@ -82,7 +104,7 @@ create_binds.cmds = {
 -- create_binds.autocmds = {}
 
 create_binds.binds = {
-  { "gXX", "jj", name = "dummytest" },
+  { "gXX", "jj", name = "regular bind" },
   {
     "<leader>",
     name = "+prefix",
@@ -97,17 +119,29 @@ create_binds.binds = {
             name = "create bind for mod",
             options = { silent = false },
           },
-          { "X", "jj", name = "doom XX" },
         },
       },
     },
     {
       {
         "X",
-        name = "+XXX",
-        {},
+        name = "+1st",
+        {
+          { "A", "jk", name = "meh" },
+          { "B", "jjeek", name = "xih" },
+          { "C", "jjeek", name = "aa bb" },
+          {
+            "Y",
+            name = "+2nd",
+            {
+              { "E", "jk", name = "meh" },
+              { "F", "jjeek", name = "xih" },
+              { "Z", name = "+3rd", {} },
+            },
+          },
+        },
       },
-    },
+    }, -- lvl 1 branch
   },
 }
 

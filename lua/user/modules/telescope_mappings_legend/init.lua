@@ -1,29 +1,22 @@
-local module_bind_for_every_line = {}
+local telescope_mappings_legend = {}
 
 -- TODO:
 --
---    - create a row based full view UI where we list all binds AND allow user to sort binds based
---    on properties/ filter binds/ etc.
---    - mapping -> go to module position where the bind is created.
---
---    this module could be generalized into a UI
---    that represents anything on a row by row basis
---    eg. binds, cmds, autocmds, and packages,
---    so that you can instantly navigate to any module
---    that hosts the property under the cursor.
---    also you can use this in telescope also.
+--    - I don't know it this should be a module. Maybe this already exists within telescop.
+--    The idea would be to make something that allows for visualizing the mappings that are
+--    available when the telescope UI is showing / when you are in the telescope buffer.
 
 ----------------------------
 -- SETTINGS
 ----------------------------
 
--- module_bind_for_every_line.settings = {}
+-- telescope_mappings_legend.settings = {}
 
 ----------------------------
 -- PACKAGES
 ----------------------------
 
--- module_bind_for_every_line.packages = {
+-- telescope_mappings_legend.packages = {
 -- [""] = {},
 -- -- [""] = {},
 -- -- [""] = {},
@@ -38,26 +31,26 @@ local module_bind_for_every_line = {}
 -- CMDS
 ----------------------------
 
--- module_bind_for_every_line.cmds = {}
+-- telescope_mappings_legend.cmds = {}
 
 --------------------------
 -- AUTOCMDS
 --------------------------
 
--- module_bind_for_every_line.autocmds = {}
+-- telescope_mappings_legend.autocmds = {}
 
 ----------------------------
 -- BINDS
 ----------------------------
 
--- module_bind_for_every_line.binds = {}
+-- telescope_mappings_legend.binds = {}
 
 ----------------------------
 -- LEADER BINDS
 ----------------------------
 
 -- if require("doom.utils").is_module_enabled("whichkey") then
---   table.insert(module_bind_for_every_line.binds, {
+--   table.insert(telescope_mappings_legend.binds, {
 --     "<leader>",
 --     name = "+prefix",
 --     {
@@ -76,6 +69,6 @@ local module_bind_for_every_line = {}
 -- RETURN
 ----------------------------
 
-return module_bind_for_every_line
+return telescope_mappings_legend
 
 

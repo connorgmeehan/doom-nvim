@@ -1,29 +1,35 @@
-local module_bind_for_every_line = {}
+local doom_user_settings_ui = {}
 
--- TODO:
+--  add override to `config.lua` file
 --
---    - create a row based full view UI where we list all binds AND allow user to sort binds based
---    on properties/ filter binds/ etc.
---    - mapping -> go to module position where the bind is created.
 --
---    this module could be generalized into a UI
---    that represents anything on a row by row basis
---    eg. binds, cmds, autocmds, and packages,
---    so that you can instantly navigate to any module
---    that hosts the property under the cursor.
---    also you can use this in telescope also.
+--
+--
+--  TODO:
+--
+--  	1. get all string fields
+--  	2. tele entry: map each field back to `settings.field..fieldN`
+--  	3. on select
+--  	4. callback NUI input
+--  	5. on submit -> turn back to telescope continue
+--  	...
+--  	...
+--  	w. on telescope exit
+--  	x. replace each modified node in source.
+--  	y. write file back to `./settings.lua`
+--  	z. full_reload()
 
 ----------------------------
 -- SETTINGS
 ----------------------------
 
--- module_bind_for_every_line.settings = {}
+-- doom_user_settings_ui.settings = {}
 
 ----------------------------
 -- PACKAGES
 ----------------------------
 
--- module_bind_for_every_line.packages = {
+-- doom_user_settings_ui.packages = {
 -- [""] = {},
 -- -- [""] = {},
 -- -- [""] = {},
@@ -38,26 +44,26 @@ local module_bind_for_every_line = {}
 -- CMDS
 ----------------------------
 
--- module_bind_for_every_line.cmds = {}
+-- doom_user_settings_ui.cmds = {}
 
 --------------------------
 -- AUTOCMDS
 --------------------------
 
--- module_bind_for_every_line.autocmds = {}
+-- doom_user_settings_ui.autocmds = {}
 
 ----------------------------
 -- BINDS
 ----------------------------
 
--- module_bind_for_every_line.binds = {}
+-- doom_user_settings_ui.binds = {}
 
 ----------------------------
 -- LEADER BINDS
 ----------------------------
 
 -- if require("doom.utils").is_module_enabled("whichkey") then
---   table.insert(module_bind_for_every_line.binds, {
+--   table.insert(doom_user_settings_ui.binds, {
 --     "<leader>",
 --     name = "+prefix",
 --     {
@@ -76,6 +82,6 @@ local module_bind_for_every_line = {}
 -- RETURN
 ----------------------------
 
-return module_bind_for_every_line
+return doom_user_settings_ui
 
 

@@ -26,3 +26,8 @@
 -- https://github.com/rohit-px2/nvim-ts-highlightparams
 -- https://github.com/kizza/jump-from-treesitter.nvim
 -- https://github.com/alexzanderr/nvim-treesitter-statusline
+-- https://github.com/jbyuki/ntangle-ts.nvim
+-- https://github.com/aaronma37/ts-word-wrapper.nvim
+-- https://github.com/spywhere/detect-language.nvim
+-- https://github.com/vigoux/proofreader.nvim
+-- https://github.com/ziontee113/syntax-tree-surfer

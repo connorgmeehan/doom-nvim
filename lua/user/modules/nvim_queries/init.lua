@@ -1,29 +1,20 @@
-local module_bind_for_every_line = {}
+local nvim_queries = {}
 
 -- TODO:
 --
---    - create a row based full view UI where we list all binds AND allow user to sort binds based
---    on properties/ filter binds/ etc.
---    - mapping -> go to module position where the bind is created.
---
---    this module could be generalized into a UI
---    that represents anything on a row by row basis
---    eg. binds, cmds, autocmds, and packages,
---    so that you can instantly navigate to any module
---    that hosts the property under the cursor.
---    also you can use this in telescope also.
+--    - git@github.com:vigoux/ratatoskr.nvim.git
 
 ----------------------------
 -- SETTINGS
 ----------------------------
 
--- module_bind_for_every_line.settings = {}
+-- nvim_queries.settings = {}
 
 ----------------------------
 -- PACKAGES
 ----------------------------
 
--- module_bind_for_every_line.packages = {
+-- nvim_queries.packages = {
 -- [""] = {},
 -- -- [""] = {},
 -- -- [""] = {},
@@ -38,26 +29,26 @@ local module_bind_for_every_line = {}
 -- CMDS
 ----------------------------
 
--- module_bind_for_every_line.cmds = {}
+-- nvim_queries.cmds = {}
 
 --------------------------
 -- AUTOCMDS
 --------------------------
 
--- module_bind_for_every_line.autocmds = {}
+-- nvim_queries.autocmds = {}
 
 ----------------------------
 -- BINDS
 ----------------------------
 
--- module_bind_for_every_line.binds = {}
+-- nvim_queries.binds = {}
 
 ----------------------------
 -- LEADER BINDS
 ----------------------------
 
 -- if require("doom.utils").is_module_enabled("whichkey") then
---   table.insert(module_bind_for_every_line.binds, {
+--   table.insert(nvim_queries.binds, {
 --     "<leader>",
 --     name = "+prefix",
 --     {
@@ -76,6 +67,6 @@ local module_bind_for_every_line = {}
 -- RETURN
 ----------------------------
 
-return module_bind_for_every_line
+return nvim_queries
 
 

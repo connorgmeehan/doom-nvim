@@ -1,63 +1,54 @@
-local module_bind_for_every_line = {}
+local move = {}
 
 -- TODO:
 --
---    - create a row based full view UI where we list all binds AND allow user to sort binds based
---    on properties/ filter binds/ etc.
---    - mapping -> go to module position where the bind is created.
---
---    this module could be generalized into a UI
---    that represents anything on a row by row basis
---    eg. binds, cmds, autocmds, and packages,
---    so that you can instantly navigate to any module
---    that hosts the property under the cursor.
---    also you can use this in telescope also.
-
+--    -
+	
 ----------------------------
 -- SETTINGS
 ----------------------------
 
--- module_bind_for_every_line.settings = {}
-
+-- move.settings = {}
+	
 ----------------------------
 -- PACKAGES
 ----------------------------
 
--- module_bind_for_every_line.packages = {
+-- move.packages = {
 -- [""] = {},
 -- -- [""] = {},
 -- -- [""] = {},
 -- -- [""] = {},
 -- }
-
+  
 ----------------------------
 -- CONFIGS
 ----------------------------
-
+  
 ----------------------------
 -- CMDS
 ----------------------------
 
--- module_bind_for_every_line.cmds = {}
-
+-- move.cmds = {}
+  
 --------------------------
 -- AUTOCMDS
 --------------------------
 
--- module_bind_for_every_line.autocmds = {}
-
+-- move.autocmds = {}
+	
 ----------------------------
 -- BINDS
 ----------------------------
 
--- module_bind_for_every_line.binds = {}
-
+-- move.binds = {}
+  
 ----------------------------
 -- LEADER BINDS
 ----------------------------
 
 -- if require("doom.utils").is_module_enabled("whichkey") then
---   table.insert(module_bind_for_every_line.binds, {
+--   table.insert(move.binds, {
 --     "<leader>",
 --     name = "+prefix",
 --     {
@@ -71,11 +62,11 @@ local module_bind_for_every_line = {}
 --     },
 --   })
 -- end
-
+  
 ----------------------------
 -- RETURN
 ----------------------------
 
-return module_bind_for_every_line
-
-
+return move
+  
+  

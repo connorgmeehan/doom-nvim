@@ -1,29 +1,20 @@
-local module_bind_for_every_line = {}
+local vigoux_templar = {}
 
 -- TODO:
 --
---    - create a row based full view UI where we list all binds AND allow user to sort binds based
---    on properties/ filter binds/ etc.
---    - mapping -> go to module position where the bind is created.
---
---    this module could be generalized into a UI
---    that represents anything on a row by row basis
---    eg. binds, cmds, autocmds, and packages,
---    so that you can instantly navigate to any module
---    that hosts the property under the cursor.
---    also you can use this in telescope also.
+--    - git@github.com:vigoux/templar.nvim.git
 
 ----------------------------
 -- SETTINGS
 ----------------------------
 
--- module_bind_for_every_line.settings = {}
+-- vigoux_templar.settings = {}
 
 ----------------------------
 -- PACKAGES
 ----------------------------
 
--- module_bind_for_every_line.packages = {
+-- vigoux_templar.packages = {
 -- [""] = {},
 -- -- [""] = {},
 -- -- [""] = {},
@@ -38,26 +29,26 @@ local module_bind_for_every_line = {}
 -- CMDS
 ----------------------------
 
--- module_bind_for_every_line.cmds = {}
+-- vigoux_templar.cmds = {}
 
 --------------------------
 -- AUTOCMDS
 --------------------------
 
--- module_bind_for_every_line.autocmds = {}
+-- vigoux_templar.autocmds = {}
 
 ----------------------------
 -- BINDS
 ----------------------------
 
--- module_bind_for_every_line.binds = {}
+-- vigoux_templar.binds = {}
 
 ----------------------------
 -- LEADER BINDS
 ----------------------------
 
 -- if require("doom.utils").is_module_enabled("whichkey") then
---   table.insert(module_bind_for_every_line.binds, {
+--   table.insert(vigoux_templar.binds, {
 --     "<leader>",
 --     name = "+prefix",
 --     {
@@ -76,6 +67,6 @@ local module_bind_for_every_line = {}
 -- RETURN
 ----------------------------
 
-return module_bind_for_every_line
+return vigoux_templar
 
 

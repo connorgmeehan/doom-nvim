@@ -1,23 +1,21 @@
-local doom_global_settings_ui_walkthrough = {}
+local scheme_formatting = {}
 
 -- TODO:
 --
---    - make a fun UI that walks through all of the options in the doom table
---    	and presents user with a UI for udating a value, on select -> go to
---    	next value, use <C-q> to exit the UI.
---    	Use treesitter to update all of the values in the code.
+--    - what tools are there for formatting and making queries look
+--    pretty??
 
 ----------------------------
 -- SETTINGS
 ----------------------------
 
-doom_global_settings_ui_walkthrough.settings = {}
+-- scheme_formatting.settings = {}
 
 ----------------------------
 -- PACKAGES
 ----------------------------
 
--- doom_global_settings_ui_walkthrough.packages = {
+-- scheme_formatting.packages = {
 -- [""] = {},
 -- -- [""] = {},
 -- -- [""] = {},
@@ -32,26 +30,26 @@ doom_global_settings_ui_walkthrough.settings = {}
 -- CMDS
 ----------------------------
 
-doom_global_settings_ui_walkthrough.cmds = {}
+-- scheme_formatting.cmds = {}
 
 --------------------------
 -- AUTOCMDS
 --------------------------
 
--- doom_global_settings_ui_walkthrough.autocmds = {}
+-- scheme_formatting.autocmds = {}
 
 ----------------------------
 -- BINDS
 ----------------------------
 
--- doom_global_settings_ui_walkthrough.binds = {}
+-- scheme_formatting.binds = {}
 
 ----------------------------
 -- LEADER BINDS
 ----------------------------
 
 -- if require("doom.utils").is_module_enabled("whichkey") then
---   table.insert(doom_global_settings_ui_walkthrough.binds, {
+--   table.insert(scheme_formatting.binds, {
 --     "<leader>",
 --     name = "+prefix",
 --     {
@@ -70,6 +68,6 @@ doom_global_settings_ui_walkthrough.cmds = {}
 -- RETURN
 ----------------------------
 
-return doom_global_settings_ui_walkthrough
+return scheme_formatting
 
 
