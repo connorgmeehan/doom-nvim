@@ -100,7 +100,7 @@ reloader._reload_doom = function()
     if
       string.match(k, "^doom%.core")
       or string.match(k, "^doom%.modules")
-      or string.match(k, "^user")
+      or string.match(k, "^user%.modules")
     then
       package.loaded[k] = nil
     end
