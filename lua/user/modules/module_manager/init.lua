@@ -342,31 +342,16 @@ local function m_delete(buf, c, m, i)
           -- local offset = 1
           local exact_match = string.match(node_text, m.name)
           if exact_match then
-            vim.api.nvim_buf_set_text(
-              buf,
-              sr,
-              sc,
-              er,
-              ec + 1,
-              { "" }
-            )
+            vim.api.nvim_buf_set_text(buf, sr, sc, er, ec + 1, { "" })
           end
         elseif capt == "modules.disabled" then
           -- local offset = 4
           local exact_match = string.match(node_text, m.name)
           if exact_match then
-            vim.api.nvim_buf_set_text(
-              buf,
-              sr,
-              sc,
-              er,
-              ec + 1,
-              { "" }
-            )
+            vim.api.nvim_buf_set_text(buf, sr, sc, er, ec + 1, { "" })
           end
         end
       end)
-
 
       -- shell: rm m.path
     end
@@ -375,19 +360,16 @@ end
 
 local function m_toggle(buf, c, m, i)
   print("toggle: ", m.name)
-  local buf, root, qp = parse_root_modules()
-  local captured_nodes = user_ts_utils.get_captures(root, buf, qp, "modules." .. toggle_state)
-  local nodes_by_section = filter_modules_by_cat(buf, captured_nodes, opts.section_name)
-  -- user_ts_utils.ts_nodes_prepend_text(nodes_by_section, buf, "-- ")
-  -- if opts.enabled then
-  --   user_ts_utils.ts_nodes_prepend_text(nodes_by_section, buf, "-- ")
-  -- else
-  --   -- remove comment
-  --   user_ts_utils.ts_nodes_prepend_text(nodes_by_section, buf, "XXX ")
-  --   -- print("root modules rm comment > todo..")
-  -- end
-  -- >> write root moduls
-  -- vim.api.nvim_buf_delete(buf, { force = true, unload = true })
+  parse_and_update_root_modules(m, function(buf, node, capt, node_text)
+    local sr, sc, er, ec = node:range()
+    if string.match(node_text, m.name) then
+      if capt == "modules.enabled" then
+        vim.api.nvim_buf_set_text(buf, sr, sc, er, ec, { "-- " .. node_text })
+      elseif capt == "modules.disabled" then
+        vim.api.nvim_buf_set_text(buf, sr, sc, er, ec, { node_text:sub(4) })
+      end
+    end
+  end)
 end
 
 local function m_move(buf, config)
