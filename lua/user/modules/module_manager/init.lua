@@ -235,6 +235,33 @@ local function parse_and_update_root_modules(m, cb)
 end
 
 --
+-- SHELL COMMANDS
+--
+local function shell_mod_new(for_section, new_name)
+  local mp = user_utils_path.get_moduls_path(for_section)
+  local nmp = string.format("%s%s%s", mp, system.sep, new_name)
+  local nmpi = string.format("%s%sinit.lua", nmp, system.sep)
+  local mkdir = string.format("!mkdir -p %s", nmp)
+  -- vim.cmd(mkdir)
+  local touch = string.format("!touch %s", nmpi)
+  -- vim.cmd(touch)
+  -- fs.write_file(nmpi, user_utils_modules.get_module_template_from_name(new_name), "w+")
+  -- vim.cmd(string.format(":e %s", nmpi))
+end
+
+local function shell_mod_rename_dir(for_section, old_dir, new_name)
+  local mp = user_utils_path.get_moduls_path(for_section)
+  local nmp = string.format("%s%s%s", mp, system.sep, new_name)
+  local cmd = string.format("!mv %s %s", old_dir, nmp)
+  -- vim.cmd(cmd)
+end
+
+local function shell_mod_remove_dir(rm_path)
+  -- local rm = string.format()
+  -- vim.cmd(rm)
+end
+
+--
 -- ACTION FUNCTIONS -> params: (buf, config, module, telescope_input)
 --
 
@@ -275,16 +302,7 @@ local function m_rename(b, c, m, i)
         end
       end)
 
-      -- REFACTOR: pass callback replace func
-      -- vim.api.nvim_buf_delete(buf, { force = true, unload = true })
-      -- >> write root moduls
-
-      -- 2. change module dir name.
-      -- get the module path -> m.path
-      --
-      --  new path = m.path.strip(tail) .. new_name
-      --
-      -- shell: mv dir m.path -> new_path
+      -- shell_mod_rename_dir(m.section, m.path, new_name)
     end
   end)
 end
@@ -298,29 +316,12 @@ local function m_create(b, c, m, i)
       new_name = i
       nui_menu("FOR SECTION:", M.settings.section_alternatives, function(value)
         for_section = value.text
-        print("create mod: ", name, ", new name:", for_section .. " > " .. new_name)
+        -- print("create mod: ", name, ", new name:", for_section .. " > " .. new_name)
         if not check_if_module_name_exists(c, { section = nil }, value) then
           local smll = parse_and_update_root_modules({ section = value.text })
-          print("smll: ", smll)
+          -- print("smll: ", smll)
           vim.api.nvim_buf_set_lines(buf, smll, smll, true, { '"' .. new_name .. '",' })
-
-          -- 2. create new module
-
-          -- local path_user_modules = string.format("%s/lua/user/modules", system.doom_root)
-          -- local new_module_path = string.format("%s%s%s", path_user_modules, system.sep, new_mname)
-          -- local new_module_init_file = string.format("%s%sinit.lua", new_module_path, system.sep)
-          -- vim.cmd(string.format("!mkdir -p %s", new_module_path))
-          -- vim.cmd(string.format("!touch %s", new_module_init_file))
-          -- fs.write_file(
-          --   new_module_init_file,
-          --   user_utils_modules.get_module_template_from_name(new_mname),
-          --   "w+"
-          -- )
-          -- vim.cmd(string.format(":e %s", new_module_init_file))
-          -- -- local newbuf = vim.api.nvim_create_buf(1, 0)
-          -- -- vim.api.nvim_buf_set_lines(newbuf, 0, 1, false, vim.fn.split(module_template_string, "\n"))
-          -- -- set file to cur bef
-          -- -- vim.cmd(string.format(":%sb", newbuf))
+          -- shell_mod_new(for_section, new_name)
         end
       end)
     end
@@ -334,8 +335,6 @@ end
 local function m_delete(buf, c, m, i)
   nui_menu("CONFIRM DELETE", M.settings.confirm_alternatives, function(value)
     if value.text == "yes" then
-      -- print("delete:", m.section .. " > " .. m.name)
-
       parse_and_update_root_modules(m, function(buf, node, capt, node_text)
         local sr, sc, er, ec = node:range()
         if capt == "modules.enabled" then
@@ -353,13 +352,13 @@ local function m_delete(buf, c, m, i)
         end
       end)
 
-      -- shell: rm m.path
+      -- shell_mod_remove_dir(m.path)     -- shell: rm m.path
     end
   end)
 end
 
 local function m_toggle(buf, c, m, i)
-  print("toggle: ", m.name)
+  -- print("toggle: ", m.name)
   parse_and_update_root_modules(m, function(buf, node, capt, node_text)
     local sr, sc, er, ec = node:range()
     if string.match(node_text, m.name) then
