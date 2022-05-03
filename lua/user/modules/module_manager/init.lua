@@ -1,8 +1,11 @@
+local utils = require("doom.utils")
 local fs = require("doom.utils.fs")
 local system = require("doom.core.system")
 local user_utils_ui = require("user.utils.ui")
 local user_utils_path = require("user.utils.path")
 local user_utils_modules = require("user.utils.modules")
+local tsq = require("vim.treesitter.query")
+local user_ts_utils = require("user.utils.ts")
 
 local M = {}
 
@@ -161,6 +164,69 @@ local function parse_root_modules()
 end
 
 --
+-- parse `modules.lua` and update module.
+--
+
+local function parse_and_update_root_modules(m, cb)
+  local settings_path = utils.find_config("modules.lua") -- returns full path..
+  local buf = load_with_file(settings_path)
+  local buf, root, qp = user_ts_utils.run_query_on_buf("lua", "doom_root_modules", buf)
+  if qp ~= nil then
+    for id, node, metadata in qp:iter_captures(root, buf, root:start(), root:end_()) do
+      local cname = qp.captures[id] -- name of the capture in the query
+      local node_text = tsq.get_node_text(node, buf)
+      local p = node:parent()
+      local ps = p:prev_sibling()
+      if ps ~= nil then -- sometimes is nil, dunno why..
+        local pss = ps:prev_sibling()
+        if pss ~= nil then
+          local section_text = tsq.get_node_text(pss, buf)
+          -- print(m.section, section_text)
+
+          if m.section == section_text then
+            -- print("RENAME -> ", section_text, ">", node_text)
+
+            cb(buf, node, cname, node_text)
+            -- local sr, sc, er, ec = node:range()
+            -- -- -- :A/((identifier) @wrapit (#eq? @wrapit "foo"))/wrapit:-- @wrapit/
+            --
+            -- if name == "modules.enabled" then
+            --   local offset = 1
+            --   local exact_match = string.match(node_text, m.name)
+            --
+            --   if exact_match then
+            --     vim.api.nvim_buf_set_text(
+            --       buf,
+            --       sr,
+            --       sc + offset,
+            --       sr,
+            --       sc + offset + string.len(m.name),
+            --       { value }
+            --     )
+            --   end
+            -- elseif name == "modules.disabled" then
+            --   local offset = 4
+            --   local exact_match = string.match(node_text, m.name)
+            --   if exact_match then
+            --     vim.api.nvim_buf_set_text(
+            --       buf,
+            --       sr,
+            --       sc + offset,
+            --       sr,
+            --       sc + offset + string.len(m.name),
+            --       { value }
+            --     )
+            --   end
+            -- end
+          end
+        end
+      end
+    end
+  end
+  vim.api.nvim_win_set_buf(0, buf)
+end
+
+--
 -- ACTION FUNCTIONS -> params: (buf, config, module, telescope_input)
 --
 
@@ -168,17 +234,40 @@ local function m_rename(b, c, m, i)
   nui_input("NEW NAME", function(value)
     if not check_if_module_name_exists(c, m, value) then
       print("old name: ", m.name, ", new name:", value)
+      local new_name = value
 
-      local buf, root, qp = parse_root_modules()
+      parse_and_update_root_modules(m, function(buf, node, capt, node_text)
+        local sr, sc, er, ec = node:range()
+        if capt == "modules.enabled" then
+          local offset = 1
+          local exact_match = string.match(node_text, m.name)
+          if exact_match then
+            vim.api.nvim_buf_set_text(
+              buf,
+              sr,
+              sc + offset,
+              sr,
+              sc + offset + string.len(m.name),
+              { value }
+            )
+          end
+        elseif capt == "modules.disabled" then
+          local offset = 4
+          local exact_match = string.match(node_text, m.name)
+          if exact_match then
+            vim.api.nvim_buf_set_text(
+              buf,
+              sr,
+              sc + offset,
+              sr,
+              sc + offset + string.len(m.name),
+              { value }
+            )
+          end
+        end
+      end)
 
-      local all_module_nodes = user_ts_utils.get_captures(root, buf, qp, "modules." .. toggle_state)
-
-      -- local old_name_node = filter_modules_by_cat(buf, captured_nodes, opts.section_name)
-
-      -- user_ts_utils.ts_replace_inner_text(old_name_node, buf, new_name)
-
-      -- NOTE: E. write buffer and delete. write `buf` back to `path`
-      -- vim.api.nvim_win_set_buf(0, buf) -> put in split instead so that it is easy to develop..
+      -- REFACTOR: pass callback replace func
       -- vim.api.nvim_buf_delete(buf, { force = true, unload = true })
       -- >> write root moduls
 
@@ -210,7 +299,7 @@ local function m_create(b, c, m, i)
           -- local captured_nodes = user_ts_utils.get_captures(root, buf, qp, "modules." .. toggle_state)
           -- local nodes_by_section = filter_modules_by_cat(buf, captured_nodes, opts.section_name)
 
-          -- CREATE_INSERT_NEW_ENTRY: insert new entry
+          -- CREATE_INSERT_NEW_ENTRY: nvim_buf_set_lines
           -- user_ts_utils.ts_nodes_prepend_text(nodes_by_section, buf, "-- ")
           -- >> write root moduls
           -- vim.api.nvim_buf_delete(buf, { force = true, unload = true })
@@ -380,7 +469,7 @@ end
 
 M.cmds = {
   {
-    "DoomModulesRenameSelect",
+    "DoomModulesManager",
     function()
       prepare_data_for_picker()
     end,
@@ -399,13 +488,7 @@ if require("doom.utils").is_module_enabled("whichkey") then
         "D",
         name = "+Doom",
         {
-          {
-            {
-              "M",
-              name = "+modules",
-              { "M", [[ :DoomModulesRenameSelect<cr> ]], name = "rename" },
-            },
-          },
+          { "D", [[ :DoomModulesManager<cr> ]], name = "mod.mngr" },
         },
       },
     },
