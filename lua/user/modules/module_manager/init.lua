@@ -299,22 +299,10 @@ local function m_create(b, c, m, i)
       nui_menu("FOR SECTION:", M.settings.section_alternatives, function(value)
         for_section = value.text
         print("create mod: ", name, ", new name:", for_section .. " > " .. new_name)
-        -- 0. check if name exists
-        -- local mm = m
-        -- TODO: need to account for section here as well
         if not check_if_module_name_exists(c, { section = nil }, value) then
           local smll = parse_and_update_root_modules({ section = value.text })
           print("smll: ", smll)
           vim.api.nvim_buf_set_lines(buf, smll, smll, true, { '"' .. new_name .. '",' })
-
-          -- local buf, root, qp = parse_root_modules()
-          -- local captured_nodes = user_ts_utils.get_captures(root, buf, qp, "modules." .. toggle_state)
-          -- local nodes_by_section = filter_modules_by_cat(buf, captured_nodes, opts.section_name)
-
-          -- CREATE_INSERT_NEW_ENTRY: nvim_buf_set_lines
-          -- user_ts_utils.ts_nodes_prepend_text(nodes_by_section, buf, "-- ")
-          -- >> write root moduls
-          -- vim.api.nvim_buf_delete(buf, { force = true, unload = true })
 
           -- 2. create new module
 
@@ -346,14 +334,40 @@ end
 local function m_delete(buf, c, m, i)
   nui_menu("CONFIRM DELETE", M.settings.confirm_alternatives, function(value)
     if value.text == "yes" then
-      print("delete:", m.section .. " > " .. m.name)
-      local buf, root, qp = parse_root_modules()
-      -- local captured_nodes = user_ts_utils.get_captures(root, buf, qp, "modules." .. toggle_state)
-      -- local nodes_by_section = filter_modules_by_cat(buf, captured_nodes, opts.section_name)
-      -- user_ts_utils.ts_nodes_prepend_text(nodes_by_section, buf, "-- ")
-      -- >> write root moduls
-      -- vim.api.nvim_buf_delete(buf, { force = true, unload = true })
-      -- 	b. delete dir.
+      -- print("delete:", m.section .. " > " .. m.name)
+
+      parse_and_update_root_modules(m, function(buf, node, capt, node_text)
+        local sr, sc, er, ec = node:range()
+        if capt == "modules.enabled" then
+          -- local offset = 1
+          local exact_match = string.match(node_text, m.name)
+          if exact_match then
+            vim.api.nvim_buf_set_text(
+              buf,
+              sr,
+              sc,
+              er,
+              ec + 1,
+              { "" }
+            )
+          end
+        elseif capt == "modules.disabled" then
+          -- local offset = 4
+          local exact_match = string.match(node_text, m.name)
+          if exact_match then
+            vim.api.nvim_buf_set_text(
+              buf,
+              sr,
+              sc,
+              er,
+              ec + 1,
+              { "" }
+            )
+          end
+        end
+      end)
+
+
       -- shell: rm m.path
     end
   end)
