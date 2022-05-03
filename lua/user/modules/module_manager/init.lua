@@ -164,13 +164,16 @@ local function parse_root_modules()
 end
 
 --
--- parse `modules.lua` and update module.
+-- PARSE `MODULES.LUA` AND UPDATE MODULE.
 --
 
+-- return
 local function parse_and_update_root_modules(m, cb)
   local settings_path = utils.find_config("modules.lua") -- returns full path..
   local buf = load_with_file(settings_path)
   local buf, root, qp = user_ts_utils.run_query_on_buf("lua", "doom_root_modules", buf)
+  local sm_ll = 0
+
   if qp ~= nil then
     for id, node, metadata in qp:iter_captures(root, buf, root:start(), root:end_()) do
       local cname = qp.captures[id] -- name of the capture in the query
@@ -186,7 +189,11 @@ local function parse_and_update_root_modules(m, cb)
           if m.section == section_text then
             -- print("RENAME -> ", section_text, ">", node_text)
 
-            cb(buf, node, cname, node_text)
+            sm_ll, _, _, _ = node:range()
+
+            if cb ~= nil then
+              cb(buf, node, cname, node_text)
+            end
             -- local sr, sc, er, ec = node:range()
             -- -- -- :A/((identifier) @wrapit (#eq? @wrapit "foo"))/wrapit:-- @wrapit/
             --
@@ -224,6 +231,7 @@ local function parse_and_update_root_modules(m, cb)
     end
   end
   vim.api.nvim_win_set_buf(0, buf)
+  return sm_ll + 1 -- return last module row for matched section
 end
 
 --
@@ -290,12 +298,16 @@ local function m_create(b, c, m, i)
       new_name = i
       nui_menu("FOR SECTION:", M.settings.section_alternatives, function(value)
         for_section = value.text
-        print("old name: ", m.name, ", new name:", for_section .. " > " .. new_name)
+        print("create mod: ", name, ", new name:", for_section .. " > " .. new_name)
         -- 0. check if name exists
-
+        -- local mm = m
         -- TODO: need to account for section here as well
-        if not check_if_module_name_exists(c, m, value) then
-          local buf, root, qp = parse_root_modules()
+        if not check_if_module_name_exists(c, { section = nil }, value) then
+          local smll = parse_and_update_root_modules({ section = value.text })
+          print("smll: ", smll)
+          vim.api.nvim_buf_set_lines(buf, smll, smll, true, { '"' .. new_name .. '",' })
+
+          -- local buf, root, qp = parse_root_modules()
           -- local captured_nodes = user_ts_utils.get_captures(root, buf, qp, "modules." .. toggle_state)
           -- local nodes_by_section = filter_modules_by_cat(buf, captured_nodes, opts.section_name)
 
